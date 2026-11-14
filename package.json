@@ -18,7 +18,8 @@
     "check:facts": "node scripts/check-facts.ts",
     "voices": "node scripts/voices.ts",
     "new:episode": "node scripts/new-episode.ts",
-    "optimize:models": "node scripts/optimize-models.ts"
+    "optimize:models": "node scripts/optimize-models.ts",
+    "ask:facts": "node scripts/ask-facts.ts"
   },
   "dependencies": {
     "astronomy-engine": "^2.1.19",

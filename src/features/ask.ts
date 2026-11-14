@@ -1,13 +1,39 @@
 /**
  * "Talk to the machine": the child asks a story's machine a question and it answers in first
  * person, only from that story's checked NASA facts, always with the source.
- * This free version needs no server: it finds the best-matching fact. Question buttons work in all
- * three languages; typed questions are matched in English (the facts are in English).
+ * With VITE_ASK_URL set, our server (server/ask) asks a small AI model to answer in the child's
+ * language from those facts only. Without it, or when the server fails, the free offline matcher
+ * picks the best fact (question buttons work in all three languages, typed questions in English).
  */
 import { button, el, link } from '../dom';
-import { tEp } from '../engine/i18n';
+import { getLang, tEp } from '../engine/i18n';
 import { factsOf } from '../episodes';
 import { bestFact } from './ask-match';
+
+const ASK_URL: string = import.meta.env.VITE_ASK_URL ?? '';
+const ASK_TIMEOUT_MS = 15000;
+
+interface AiAnswer {
+  answer: string;
+  sources: { id: string; url: string }[];
+}
+
+async function askServer(episode: string, question: string): Promise<AiAnswer | null> {
+  if (!ASK_URL) return null;
+  try {
+    const res = await fetch(ASK_URL, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ episode, question, lang: getLang() }),
+      signal: AbortSignal.timeout(ASK_TIMEOUT_MS),
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as AiAnswer;
+    return typeof data.answer === 'string' && data.answer ? data : null;
+  } catch {
+    return null; // offline, blocked or slow: the free matcher answers instead
+  }
+}
 
 /** Ready-made questions: their i18n key and the English words that find the answer. */
 const STARTERS: { key: string; words: string }[] = [
@@ -38,8 +64,15 @@ export function openAsk(host: HTMLElement, episodeId: string): void {
     if (source) link('ask-source', t('ui.holo.siteSource'), source, line);
     line.scrollIntoView({ block: 'nearest' });
   };
-  const answer = (question: string, label: string): void => {
+  const answer = async (question: string, label: string): Promise<void> => {
     say('you', label);
+    const thinking = ASK_URL ? el('p', 'ask-line it ask-thinking', t('ui.ask.thinking'), log) : null;
+    const ai = await askServer(episodeId, label);
+    thinking?.remove();
+    if (ai) {
+      say('it', ai.answer, ai.sources[0]?.url);
+      return;
+    }
     const fact = bestFact(question, facts);
     if (fact) say('it', fact.text, fact.source);
     else say('it', t('ui.ask.unknown'));
@@ -47,21 +80,21 @@ export function openAsk(host: HTMLElement, episodeId: string): void {
   say('it', t('ui.ask.hello', { name }));
 
   const chips = el('div', 'ask-chips', undefined, box);
-  for (const s of STARTERS) button('chip', t(s.key), () => answer(s.words, t(s.key)), chips);
+  for (const s of STARTERS) button('chip', t(s.key), () => void answer(s.words, t(s.key)), chips);
 
   const form = el('form', 'ask-form', undefined, box);
   const input = el('input', '', undefined, form);
   input.type = 'text';
   input.maxLength = 200;
-  input.placeholder = t('ui.ask.placeholder');
-  input.setAttribute('aria-label', t('ui.ask.placeholder'));
+  input.placeholder = t(ASK_URL ? 'ui.ask.placeholderAi' : 'ui.ask.placeholder');
+  input.setAttribute('aria-label', input.placeholder);
   button('btn', t('ui.ask.send'), () => undefined, form).type = 'submit';
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const q = input.value.trim();
     if (!q) return;
     input.value = '';
-    answer(q, q);
+    void answer(q, q);
   });
   el('p', 'ask-note', t('ui.ask.note'), box);
   button('btn alt', t('ui.close'), () => overlay.remove(), box);
