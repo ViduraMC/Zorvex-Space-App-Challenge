@@ -1,276 +1,203 @@
 /**
- * ALSEP · Apollo 12 · "Eight Years in the Ocean of Storms"
- *
- * Narrator: the ALSEP Central Station, Moon, Oceanus Procellarum.
- * Style: cinematic.
- * 4 acts: Start → Work Done → Timeline → Goodbye.
- *
- * Camera convention (from director.ts):
- *   shot.pos  = world position of the camera
- *   shot.look = world position the camera looks AT (not a direction!)
- *   FOV = 38° (narrow). Keep subjects 3–10 m from the camera.
- *
- * Scene layout (scene.ts):
- *   ALSEP station   (0,   0,   0)
- *   RTG             (2,   0,   1)
- *   Intrepid        (12,  0,  -8)   ~14 m away
- *   Surveyor 3      (20, -1,  14)   ~25 m SE
- *
- * Sources: NASA NSSDCA 1969-099C, 1969-099A, 1967-035A.
+ * APOLLO 12 ALSEP: the science station the astronauts left behind, told by the station itself.
+ * Story by Kaushal Bandara (Team Zorvex). Every fact is in facts.json (NSSDCA 1969-099C and the
+ * NASA Surveyor 3 page, both challenge resources).
+ * Play moments: launch the Saturn V, switch on the instruments, watch Intrepid lift off, catch the
+ * first artificial moonquake, and count the hours of the long watch.
  */
 import { defineEpisode } from '../../engine/types';
+import { INTREPID_X, INTREPID_Z, SURVEYOR_X, SURVEYOR_Z } from './scene';
 import buildScene from './scene';
 
-/** Lunar night: pitch-black sky, stars visible, sun below horizon. */
-const MOON_NIGHT = { day: 0, sunset: 0, az: 0 } as const;
+const STATION = { x: 0, z: 0, heading: 0 } as const;
+const LM_LOOK: [number, number, number] = [INTREPID_X, 3, INTREPID_Z];
+const SURVEYOR_LOOK: [number, number, number] = [SURVEYOR_X, 1, SURVEYOR_Z];
 
 export default defineEpisode({
   id: 'alsep-apollo-12',
-  order: 10,
+  order: 4,
   world: 'moon',
+  stages: ['earth'],
   sky: 'moonDay',
   style: 'cinematic',
-  machine: {
-    start: { x: 0, z: 0 },
-  },
-  patch: { color: '#1a3a6b', glyph: 'A12' },
+  machine: { start: STATION },
+  patch: { color: '#1A3A6B', glyph: 'A12' },
   lastContact: { date: '1977-09-30', fact: 'alsep-shutdown' },
   lookUp: 'Moon',
   stats: [
-    { value: '~8', label: 'stat.operated' },
-    { value: '6',  label: 'stat.instruments' },
+    { value: '2,872', label: 'stat.days' },
+    { value: '6', label: 'stat.instruments' },
     { value: '25', label: 'stat.mass' },
     { value: '70', label: 'stat.power' },
   ],
   scene: buildScene,
   pages: [
-
-    // ═══════════════════════════════════════════════════════════════════════
-    // ACT 1  START — nuclear warmth wakes the narrator
-    // ═══════════════════════════════════════════════════════════════════════
-
-    // 1 · Boot: eyes open on the moonscape; camera looks across ALSEP toward horizon
+    // 1. A memory: folded inside the lander, on top of a Saturn V
     [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: 'moonDay' },
-      // Camera 5 m south of ALSEP, low angle, looking at the station from outside
-      { shot: { pos: [-3, 1.8, 6], look: [0, 1.2, 0] } },
-      { power: 0, ms: 0 },
-      { wait: 1500 },
-      { sfx: 'sfx.warmup' },
-      { power: 1, ms: 3000 },
-      { caption: 'p1.boot', fact: 'alsep-on', auto: 2000 },
-      { say: 'p1.wake', fact: 'snap-27' },
-    ],
-
-    // 2 · The astronauts finish work; camera looks toward Intrepid
-    [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: 'moonDay' },
-      // Camera behind ALSEP looking ENE at Intrepid (~14 m away)
-      { shot: { pos: [-2, 2.5, 5], look: [12, 1.5, -8] } },
-      { shot: { pos: [-2, 2.0, 4], look: [12, 2.5, -8], ms: 10000 } },
-      { say: 'p1.astronauts', fact: 'tv-camera' },
-      { caption: 'p1.hatch', fact: 'hatch-closed', auto: 3000 },
-    ],
-
-    // 3 · Turn to look toward Surveyor 3 crater and the Earth in the sky
-    [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: 'moonDay' },
-      // Camera behind ALSEP looking SE toward Surveyor
-      { shot: { pos: [-2, 2.5, -4], look: [20, 1.0, 14] } },
-      { shot: { pos: [-2, 2.0, -3], look: [20, 2.5, 14], ms: 4000 } },
-      { say: 'p1.turn', fact: 'surveyor-3' },
-    ],
-
-    // 4 · Origin memory — transition into Act 2
-    [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: MOON_NIGHT },
-      // Close-up of the ALSEP antenna mast at night, stars behind
-      { shot: { pos: [3, 2.5, 4], look: [0, 1.5, 0] } },
-      { say: 'p1.origin', fact: 'launch' },
+      { stage: 'earth', sky: 'earthDay' },
+      { call: 'launchPose' },
+      { shot: { pos: [110, 16, 140], look: [0, 30, 0] } },
+      { shot: { pos: [80, 12, 105], look: [0, 30, 0], ms: 9000 } },
+      { caption: 'p1.where', fact: 'carried' },
+      { say: 'p1.dark', fact: 'carried' },
+      { say: 'p1.rocket', fact: 'carried' },
       { act: 'p1.go' },
+      { call: 'launch' },
+      { caption: 'p1.gone', fact: 'landing' },
     ],
-
-    // ═══════════════════════════════════════════════════════════════════════
-    // ACT 2  WORK DONE — every machine as a "memory ghost" card
-    // ═══════════════════════════════════════════════════════════════════════
-
-    // 5 · Saturn V card — camera tilts up into the night sky
+    // 2. Waking up on the Moon
     [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: MOON_NIGHT },
-      // Looking up at an empty sky to invoke the rocket memory
-      { shot: { pos: [3, 1.5, 4], look: [0, 8, -6] } },
-      { shot: { pos: [3, 1.5, 4], look: [0, 14, -8], ms: 10000 } },
-      { say: 'p2.intro', fact: 'launch' },
+      { stage: 'moon', sky: 'moonDay' },
+      { call: 'landed' },
+      { place: STATION },
+      { power: 1 },
+      { power: 0 },
+      { shot: { rel: 'machine', pos: [4.5, 1.4, 5.5], look: [0, 1.2, 0] } },
+      { shot: { rel: 'machine', pos: [3.4, 1.8, 4.2], look: [0, 1.4, 0], ms: 10000 } },
+      { caption: 'p2.where', fact: 'landing', auto: 2600 },
+      { sfx: 'sfx.warm', sound: 'beep' },
+      { power: 1, ms: 2500 },
+      { say: 'p2.warm', fact: 'snap-27' },
+      { say: 'p2.power', fact: 'snap-27' },
+      { say: 'p2.name', fact: 'carried' },
     ],
-
-    // 6 · Yankee Clipper card — wide shot of the moonscape
+    // 3. Intrepid and her crew
     [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: MOON_NIGHT },
-      // High camera looking down and across the site
-      { shot: { pos: [-5, 6, 10], look: [4, 0, -2] } },
-      { shot: { pos: [-4, 5, 8], look: [4, 0, -2], ms: 9000 } },
-      { say: 'p2.clipper', fact: 'yankee-clipper' },
+      { stage: 'moon', sky: 'moonDay' },
+      { call: 'landed' },
+      { place: STATION },
+      { power: 1 },
+      { shot: { pos: [-3, 2.2, 6], look: LM_LOOK } },
+      { shot: { pos: [-1, 2.6, 4], look: LM_LOOK, ms: 10000 } },
+      { say: 'p3.intrepid', fact: 'carried' },
+      { caption: 'p3.crew', fact: 'crew' },
+      { say: 'p3.tv', fact: 'tv-camera' },
     ],
-
-    // 7 · Intrepid ascent stage card — camera close to Intrepid looking up
+    // 4. Switch on the six instruments
     [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: MOON_NIGHT },
-      // Camera 4 m west of Intrepid, looking at the ascent stage cabin
-      { shot: { pos: [7, 2.5, -3], look: [12, 3.5, -8] } },
-      { shot: { pos: [8, 2.0, -4], look: [12, 2.5, -8], ms: 9000 } },
-      { say: 'p2.ascent', fact: 'impact' },
+      { stage: 'moon', sky: 'moonDay' },
+      { call: 'landed' },
+      { place: STATION },
+      { power: 1 },
+      { shot: { pos: [3, 11, 16], look: [0.5, 0, -1.5] } },
+      { say: 'p4.cables', fact: 'six-instruments' },
+      {
+        play: 'holdToScan',
+        config: {
+          goal: 'p4.goal',
+          hint: 'p4.hint',
+          holdLabel: 'p4.hold',
+          targets: [
+            { at: 'seismometer', label: 'p4.t.seis', say: 'p4.s.seis', fact: 'seismometer', labelLift: 1.6 },
+            { at: 'magnetometer', label: 'p4.t.mag', say: 'p4.s.mag', fact: 'magnetometer', labelLift: 1.6 },
+            { at: 'solarWind', label: 'p4.t.wind', say: 'p4.s.wind', fact: 'solar-wind', labelLift: 1.6 },
+            { at: 'ionGauge', label: 'p4.t.gauge', say: 'p4.s.gauge', fact: 'ion-gauge', labelLift: 1.6 },
+            { at: 'dustDetector', label: 'p4.t.dust', say: 'p4.s.dust', fact: 'dust', labelLift: 1.6 },
+            { at: 'ionDetector', label: 'p4.t.ions', say: 'p4.s.ions', fact: 'ion-detector', labelLift: 1.6 },
+          ],
+          need: 4,
+          holdSeconds: 1.6,
+          winSay: 'p4.win',
+          winFact: 'central-station',
+        },
+      },
+      { caption: 'p4.on', fact: 'alsep-on' },
     ],
-
-    // 8 · Intrepid descent stage card — wider view of the whole lander
+    // 5. The old neighbour: Surveyor 3
     [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: 'moonDay' },
-      // Camera circles left side of Intrepid, looking at the full lander shape
-      { shot: { pos: [5, 3.5, -1], look: [12, 1.0, -8] } },
-      { shot: { pos: [6, 3.0, -2], look: [12, 1.5, -8], ms: 9000 } },
-      { say: 'p2.descent', fact: 'descent-stage' },
+      { stage: 'moon', sky: 'moonDay' },
+      { call: 'landed' },
+      { place: STATION },
+      { power: 1 },
+      { shot: { pos: [12, 3, 4], look: SURVEYOR_LOOK } },
+      { shot: { pos: [16, 2.2, 8.5], look: SURVEYOR_LOOK, ms: 11000 } },
+      { say: 'p5.cousin', fact: 'surveyor-3' },
+      { caption: 'p5.close', fact: 'landing' },
+      { say: 'p5.parts', fact: 'surveyor-visit' },
+      { caption: 'p5.why', fact: 'surveyor-visit' },
     ],
-
-    // 9 · Surveyor 3 card — camera close to Surveyor in the crater
+    // 6. Intrepid leaves
     [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: 'moonDay' },
-      // Camera 5 m from Surveyor, looking at the robot
-      { shot: { pos: [14, 2.0, 10], look: [20, 1.2, 14] } },
-      { shot: { pos: [15, 1.6, 11], look: [20, 1.4, 14], ms: 9000 } },
-      { say: 'p2.surveyor', fact: 'surveyor-visit' },
+      { stage: 'moon', sky: 'moonDay' },
+      { call: 'landed' },
+      { place: STATION },
+      { power: 1 },
+      { shot: { pos: [-6, 2, 10], look: LM_LOOK } },
+      { caption: 'p6.time', fact: 'liftoff' },
+      { act: 'p6.go' },
+      { shot: { pos: [-8, 2, 12], look: LM_LOOK, follow: 'intrepidAscent' } },
+      { call: 'liftoff' },
+      { shot: { pos: [-6, 2.2, 10], look: LM_LOOK, ms: 3000, follow: false } },
+      { say: 'p6.stay', fact: 'liftoff' },
+      { say: 'p6.alone', fact: null },
     ],
-
-    // 10 · ALSEP self-card — camera orbits the station itself
+    // 7. The first artificial moonquake
     [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: 'moonDay' },
-      // Camera close behind the station, pulls back slightly
-      { shot: { pos: [5, 3.0, 5], look: [0, 1.0, 0] } },
-      { shot: { pos: [4, 2.5, 4], look: [0, 1.2, 0], ms: 9000 } },
-      { say: 'p2.me', fact: 'six-instruments' },
+      { stage: 'moon', sky: 'moonDay' },
+      { call: 'landed' },
+      { call: 'liftoffDone' },
+      { place: STATION },
+      { power: 1 },
+      { shot: { rel: 'machine', pos: [-4, 1.8, 5], look: [0, 1, 0] } },
+      { say: 'p7.plan', fact: 'moonquake' },
+      {
+        play: 'custom:quake',
+        config: {
+          goal: 'p7.goal',
+          hint: 'p7.hint',
+          tapLabel: 'p7.tap',
+          calmLabel: 'p7.calm',
+          gotLabel: 'p7.got',
+          rounds: 3,
+          winSay: 'p7.win',
+          winFact: 'moonquake',
+        },
+      },
+      { say: 'p7.science', fact: 'seismometer' },
     ],
-
-    // 11 · Closing Act 2 — wide overhead pulling back
+    // 8. The long watch
     [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: MOON_NIGHT },
-      // High overhead shot of the whole site
-      { shot: { pos: [5, 12, 8], look: [6, 0, 2] } },
-      { shot: { pos: [5, 10, 6], look: [6, 0, 2], ms: 10000 } },
-      { say: 'p2.closing', fact: 'still-there' },
-    ],
-
-    // ═══════════════════════════════════════════════════════════════════════
-    // ACT 3  TIMELINE — interactive chronology 1967–1977
-    // ═══════════════════════════════════════════════════════════════════════
-
-    // 12 · Timeline intro then counterRace mini-game
-    [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: 'moonDay' },
-      // Camera faces the ALSEP station from the front at eye level
-      { shot: { pos: [5, 2.0, 4], look: [0, 1.2, 0] } },
-      { caption: 'p3.intro', fact: 'alsep-on', auto: 3500 },
+      { stage: 'moon', sky: 'moonDay' },
+      { call: 'landed' },
+      { call: 'liftoffDone' },
+      { place: STATION },
+      { power: 1 },
+      { shot: { pos: [8, 4, 9], look: [2, 1, -2] } },
+      { say: 'p8.home', fact: 'carried' },
+      { call: 'longWatch', block: false },
       {
         play: 'counterRace',
         config: {
-          goal: 'p3.play',
-          hint: 'p4.winthint',
-          plan: 7,
-          actual: 2922,
-          unit: 'p3.day',
-          planLabel: 'p3.planChip',
-          tapLabel: 'p4.watchgoal',
-          dayNight: true,
-          winSfx: 'sfx.day83',
-          winSay: 'p4.watchwin',
-          winFact: 'alsep-shutdown',
+          goal: 'p8.goal',
+          hint: 'p8.hint',
+          plan: 31,
+          actual: 68928,
+          unit: 'p8.unit',
+          planLabel: 'p8.plan',
+          tapLabel: 'p8.tap',
+          planSfx: 'sfx.more',
+          winSay: 'p8.win',
+          winFact: 'watch-length',
         },
       },
+      { caption: 'p8.decay', fact: 'rtg-decay' },
     ],
-
-    // ═══════════════════════════════════════════════════════════════════════
-    // ACT 4  GOODBYE — Intrepid leaves, moonquake, 8 years, shutdown
-    // ═══════════════════════════════════════════════════════════════════════
-
-    // 13 · Intrepid liftoff (silent – no air)
+    // 9. Switched off, still there
     [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: 'moonDay' },
-      // Camera close behind ALSEP looking at Intrepid, tilts up as it rises
-      { shot: { pos: [-2, 2.5, 5], look: [12, 2.5, -8] } },
-      { shot: { pos: [-2, 2.0, 4], look: [12, 10, -8], ms: 5000 }, block: false },
-      { caption: 'p4.liftoff', fact: 'liftoff', auto: 1500 },
-      { call: 'liftoff' },
-      { say: 'p4.liftoff', fact: 'liftoff' },
-    ],
-
-    // 14 · The moonquake: camera micro-shake
-    [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: 'moonDay' },
-      // Low angle looking across the moonscape
-      { shot: { pos: [3, 1.4, 6], look: [8, 0.4, -4] } },
-      { sfx: 'sfx.rumble' },
-      { call: 'moonquakeShake' },
-      { say: 'p4.impact', fact: 'moonquake' },
-    ],
-
-    // 15 · Eight years of day/night cycles (accelerated)
-    [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: 'moonDay' },
-      // Camera at antenna height, looking across the instrument field
-      { shot: { pos: [5, 2.5, 5], look: [0, 1.5, 0] } },
-      { call: 'dayCycle' },
-      { say: 'p4.watch', fact: 'splashdown' },
-    ],
-
-    // 16 · The final command and shutdown
-    [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: 'moonDay' },
-      // Close on the ALSEP antenna – the last signal
-      { shot: { pos: [4, 2.8, 4], look: [0, 2.0, 0] } },
-      { say: 'p4.shutdown', fact: 'alsep-shutdown' },
-    ],
-
-    // 17 · Goodbye — slow crane shot sweeping from Intrepid toward Surveyor; eyes close
-    [
-      { call: 'boot' },
-      { place: { x: 0, z: 0, heading: 0 } },
-      { sky: MOON_NIGHT },
-      // Start looking at the dark Intrepid, pan to Surveyor crater under stars
-      { shot: { pos: [-3, 3.0, 5], look: [12, 1.5, -8] } },
-      { shot: { pos: [-2, 4.0, 2], look: [20, 0.5, 14], ms: 8000 } },
-      { say: 'p4.goodbye', fact: 'still-there' },
-      { call: 'finalShutdown' },
-      { power: 0, ms: 6000 },
-      { sfx: 'sfx.shutdown' },
+      { stage: 'moon' },
+      { sky: { day: 0.15, sunset: 0, az: 2.4 }, ms: 4000 },
+      { call: 'landed' },
+      { call: 'liftoffDone' },
+      { place: STATION },
+      { power: 1 },
+      { shot: { rel: 'machine', pos: [3.5, 1.5, 4], look: [0, 1.4, 0] } },
+      { shot: { rel: 'machine', pos: [16, 8, 20], look: [4, 1, -2], ms: 24000 } },
+      { caption: 'p9.date', fact: 'alsep-shutdown' },
+      { power: 0, ms: 5000 },
+      { sfx: 'sfx.off', sound: 'powerDown' },
+      { say: 'p9.still', fact: 'liftoff' },
+      { say: 'p9.bye', fact: null },
+      { caption: 'p9.last', auto: 3600 },
       { patch: true },
     ],
   ],

@@ -11,10 +11,11 @@ Space Apps requires teams to disclose how AI was used. Add a row for everything 
 | 14 Nov 2026 | Vidura | Claude Code (Anthropic) | Built the Viking episode from the team's brief (`docs/stories/viking.md`), re-checking each fact on the NASA pages; built the Titan rocket, Viking orbiter and descent hardware in code | Sources linked in the app; a person must re-read them before submission |
 | 14 Nov 2026 | Vidura | AI assistant | `docs/stories/viking.md` (the Viking story brief) | Written with AI help; confirm how before submission |
 | 14 Nov 2026 | Vidura | AI assistant | `docs/BUILD_GUIDE.md` (the journey specification) | Written with AI help; confirm how before submission |
+| 14 Nov 2026 | Vidura | Claude Code (Anthropic) | Reworked the ALSEP episode by Kaushal: re-checked every fact on NSSDCA 1969-099C and the Surveyor 3 page, shortened the lines, added the moonquake game and NASA's Lunar Module and Saturn V models | Sources linked in the app; a person must re-read them before submission |
 
 ## AI-generated content in the product
 
-- **Voices.** Every recorded line (narrator, Viking 1, Viking 2, Sojourner, mission control) is
+- **Voices.** Every recorded line (narrators, Viking 1, Viking 2, Sojourner, ALSEP, mission control) is
   AI-generated speech from the open Kokoro-82M model, run locally. The About page says so.
 
 ## What AI did not make

@@ -1,51 +1,49 @@
 /**
- * Apollo 12 ALSEP scene.
+ * Apollo 12 ALSEP scene. The narrator is the ALSEP central station.
  *
- * The narrator IS the ALSEP Central Station; the camera lives near its antenna mast.
- * Everything is procedural geometry.
+ * Moon layout (1 unit = 1 m, north = -Z, east = +X). The station and its instruments are drawn
+ * larger than life so a child can see them; distances are squeezed so everything fits one view.
+ *   ALSEP central station (0, 0)     SNAP-27 RTG (2, 1)     six instruments in a ring
+ *   Intrepid (NASA Apollo Lunar Module model) (INTREPID_X, INTREPID_Z)
+ *   Surveyor 3 (SURVEYOR_X, SURVEYOR_Z)
+ * Earth stage: NASA's Saturn V model on the pad, for the launch memory.
  *
- * Layout (1 unit ≈ 1 m, north = -Z, east = +X, up = +Y):
- *   ALSEP origin         ( 0,  0,  0)   ← narrator / camera anchor
- *   SNAP-27 RTG          ( 2,  0,  1)
- *   Intrepid descent     (12,  0, -8)   ~14 m away (ENE) – scaled for visibility
- *   Surveyor 3 crater    (20, -1, 14)   ~25 m SE – scaled for visibility
- *
- * All geometry enlarged 3–4× vs. real dimensions so models are clearly visible
- * at the engine's 38° FOV from a few metres away.
- *
- * Calls available via { call: 'name' } in episode.ts:
- *   boot             – reset state at the start of every page
- *   liftoff          – animates ascent stage rising (silent – no air)
- *   moonquakeShake   – camera micro-shake + seismograph spike
- *   dayCycle         – begin the accelerated day/night loop
- *   finalShutdown    – power down glow and shutdown sequence
+ * Calls: launchPose, launch, landed, liftoff, longWatch.
  */
 import {
+  Box3,
   BoxGeometry,
+  Color,
+  ConeGeometry,
   CylinderGeometry,
   Group,
   Mesh,
+  MeshBasicMaterial,
   MeshStandardMaterial,
+  PointLight,
+  QuadraticBezierCurve3,
   SphereGeometry,
   TubeGeometry,
   Vector3,
-  QuadraticBezierCurve3,
-  PointLight,
 } from 'three';
 import type { Object3D } from 'three';
 import gsap from 'gsap';
-import { part, tube, type MachineMaterials, type MachineParts } from '../../engine/models';
+import { part, tube, type MachineMaterials } from '../../engine/models';
 import { hash } from '../../engine/noise';
-import type { EpisodeContext, SceneBuild, SceneHandles } from '../../engine/types';
+import type { Scope } from '../../engine/scope';
+import type { SceneBuild, SceneHandles } from '../../engine/types';
+import { nasaModel } from '../../journey/nasaModels';
 
-// ─── scene layout constants ───────────────────────────────────────────────────
-/** Intrepid is parked about 14 m ENE – close enough to see clearly. */
-export const INTREPID_X = 12;
-export const INTREPID_Z = -8;
-/** Surveyor 3 sits another ~12 m SE of Intrepid. */
-export const SURVEYOR_X = 20;
+export const INTREPID_X = 14;
+export const INTREPID_Z = -10;
+export const SURVEYOR_X = 22;
 export const SURVEYOR_Z = 14;
-export const SURVEYOR_Y = -1;
+const SURVEYOR_Y = 0;
+/** NASA: the Lunar Module stood about 7 m tall; the model is fitted to that height. */
+const LM_HEIGHT = 7;
+/** Share of the model's height below which parts belong to the descent stage. */
+const DESCENT_SHARE = 0.42;
+const SATURN_HEIGHT = 60;
 
 // ─── RTG generator ───────────────────────────────────────────────────────────
 function buildRTG(mats: MachineMaterials): Group {
@@ -250,145 +248,202 @@ function buildFootprints(scene: Group): void {
   }
 }
 
-// ─── Main scene build ─────────────────────────────────────────────────────────
-export default function buildScene({ scene, materials }: SceneBuild): SceneHandles {
+/** NASA's Lunar Module, split in two so the ascent stage can lift off. Falls back to the stand-in. */
+async function buildLunarModule(mats: MachineMaterials, scene: Object3D, groundY: number): Promise<{ lm: Group; ascent: Group }> {
+  const lm = new Group();
+  lm.position.set(INTREPID_X, groundY, INTREPID_Z);
+  lm.rotation.y = -0.6;
+  scene.add(lm);
+  const model = await nasaModel('apollo-lunar-module', { size: LM_HEIGHT, by: 'height' });
+  if (!model) {
+    const { descent, ascent } = buildIntrepid(mats);
+    lm.add(descent);
+    return { lm, ascent };
+  }
+  lm.add(model);
+  lm.updateMatrixWorld(true);
+  const bounds = new Box3().setFromObject(model);
+  const cut = bounds.min.y + (bounds.max.y - bounds.min.y) * DESCENT_SHARE;
+  const upper: Mesh[] = [];
+  const centre = new Vector3();
+  model.traverse((o) => {
+    if (o instanceof Mesh && new Box3().setFromObject(o).getCenter(centre).y > cut) upper.push(o);
+  });
+  const ascent = new Group();
+  lm.add(ascent);
+  for (const mesh of upper) ascent.attach(mesh);
+  return { lm, ascent };
+}
+
+/** A rocket flame: an open cone glowing brighter than white. */
+function flame(radius: number, length: number, color: number): Mesh {
+  const mat = new MeshBasicMaterial({ color: new Color(color).multiplyScalar(3), transparent: true, opacity: 0.85, depthWrite: false });
+  const mesh = new Mesh(new ConeGeometry(radius, length, 24, 1, true), mat);
+  mesh.rotation.x = Math.PI;
+  mesh.visible = false;
+  return mesh;
+}
+
+/** Run a gsap tween inside a scope: it stops when the page is skipped. */
+function play(scope: Scope, vars: gsap.TweenVars & { target: object }): Promise<void> {
+  const { target, ...rest } = vars;
+  const tween = gsap.to(target, rest);
+  scope.add(() => tween.kill());
+  return new Promise((resolve) => {
+    tween.eventCallback('onComplete', () => resolve());
+    tween.eventCallback('onInterrupt', () => resolve());
+  });
+}
+
+export default async function buildScene({ scene, world, materials, stage }: SceneBuild): Promise<SceneHandles> {
   const objects: Record<string, Object3D> = {};
-  let ctx: EpisodeContext | null = null;
+  const ground = (x: number, z: number): number => world.heightAt(x, z);
 
-  // ALSEP Central Station (at origin – this IS the narrator's body)
-  const { station, lamp: alsepLamp, antennaGlow } = buildCentralStation(materials);
-  scene.add(station);
-  objects['alsepStation'] = station;
+  // ---------- Moon: the station ----------
+  const { station, lamp, antennaGlow } = buildCentralStation(materials);
+  const body = new Group();
+  body.add(station);
+  const root = new Group();
+  root.add(body);
+  scene.add(root);
+  objects.alsepStation = station;
 
-  // RTG power generator
   const rtg = buildRTG(materials);
+  rtg.position.y = ground(rtg.position.x, rtg.position.z);
   scene.add(rtg);
-  objects['rtg'] = rtg;
+  objects.rtg = rtg;
 
-  // 6 science instruments
   buildInstruments(materials, objects);
   for (const def of INSTRUMENT_DEFS) {
-    const instr = objects[def.id];
-    if (instr) scene.add(instr);
+    const instrument = objects[def.id];
+    instrument.position.y = ground(def.x, def.z);
+    scene.add(instrument);
   }
 
-  // Intrepid lander
-  const { descent, ascent } = buildIntrepid(materials);
-  descent.position.set(INTREPID_X, 0, INTREPID_Z);
-  scene.add(descent);
-  objects['intrepidDescent'] = descent;
-  objects['intrepidAscent'] = ascent;
-
-  // TV camera stub
-  const tvCam = buildTVCamera(materials);
-  scene.add(tvCam);
-  objects['tvCamera'] = tvCam;
-
-  // Surveyor 3
   const surveyor = buildSurveyor(materials);
+  surveyor.position.y = ground(SURVEYOR_X, SURVEYOR_Z) + SURVEYOR_Y;
   scene.add(surveyor);
-  objects['surveyor3'] = surveyor;
+  objects.surveyor3 = surveyor;
 
-  // Footprints
+  const tvCamera = buildTVCamera(materials);
+  tvCamera.position.y += ground(tvCamera.position.x, tvCamera.position.z);
+  scene.add(tvCamera);
+  objects.tvCamera = tvCamera;
   buildFootprints(scene as unknown as Group);
 
-  // ─── State ───────────────────────────────────────────────────────────────
-  let pulseTick = 0;
-  let dayCycleActive = false;
-  let dayCycleT = 0;
+  const { lm, ascent } = await buildLunarModule(materials, scene, ground(INTREPID_X, INTREPID_Z));
+  const ascentFlame = flame(0.5, 3, 0xffc070);
+  ascentFlame.position.y = LM_HEIGHT * DESCENT_SHARE - 1;
+  ascent.add(ascentFlame);
+  const ascentLight = new PointLight(0xffb060, 0, 60, 1.6);
+  ascentLight.position.y = LM_HEIGHT * DESCENT_SHARE - 1.5;
+  ascent.add(ascentLight);
+  objects.intrepid = lm;
+  objects.intrepidAscent = ascent;
 
-  // ─── Calls ────────────────────────────────────────────────────────────────
+  // ---------- Earth: the Saturn V on the pad ----------
+  const earth = stage('earth');
+  const rocket = new Group();
+  earth.scene.add(rocket);
+  const saturn = await nasaModel('saturn-v', { size: SATURN_HEIGHT, by: 'height' });
+  if (saturn) rocket.add(saturn);
+  else part(rocket, new CylinderGeometry(2, 2, SATURN_HEIGHT, 24), materials.white, 0, SATURN_HEIGHT / 2, 0);
+  const engines = new Group();
+  for (let k = 0; k < 5; k++) {
+    const f = flame(1.1, 14, 0xffa040);
+    const a = (k / 4) * Math.PI * 2;
+    f.position.set(k === 4 ? 0 : Math.cos(a) * 1.6, -7, k === 4 ? 0 : Math.sin(a) * 1.6);
+    engines.add(f);
+  }
+  rocket.add(engines);
+  const exhaust = new PointLight(0xff8a30, 0, 200, 1.4);
+  exhaust.position.y = -5;
+  rocket.add(exhaust);
+  objects.saturn = rocket;
+
+  const tmp = new Vector3();
+
   const calls: SceneHandles['calls'] = {
+    launchPose() {
+      gsap.killTweensOf(rocket.position);
+      rocket.position.set(0, 0, 0);
+      exhaust.intensity = 0;
+      for (const f of engines.children) f.visible = false;
+    },
 
-    /** Act 1 initial state: everything present, signal alive. */
-    boot() {
+    async launch(c, scope) {
+      for (const f of engines.children) f.visible = true;
+      c.audio.play('thud');
+      c.audio.play('whoosh');
+      c.comic.sfx(c.t('sfx.liftoff'));
+      for (let k = 0; k < 12; k++) c.fx.burst('smoke', tmp.set((Math.random() - 0.5) * 18, 1, (Math.random() - 0.5) * 18));
+      let puff = 0;
+      scope.frame((dt, time) => {
+        for (const f of engines.children) f.scale.set(1, 1 + Math.sin(time * 40 + f.id) * 0.12, 1);
+        exhaust.intensity = 1200 + Math.sin(time * 33) * 300;
+        puff += dt;
+        if (puff > 0.08 && rocket.position.y < 220) {
+          puff = 0;
+          c.fx.burst('smoke', tmp.set((Math.random() - 0.5) * 4, rocket.position.y - 6, (Math.random() - 0.5) * 4));
+        }
+        const shake = Math.max(0, 1 - rocket.position.y / 140) * 0.4;
+        c.director.shot({
+          pos: [80 + Math.sin(time * 61) * shake, Math.max(12, rocket.position.y * 0.5 + 12) + Math.cos(time * 53) * shake, 105],
+          look: [0, rocket.position.y + 30, 0],
+        });
+        c.audio.drive(1);
+      });
+      scope.add(() => {
+        c.audio.drive(0);
+        exhaust.intensity = 0;
+      });
+      await play(scope, { target: rocket.position, y: 320, duration: 7, ease: 'power2.in' });
+    },
+
+    /** Every Moon page starts here: Intrepid whole again (the child may have skipped back). */
+    landed() {
+      gsap.killTweensOf(ascent.position);
+      ascent.position.set(0, 0, 0);
       ascent.visible = true;
-      alsepLamp.intensity = 0.6;
-      antennaGlow.visible = true;
-      dayCycleActive = false;
-      dayCycleT = 0;
+      ascentFlame.visible = false;
+      ascentLight.intensity = 0;
     },
 
-    /** Ascent stage fires and rises silently – no audio (vacuum). */
-    async liftoff(_context, scope) {
-      await scope.wait(gsap.to(ascent.position, {
-        y: 60,
-        duration: 5,
-        ease: 'power1.in',
-        onComplete() {
-          ascent.visible = false;
-        },
-      }));
-    },
-
-    /** Camera micro-shake to simulate the moonquake felt through the ground. */
-    async moonquakeShake(context, scope) {
-      const { camera } = context;
-      const shakes = 22;
-      for (let i = 0; i < shakes; i++) {
-        const mag = 0.018 * (1 - i / shakes);
-        await scope.wait(gsap.to(camera.position, {
-          x: camera.position.x + (Math.random() - 0.5) * mag,
-          y: camera.position.y + (Math.random() - 0.5) * mag * 0.5,
-          duration: 0.07,
-          ease: 'none',
-        }));
+    /** The ascent stage rises on its own engine; the descent stage stays as the launch pad. */
+    async liftoff(c, scope) {
+      ascentFlame.visible = true;
+      ascentLight.intensity = 30;
+      c.comic.sfx(c.t('sfx.liftoff'));
+      c.audio.play('whoosh');
+      for (let k = 0; k < 6; k++) {
+        c.fx.burst('moonDust', tmp.set(INTREPID_X + (Math.random() - 0.5) * 6, ground(INTREPID_X, INTREPID_Z) + 0.1, INTREPID_Z + (Math.random() - 0.5) * 6));
       }
+      scope.frame((_dt, time) => ascentFlame.scale.set(1, 1 + Math.sin(time * 45) * 0.15, 1));
+      scope.add(() => {
+        ascentFlame.visible = false;
+        ascentLight.intensity = 0;
+      });
+      await play(scope, { target: ascent.position, y: 80, duration: 6, ease: 'power1.in' });
+      ascent.visible = false;
     },
 
-    /** Start the accelerated day/night cycle for Act 4. */
-    dayCycle() {
-      dayCycleActive = true;
+    /** After the liftoff page: only the descent stage is left. */
+    liftoffDone() {
+      ascent.visible = false;
     },
 
-    /** Power the signal glow down slowly – called at shutdown. */
-    async powerDown(_context, scope) {
-      await scope.wait(gsap.to(alsepLamp, { intensity: 0, duration: 6, ease: 'power2.in' }));
-      antennaGlow.visible = false;
-    },
-
-    /** Final shutdown: kill the lights. The director handles the DOM overlay. */
-    finalShutdown(_context, scope) {
-      void scope.wait(gsap.to(alsepLamp, { intensity: 0, duration: 7, ease: 'power1.in' }));
-      gsap.to(antennaGlow.scale, { x: 0, y: 0, z: 0, duration: 5, ease: 'power2.in', onComplete() {
-        antennaGlow.visible = false;
-      } });
+    /** Lunar days and nights race past while the hours are counted. */
+    longWatch(c, scope) {
+      scope.frame((_dt, time) => {
+        c.sky.state.day = 0.5 + 0.5 * Math.cos(time * 0.9);
+        c.sky.state.az = time * 0.45;
+      });
     },
   };
 
   return {
-    machine: {
-      root: station,
-      body: station,
-      bubbleHeight: 2.6,
-      eyes: materials.lens,
-      lamp: alsepLamp,
-    } as unknown as MachineParts,
+    machine: { root, body, bubbleHeight: 2.6, eyes: antennaGlow.material as MeshStandardMaterial, lamp },
     objects,
     calls,
-    onReady(context) {
-      ctx = context;
-      context.machine.groundAt = () => 0;
-      context.machine.leavesTracksAt = () => false;
-    },
-    update(dt, time) {
-      // Pulse the antenna glow to simulate telemetry heartbeat
-      pulseTick += dt;
-      if (antennaGlow.visible) {
-        const pulse = 0.6 + 0.5 * Math.sin(pulseTick * 2.8);
-        const mat = antennaGlow.material as MeshStandardMaterial;
-        mat.emissiveIntensity = pulse;
-      }
-
-      // Accelerated day/night visual (cycle the ambient-like point light)
-      if (dayCycleActive && ctx) {
-        dayCycleT += dt * 0.4;
-        const dayBrightness = Math.max(0, Math.sin(dayCycleT * Math.PI));
-        alsepLamp.intensity = 0.2 + dayBrightness * 0.8;
-      }
-
-      void time;
-      void ctx;
-    },
   };
 }

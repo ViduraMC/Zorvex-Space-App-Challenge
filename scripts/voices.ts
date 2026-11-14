@@ -40,6 +40,8 @@ const SPEAK: [RegExp, string][] = [
   [/\bAug\b/g, 'August'],
   [/\bV1\b/g, 'Viking 1'],
   [/\bV2\b/g, 'Viking 2'],
+  [/\bSaturn V\b/g, 'Saturn Five'],
+  [/\b(\d\d):(\d\d) UT\b/g, '$1 $2, Universal Time'],
   [/…/g, '...'],
   [/–/g, ' to '],
 ];
