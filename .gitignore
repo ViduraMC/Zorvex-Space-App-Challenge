@@ -43,3 +43,6 @@ npm-debug.log*
 test-results/
 playwright-report/
 screenshots/
+
+# local Python environment for npm run voices (Kokoro TTS)
+.venv-voices/

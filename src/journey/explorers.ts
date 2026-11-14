@@ -20,6 +20,8 @@ export interface Explorer {
   years: { start: number; end: number | null };
   summary: string;
   sources: { label: string; url: string }[];
+  /** Where it landed (east longitude), from the linked NASA page. Missing when not yet sourced. */
+  site?: { lat: number; lon: number; note: string; source: string };
 }
 
 export const MAX_SLOTS = 9;
@@ -44,6 +46,10 @@ export function parseRoster(raw: unknown, destination: Destination): Explorer[] 
     if (item.years?.end != null && typeof item.years.end !== 'number') fail('years.end must be a number or null');
     if (!item.summary) fail('missing summary');
     if (!Array.isArray(item.sources) || item.sources.length === 0) fail('needs at least one source');
+    const site = item.site;
+    if (site && (Math.abs(site.lat) > 90 || site.lon < -360 || site.lon > 360 || !site.source.startsWith('https://'))) {
+      fail('site needs lat -90..90, lon -360..360 and a source URL');
+    }
     return item as Explorer;
   });
   if (list.length < 1 || list.length > MAX_SLOTS) throw new Error(`explorers.${destination}.json needs 1 to ${MAX_SLOTS} explorers`);

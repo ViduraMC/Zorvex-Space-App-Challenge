@@ -45,8 +45,8 @@ type PlayStep = { [K in keyof GameConfigs]: { play: K; config: GameConfigs[K] } 
 export type Step =
   /** Yellow narrator box. Waits for Next unless `auto` (ms) is set. */
   | { caption: string; fact?: string; auto?: number }
-  /** Speech bubble from the machine. `fact` is required: a fact id, or null for pure feeling ("Goodbye!"). */
-  | { say: string; fact: string | null; auto?: number }
+  /** Speech bubble. `fact` is required: a fact id, or null for pure feeling ("Goodbye!"). `by` names another speaker (a role in voice/cast.json). */
+  | { say: string; fact: string | null; auto?: number; by?: string }
   /** Comic sound-effect word ("WHIRRR!") with an optional sound. */
   | { sfx: string; sound?: SoundName }
   /** A sound on its own. */
@@ -62,6 +62,8 @@ export type Step =
   | { choice: { label: string; say?: string; fact?: string | null }[] }
   /** Run a function from the episode's scene.ts (`calls`). Waits for it unless `block: false`. */
   | { call: string; block?: boolean }
+  /** Switch to another world of this episode (see EpisodeDef.stages), optionally with a sky preset. */
+  | { stage: WorldKind; sky?: SkyPreset }
   /** Put the machine somewhere at once. Start a page with it: the child may have skipped the page before. */
   | { place: { x: number; z: number; heading?: number } }
   /** Machine power 0..1 (eye glow), faded over ms. */
@@ -78,6 +80,10 @@ export interface EpisodeDef {
   /** Position in the hub; lower comes first. */
   order: number;
   world: WorldKind;
+  /** Extra worlds the story visits (for example a launch on Earth, a cruise through space). */
+  stages?: WorldKind[];
+  /** Explorer ids (src/data/explorers.*.json) whose Explore button opens this episode. */
+  covers?: string[];
   /** Sky at the start of the episode. */
   sky: SkyPreset;
   machine: {
@@ -109,6 +115,8 @@ export interface EpisodeDef {
 export interface SceneBuild {
   scene: Scene;
   world: World;
+  /** The scene and world of another stage, to build objects there. */
+  stage: (kind: WorldKind) => { scene: Scene; world: World };
   materials: MachineMaterials;
   quality: Quality;
   anisotropy: number;
@@ -141,6 +149,10 @@ export interface EpisodeContext {
   fx: Fx;
   machine: Machine;
   objects: Record<string, Object3D>;
+  /** The world currently on screen. */
+  stageKind: WorldKind;
+  /** Show another stage; scene, world, sky and fx above switch with it. */
+  setStage: (kind: WorldKind) => void;
   quality: Quality;
   /** Translate a key of this episode (or shared UI text). */
   t: (key: string, vars?: Record<string, string | number>) => string;
@@ -150,7 +162,9 @@ export interface EpisodeContext {
   /** Screen position (CSS px) of a world point; `visible` is false behind the camera. */
   project: (point: Vector3) => { x: number; y: number; visible: boolean };
   /** Make the machine speak a line (bubble + voice) and wait for Next. */
-  say: (key: string, scope: Scope) => Promise<void>;
+  say: (key: string, scope: Scope, role?: string) => Promise<void>;
+  /** Show a role's name in the speech bubble (voice/cast.json roles; default the machine). */
+  speaker: (role?: string) => void;
 }
 
 /** Identity helper that gives episode files full type checking and autocomplete. */

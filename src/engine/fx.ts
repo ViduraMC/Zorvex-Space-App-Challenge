@@ -39,6 +39,8 @@ const PRESETS = {
   dustBurst: { count: 46, life: [1.2, 2.6], speed: [0.6, 2.6], size: [0.5, 1.5], color: [0.83, 0.62, 0.42, 0.55], spread: 1.25, radius: 0.9 },
   /** Grey lunar dust flies in clean arcs (no air to hold it up). */
   moonDust: { count: 24, life: [0.8, 1.6], speed: [0.8, 2.4], size: [0.08, 0.22], color: [0.72, 0.71, 0.69, 0.6], spread: 0.9, radius: 0.15 },
+  /** Rocket exhaust smoke: big, slow, long-lived. */
+  smoke: { count: 26, life: [3, 5.5], speed: [0.8, 3.2], size: [6, 14], color: [0.78, 0.77, 0.74, 0.62], spread: 1.35, radius: 2.4 },
   /** Bright sparks for a finished scan, a found clue, a win. */
   sparkle: { count: 26, life: [0.4, 0.9], speed: [0.5, 1.6], size: [0.03, 0.09], color: [1, 0.86, 0.35, 1], spread: 1.5, radius: 0.08, additive: true },
 } satisfies Record<string, Preset>;

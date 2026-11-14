@@ -1,6 +1,6 @@
 # Progress
 
-Updated: Saturday 14 Nov 2026, about 16:00 (Asia/Colombo).
+Updated: Saturday 14 Nov 2026, about 18:45 (Asia/Colombo).
 
 ## Now
 
@@ -12,6 +12,14 @@ Updated: Saturday 14 Nov 2026, about 16:00 (Asia/Colombo).
 - Sojourner episode plays end to end with four mini-games and awards its patch.
 - InSight episode implemented in `src/episodes/insight/`: 5 scenes, official NASA 3D model, deployable SEIS dome & HP3 Mole, Marsquake timingTap mini-game, 9 verified facts. Direct integration with Mars explorer roster.
 - Pioneer 10 & 11 episode implemented in `src/episodes/pioneer/`: 9 chapters, 33 verified facts, Three.js 3D spacecraft, Jupiter & Saturn with rings, and mini-games (`counterRace`, `balance`, `findHidden`, `resourceManage`). Passes lint, typecheck, tests, check:facts, and build.
+
+- Product renamed: The Abandoned Explorers, "Abandoned but not Forgotten."
+- Viking 1 & 2 story playable end to end (10 pages, 3 stages: Earth, space, Mars).
+
+- Voices: narrator, Viking 1 (male), Viking 2 (female), Sojourner and mission control, recorded with Kokoro (`npm run voices`).
+- Take-off and landing: cockpit telemetry, clouds, speed streaks, curved Earth, entry heat and dust.
+- Hologram globe shows each landing site with its source.
+- Viking: 11 pages, with a real 1976 panorama to look around and Viking 2's colour photo.
 
 ## Next
 

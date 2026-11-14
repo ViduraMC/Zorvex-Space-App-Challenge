@@ -27,6 +27,23 @@ const clips = import.meta.glob<string>('../episodes/*/voice/*/*.{mp3,ogg,m4a,web
 });
 
 const SPEECH_LANG: Record<string, string> = { en: 'en-US', si: 'si-LK', ta: 'ta-IN' };
+
+/** Who speaks with which voice, per episode (used when a line has no recorded clip). */
+const casts = import.meta.glob<Record<string, { gender?: 'male' | 'female' }>>('../episodes/*/voice/cast.json', {
+  eager: true,
+  import: 'default',
+});
+
+// Common system voice names; the browser does not say which voices are male or female.
+const FEMALE = /aria|jenny|zira|sonia|libby|natasha|clara|emma|samantha|karen|moira|serena|female|google uk english female|heera|veena/i;
+const MALE = /guy|david|mark|ryan|christopher|eric|daniel|george|thomas|alex|fred|male|google uk english male|ravi/i;
+
+function pickVoice(lang: string, gender: 'male' | 'female'): SpeechSynthesisVoice | undefined {
+  const voices = speechSynthesis.getVoices().filter((v) => v.lang.toLowerCase().startsWith(lang.slice(0, 2).toLowerCase()));
+  const wanted = voices.filter((v) => (gender === 'female' ? FEMALE : MALE).test(v.name) && !(gender === 'female' ? MALE : FEMALE).test(v.name.replace(/female/i, '')));
+  // natural (online neural) voices sound far better where the browser has them
+  return wanted.find((v) => /natural|online|neural/i.test(v.name)) ?? wanted[0] ?? voices[0];
+}
 const MASTER_VOLUME = 0.6;
 
 class AudioEngine {
@@ -200,24 +217,38 @@ class AudioEngine {
     this.#riser.osc.frequency.setTargetAtTime(220 + progress01 * 660, ctx.currentTime, 0.03);
   }
 
-  /** Speak a line: the recorded clip when the episode has one, else text-to-speech. */
-  say(text: string, opts: { episode: string; key: string; robot: boolean }): void {
+  /**
+   * Speak a line: the recorded clip when the episode has one (npm run voices), else the
+   * browser's text-to-speech, picking a voice that matches the role's gender in voice/cast.json.
+   */
+  say(text: string, opts: { episode: string; key: string; role: string }): void {
     if (!this.voiceOn || !this.soundOn) return;
     this.hush();
     const lang = getLang();
     const base = `../episodes/${opts.episode}/voice/${lang}/${opts.key}.`;
     const url = Object.entries(clips).find(([path]) => path.startsWith(base))?.[1];
     if (url) {
-      this.#clip = new Audio(url);
-      void this.#clip.play().catch(() => undefined);
+      this.clip(url);
       return;
     }
     if (!('speechSynthesis' in window)) return;
+    const cast = casts[`../episodes/${opts.episode}/voice/cast.json`];
+    const gender = cast?.[opts.role]?.gender ?? (opts.role === 'narrator' ? 'male' : 'female');
     const u = new SpeechSynthesisUtterance(text);
     u.lang = SPEECH_LANG[lang] ?? 'en-US';
-    u.rate = opts.robot ? 0.95 : 0.9;
-    u.pitch = opts.robot ? 1.45 : 0.85;
+    const voice = pickVoice(u.lang, gender);
+    if (voice) u.voice = voice;
+    u.rate = opts.role === 'narrator' ? 0.92 : 0.98;
+    u.pitch = opts.role === 'narrator' ? 0.9 : 1.1;
     speechSynthesis.speak(u);
+  }
+
+  /** Play a recorded clip (stops the previous one). */
+  clip(url: string): void {
+    if (!this.voiceOn || !this.soundOn) return;
+    this.hush();
+    this.#clip = new Audio(url);
+    void this.#clip.play().catch(() => undefined);
   }
 
   hush(): void {

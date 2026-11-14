@@ -1,0 +1,199 @@
+{
+  "episode": "viking",
+  "checked": "2026-11-14",
+  "note": "Sources: the challenge resource (NASA Viking 1 page), the NASA pages in the team's Viking brief, and the NSSDCA catalogue (challenge resource).",
+  "facts": [
+    {
+      "id": "pairs",
+      "text": "NASA's Viking mission was two spacecraft, Viking 1 and Viking 2, each made of an orbiter and a lander. Each orbiter-lander pair flew together and entered Mars orbit; then the landers separated and descended.",
+      "source": "https://science.nasa.gov/mission/viking/spacecraft-and-science/",
+      "sourceName": "NASA Science: Viking Spacecraft and Science"
+    },
+    {
+      "id": "objectives",
+      "text": "The primary mission objectives were to obtain high-resolution images of the Martian surface, characterize the atmosphere and surface, and search for evidence of life.",
+      "source": "https://science.nasa.gov/mission/viking/spacecraft-and-science/",
+      "sourceName": "NASA Science: Viking Spacecraft and Science"
+    },
+    {
+      "id": "launch-site",
+      "text": "Both Vikings launched from Cape Canaveral, Florida, Launch Complex 41, on Titan IIIE-Centaur rockets.",
+      "source": "https://science.nasa.gov/mission/viking-1/",
+      "sourceName": "NASA Science: Viking 1 (challenge resource); rocket from NASA NSSDCA Viking 2 Lander"
+    },
+    {
+      "id": "swap",
+      "text": "The Viking-A spacecraft was scheduled to launch first, but a problem with its batteries meant it launched second. It was renamed Viking 2.",
+      "source": "https://science.nasa.gov/mission/viking-2/",
+      "sourceName": "NASA Science: Viking 2"
+    },
+    {
+      "id": "launch-1",
+      "text": "Viking 1 launched on 20 August 1975.",
+      "source": "https://science.nasa.gov/mission/viking-1/",
+      "sourceName": "NASA Science: Viking 1 (challenge resource)"
+    },
+    {
+      "id": "launch-2",
+      "text": "Viking 2 launched on 9 September 1975.",
+      "source": "https://science.nasa.gov/mission/viking-2/",
+      "sourceName": "NASA Science: Viking 2"
+    },
+    {
+      "id": "corrections",
+      "text": "Viking 1 made three course corrections: 27 August 1975, 10 June 1976 and 15 June 1976. Viking 2 made a course correction on 19 September 1975.",
+      "source": "https://science.nasa.gov/mission/viking-1/",
+      "sourceName": "NASA Science: Viking 1 (challenge resource) and Viking 2"
+    },
+    {
+      "id": "arrival",
+      "text": "Viking 1 entered orbit around Mars on 19 June 1976. Viking 2 entered orbit on 7 August 1976, almost 11 months after launch.",
+      "source": "https://science.nasa.gov/mission/viking-2/",
+      "sourceName": "NASA Science: Viking 1 (challenge resource) and Viking 2"
+    },
+    {
+      "id": "orbiter-role",
+      "text": "The orbiters carried the landers to Mars, photographed and certified landing sites, relayed the landers' messages, and did their own science. Each was an octagon about 2.5 metres across, powered by 8 solar panels with 34,800 solar cells giving 620 watts at Mars.",
+      "source": "https://science.nasa.gov/mission/viking/spacecraft-and-science/",
+      "sourceName": "NASA Science: Viking Spacecraft and Science"
+    },
+    {
+      "id": "rough-site",
+      "text": "Orbiter photos showed that Viking 1's primary landing site in the Chryse region was rougher than expected, so scientists targeted the western slopes of Chryse Planitia instead. The lander came down about 28 kilometres from its planned target.",
+      "source": "https://science.nasa.gov/mission/viking-1/",
+      "sourceName": "NASA Science: Viking 1 (challenge resource)"
+    },
+    {
+      "id": "descent",
+      "text": "After separating from the orbiter, the lander's aeroshell and heat shield slowed it in the atmosphere. At 6 km altitude and about 250 m/s a 16-metre parachute opened and in 45 seconds slowed it to 60 m/s. Then the aeroshell was dropped, the three legs came out, and three hydrazine engines made the final descent.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C",
+      "sourceName": "NASA NSSDCA: Viking 1 Lander (challenge catalogue)"
+    },
+    {
+      "id": "air-samples",
+      "text": "During its complicated atmospheric entry, the Viking 1 lander took samples of the air.",
+      "source": "https://science.nasa.gov/mission/viking-1/",
+      "sourceName": "NASA Science: Viking 1 (challenge resource)"
+    },
+    {
+      "id": "landing-1",
+      "text": "On 20 July 1976 Viking 1's lander touched down on the western slope of Chryse Planitia (the Plains of Gold). It was the first truly successful landing on Mars and the first U.S. landing there. The Soviet Mars 3 lander had landed in 1971, but contact was lost seconds after touchdown.",
+      "source": "https://science.nasa.gov/mission/viking-1/",
+      "sourceName": "NASA Science: Viking 1 (challenge resource) and Viking Project and Astrobiology"
+    },
+    {
+      "id": "signal-time",
+      "text": "The radio signal confirming Viking 1's landing took 19 more minutes to travel the 212 million miles to Earth. The landing was on the seventh anniversary of the Apollo 11 Moon landing.",
+      "source": "https://science.nasa.gov/mission/viking/viking-50-years-on-mars/",
+      "sourceName": "NASA Science: Viking, 50 Years on Mars"
+    },
+    {
+      "id": "first-image",
+      "text": "Viking 1 was programmed to take an image 25 seconds after touchdown: a view looking down at its footpad, the first photograph ever taken from the surface of Mars.",
+      "source": "https://science.nasa.gov/mission/viking/viking-50-years-on-mars/",
+      "sourceName": "NASA Science: Viking, 50 Years on Mars"
+    },
+    {
+      "id": "lander-body",
+      "text": "Each lander was a six-sided aluminium base on three legs. Two radioisotope thermoelectric generators (RTGs) containing plutonium-238 gave it power; the orbiters were solar-powered.",
+      "source": "https://science.nasa.gov/mission/viking/spacecraft-and-science/",
+      "sourceName": "NASA Science: Viking Spacecraft and Science; power from NASA Science: Viking 2"
+    },
+    {
+      "id": "sampler",
+      "text": "The sampler arm had a collector head, a temperature sensor and a magnet. On 28 July 1976 Viking 1's robot arm scooped up its first soil samples and put them into its biology laboratory, which included a gas chromatograph mass spectrometer.",
+      "source": "https://science.nasa.gov/mission/viking-1/",
+      "sourceName": "NASA Science: Viking 1 (challenge resource) and Viking Spacecraft and Science"
+    },
+    {
+      "id": "biology",
+      "text": "The landers ran three biology experiments (Labeled Release, Gas Exchange and Pyrolytic Release). They found unexpected and enigmatic chemical activity in the soil, but no definitive evidence of living microorganisms near the landing sites.",
+      "source": "https://science.nasa.gov/astrobiology/missions/viking-project/",
+      "sourceName": "NASA Science: Viking Project and Astrobiology"
+    },
+    {
+      "id": "first-life-search",
+      "text": "Viking was NASA's first attempt to search for life on another planet.",
+      "source": "https://science.nasa.gov/astrobiology/missions/viking-project/",
+      "sourceName": "NASA Science: Viking Project and Astrobiology"
+    },
+    {
+      "id": "soil",
+      "text": "Viking showed that the Martian surface is a type of iron-rich clay containing a highly oxidizing substance that releases oxygen when it is wetted. No organic molecules were detected at the parts-per-billion level.",
+      "source": "https://science.nasa.gov/astrobiology/missions/viking-project/",
+      "sourceName": "NASA Science: Viking Project and Astrobiology"
+    },
+    {
+      "id": "weather",
+      "text": "A meteorology boom on one lander leg held temperature, wind direction and wind velocity sensors.",
+      "source": "https://science.nasa.gov/mission/viking/spacecraft-and-science/",
+      "sourceName": "NASA Science: Viking Spacecraft and Science"
+    },
+    {
+      "id": "landing-2",
+      "text": "Viking 2's lander touched down on 3 September 1976 at Utopia Planitia, about 6,460 km from Viking 1. Its site was rockier and flatter, and the lander was tilted 8.5 degrees to the west.",
+      "source": "https://science.nasa.gov/mission/viking-2/",
+      "sourceName": "NASA Science: Viking 2"
+    },
+    {
+      "id": "images",
+      "text": "The two orbiters returned 52,663 images of Mars and mapped about 97 percent of the surface at about 300 metres resolution. The landers returned 4,500 photos of the two landing sites.",
+      "source": "https://science.nasa.gov/mission/viking-1/",
+      "sourceName": "NASA Science: Viking 1 (challenge resource)"
+    },
+    {
+      "id": "valles",
+      "text": "A global mosaic made from Viking 1 Orbiter images shows the Valles Marineris canyon system, more than 3,000 km long, 600 km wide and 8 km deep.",
+      "source": "https://science.nasa.gov/astrobiology/missions/viking-project/",
+      "sourceName": "NASA Science: Viking Project and Astrobiology"
+    },
+    {
+      "id": "primary-mission",
+      "text": "The primary mission of both Vikings ended in November 1976. Work continued in the Extended Mission (November 1976 to May 1978) and the Continuation Mission (May 1978 to July 1979).",
+      "source": "https://science.nasa.gov/mission/viking-1/",
+      "sourceName": "NASA Science: Viking 1 (challenge resource)"
+    },
+    {
+      "id": "v2-orbiter-end",
+      "text": "Viking 2's orbiter operations ended in July 1978 after 706 orbits. NASA's Viking 2 page gives 24 July; the Spacecraft and Science page gives 25 July.",
+      "source": "https://science.nasa.gov/mission/viking-2/",
+      "sourceName": "NASA Science: Viking 2 and Viking Spacecraft and Science"
+    },
+    {
+      "id": "v1-orbiter-end",
+      "text": "Viking 1's orbiter was shut down on 7 August 1980, after it ran out of attitude-control propellant on its 1,489th orbit around Mars.",
+      "source": "https://science.nasa.gov/mission/viking-1/",
+      "sourceName": "NASA Science: Viking 1 (challenge resource)"
+    },
+    {
+      "id": "v2-lander-end",
+      "text": "The last data from Viking 2's lander arrived on 11 April 1980; NASA's Viking 2 page lists 12 April 1980 as the end of the lander mission.",
+      "source": "https://science.nasa.gov/astrobiology/missions/viking-project/",
+      "sourceName": "NASA Science: Viking Project and Astrobiology, and Viking 2"
+    },
+    {
+      "id": "v1-lander-end",
+      "text": "On 11 November 1982 a faulty command sent from Earth interrupted communications with Viking 1's lander. NASA gives 13 November 1982 as its end of mission. It worked the longest.",
+      "source": "https://science.nasa.gov/mission/viking-1/",
+      "sourceName": "NASA Science: Viking 1 (challenge resource) and Viking Project and Astrobiology"
+    },
+    {
+      "id": "memorials",
+      "text": "In January 1982 Viking 1's lander was renamed the Thomas Mutch Memorial Station, after the leader of the imaging team. In July 2001 Viking 2's lander was renamed the Gerald Soffen Memorial Station, after the Viking Project Scientist.",
+      "source": "https://science.nasa.gov/mission/viking-2/",
+      "sourceName": "NASA Science: Viking 1 (challenge resource) and Viking 2"
+    },
+    {
+      "id": "panorama",
+      "text": "Viking 1's cameras returned the first panoramic views ever taken from the surface of Mars, showing Chryse Planitia in July 1976 (camera 2 on 20 July, camera 1 on 23 July).",
+      "source": "https://science.nasa.gov/mission/viking/viking-50-years-on-mars/",
+      "sourceName": "NASA Science: Viking, 50 Years on Mars"
+    },
+    {
+      "id": "cameras",
+      "text": "Each lander had two 360-degree cylindrical scan cameras mounted near one long side of its base.",
+      "source": "https://science.nasa.gov/mission/viking/spacecraft-and-science/",
+      "sourceName": "NASA Science: Viking Spacecraft and Science"
+    }
+  ]
+}
