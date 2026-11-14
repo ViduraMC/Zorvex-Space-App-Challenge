@@ -72,6 +72,8 @@ export const playerPage: Page = (root, id) => {
     renderer.dispose();
     audio.hush();
     audio.drive(0);
+    audio.rocket(0);
+    audio.rotor(0);
     useEpisode('');
   });
   void play(episode, shell, canvas, renderer, session);
@@ -184,6 +186,7 @@ async function play(
       Object.assign(ctx, { stageKind: kind, scene: current.scene, world: current.world, sky: current.sky, fx: current.fx });
       director.groundAt = current.world.heightAt;
       renderer.setScene(current.scene, director.camera);
+      audio.ambience(kind);
     },
     quality,
     t,
@@ -294,6 +297,8 @@ async function play(
   const open = button('btn wait', t('ui.answerSignal'), () => {
     void (async () => {
       audio.init();
+      audio.ambience(ctx.stageKind);
+      audio.play('static');
       audio.play('radio');
       cover.remove();
       skip.hidden = false;

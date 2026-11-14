@@ -267,6 +267,7 @@ export const journeyPage: Page = (root) => {
   // ---------- the phases ----------
   const ENTER: Record<Phase, () => void> = {
     HOME() {
+      audio.ambience('earth');
       useScene(scene);
       setFov(50);
       earth.visible = nightSky.mesh.visible = true;
@@ -327,9 +328,11 @@ export const journeyPage: Page = (root) => {
       cam.speed = 0;
       rush.set(0, -1, 0);
       flight.earth.visible = true;
-      phaseScope.frame(() => audio.drive(Math.max(cam.shake, cam.speed)));
+      audio.ambience('earth');
+      // the roar follows the shaking; it thins out as the air does
+      phaseScope.frame(() => audio.rocket(Math.min(1, cam.shake * 0.7) * (1 - Math.min(0.75, Math.max(0, cam.pos.y - 200) / 400))));
       phaseScope.add(() => {
-        audio.drive(0);
+        audio.rocket(0);
         flight.exhaust.intensity = 0;
         cockpit.classList.remove('rumble', 'ignite');
       });
@@ -350,7 +353,10 @@ export const journeyPage: Page = (root) => {
         .call(() => count('1', 'voice.count1'), [], 2.9 * D)
         // ignition: the ground lights up orange, everything starts to shake
         .to(ignite, { glow: 1, duration: 1.2 * D }, 2.4 * D)
-        .call(() => cockpit.classList.add('ignite'), [], 2.4 * D)
+        .call(() => {
+          cockpit.classList.add('ignite');
+          audio.play('ignition');
+        }, [], 2.4 * D)
         .call(() => cockpit.classList.remove('ignite'), [], 6.2 * D)
         .to(cam, { shake: 0.6, duration: 1.4 * D }, 2.4 * D)
         .call(() => {
@@ -383,6 +389,7 @@ export const journeyPage: Page = (root) => {
         .to(blackout, { backgroundColor: '#000000', duration: 0.3 * D }, 12.55 * D);
     },
     DESTINATION() {
+      audio.ambience('space');
       useScene(scene);
       layout();
       earth.visible = nightSky.mesh.visible = false;
@@ -436,9 +443,11 @@ export const journeyPage: Page = (root) => {
       say(t('ui.journey.landing', { place }));
       voice(`voice.landing.${destination}`);
       rush.set(0, 0, 1);
-      phaseScope.frame(() => audio.drive(Math.max(cam.shake, cam.speed)));
+      audio.ambience('space');
+      // landing engines fire hard near the ground (on the Moon the roar is what the crew feels)
+      phaseScope.frame(() => audio.rocket(cam.shake * 0.8));
       phaseScope.add(() => {
-        audio.drive(0);
+        audio.rocket(0);
         cam.speed = 0;
         cockpit.classList.remove('entry', 'rumble');
       });
@@ -459,6 +468,8 @@ export const journeyPage: Page = (root) => {
           cam.look.copy(s.view.look);
           rush.set(0, 1, 0);
           cockpit.classList.add('entry', 'rumble');
+          audio.ambience(destination);
+          audio.play('hiss');
           // Mars: drop through a haze of dust that clears near the ground
           const fog = s.scene.fog as FogExp2 | null;
           if (fog) gsap.fromTo(fog, { density: 0.06 }, { density: fog.density, duration: 2.4 * D, ease: 'power2.out' });
@@ -471,6 +482,7 @@ export const journeyPage: Page = (root) => {
           const dust = destination === 'moon' ? 'moonDust' : 'dustBurst';
           for (const x of [-3, 0, 3]) s.fx.burst(dust, tmp.set(x, s.world.heightAt(x, 11), 11));
           audio.play('thud');
+          audio.play('hiss');
           voice('voice.touchdown');
           cam.speed = 0;
           cockpit.classList.remove('entry', 'rumble');
@@ -479,6 +491,7 @@ export const journeyPage: Page = (root) => {
         .to(cockpit, { opacity: 0, duration: 0.5 * D });
     },
     EXPLORERS() {
+      audio.ambience(journey.get().destination ?? 'mars');
       const s = ensureSurface(journey.get().destination!);
       useScene(s.scene);
       setFov(s.view.fov, PANEL_SHARE);

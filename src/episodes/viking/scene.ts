@@ -367,7 +367,7 @@ export default async function buildScene({ scene, world, materials, anisotropy, 
       async launch(c, scope) {
         for (const f of flames) f.visible = true;
         exhaust.intensity = 0;
-        c.audio.play('thud');
+        c.audio.play('ignition');
         c.audio.play('whoosh');
         c.comic.sfx(c.t('sfx.liftoff'));
         // a billowing cloud on the pad, then a smoke column left behind as it climbs
@@ -386,10 +386,10 @@ export default async function buildScene({ scene, world, materials, anisotropy, 
             pos: [46 + Math.sin(time * 61) * shake, Math.max(9, rocket.position.y * 0.55 + 9) + Math.cos(time * 53) * shake, 62],
             look: [0, rocket.position.y + 20, 0],
           });
-          c.audio.drive(1);
+          c.audio.rocket(Math.max(0.35, 1 - rocket.position.y / 320));
         });
         scope.add(() => {
-          c.audio.drive(0);
+          c.audio.rocket(0);
           exhaust.intensity = 0;
         });
         await play(scope, { target: rocket.position, y: 260, duration: 6.5, ease: 'power2.in' });

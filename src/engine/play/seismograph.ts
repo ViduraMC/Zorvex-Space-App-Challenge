@@ -77,7 +77,7 @@ export const seismograph: MiniGame<SeismographConfig> = ({ ctx, scope, hud }, cf
       if (clock > next) {
         bursts.push(clock);
         next = clock + SHAKE_S + 1.5 + Math.random() * 2.5;
-        audio.play('thud');
+        audio.play('boom');
         comic.sfx(t(cfg.burstSfx));
       }
       const now = strength(clock);

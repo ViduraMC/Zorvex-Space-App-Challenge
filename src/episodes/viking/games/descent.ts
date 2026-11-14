@@ -40,7 +40,9 @@ const descent: MiniGame<BaseGameConfig> = ({ ctx, scope, hud }) => {
   const chuteButton = hud.button(t('game.descent.chute'), () => press('chute'));
   const buttons: Record<Step, HTMLButtonElement> = { chute: chuteButton, shield: shieldButton, engines: engineButton };
 
+  scope.add(() => audio.rocket(0));
   const reset = (): void => {
+    audio.rocket(0);
     km = START_KM;
     speed = 0;
     phase = 'falling';
@@ -67,7 +69,7 @@ const descent: MiniGame<BaseGameConfig> = ({ ctx, scope, hud }) => {
       speed = CHUTE_SPEED;
       chute.visible = true;
       chute.scale.set(0.2, 0.2, 0.2);
-      audio.play('pop');
+      audio.play('chute');
       comic.sfx(t('sfx.chute'));
       buttons.chute.disabled = true;
       return;
@@ -89,7 +91,8 @@ const descent: MiniGame<BaseGameConfig> = ({ ctx, scope, hud }) => {
     chute.visible = false;
     engines.visible = true;
     buttons.engines.disabled = true;
-    audio.play('whoosh');
+    audio.play('ignition');
+    audio.rocket(0.6);
     comic.sfx(t('sfx.engines'));
   }
 
@@ -132,6 +135,7 @@ const descent: MiniGame<BaseGameConfig> = ({ ctx, scope, hud }) => {
           phase = 'done';
           machine.lift = 0;
           engines.visible = false;
+          audio.rocket(0);
           fx.burst('dustBurst', ctx.resolve('machine'));
           audio.play('thud');
           comic.sfx(t('sfx.touchdown'));

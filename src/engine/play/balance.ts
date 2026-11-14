@@ -27,6 +27,8 @@ export interface BalanceConfig extends BaseGameConfig {
   unitMax?: number;
   /** Lift the machine by up to this many metres as the value rises (flight!). */
   lift?: number;
+  /** An engine sound that follows the value: rotors (Ingenuity) or rocket thrusters. */
+  sound?: 'rotor' | 'rocket';
 }
 
 const DRAIN = 0.5;
@@ -80,6 +82,7 @@ export const balance: MiniGame<BalanceConfig> = async ({ ctx, scope, hud }, cfg)
   }
   scope.add(() => {
     machine.lift = 0;
+    if (cfg.sound) ctx.audio[cfg.sound](0);
   });
 
   return new Promise<void>((resolve) => {
@@ -99,6 +102,7 @@ export const balance: MiniGame<BalanceConfig> = async ({ ctx, scope, hud }, cfg)
       marker.style.bottom = `${value * 100}%`;
       gauge.classList.toggle('ok', ok);
       if (cfg.readout) readout.textContent = t(cfg.readout, { n: Math.round(value * (cfg.unitMax ?? 100)) });
+      if (cfg.sound) ctx.audio[cfg.sound](0.25 + value * 0.75);
       if (cfg.lift) machine.lift = Math.max(0, value - cfg.band[0] * 0.5) * cfg.lift;
       hud.progress(inBand / cfg.holdSeconds);
       if (inBand >= cfg.holdSeconds) resolve();
