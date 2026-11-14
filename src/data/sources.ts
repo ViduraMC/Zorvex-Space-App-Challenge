@@ -47,6 +47,7 @@ function modelUse(title: string): string {
   if (title.startsWith('Viking')) return 'Viking 1 and Viking 2 on Mars';
   if (title.startsWith('InSight')) return 'InSight on Mars';
   if (title.startsWith('Ingenuity')) return 'Ingenuity on Mars';
+  if (title.startsWith('Mars 2020')) return 'Perseverance, which carried Ingenuity, in the Ingenuity story';
   if (title.startsWith('Pioneer')) return 'Pioneer 10 and its sister Pioneer 11 in the Pioneer story';
   return 'Apollo 11 descent stage (lower half only) and Apollo 12 Intrepid on the Moon';
 }

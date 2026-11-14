@@ -13,6 +13,7 @@ import crewEscapeSuit from '../assets/models/crew-escape-suit.glb?url';
 import ingenuity from '../assets/models/ingenuity.glb?url';
 import insightLander from '../assets/models/insight-lander.glb?url';
 import merOpportunity from '../assets/models/mer-opportunity.glb?url';
+import perseverance from '../assets/models/perseverance.glb?url';
 import pioneer10 from '../assets/models/pioneer-10.glb?url';
 import saturnV from '../assets/models/saturn-v.glb?url';
 import vikingLander from '../assets/models/viking-lander.glb?url';
@@ -41,6 +42,7 @@ export const NASA_MODELS = {
     page: 'https://science.nasa.gov/3d-resources/mars-exploration-rover-opportunity-mer-b/',
     title: 'Mars Exploration Rover - Opportunity (MER-B)',
   },
+  perseverance: { url: perseverance, page: 'https://science.nasa.gov/3d-resources/mars-2020-perseverance-rover/', title: 'Mars 2020 Perseverance Rover' },
   'pioneer-10': { url: pioneer10, page: 'https://science.nasa.gov/3d-resources/pioneer/', title: 'Pioneer 10' },
 } as const;
 export type NasaModel = keyof typeof NASA_MODELS;

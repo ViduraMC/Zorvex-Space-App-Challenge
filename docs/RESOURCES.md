@@ -48,6 +48,7 @@ Raw downloads live in `models-src/` (git-ignored); the app uses `src/assets/mode
 | InSight Cruise Lander (panels deployed) | <https://science.nasa.gov/3d-resources/insight-cruise-lander/> | InSight |
 | Ingenuity Mars Helicopter | <https://science.nasa.gov/3d-resources/ingenuity-mars-helicopter/> | Ingenuity |
 | Apollo Lunar Module | <https://science.nasa.gov/3d-resources/apollo-lunar-module/> | Apollo 11 descent stage (lower half only); Intrepid in the ALSEP story |
+| Mars 2020 Perseverance Rover | <https://science.nasa.gov/3d-resources/mars-2020-perseverance-rover/> | Perseverance in the Ingenuity story |
 | Pioneer 10 | <https://science.nasa.gov/3d-resources/pioneer/> | Pioneer 10 and 11 in the Pioneer story |
 | Mars (image texture) | <https://science.nasa.gov/3d-resources/mars/> | The Mars globe on the destination screen |
 

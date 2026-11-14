@@ -1,0 +1,79 @@
+{
+  "episode": "ingenuity",
+  "checked": "2026-11-15",
+  "note": "Every fact checked on the NASA Ingenuity Mars Helicopter page (challenge resource).",
+  "facts": [
+    {
+      "id": "ride",
+      "text": "After riding to Mars strapped beneath the Perseverance rover (launched 30 July 2020 from Cape Canaveral; landed 18 February 2021 in Jezero Crater), Ingenuity set its four feet on Mars on 3 April 2021.",
+      "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+      "sourceName": "NASA Science: Ingenuity Mars Helicopter (challenge resource)"
+    },
+    {
+      "id": "first-night",
+      "text": "Ingenuity survived its first night on Mars on 4 April 2021, and spun its rotors for the first time on 8 April 2021.",
+      "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+      "sourceName": "NASA Science: Ingenuity Mars Helicopter (challenge resource)"
+    },
+    {
+      "id": "power",
+      "text": "A solar panel charged lithium-ion batteries, giving enough energy for one 90-second flight per Martian day.",
+      "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+      "sourceName": "NASA Science: Ingenuity Mars Helicopter (challenge resource)"
+    },
+    {
+      "id": "size",
+      "text": "Ingenuity has a mass of 1.8 kg, and its rotors are about 1.2 m tip to tip.",
+      "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+      "sourceName": "NASA Science: Ingenuity Mars Helicopter (challenge resource)"
+    },
+    {
+      "id": "thin-air",
+      "text": "Ingenuity flew successfully in the extremely thin Martian atmosphere.",
+      "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+      "sourceName": "NASA Science: Ingenuity Mars Helicopter (challenge resource)"
+    },
+    {
+      "id": "first-flight",
+      "text": "On 19 April 2021 Ingenuity made the first powered, controlled flight on another planet, a feat called a Wright Brothers moment.",
+      "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+      "sourceName": "NASA Science: Ingenuity Mars Helicopter (challenge resource)"
+    },
+    {
+      "id": "rover-photo",
+      "text": "Ingenuity took its first photo of the Perseverance rover on 25 April 2021.",
+      "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+      "sourceName": "NASA Science: Ingenuity Mars Helicopter (challenge resource)"
+    },
+    {
+      "id": "demo",
+      "text": "Ingenuity was designed as a technology demonstration of no more than five test flights in 30 days. The technology demonstration was complete on 7 May 2021.",
+      "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+      "sourceName": "NASA Science: Ingenuity Mars Helicopter (challenge resource)"
+    },
+    {
+      "id": "scout",
+      "text": "Ingenuity then became an aerial scout for scientists and rover planners, previewing areas of interest for Perseverance; its first scouting flight was on 24 July 2021.",
+      "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+      "sourceName": "NASA Science: Ingenuity Mars Helicopter (challenge resource)"
+    },
+    {
+      "id": "flights",
+      "text": "Ingenuity completed 72 flights across nearly three years.",
+      "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+      "sourceName": "NASA Science: Ingenuity Mars Helicopter (challenge resource)"
+    },
+    {
+      "id": "totals",
+      "text": "In all, Ingenuity flew 128.8 minutes, covered 17.0 km, and reached altitudes as high as 24.0 m.",
+      "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+      "sourceName": "NASA Science: Ingenuity Mars Helicopter (challenge resource)"
+    },
+    {
+      "id": "last",
+      "text": "Ingenuity flew for the last time on 18 January 2024. The mission ended on 25 January 2024.",
+      "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/",
+      "sourceName": "NASA Science: Ingenuity Mars Helicopter (challenge resource)"
+    }
+  ]
+}
