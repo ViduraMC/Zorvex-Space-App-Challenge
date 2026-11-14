@@ -238,5 +238,18 @@
   "parts.pioneer-10.camera.science": "About 500 pictures of Jupiter and its Great Red Spot.",
   "parts.pioneer-10.plaque.name": "The plaque",
   "parts.pioneer-10.plaque.job": "A message from Earth, engraved in metal.",
-  "parts.pioneer-10.plaque.science": "It shows who made the spacecraft and where we live."
+  "parts.pioneer-10.plaque.science": "It shows who made the spacecraft and where we live.",
+  "ui.ask.open": "Talk to {name}",
+  "ui.ask.title": "Talk to {name}",
+  "ui.ask.you": "You",
+  "ui.ask.hello": "Hi! I am {name}. Ask me about my mission.",
+  "ui.ask.unknown": "My NASA records do not say. Try one of the questions below!",
+  "ui.ask.placeholder": "Type a question in English…",
+  "ui.ask.send": "Ask",
+  "ui.ask.note": "I only answer from my checked NASA facts, and every answer links to its source.",
+  "ui.ask.q.when": "When did you get there?",
+  "ui.ask.q.found": "What did you discover?",
+  "ui.ask.q.power": "Where did your power come from?",
+  "ui.ask.q.end": "How did your mission end?",
+  "ui.ask.q.size": "How big are you?"
 }

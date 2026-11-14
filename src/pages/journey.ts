@@ -15,6 +15,7 @@ import { Renderer } from '../engine/renderer';
 import { go, type Page } from '../engine/router';
 import { Scope } from '../engine/scope';
 import { episodeFor } from '../episodes';
+import { openAsk } from '../features/ask';
 import { summaryOf, type Explorer } from '../journey/explorers';
 import { NASA_MODELS, nasaModel, loadNasaModel } from '../journey/nasaModels';
 import { COLORS, createChild, createDesert, createNightSky, createPlanet, createRocket, createShootingStars, createStars } from '../journey/props';
@@ -249,6 +250,8 @@ export const journeyPage: Page = (root) => {
     button('holo-explore', t('ui.holo.explore'), () => launch(e.id), holo);
     const parts = modelKeyOf(e.id);
     if (parts && hasAnatomy(parts)) link('holo-parts', t('ui.parts.open'), `#parts-${parts}`, holo);
+    const story = episodeFor(e.id);
+    if (story) button('holo-parts', t('ui.ask.open', { name: e.name }), () => openAsk(shell, story.id), holo);
     holo.classList.remove('in');
     void holo.offsetWidth; // restart the appear animation
     holo.classList.add('in');

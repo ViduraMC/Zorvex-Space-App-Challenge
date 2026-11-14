@@ -305,3 +305,90 @@ html:lang(si) *,
 html:lang(ta) * {
   letter-spacing: normal !important;
 }
+
+/* "Talk to the machine" panel */
+.ask {
+  display: grid;
+  place-items: center;
+  z-index: var(--z-overlay);
+}
+
+.ask-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-m);
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  padding: var(--gap-l);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--space-raised);
+  color: var(--text);
+  font-family: var(--font-ui);
+}
+
+.ask-box h2 {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: var(--text-l);
+}
+
+.ask-log {
+  flex: 1;
+  min-height: 140px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-s);
+}
+
+.ask-line {
+  margin: 0;
+  padding: var(--gap-s) var(--gap-m);
+  border-radius: var(--radius);
+  font-size: var(--text-m);
+  line-height: 1.4;
+}
+
+.ask-line.it {
+  background: var(--space);
+  border: 1px solid var(--line);
+}
+
+.ask-line.you {
+  align-self: flex-end;
+  background: var(--holo);
+  color: var(--space);
+}
+
+.ask-line b {
+  margin-right: 4px;
+}
+
+.ask-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-s);
+}
+
+.ask-form {
+  display: flex;
+  gap: var(--gap-s);
+}
+
+.ask-form input {
+  flex: 1;
+  min-height: 44px;
+  padding: 0 var(--gap-m);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--space);
+  color: var(--text);
+  font: inherit;
+}
+
+.ask-source,
+.ask-note {
+  color: var(--text-dim);
+  font-size: var(--text-s);
+}

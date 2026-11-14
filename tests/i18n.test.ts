@@ -42,3 +42,14 @@ test('anatomy: every part has a sourced fact and its text in English, Sinhala an
     }
   }
 });
+
+test('ask: a question finds the fact that answers it', async () => {
+  const { bestFact } = await import('../src/features/ask-match.ts');
+  const facts = [
+    { id: 'a', text: 'The lander touched down on 20 July 1976 at Chryse Planitia.', source: 'x', sourceName: 'x' },
+    { id: 'b', text: 'Two RTGs with plutonium gave the lander electrical power.', source: 'x', sourceName: 'x' },
+  ];
+  assert.equal(bestFact('Where did your power come from?', facts)?.id, 'b');
+  assert.equal(bestFact('When did you touch down?', facts)?.id, 'a');
+  assert.equal(bestFact('Do you like pizza?', facts), null);
+});
