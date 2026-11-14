@@ -1,0 +1,45 @@
+# dependencies and build output
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+
+# secrets and local environment (never commit; see .env.example)
+.env
+.env.*
+!.env.example
+
+# deploy and editor state
+.vercel/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# AI assistant local state (the shared rules live in CLAUDE.md, which IS committed)
+.claude/
+graphify-out/
+.playwright-mcp/
+
+# internal working material: not part of the submission
+zorvex-final-claude-code-prompt.md
+*-claude-code-prompt.md
+notes/
+scratch/
+*.local.md
+
+# raw NASA downloads are huge (the HiRISE terrain model is 376 MB);
+# only the small processed files under src/**/assets are committed
+data/raw/
+
+# raw, unoptimised models and voice takes; commit only the optimised output
+*.raw.glb
+models-src/
+voice-raw/
+
+# logs and test output
+*.log
+npm-debug.log*
+test-results/
+playwright-report/
+screenshots/

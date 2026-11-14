@@ -1,0 +1,38 @@
+{
+  "name": "zorvex-space-apps-2026",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Abandoned, Not Forgotten: an interactive 3D comic game about the machines NASA left on the Moon, Mars and in deep space. Team Zorvex, NASA Space Apps Challenge 2026.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"tests/**/*.test.ts\"",
+    "check:facts": "node scripts/check-facts.ts",
+    "new:episode": "node scripts/new-episode.ts",
+    "optimize:models": "node scripts/optimize-models.ts"
+  },
+  "dependencies": {
+    "astronomy-engine": "^2.1.19",
+    "camera-controls": "^3.1.2",
+    "gsap": "^3.15.1",
+    "postprocessing": "^6.39.6",
+    "three": "^0.187.0",
+    "three.quarks": "^0.17.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.0",
+    "@types/three": "^0.187.0",
+    "eslint": "^10.15.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.2",
+    "vite": "^8.3.8"
+  }
+}

@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sojourner 3D Comic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+<style>
+/* One visual world, by choice: a printed comic page laid over a real-looking 3D Mars.
+   Layout idea: the 3D scene is the panel art; caption box top-left, speech bubble tied to the rover, action bottom-right. */
+:root {
+  --paper: #F7F1E3;
+  --ink: #111111;
+  --yellow: #FFD84A;
+  --red: #E8402A;
+  --shade: rgba(0, 0, 0, .38);
+  --shout: "Bangers", "Impact", "Arial Black", sans-serif;
+  --letter: "Comic Neue", "Comic Sans MS", "Chalkboard SE", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; background: #1a0f0b; color: var(--ink); font-family: var(--letter); font-weight: 700; overflow: hidden; }
+canvas#gl { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible { outline: 4px solid var(--yellow); outline-offset: 3px; }
+[hidden] { display: none !important; }
+
+.dots { position: fixed; inset: 0; pointer-events: none; z-index: 2; opacity: .16; mix-blend-mode: multiply;
+  background-image: radial-gradient(rgba(0,0,0,.7) 1.1px, transparent 1.7px); background-size: 6px 6px;
+  -webkit-mask-image: radial-gradient(ellipse at 60% 45%, transparent 42%, #000 100%); mask-image: radial-gradient(ellipse at 60% 45%, transparent 42%, #000 100%); }
+.frame { position: fixed; inset: 0; pointer-events: none; z-index: 3; border: 10px solid var(--paper); box-shadow: inset 0 0 0 5px var(--ink); }
+.flash { position: fixed; inset: 0; background: var(--paper); z-index: 9; pointer-events: none; opacity: 0; }
+.flash.go { animation: cut .42s ease-out; }
+@keyframes cut { 0% { opacity: .95; } 100% { opacity: 0; } }
+
+.hud { position: fixed; top: 26px; right: 28px; z-index: 8; display: flex; gap: 8px; }
+.mini { font-family: var(--shout); font-weight: 400; font-size: 16px; letter-spacing: .06em; background: var(--paper); border: 3px solid var(--ink); padding: 3px 10px; box-shadow: 3px 3px 0 var(--ink); }
+.mini[aria-pressed="false"] { background: #bdb6a6; text-decoration: line-through; }
+
+.page { position: fixed; left: 28px; bottom: 26px; z-index: 6; font-family: var(--shout); font-weight: 400; font-size: 17px; letter-spacing: .08em; background: var(--paper); border: 3px solid var(--ink); padding: 3px 12px; }
+
+.cap { position: fixed; z-index: 6; top: 30px; left: 30px; max-width: min(540px, calc(100% - 60px)); background: var(--yellow); border: 4px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);
+  padding: 12px 16px; font-size: clamp(16px, 1.9vw, 23px); line-height: 1.25; text-transform: uppercase; letter-spacing: .02em; transform: rotate(-1.2deg); transform-origin: top left; }
+.bub { position: fixed; z-index: 7; background: #fff; border: 4px solid var(--ink); border-radius: 28px; box-shadow: 6px 6px 0 var(--shade);
+  padding: 14px 20px; max-width: min(430px, calc(100vw - 48px)); font-size: clamp(17px, 2vw, 25px); line-height: 1.22; text-transform: uppercase; letter-spacing: .02em; }
+.bub::before, .bub::after { content: ""; position: absolute; left: var(--tail, 50%); width: 0; height: 0; border-style: solid; transform: translateX(-50%); }
+.bub::before { bottom: -30px; border-width: 30px 15px 0 15px; border-color: var(--ink) transparent transparent transparent; }
+.bub::after { bottom: -20px; border-width: 23px 10px 0 10px; border-color: #fff transparent transparent transparent; }
+.bub.below::before { bottom: auto; top: -30px; border-width: 0 15px 30px 15px; border-color: transparent transparent var(--ink) transparent; }
+.bub.below::after { bottom: auto; top: -20px; border-width: 0 10px 23px 10px; border-color: transparent transparent #fff transparent; }
+.who { display: block; font-family: var(--shout); font-weight: 400; font-size: 15px; letter-spacing: .1em; color: var(--red); margin-bottom: 2px; }
+
+.sfx { position: fixed; z-index: 6; right: 7vw; top: 20vh; font-family: var(--shout); font-weight: 400; font-size: clamp(56px, 11vw, 150px); line-height: .9; color: var(--yellow);
+  -webkit-text-stroke: 3px var(--ink); text-shadow: 6px 6px 0 var(--red), 9px 9px 0 var(--ink); transform: rotate(-8deg); pointer-events: none; animation: pop .55s cubic-bezier(.2, 1.7, .4, 1) both; }
+@keyframes pop { 0% { transform: rotate(-8deg) scale(.2); opacity: 0; } 100% { transform: rotate(-8deg) scale(1); opacity: 1; } }
+.days { position: fixed; z-index: 6; left: 40px; bottom: 90px; font-family: var(--shout); font-weight: 400; font-size: clamp(60px, 12vw, 160px); line-height: .9; color: var(--paper);
+  -webkit-text-stroke: 3px var(--ink); text-shadow: 6px 6px 0 var(--ink); font-variant-numeric: tabular-nums; }
+
+.acts { position: fixed; right: 30px; bottom: 28px; z-index: 8; display: flex; gap: 12px; }
+.btn { font-family: var(--shout); font-weight: 400; font-size: clamp(20px, 2.4vw, 28px); letter-spacing: .05em; background: var(--red); color: #fff; border: 4px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 8px 24px; }
+.btn:active { transform: translate(3px, 3px); box-shadow: 3px 3px 0 var(--ink); }
+.btn.alt { background: var(--yellow); color: var(--ink); }
+.btn.wait { animation: nudge 1.4s ease-in-out infinite; }
+@keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+.tagbtn { position: fixed; z-index: 7; transform: translate(-50%, -100%); font-size: 16px; text-transform: uppercase; background: #fff; border: 3px solid var(--ink); border-radius: 999px; padding: 4px 12px; box-shadow: 3px 3px 0 var(--shade); white-space: nowrap; }
+.tagbtn.done { background: var(--yellow); }
+.tagbtn.done::before { content: "\2713  "; }
+
+.cover { position: fixed; z-index: 6; left: clamp(28px, 5vw, 80px); bottom: clamp(40px, 9vh, 96px); max-width: min(640px, calc(100% - 56px)); }
+.cover .kick { display: inline-block; font-family: var(--shout); font-weight: 400; letter-spacing: .1em; font-size: 18px; background: var(--paper); border: 3px solid var(--ink); padding: 2px 12px; transform: rotate(-2deg); }
+.cover h1 { font-family: var(--shout); font-weight: 400; font-size: clamp(72px, 12vw, 170px); line-height: .82; margin: 12px 0 6px; color: var(--yellow);
+  -webkit-text-stroke: 4px var(--ink); text-shadow: 7px 7px 0 var(--red), 11px 11px 0 var(--ink); transform: rotate(-3deg); transform-origin: left bottom; letter-spacing: .01em; }
+.cover p { display: inline-block; font-size: clamp(18px, 2.3vw, 27px); line-height: 1.2; text-transform: uppercase; background: #fff; border: 4px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 8px 14px; margin: 14px 0 22px; }
+
+.endcard { position: fixed; z-index: 6; left: clamp(28px, 5vw, 80px); bottom: clamp(40px, 9vh, 96px); width: min(560px, calc(100% - 56px)); background: var(--paper); border: 5px solid var(--ink); box-shadow: 9px 9px 0 var(--ink); padding: 20px 24px 24px; transform: rotate(-1deg); }
+.endcard h2 { font-family: var(--shout); font-weight: 400; font-size: clamp(54px, 9vw, 104px); line-height: .9; margin: 0; color: var(--red); -webkit-text-stroke: 2px var(--ink); }
+.endcard p { font-size: clamp(18px, 2.2vw, 25px); text-transform: uppercase; margin: 8px 0 14px; line-height: 1.2; }
+.facts { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0 0 18px; padding: 12px 0 0; border-top: 4px solid var(--ink); }
+.facts li { font-size: 14px; text-transform: uppercase; }
+.facts b { display: block; font-family: var(--shout); font-weight: 400; font-size: 34px; line-height: 1; letter-spacing: .03em; }
+.fallback { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; background: var(--paper); padding: 30px; text-align: center; font-size: 22px; }
+
+@media (max-width: 620px) {
+  .cap { top: 22px; left: 22px; max-width: calc(100% - 44px); }
+  .hud { top: auto; bottom: 26px; right: auto; left: 22px; }
+  .page { display: none; }
+  .acts { right: 22px; bottom: 22px; }
+  .days { bottom: 110px; left: 26px; }
+}
+@media (prefers-reduced-motion: reduce) { .sfx, .btn.wait, .flash.go { animation: none; } }
+</style>
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="dots"></div>
+<div class="frame"></div>
+<div class="flash" id="flash"></div>
+
+<div class="hud">
+  <button class="mini" id="btnSound" aria-pressed="true">Sound</button>
+  <button class="mini" id="btnVoice" aria-pressed="true">Voice</button>
+</div>
+<div class="page" id="page">Style sample</div>
+
+<section class="cover" id="cover">
+  <span class="kick">A true story from Mars · 1997</span>
+  <h1>Sojourner</h1>
+  <p>The little rover who went first</p><br>
+  <button class="btn" id="btnOpen">Open the comic</button>
+</section>
+
+<div class="cap" id="cap" hidden aria-live="polite"></div>
+<div class="bub" id="bub" hidden aria-live="polite"><span class="who">Sojourner</span><span id="bubText"></span></div>
+<div class="days" id="days" hidden></div>
+<div id="tags"></div>
+<div id="sfxHost"></div>
+
+<div class="acts">
+  <button class="btn alt" id="btnAct" hidden></button>
+  <button class="btn" id="btnNext" hidden>Next</button>
+</div>
+
+<section class="endcard" id="end" hidden>
+  <h2>The End</h2>
+  <p>Abandoned, but not forgotten.</p>
+  <ul class="facts">
+    <li><b>7</b>days planned</li>
+    <li><b>83</b>days worked</li>
+    <li><b>100 m</b>driven</li>
+    <li><b>1 cm/s</b>top speed</li>
+  </ul>
+  <button class="btn" id="btnAgain">Read again</button>
+</section>
+
+<div class="fallback" id="fallback" hidden>This comic needs 3D graphics (WebGL), which this browser could not start. Try it in Chrome or Edge on a laptop.</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var T = window.THREE, renderer;
+  try {
+    if (!T) throw new Error('no three');
+    renderer = new T.WebGLRenderer({ canvas: $('gl'), antialias: true });
+  } catch (e) { $('fallback').hidden = false; $('cover').hidden = true; return; }
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
+  var soundOn = true, voiceOn = !!synth, run = 0;
+  if (!synth) $('btnVoice').hidden = true;
+  function C(hex) { return new T.Color(hex).convertSRGBToLinear(); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
+  function smooth(a, b, x) { var t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); }
+  function hash(x, y) { var s = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return s - Math.floor(s); }
+  function vnoise(x, y) {
+    var xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi, u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
+    var a = hash(xi, yi), b = hash(xi + 1, yi), c = hash(xi, yi + 1), d = hash(xi + 1, yi + 1);
+    return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
+  }
+  function fbm(x, y) { var s = 0, a = 0.5, f = 1; for (var i = 0; i < 5; i++) { s += a * vnoise(x * f, y * f); f *= 2.03; a *= 0.5; } return s; }
+  function height(x, z) {
+    var r = Math.sqrt(x * x + z * z);
+    var h = (fbm(x * 0.03 + 10, z * 0.03 + 10) - 0.5) * 13 * smooth(9, 75, r);
+    h += (fbm(x * 0.22, z * 0.22) - 0.5) * 0.7 * smooth(6, 16, r);
+    h += (fbm(x * 1.3, z * 1.3) - 0.5) * 0.035;
+    h += 17 * Math.exp(-((x - 70) * (x - 70) + (z + 95) * (z + 95)) / (2 * 22 * 22));
+    h += 13 * Math.exp(-((x - 118) * (x - 118) + (z + 78) * (z + 78)) / (2 * 20 * 20));
+    return h;
+  }
+
+  /* ---------- renderer, scene, camera ---------- */
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.outputEncoding = T.sRGBEncoding;
+  renderer.toneMapping = T.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 0.95;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = T.PCFSoftShadowMap;
+  var scene = new T.Scene();
+  scene.fog = new T.FogExp2(0xffffff, 0.0105);
+  var camera = new T.PerspectiveCamera(38, 1, 0.05, 2500);
+  var W = 1, H = 1;
+  function size() {
+    W = window.innerWidth; H = window.innerHeight;
+    renderer.setSize(W, H, false);
+    camera.aspect = W / H;
+    /* keep the subject right of centre and a little high, clear of the words */
+    camera.setViewOffset(W, H, W > 760 ? -0.15 * W : 0, -H * 0.03, W, H);
+    camera.updateProjectionMatrix();
+  }
+  window.addEventListener('resize', size);
+
+  /* ---------- sky ---------- */
+  var skyU = { zenith: { value: new T.Color() }, horizon: { value: new T.Color() }, glow: { value: C(0x8fbcf5) }, sunDir: { value: new T.Vector3(0, 1, 0) }, glowAmt: { value: 0 }, disc: { value: 1 } };
+  var skyMat = new T.ShaderMaterial({
+    uniforms: skyU, side: T.BackSide, depthWrite: false, fog: false,
+    vertexShader: 'varying vec3 vDir; void main(){ vDir = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+    fragmentShader: [
+      'uniform vec3 zenith; uniform vec3 horizon; uniform vec3 glow; uniform vec3 sunDir; uniform float glowAmt; uniform float disc; varying vec3 vDir;',
+      'void main(){',
+      '  vec3 d = normalize(vDir); float h = clamp(d.y * 1.15 + 0.02, 0.0, 1.0);',
+      '  vec3 col = mix(horizon, zenith, pow(h, 0.5));',
+      '  float s = max(dot(d, sunDir), 0.0);',
+      '  col += glow * glowAmt * (pow(s, 7.0) * 0.55 + pow(s, 60.0) * 1.3);',
+      '  col += vec3(1.0, 0.95, 0.85) * disc * pow(s, 2500.0) * 40.0;',
+      '  gl_FragColor = vec4(col, 1.0);',
+      '  #include <tonemapping_fragment>',
+      '  #include <encodings_fragment>',
+      '}'].join('\n')
+  });
+  var skyGroup = new T.Group(); scene.add(skyGroup);
+  skyGroup.add(new T.Mesh(new T.SphereGeometry(1500, 32, 16), skyMat));
+  var starGeo = new T.BufferGeometry(), sp = [], i;
+  for (i = 0; i < 1400; i++) {
+    var a1 = hash(i, 3) * 6.2832, e1 = Math.asin(hash(i, 7) * 0.98 + 0.02);
+    sp.push(Math.cos(e1) * Math.cos(a1) * 1400, Math.sin(e1) * 1400, Math.cos(e1) * Math.sin(a1) * 1400);
+  }
+  starGeo.setAttribute('position', new T.Float32BufferAttribute(sp, 3));
+  var starMat = new T.PointsMaterial({ color: 0xffffff, size: 1.7, sizeAttenuation: false, transparent: true, opacity: 0, fog: false, depthWrite: false });
+  skyGroup.add(new T.Points(starGeo, starMat));
+
+  /* ---------- lights ---------- */
+  var sun = new T.DirectionalLight(0xffffff, 2);
+  sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+  sun.shadow.camera.left = -9; sun.shadow.camera.right = 9; sun.shadow.camera.top = 9; sun.shadow.camera.bottom = -9;
+  sun.shadow.camera.near = 1; sun.shadow.camera.far = 90; sun.shadow.bias = -0.0006; sun.shadow.normalBias = 0.02;
+  sun.target.position.set(2.8, 0, 0); scene.add(sun); scene.add(sun.target);
+  var hemi = new T.HemisphereLight(0xffffff, 0x000000, 0.5); scene.add(hemi);
+  var night = new T.DirectionalLight(C(0x7f96c8), 0); night.position.set(-6, 14, 8); scene.add(night);
+
+  /* ---------- textures made in code ---------- */
+  function canvasTex(n, paint, color) {
+    var c = document.createElement('canvas'); c.width = c.height = n; paint(c.getContext('2d'), n);
+    var t = new T.CanvasTexture(c); if (color) t.encoding = T.sRGBEncoding; t.anisotropy = renderer.capabilities.getMaxAnisotropy(); return t;
+  }
+  function speckle(g, n, base, seed) {
+    g.fillStyle = base; g.fillRect(0, 0, n, n);
+    for (var k = 0; k < 9000; k++) {
+      var x = hash(k, seed) * n, y = hash(k, seed + 9) * n, r = hash(k, seed + 5), v = Math.floor(hash(k, seed + 2) * 90);
+      g.fillStyle = hash(k, seed + 4) > 0.5 ? 'rgba(' + (60 + v) + ',' + (24 + v * 0.4) + ',' + (10 + v * 0.2) + ',.45)' : 'rgba(255,' + (190 + v * 0.5) + ',' + (140 + v) + ',.22)';
+      g.beginPath(); g.arc(x, y, 0.4 + r * r * 3.2, 0, 6.283); g.fill();
+    }
+  }
+  var groundMap = canvasTex(512, function (g, n) { speckle(g, n, '#a8714a', 1); }, true);
+  var groundBump = canvasTex(512, function (g, n) {
+    g.fillStyle = '#808080'; g.fillRect(0, 0, n, n);
+    for (var k = 0; k < 7000; k++) { var v = Math.floor(hash(k, 31) * 255); g.fillStyle = 'rgba(' + v + ',' + v + ',' + v + ',.5)'; g.beginPath(); g.arc(hash(k, 33) * n, hash(k, 35) * n, 0.5 + hash(k, 37) * 3, 0, 6.283); g.fill(); }
+  }, false);
+  [groundMap, groundBump].forEach(function (t) { t.wrapS = t.wrapT = T.RepeatWrapping; t.repeat.set(240, 240); });
+  var solarMap = canvasTex(256, function (g, n) {
+    g.fillStyle = '#0c1436'; g.fillRect(0, 0, n, n);
+    for (var x = 0; x < n; x += 32) for (var y = 0; y < n; y += 32) {
+      g.fillStyle = hash(x, y) > 0.5 ? '#16245c' : '#101c4c'; g.fillRect(x + 2, y + 2, 28, 28);
+      g.fillStyle = 'rgba(160,190,255,.18)'; g.fillRect(x + 2, y + 2, 28, 3);
+    }
+    g.strokeStyle = '#8a93a8'; g.lineWidth = 1.5;
+    for (var q = 0; q <= n; q += 32) { g.beginPath(); g.moveTo(q, 0); g.lineTo(q, n); g.stroke(); g.beginPath(); g.moveTo(0, q); g.lineTo(n, q); g.stroke(); }
+  }, true);
+
+  /* ---------- Mars ---------- */
+  var tg = new T.PlaneGeometry(520, 520, 240, 240); tg.rotateX(-Math.PI / 2);
+  var tp = tg.attributes.position, tcol = [], c1 = C(0x7a4c32), c2 = C(0xba8c62), tmp = new T.Color();
+  for (i = 0; i < tp.count; i++) {
+    var vx = tp.getX(i), vz = tp.getZ(i);
+    tp.setY(i, height(vx, vz));
+    tmp.copy(c1).lerp(c2, clamp(fbm(vx * 0.045 + 3, vz * 0.045 + 7) * 1.5 - 0.25, 0, 1));
+    tcol.push(tmp.r, tmp.g, tmp.b);
+  }
+  tg.setAttribute('color', new T.Float32BufferAttribute(tcol, 3)); tg.computeVertexNormals();
+  var ground = new T.Mesh(tg, new T.MeshStandardMaterial({ map: groundMap, bumpMap: groundBump, bumpScale: 0.014, vertexColors: true, roughness: 1, metalness: 0 }));
+  ground.receiveShadow = true; scene.add(ground);
+
+  function rockGeo(seed, detail) {
+    var g = new T.IcosahedronGeometry(1, detail), p = g.attributes.position, nrm = [];
+    for (var k = 0; k < p.count; k++) {
+      var x = p.getX(k), y = p.getY(k), z = p.getZ(k);
+      var d = 0.66 + 0.66 * vnoise(x * 1.7 + seed + z * 0.9, y * 1.7 - z * 1.3 + seed * 0.37);
+      var px = x * d, py = y * d * 0.72, pz = z * d, nl = Math.sqrt(px * px + py * py * 3.6 + pz * pz) || 1;
+      p.setXYZ(k, px, py, pz); nrm.push(px / nl, py * 1.9 / nl, pz / nl);
+    }
+    g.setAttribute('normal', new T.Float32BufferAttribute(nrm, 3)); return g;
+  }
+  var rockMap = canvasTex(256, function (g, n) {
+    g.fillStyle = '#c4bab0'; g.fillRect(0, 0, n, n);
+    for (var k = 0; k < 5000; k++) { var v = Math.floor(60 + hash(k, 41) * 150); g.fillStyle = 'rgba(' + v + ',' + Math.floor(v * 0.9) + ',' + Math.floor(v * 0.82) + ',.5)'; g.beginPath(); g.arc(hash(k, 43) * n, hash(k, 45) * n, 0.5 + hash(k, 47) * 3.5, 0, 6.283); g.fill(); }
+  }, true);
+  var rockBump = canvasTex(256, function (g, n) {
+    g.fillStyle = '#808080'; g.fillRect(0, 0, n, n);
+    for (var k = 0; k < 4000; k++) { var v = Math.floor(hash(k, 51) * 255); g.fillStyle = 'rgba(' + v + ',' + v + ',' + v + ',.55)'; g.beginPath(); g.arc(hash(k, 53) * n, hash(k, 55) * n, 0.6 + hash(k, 57) * 4, 0, 6.283); g.fill(); }
+  }, false);
+  var rockMat = new T.MeshStandardMaterial({ color: 0xffffff, map: rockMap, bumpMap: rockBump, bumpScale: 0.03, roughness: 0.96, metalness: 0 });
+  var m4 = new T.Matrix4(), q4 = new T.Quaternion(), v3 = new T.Vector3(), s3 = new T.Vector3(), eul = new T.Euler();
+  function scatter(count, rmin, rmax, smin, smax, seed, detail) {
+    var mesh = new T.InstancedMesh(rockGeo(seed, detail), rockMat, count), col = new T.Color(), ca = C(0x4a362c), cb = C(0x9a7458);
+    for (var k = 0; k < count; k++) {
+      var ang = hash(k, seed) * 6.2832, rr = rmin + Math.pow(hash(k, seed + 1), 1.6) * (rmax - rmin);
+      var x = Math.cos(ang) * rr, z = Math.sin(ang) * rr, s = smin + Math.pow(hash(k, seed + 2), 3) * (smax - smin);
+      /* keep the ramp lane and the rover's working area clear of larger rocks */
+      if (smax > 0.08 && x > 1.2 && x < 6.6 && Math.abs(z) < 3.8) { x = -x - 4; }
+      eul.set(hash(k, seed + 3) * 6.28, hash(k, seed + 4) * 6.28, hash(k, seed + 5) * 6.28); q4.setFromEuler(eul);
+      v3.set(x, height(x, z) + s * 0.22, z); s3.set(s * (0.8 + hash(k, seed + 6) * 0.6), s, s * (0.8 + hash(k, seed + 7) * 0.6));
+      m4.compose(v3, q4, s3); mesh.setMatrixAt(k, m4);
+      col.copy(ca).lerp(cb, hash(k, seed + 8)); mesh.setColorAt(k, col);
+    }
+    mesh.castShadow = true; mesh.receiveShadow = true; scene.add(mesh); return mesh;
+  }
+  scatter(760, 4.5, 110, 0.05, 0.6, 11, 2);
+  scatter(2200, 1.3, 18, 0.01, 0.045, 57, 1);
+
+  var NAMED = [
+    { name: 'Barnacle Bill', x: 4.1, z: 1.15, s: [0.2, 0.17, 0.19], c: 0x8c6a55, line: 'Barnacle Bill! My very first rock.' },
+    { name: 'Yogi', x: 5.5, z: -1.35, s: [0.62, 0.56, 0.58], c: 0x7c5c4a, line: 'This is Yogi. Next to me, Yogi is enormous!' },
+    { name: 'Scooby-Doo', x: 3.5, z: 2.75, s: [0.34, 0.13, 0.26], c: 0xc9b8a6, line: 'Scooby-Doo! My team named the rocks after cartoon characters.' }
+  ];
+  NAMED.forEach(function (r, k) {
+    var mesh = new T.Mesh(rockGeo(200 + k * 13, 2), new T.MeshStandardMaterial({ color: C(r.c), map: rockMap, bumpMap: rockBump, bumpScale: 0.03, roughness: 0.95 }));
+    mesh.scale.set(r.s[0], r.s[1], r.s[2]); mesh.position.set(r.x, height(r.x, r.z) + r.s[1] * 0.45, r.z); mesh.rotation.y = k * 1.7;
+    mesh.castShadow = true; mesh.receiveShadow = true; scene.add(mesh); r.top = r.s[1] * 1.15 + 0.12;
+  });
+
+  /* ---------- materials for the machines ---------- */
+  var gold = new T.MeshStandardMaterial({ color: C(0xc79a2c), metalness: 0.9, roughness: 0.36 });
+  var alu = new T.MeshStandardMaterial({ color: C(0xc4c8ce), metalness: 0.92, roughness: 0.42 });
+  var dark = new T.MeshStandardMaterial({ color: C(0x18191d), metalness: 0.4, roughness: 0.6 });
+  var white = new T.MeshStandardMaterial({ color: C(0xd2cec4), metalness: 0.1, roughness: 0.7 });
+  var bag = new T.MeshStandardMaterial({ color: C(0xb3a384), metalness: 0, roughness: 1 });
+  var solar = new T.MeshStandardMaterial({ map: solarMap, metalness: 0.55, roughness: 0.3 });
+  var lens = new T.MeshStandardMaterial({ color: C(0x0a0a0c), metalness: 0.9, roughness: 0.15, emissive: C(0xffc266), emissiveIntensity: 0.2 });
+  function add(parent, geo, mat, x, y, z) { var m = new T.Mesh(geo, mat); m.position.set(x || 0, y || 0, z || 0); m.castShadow = true; m.receiveShadow = true; parent.add(m); return m; }
+  var UP = new T.Vector3(0, 1, 0);
+  function tube(parent, a, b, r, mat) {
+    var d = new T.Vector3().subVectors(b, a), len = d.length();
+    var m = add(parent, new T.CylinderGeometry(r, r, len, 8), mat, (a.x + b.x) / 2, (a.y + b.y) / 2, (a.z + b.z) / 2);
+    m.quaternion.setFromUnitVectors(UP, d.normalize()); return m;
+  }
+  function V(x, y, z) { return new T.Vector3(x, y, z); }
+
+  /* ---------- the lander: petals, airbags, mast, ramps ---------- */
+  var lander = new T.Group(); scene.add(lander);
+  add(lander, new T.CylinderGeometry(0.42, 0.62, 0.34, 3), white, 0, 0.3, 0).rotation.y = Math.PI / 6;
+  add(lander, new T.BoxGeometry(0.34, 0.14, 0.3), gold, -0.05, 0.54, 0.05);
+  var petals = [];
+  for (i = 0; i < 3; i++) {
+    var hinge = new T.Group(), ang = i * 2.0944; hinge.rotation.y = -ang; hinge.position.set(Math.cos(ang) * 0.45, 0.13, Math.sin(ang) * 0.45);
+    var pet = add(hinge, new T.CylinderGeometry(0.98, 0.98, 0.035, 3), alu, 0.62, 0, 0); pet.rotation.y = Math.PI;
+    var cells = add(hinge, new T.CylinderGeometry(0.86, 0.86, 0.012, 3), solar, 0.62, 0.024, 0); cells.rotation.y = Math.PI;
+    lander.add(hinge); petals.push(hinge);
+  }
+  for (i = 0; i < 14; i++) {
+    var ba = i / 14 * 6.2832, br = 0.95 + hash(i, 71) * 0.95;
+    var b = add(lander, new T.SphereGeometry(0.34 + hash(i, 73) * 0.2, 18, 12), bag, Math.cos(ba) * br, 0.0, Math.sin(ba) * br);
+    b.scale.y = 0.17 + hash(i, 75) * 0.07; b.castShadow = false;
+  }
+  tube(lander, V(0.1, 0.45, -0.1), V(0.1, 1.55, -0.1), 0.022, alu);
+  add(lander, new T.BoxGeometry(0.2, 0.12, 0.12), white, 0.1, 1.6, -0.1);
+  var eyeL = add(lander, new T.CylinderGeometry(0.03, 0.03, 0.03, 12), lens, 0.2, 1.6, -0.065); eyeL.rotation.z = Math.PI / 2;
+  var eyeR = add(lander, new T.CylinderGeometry(0.03, 0.03, 0.03, 12), lens, 0.2, 1.6, -0.135); eyeR.rotation.z = Math.PI / 2;
+  var dish = add(lander, new T.CylinderGeometry(0.16, 0.16, 0.015, 20), white, -0.25, 0.86, 0.2); dish.rotation.set(0.5, 0, 0.5);
+  tube(lander, V(-0.2, 0.45, 0.15), V(-0.25, 0.86, 0.2), 0.012, alu);
+  tube(lander, V(-0.1, 0.45, -0.25), V(-0.1, 1.05, -0.25), 0.008, dark);
+  tube(lander, V(1.86, 0.155, 0.16), V(2.8, 0.01, 0.16), 0.02, alu); tube(lander, V(1.86, 0.155, -0.16), V(2.8, 0.01, -0.16), 0.02, alu);
+  for (i = 0; i < 9; i++) { var rx0 = 1.9 + i * 0.105; add(lander, new T.BoxGeometry(0.02, 0.006, 0.36), alu, rx0, 0.155 - (rx0 - 1.86) * 0.154, 0); }
+  var landerLamp = new T.PointLight(C(0xffc67a), 0, 6, 2); landerLamp.position.set(0.25, 1.6, -0.1); lander.add(landerLamp);
+
+  /* ---------- Sojourner: 65 cm long, six cleated wheels, solar deck ---------- */
+  var rover = new T.Group(), tilt = new T.Group(); rover.add(tilt); scene.add(rover);
+  add(tilt, new T.BoxGeometry(0.44, 0.13, 0.3), gold, 0, 0.2, 0);
+  add(tilt, new T.BoxGeometry(0.46, 0.012, 0.32), alu, 0, 0.268, 0);
+  add(tilt, new T.BoxGeometry(0.62, 0.012, 0.46), alu, -0.02, 0.292, 0);
+  var deck = add(tilt, new T.BoxGeometry(0.58, 0.008, 0.42), solar, -0.02, 0.301, 0);
+  solarMap.wrapS = solarMap.wrapT = T.RepeatWrapping;
+  for (i = -1; i <= 1; i += 2) {
+    var cam1 = add(tilt, new T.CylinderGeometry(0.02, 0.02, 0.05, 14), dark, 0.235, 0.215, i * 0.07); cam1.rotation.z = Math.PI / 2;
+    var gl1 = add(tilt, new T.CylinderGeometry(0.014, 0.014, 0.006, 14), lens, 0.262, 0.215, i * 0.07); gl1.rotation.z = Math.PI / 2;
+  }
+  add(tilt, new T.BoxGeometry(0.03, 0.03, 0.06), dark, 0.235, 0.165, 0);
+  tube(tilt, V(-0.22, 0.2, 0), V(-0.3, 0.16, 0), 0.012, alu);
+  var apxs = add(tilt, new T.CylinderGeometry(0.028, 0.028, 0.05, 14), white, -0.32, 0.15, 0); apxs.rotation.z = Math.PI / 2;
+  var whip = tube(tilt, V(-0.24, 0.3, 0.19), V(-0.24, 0.78, 0.19), 0.004, dark);
+  add(tilt, new T.SphereGeometry(0.009, 8, 8), alu, -0.24, 0.78, 0.19);
+  var spins = [], WR = 0.065;
+  [-0.23, 0.0, 0.23].forEach(function (wx) {
+    [-0.215, 0.215].forEach(function (wz) {
+      var hub = new T.Group(); hub.position.set(wx, WR, wz); tilt.add(hub);
+      var spin = new T.Group(); hub.add(spin); spins.push(spin);
+      var rim = add(spin, new T.CylinderGeometry(WR - 0.006, WR - 0.006, 0.075, 22), alu); rim.rotation.x = Math.PI / 2;
+      var capm = add(spin, new T.CylinderGeometry(0.028, 0.028, 0.08, 12), dark); capm.rotation.x = Math.PI / 2;
+      for (var k = 0; k < 14; k++) { var a = k / 14 * 6.2832, cl = add(spin, new T.BoxGeometry(0.013, 0.01, 0.075), dark, Math.cos(a) * (WR - 0.002), Math.sin(a) * (WR - 0.002), 0); cl.rotation.z = a + Math.PI / 2; }
+    });
+  });
+  [-1, 1].forEach(function (sd) {
+    var z = sd * 0.168;
+    tube(tilt, V(0.23, WR, z), V(0.06, 0.2, z), 0.011, alu);
+    tube(tilt, V(0.06, 0.2, z), V(-0.11, 0.14, z), 0.011, alu);
+    tube(tilt, V(-0.23, WR, z), V(-0.11, 0.14, z), 0.011, alu);
+    tube(tilt, V(0, WR, z), V(-0.11, 0.14, z), 0.011, alu);
+    add(tilt, new T.SphereGeometry(0.018, 10, 10), dark, 0.06, 0.2, z);
+  });
+  var roverLamp = new T.PointLight(C(0xffd29a), 0, 3.2, 2); roverLamp.position.set(0.34, 0.24, 0); tilt.add(roverLamp);
+
+  /* wheel tracks */
+  var TRACKS = 900, trackN = 0;
+  var trackGeo = new T.PlaneGeometry(0.07, 0.05); trackGeo.rotateX(-Math.PI / 2);
+  var tracks = new T.InstancedMesh(trackGeo, new T.MeshBasicMaterial({ color: C(0x3a1c10), transparent: true, opacity: 0.55, depthWrite: false }), TRACKS);
+  tracks.count = 0; scene.add(tracks);
+
+  /* dust in the air */
+  var dg = new T.BufferGeometry(), dp = [];
+  for (i = 0; i < 700; i++) dp.push(hash(i, 91) * 40 - 14, hash(i, 93) * 5, hash(i, 95) * 40 - 20);
+  dg.setAttribute('position', new T.Float32BufferAttribute(dp, 3));
+  var dustMat = new T.PointsMaterial({ color: C(0xffd9b0), size: 0.035, transparent: true, opacity: 0.5, depthWrite: false });
+  var dust = new T.Points(dg, dustMat); scene.add(dust);
+
+  /* ---------- state the story animates ---------- */
+  var S = { day: 0.86, sunset: 0.25, az: 0.95, lander: 1, power: 0.9 };
+  var R = { x: 1.05, z: 0, h: 0, pitch: 0 };
+  var camPos = new T.Vector3(2.9, 0.62, 1.9), camLook = new T.Vector3(1.0, 0.3, 0), follow = false, ptr = { x: 0, y: 0, sx: 0, sy: 0 };
+  var AZ_DAY = 0.95, AZ_SET = Math.atan2(-95, 70);
+  var tweens = [];
+  function tw(obj, key, to, ms) {
+    if (reduce) ms = Math.min(ms, 500);
+    tweens = tweens.filter(function (t) { return !(t.obj === obj && t.key === key); });
+    if (ms <= 0) { obj[key] = to; return Promise.resolve(); }
+    return new Promise(function (res) { tweens.push({ obj: obj, key: key, from: obj[key], to: to, t0: performance.now(), ms: ms, res: res }); });
+  }
+  function tv(vec, to, ms) { return Promise.all([tw(vec, 'x', to[0], ms), tw(vec, 'y', to[1], ms), tw(vec, 'z', to[2], ms)]); }
+  function shot(p, l, ms) { return Promise.all([tv(camPos, p, ms), tv(camLook, l, ms)]); }
+  function ease(x) { return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; }
+  function sleep(ms) { var id = run; return new Promise(function (r) { setTimeout(function () { if (id === run) r(); }, ms); }); }
+  var anims = [];
+  function animate(ms, fn) { return new Promise(function (res) { anims.push({ t0: performance.now(), ms: ms, fn: fn, res: res }); }); }
+
+  function groundY(x, z) {
+    if (x < 1.86 && Math.abs(z) < 0.7) return 0.155;
+    if (x < 2.8 && Math.abs(z) < 0.7) return lerp(0.155, height(2.8, z), (x - 1.86) / 0.94);
+    return height(x, z);
+  }
+
+  /* ---------- sky + light from the time of day ---------- */
+  var COL = { dz: C(0xa67c58), dh: C(0xe8c59c), nz: C(0x03040a), nh: C(0x16121a), sz: C(0x2c2937), sh: C(0x75605e), sunDay: C(0xffe6c8), sunSet: C(0xa9c8ff), gDay: C(0x7a4a30), gNight: C(0x0c0808) };
+  var zc = new T.Color(), hc = new T.Color(), envs = {}, envNow = '';
+  function applySky() {
+    zc.copy(COL.nz).lerp(COL.dz, S.day).lerp(COL.sz, S.sunset * (1 - S.day * 0.7));
+    hc.copy(COL.nh).lerp(COL.dh, S.day).lerp(COL.sh, S.sunset * (1 - S.day * 0.7));
+    skyU.zenith.value.copy(zc); skyU.horizon.value.copy(hc); scene.fog.color.copy(hc);
+    var el = lerp(0.045, 0.86, S.day), dir = skyU.sunDir.value;
+    dir.set(Math.cos(el) * Math.cos(S.az), Math.sin(el), Math.cos(el) * Math.sin(S.az));
+    skyU.glowAmt.value = S.sunset; skyU.disc.value = clamp(S.day * 3 + S.sunset, 0, 1);
+    sun.position.copy(sun.target.position).addScaledVector(dir, 45);
+    sun.color.copy(COL.sunDay).lerp(COL.sunSet, S.sunset * (1 - S.day));
+    sun.intensity = 2.5 * S.day + 0.7 * S.sunset * (1 - S.day);
+    hemi.color.copy(zc).lerp(hc, 0.5); hemi.groundColor.copy(COL.gNight).lerp(COL.gDay, S.day); hemi.intensity = 0.1 + 0.55 * S.day + 0.25 * S.sunset;
+    var dk = clamp(1 - S.day * 2.2 - S.sunset * 0.55, 0, 1);
+    night.intensity = 0.5 * dk; starMat.opacity = dk;
+    dustMat.opacity = 0.12 + 0.4 * S.day;
+  }
+  function buildEnvs() {
+    var pm = new T.PMREMGenerator(renderer), es = new T.Scene(); es.add(new T.Mesh(new T.SphereGeometry(50, 24, 12), skyMat));
+    var keep = { d: S.day, s: S.sunset };
+    [['day', 1, 0], ['dusk', 0.12, 1], ['night', 0, 0]].forEach(function (e) { S.day = e[1]; S.sunset = e[2]; applySky(); envs[e[0]] = pm.fromScene(es, 0.03).texture; });
+    S.day = keep.d; S.sunset = keep.s; pm.dispose();
+  }
+
+  /* ---------- sound ---------- */
+  var AC = null, master = null, motor = null;
+  function initAudio() {
+    if (AC) { try { AC.resume(); } catch (e) {} return; }
+    try {
+      var A = window.AudioContext || window.webkitAudioContext; if (!A) return;
+      AC = new A(); master = AC.createGain(); master.gain.value = soundOn ? 0.6 : 0; master.connect(AC.destination);
+      var f = AC.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 480;
+      var pad = AC.createGain(); pad.gain.value = 0; f.connect(pad); pad.connect(master);
+      [[65.4, 'sine', 0.5], [98, 'sine', 0.3], [130.8, 'triangle', 0.14], [196, 'sine', 0.1]].forEach(function (v) {
+        var o = AC.createOscillator(), g = AC.createGain(); o.type = v[1]; o.frequency.value = v[0]; g.gain.value = v[2]; o.connect(g); g.connect(f); o.start();
+      });
+      pad.gain.linearRampToValueAtTime(0.2, AC.currentTime + 4);
+      var mo = AC.createOscillator(), mf = AC.createBiquadFilter(); motor = AC.createGain();
+      mo.type = 'sawtooth'; mo.frequency.value = 74; mf.type = 'lowpass'; mf.frequency.value = 340; motor.gain.value = 0;
+      mo.connect(mf); mf.connect(motor); motor.connect(master); mo.start();
+    } catch (e) { AC = null; }
+  }
+  function tone(freq, dur, vol, type, to) {
+    if (!AC) return;
+    try {
+      var t = AC.currentTime, o = AC.createOscillator(), g = AC.createGain();
+      o.type = type || 'sine'; o.frequency.setValueAtTime(freq, t); if (to) o.frequency.exponentialRampToValueAtTime(to, t + dur);
+      g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(vol, t + 0.03); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(master); o.start(t); o.stop(t + dur + 0.05);
+    } catch (e) {}
+  }
+  function beep() { tone(988, 0.12, 0.08, 'square'); setTimeout(function () { tone(1319, 0.16, 0.08, 'square'); }, 130); }
+  function pop() { tone(300, 0.18, 0.1, 'triangle', 620); }
+  function thud() { tone(120, 0.3, 0.2, 'sine', 50); }
+
+  /* ---------- comic lettering ---------- */
+  var typing = false, hurry = false, gate = null, bubbleOn = false;
+  function speak(text, robot) {
+    if (!voiceOn || !synth) return;
+    try { synth.cancel(); var u = new SpeechSynthesisUtterance(text); u.rate = robot ? 0.95 : 0.9; u.pitch = robot ? 1.45 : 0.85; synth.speak(u); } catch (e) {}
+  }
+  function typeInto(el, text) {
+    if (reduce) { el.textContent = text; return Promise.resolve(); }
+    var id = run, n = 0; typing = true; hurry = false; el.textContent = '';
+    return new Promise(function (res) {
+      (function step() {
+        if (id !== run) return;
+        if (hurry) { el.textContent = text; typing = false; return res(); }
+        n++; el.textContent = text.slice(0, n);
+        if (n % 3 === 0) tone(700 + (n % 5) * 60, 0.03, 0.012, 'square');
+        if (n >= text.length) { typing = false; return res(); }
+        setTimeout(step, 22);
+      })();
+    });
+  }
+  function next(label) {
+    var b = $('btnNext'); b.textContent = label || 'Next'; b.hidden = false; b.classList.add('wait');
+    return new Promise(function (res) { gate = function () { b.classList.remove('wait'); res(); }; });
+  }
+  function pressNext() {
+    if (typing) { hurry = true; return; }
+    if (gate) { var g = gate; gate = null; g(); }
+  }
+  async function caption(text, wait) {
+    var el = $('cap'); el.hidden = false; speak(text, false);
+    if (wait) { $('btnNext').textContent = 'Next'; $('btnNext').hidden = false; }
+    await typeInto(el, text);
+    if (wait) await next();
+  }
+  async function bubble(text) {
+    $('bub').hidden = false; bubbleOn = true; pop(); speak(text, true);
+    $('btnNext').textContent = 'Next'; $('btnNext').hidden = false;
+    await typeInto($('bubText'), text); await next();
+  }
+  function clearWords() { $('cap').hidden = true; $('bub').hidden = true; bubbleOn = false; $('days').hidden = true; }
+  function sfx(word, ms) {
+    var el = document.createElement('div'); el.className = 'sfx'; el.textContent = word; $('sfxHost').appendChild(el);
+    setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, ms || 1700);
+  }
+  function page(n) {
+    $('page').textContent = 'Style sample · page ' + n + ' of 9';
+    var f = $('flash'); f.classList.remove('go'); void f.offsetWidth; f.classList.add('go');
+    clearWords(); $('btnNext').hidden = true; $('btnAct').hidden = true; follow = false;
+    if (synth) { try { synth.cancel(); } catch (e) {} }
+  }
+  function act(label) {
+    var b = $('btnAct'); b.textContent = label; b.hidden = false; b.classList.add('wait'); $('btnNext').hidden = true;
+    return new Promise(function (res) { b.onclick = function () { b.hidden = true; b.onclick = null; res(); }; });
+  }
+
+  /* ---------- the rover drives ---------- */
+  async function driveTo(x, z, ms) {
+    var dx = x - R.x, dz = z - R.z, target = Math.atan2(-dz, dx), d = target - R.h;
+    while (d > Math.PI) d -= 6.2832; while (d < -Math.PI) d += 6.2832;
+    if (Math.abs(d) > 0.05) await tw(R, 'h', R.h + d, 500 + Math.abs(d) * 500);
+    await Promise.all([tw(R, 'x', x, ms), tw(R, 'z', z, ms)]);
+  }
+
+  var lastRock = null;
+  function side(dist, hgt, turn) {
+    var rk = lastRock || NAMED[0], dx = R.x - rk.x, dz = R.z - rk.z, l = Math.sqrt(dx * dx + dz * dz) || 1, c = Math.cos(turn), sn = Math.sin(turn);
+    dx /= l; dz /= l; return [R.x + (dx * c - dz * sn) * dist, hgt, R.z + (dx * sn + dz * c) * dist];
+  }
+  /* ---------- the story ---------- */
+  async function story() {
+    var id = ++run; initAudio(); $('cover').hidden = true;
+    function gone() { return id !== run; }
+
+    /* 1. landing */
+    page(1); S.day = 1; S.sunset = 0; S.az = AZ_DAY; S.power = 0.25; S.lander = 0.6;
+    petals[1].rotation.z = 1.5; petals[2].rotation.z = 1.5;
+    shot([10.5, 2.6, 8], [0.4, 0.5, 0], 0); shot([7.2, 1.7, 5.6], [0.6, 0.5, 0], 14000);
+    sfx('BOING! BOING!'); thud(); setTimeout(thud, 380);
+    await caption('Mars. The 4th of July, 1997. A spacecraft wrapped in airbags bounces across the red ground, and stops.', true); if (gone()) return;
+    sfx('CLUNK!'); thud(); tw(petals[1].rotation, 'z', 0, 1800); tw(petals[2].rotation, 'z', 0, 2100);
+    await caption('Its metal petals open like a flower. Something small is riding inside.', true); if (gone()) return;
+
+    /* 2. hello */
+    page(2); tw(S, 'power', 1, 1200); beep();
+    shot([3.3, 0.6, 1.7], [1.0, 0.32, 0], 0); shot([2.9, 0.5, 1.45], [1.0, 0.3, 0], 12000);
+    await bubble('Hello, Mars! My name is Sojourner.'); if (gone()) return;
+    await bubble('I am no bigger than a microwave oven. But I have a very big job.'); if (gone()) return;
+    $('bub').hidden = true; bubbleOn = false;
+    await act('Roll down the ramp!'); if (gone()) return;
+    sfx('WHIRRR'); follow = true; tv(camPos, [4.6, 0.7, 2.6], 7000);
+    await driveTo(3.35, 0, 6500); if (gone()) return;
+    sfx('BUMP!', 1200); thud();
+    await caption('No wheel had ever touched Mars before.', false); if (gone()) return;
+    await bubble('My wheels are the first wheels ever to roll on this planet!'); if (gone()) return;
+
+    /* 3. slow and careful */
+    page(3); shot([4.25, 0.16, 1.05], [3.35, 0.2, 0], 0); shot([4.6, 0.2, 0.75], [3.35, 0.2, 0], 12000);
+    await bubble('I drive one centimetre every second. Even a tortoise is faster than me!'); if (gone()) return;
+    await bubble('But slow and careful is how you explore a brand new world.'); if (gone()) return;
+
+    /* 4. the rocks */
+    page(4); shot([1.4, 2.6, 5.6], [4.3, 0.2, 0.5], 0); shot([1.9, 2.3, 5.1], [4.3, 0.2, 0.5], 9000);
+    await caption('Tap a rock, and Sojourner will go and study it.', false); if (gone()) return;
+    var seen = 0;
+    await new Promise(function (done) {
+      var busy = false;
+      NAMED.forEach(function (r) {
+        var b = document.createElement('button'); b.className = 'tagbtn'; b.textContent = r.name; r.el = b; $('tags').appendChild(b);
+        b.onclick = async function () {
+          if (busy || r.seen || gone()) return; busy = true; $('btnNext').hidden = true; $('bub').hidden = true; bubbleOn = false;
+          var dx = r.x - R.x, dz = r.z - R.z, len = Math.sqrt(dx * dx + dz * dz), stop = r.s[0] + 0.5;
+          sfx('WHIRRR', 1300);
+          await driveTo(r.x - dx / len * stop, r.z - dz / len * stop, 1800 + len * 900); if (gone()) return;
+          sfx('BEEP!', 1300); beep(); r.seen = true; lastRock = r; b.classList.add('done'); seen++;
+          $('bub').hidden = false; bubbleOn = true; speak(r.line, true); await typeInto($('bubText'), r.line); if (gone()) return;
+          busy = false;
+          if (seen >= NAMED.length) { await next(); done(); }
+          else { $('btnNext').textContent = 'Enough rocks'; $('btnNext').hidden = false; gate = done; }
+        };
+      });
+    });
+    if (gone()) return;
+    $('tags').innerHTML = '';
+    await bubble('I pressed my sensor on the rocks and told Earth what they were made of.'); if (gone()) return;
+
+    /* 5. the water clue */
+    page(5); shot(side(1.7, 0.3, 1.9), [R.x, 0.14, R.z], 0); shot(side(1.45, 0.24, 2.1), [R.x, 0.14, R.z], 10000);
+    await bubble('Look at these stones. Smooth and round, like stones from a river.'); if (gone()) return;
+    sfx('A CLUE!'); beep();
+    await bubble('Long, long ago, water ran right here on Mars!'); if (gone()) return;
+
+    /* 6. seven days becomes eighty-three */
+    page(6); shot(side(5.0, 1.6, 1.2), [R.x, 0.3, R.z], 0); shot(side(4.4, 1.35, 1.35), [R.x, 0.3, R.z], 9000);
+    await caption('The plan was for Sojourner to work for just 7 days.', true); if (gone()) return;
+    $('days').hidden = false;
+    await animate(reduce ? 600 : 6500, function (p) {
+      var ph = p * 6 * 6.2832; S.day = 0.5 + 0.5 * Math.cos(ph); S.sunset = Math.pow(1 - S.day, 2) * 0.6; S.az = AZ_DAY + ph;
+      $('days').textContent = 'Day ' + Math.min(83, 1 + Math.floor(p * 83));
+    });
+    if (gone()) return;
+    S.day = 1; S.sunset = 0; S.az = AZ_DAY; $('days').textContent = 'Day 83'; sfx('DAY 83!'); beep();
+    await bubble('Every morning I asked for one more day. I kept going for eighty-three!'); if (gone()) return;
+
+    /* 7. the lander goes quiet */
+    page(7); tw(S, 'day', 0.1, 5000); tw(S, 'sunset', 1, 5000); tw(S, 'az', AZ_SET, 5000); tw(S, 'lander', 0, 6000);
+    var bx = R.x - 0.59 * 2.3, bz = R.z + 0.8 * 2.3;
+    shot([bx, 0.55, bz], [R.x + 0.59 * 2, 0.45, R.z - 0.8 * 2], 0); shot([bx - 0.3, 0.62, bz + 0.4], [R.x + 0.59 * 2, 0.5, R.z - 0.8 * 2], 14000);
+    await caption('Then, one evening, the lander went quiet. It was the little rover\'s only way to call home.', true); if (gone()) return;
+    await bubble('Hello? ... Earth? ... Can anybody hear me?'); if (gone()) return;
+
+    /* 8. the ones who followed */
+    page(8); tw(S, 'day', 0, 6000); tw(S, 'sunset', 0.12, 6000);
+    shot(side(2.3, 0.5, 1.9), [R.x, 0.3, R.z], 0); shot(side(2.0, 0.42, 2.15), [R.x, 0.32, R.z], 14000);
+    await bubble('Do not be sad for me.'); if (gone()) return;
+    await bubble('After me came Spirit and Opportunity. Then Curiosity. Then Perseverance.'); if (gone()) return;
+    await bubble('Every one of them followed my tracks.'); if (gone()) return;
+
+    /* 9. goodbye */
+    page(9); tw(S, 'sunset', 0, 4000);
+    shot(side(2.4, 0.6, 2.0), [R.x, 0.3, R.z], 0); shot(side(9.5, 4.4, 1.5), [R.x, 0.3, R.z], 26000);
+    await bubble('My part is done. For Mars, and for the Earth.'); if (gone()) return;
+    tone(392, 5, 0.09, 'sine', 196); tw(S, 'power', 0.06, 8000);
+    await bubble('Goodbye, my friend!'); if (gone()) return;
+    $('bub').hidden = true; bubbleOn = false;
+    await caption('Sojourner is still there today, in a valley called Ares Vallis.', true, true); if (gone()) return;
+    clearWords(); $('btnNext').hidden = true; $('page').textContent = 'Style sample';
+    $('end').hidden = false;
+  }
+
+  function reset() {
+    run++; if (synth) { try { synth.cancel(); } catch (e) {} }
+    tweens = []; anims = []; gate = null; typing = false; follow = false;
+    S.day = 0.86; S.sunset = 0.25; S.az = AZ_DAY; S.lander = 1; S.power = 0.9;
+    R.x = 1.05; R.z = 0; R.h = 0; petals[1].rotation.z = 0; petals[2].rotation.z = 0;
+    camPos.set(2.9, 0.62, 1.9); camLook.set(1.0, 0.3, 0);
+    tracks.count = 0; trackN = 0; NAMED.forEach(function (r) { r.seen = false; }); lastRock = null; $('tags').innerHTML = ''; $('sfxHost').innerHTML = '';
+    clearWords(); $('btnNext').hidden = true; $('btnAct').hidden = true; $('end').hidden = true; $('cover').hidden = false; $('page').textContent = 'Style sample';
+  }
+
+  /* ---------- every frame ---------- */
+  var last = performance.now(), lastX = R.x, lastZ = R.z, sinceTrack = 0, proj = new T.Vector3(), lookNow = new T.Vector3(1, 0.3, 0), rightV = new T.Vector3();
+  function toScreen(x, y, z) { proj.set(x, y, z).project(camera); return { x: (proj.x * 0.5 + 0.5) * W, y: (-proj.y * 0.5 + 0.5) * H, ok: proj.z < 1 }; }
+  function frame(now) {
+    var dt = Math.min(0.05, (now - last) / 1000), k, t, p; last = now;
+    for (k = tweens.length - 1; k >= 0; k--) {
+      t = tweens[k]; p = Math.min(1, (now - t.t0) / t.ms); t.obj[t.key] = t.from + (t.to - t.from) * ease(p);
+      if (p >= 1) { tweens.splice(k, 1); t.res(); }
+    }
+    for (k = anims.length - 1; k >= 0; k--) { t = anims[k]; p = Math.min(1, (now - t.t0) / t.ms); t.fn(p); if (p >= 1) { anims.splice(k, 1); t.res(); } }
+
+    applySky();
+    var want = S.sunset > 0.5 && S.day < 0.5 ? 'dusk' : (S.day > 0.35 ? 'day' : 'night');
+    if (want !== envNow && envs[want]) { scene.environment = envs[want]; envNow = want; }
+
+    /* rover */
+    var gy = groundY(R.x, R.z), onRamp = R.x > 1.86 && R.x < 2.8 && Math.abs(R.z) < 0.7;
+    R.pitch += ((onRamp ? -0.16 : 0) - R.pitch) * Math.min(1, dt * 6);
+    var sec = now / 1000, talk = bubbleOn ? Math.sin(sec * 9) * 0.006 : 0;
+    rover.position.set(R.x, gy, R.z); rover.rotation.y = R.h; tilt.rotation.z = R.pitch; tilt.position.y = Math.abs(talk);
+    var moved = Math.sqrt((R.x - lastX) * (R.x - lastX) + (R.z - lastZ) * (R.z - lastZ));
+    if (moved > 0) {
+      for (k = 0; k < spins.length; k++) spins[k].rotation.z -= moved / WR;
+      sinceTrack += moved;
+      if (sinceTrack > 0.055 && R.x > 2.85 && trackN < TRACKS - 2) {
+        sinceTrack = 0;
+        for (var sd = -1; sd <= 1; sd += 2) {
+          var ox = Math.sin(R.h) * 0.215 * sd, oz = Math.cos(R.h) * 0.215 * sd;
+          v3.set(R.x + ox, height(R.x + ox, R.z + oz) + 0.006, R.z + oz); eul.set(0, R.h, 0); q4.setFromEuler(eul); s3.set(1, 1, 1);
+          m4.compose(v3, q4, s3); tracks.setMatrixAt(trackN++, m4);
+        }
+        tracks.count = trackN; tracks.instanceMatrix.needsUpdate = true;
+      }
+    }
+    if (motor) { try { motor.gain.value += ((moved > 0.0002 ? 0.05 : 0) - motor.gain.value) * 0.2; } catch (e) {} }
+    lastX = R.x; lastZ = R.z;
+    whip.rotation.x = Math.sin(sec * 2.1) * 0.02 + (moved > 0 ? Math.sin(sec * 17) * 0.03 : 0);
+    lens.emissiveIntensity = 0.15 + S.power * (1.6 + (bubbleOn ? Math.sin(sec * 9) * 0.5 : 0));
+    roverLamp.intensity = S.power * (0.5 + 1.6 * (1 - S.day));
+    landerLamp.intensity = S.lander * (0.3 + 1.8 * (1 - S.day));
+
+    /* dust drifts with the wind */
+    var dpos = dg.attributes.position;
+    for (k = 0; k < dpos.count; k += 3) { var nx = dpos.getX(k) + dt * 0.25; dpos.setX(k, nx > 26 ? -14 : nx); }
+    dpos.needsUpdate = true;
+
+    /* camera */
+    ptr.sx += (ptr.x - ptr.sx) * 0.05; ptr.sy += (ptr.y - ptr.sy) * 0.05;
+    if (follow) lookNow.lerp(v3.set(R.x, gy + 0.22, R.z), Math.min(1, dt * 4)); else lookNow.copy(camLook);
+    camera.position.copy(camPos);
+    camera.lookAt(lookNow);
+    rightV.setFromMatrixColumn(camera.matrixWorld, 0);
+    camera.position.addScaledVector(rightV, ptr.sx * 0.14); camera.position.y += -ptr.sy * 0.07;
+    if (camera.position.y < 0.12) camera.position.y = 0.12;
+    camera.lookAt(lookNow);
+    skyGroup.position.copy(camera.position);
+    camera.updateMatrixWorld();
+
+    /* words that follow things in the 3D world */
+    if (bubbleOn) {
+      var b = $('bub'), a = toScreen(R.x, gy + 0.42, R.z), bw = b.offsetWidth, bh = b.offsetHeight;
+      var minTop = 74, cap = $('cap');
+      if (!cap.hidden && W <= 760) minTop = cap.getBoundingClientRect().bottom + 12;
+      var left = clamp(a.x - bw * 0.42, 24, W - bw - 24), top = a.y - bh - 34, below = false;
+      if (top < minTop) { var under = toScreen(R.x, gy - 0.05, R.z); top = Math.min(under.y + 40, H - bh - 96); below = top > a.y; if (!below) top = minTop; }
+      b.style.left = left + 'px'; b.style.top = top + 'px'; b.classList.toggle('below', below);
+      b.style.setProperty('--tail', clamp(a.x - left, 34, bw - 34) + 'px');
+    }
+    for (k = 0; k < NAMED.length; k++) {
+      var r = NAMED[k]; if (!r.el || !r.el.parentNode) continue;
+      var s = toScreen(r.x, height(r.x, r.z) + r.top, r.z); r.el.style.left = s.x + 'px'; r.el.style.top = (s.y - 6) + 'px';
+    }
+    renderer.render(scene, camera);
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- controls ---------- */
+  $('btnOpen').addEventListener('click', story);
+  $('btnNext').addEventListener('click', pressNext);
+  $('btnAgain').addEventListener('click', reset);
+  window.addEventListener('keydown', function (e) { if ((e.key === 'ArrowRight' || e.key === ' ') && !$('btnNext').hidden) { e.preventDefault(); pressNext(); } });
+  window.addEventListener('pointermove', function (e) { ptr.x = e.clientX / W * 2 - 1; ptr.y = e.clientY / H * 2 - 1; });
+  $('btnSound').addEventListener('click', function () { soundOn = !soundOn; this.setAttribute('aria-pressed', soundOn); if (master) { try { master.gain.value = soundOn ? 0.6 : 0; } catch (e) {} } });
+  $('btnVoice').addEventListener('click', function () { voiceOn = !voiceOn; this.setAttribute('aria-pressed', voiceOn); if (!voiceOn && synth) { try { synth.cancel(); } catch (e) {} } });
+
+  size(); buildEnvs(); applySky(); requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
