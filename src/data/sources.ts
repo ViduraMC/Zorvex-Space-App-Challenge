@@ -64,12 +64,27 @@ export const OTHER_SOURCES: Source[] = [
   {
     label: "Blue Marble: Land Surface, Ocean Color and Sea Ice, NASA's Scientific Visualization Studio",
     url: 'https://svs.gsfc.nasa.gov/2915',
-    usedFor: 'The Earth globe in the Viking story',
+    usedFor: 'The Earth globe in the Viking story and below the rocket after take-off',
   },
   {
     label: 'First image from the surface of Mars (Viking 1, 20 July 1976), NASA/JPL',
     url: 'https://science.nasa.gov/mission/viking/viking-50-years-on-mars/',
     usedFor: 'The first-photo moment in the Viking story',
+  },
+  {
+    label: 'Viking 1 Lander panorama of Chryse Planitia (July 1976), NASA/JPL',
+    url: 'https://science.nasa.gov/mission/viking/viking-50-years-on-mars/',
+    usedFor: 'The 360-degree look-around in the Viking story',
+  },
+  {
+    label: 'Viking 2 Lander colour view of Utopia Planitia, NASA/JPL',
+    url: 'https://science.nasa.gov/mission/viking-2/',
+    usedFor: "Viking 2's photo in the Viking story",
+  },
+  {
+    label: 'Kokoro-82M text-to-speech model (Apache-2.0), run locally through the HyperFrames CLI',
+    url: 'https://huggingface.co/hexgrad/Kokoro-82M',
+    usedFor: 'All recorded voices (AI-generated speech)',
   },
   {
     label: 'Viking orbiter line drawing and Viking spacecraft photo, NASA',

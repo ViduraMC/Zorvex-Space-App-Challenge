@@ -45,8 +45,10 @@ Dev-only page with every mini-game: <http://localhost:5173/#ep-_playground>
 
    All step types are in `src/engine/types.ts`; `src/episodes/sojourner/` is a full example.
    Every `say` needs `fact`: a fact id, or `null` for pure feeling.
-5. **Write the words** in `i18n/en.json` (then `si.json` and `ta.json`). Voice clips go in
-   `voice/<lang>/<key>.mp3`; a line without a clip is read aloud by the browser.
+5. **Write the words** in `i18n/en.json` (then `si.json` and `ta.json`). Give the voices a cast in
+   `voice/cast.json` (roles: `narrator`, `machine`, plus any you add, e.g. `viking2`; a line picks a role
+   with `by: 'viking2'` and the bubble shows `speaker.<role>` from i18n). Then `npm run voices -- <id>`
+   records every line with a Kokoro voice. A line without a clip is read by the browser.
 6. **Check and send.** `npm run check:facts`, `npm run lint`, `npm run typecheck`, `npm test`,
    then run `docs/FUN_CHECKLIST.md`, log AI use in `docs/AI_USAGE.md`, and open a pull request.
 

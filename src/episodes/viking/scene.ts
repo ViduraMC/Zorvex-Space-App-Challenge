@@ -23,6 +23,7 @@ import {
   MeshBasicMaterial,
   MeshStandardMaterial,
   Object3D,
+  PointLight,
   Quaternion,
   ShaderMaterial,
   SphereGeometry,
@@ -39,8 +40,10 @@ import { hash } from '../../engine/noise';
 import type { Scope } from '../../engine/scope';
 import type { EpisodeContext, SceneBuild, SceneHandles } from '../../engine/types';
 import { createRockMaterial, rockGeometry } from '../../engine/worlds/mars';
+import { onGlobe } from '../../journey/geo';
 import { nasaModel } from '../../journey/nasaModels';
 import firstImage from './assets/first-image.jpg';
+import utopiaColor from './assets/utopia-color.jpg';
 
 const MARS_RADIUS = 30;
 const EARTH_RADIUS = 56;
@@ -48,14 +51,6 @@ const EARTH_AT = new Vector3(-900, 120, -700);
 const ORBIT_RADIUS = 46;
 const LANDER_HEIGHT = 2.2;
 const TILT_VIKING_2 = (8.5 * Math.PI) / 180; // NASA: "tilted 8.5 degrees to the west"
-const DEG = Math.PI / 180;
-
-/** A point on a globe from latitude and east longitude (texture centred on 0° longitude). */
-export function onGlobe(latDeg: number, lonEastDeg: number, radius: number, out = new Vector3()): Vector3 {
-  const lat = latDeg * DEG;
-  const lon = lonEastDeg * DEG;
-  return out.set(radius * Math.cos(lat) * Math.cos(lon), radius * Math.sin(lat), -radius * Math.cos(lat) * Math.sin(lon));
-}
 
 /** Landing sites from NASA's mission pages (Viking 2 page gives 225.71° W = 134.29° E). */
 const SITES = {
@@ -229,6 +224,10 @@ export default async function buildScene({ scene, world, materials, anisotropy, 
   const earthStage = stage('earth');
   const { rocket, flames } = buildTitan();
   earthStage.scene.add(rocket, buildTower());
+  // the engines light up the pad and the smoke
+  const exhaust = new PointLight(0xff8a30, 0, 160, 1.4);
+  exhaust.position.set(0, -4, 0);
+  rocket.add(exhaust);
   objects.titan = rocket;
 
   // ---------- space: Earth, Mars, the orbiter with its lander ----------
@@ -331,6 +330,17 @@ export default async function buildScene({ scene, world, materials, anisotropy, 
       }),
     );
 
+  /** A real NASA photo, revealed from left to right like a picture arriving line by line. */
+  const photo = async (c: EpisodeContext, scope: Scope, url: string, key: string): Promise<void> => {
+    const frame = scope.el('figure', 'first-image', c.comic.gameHost);
+    const img = scope.el('img', '', frame);
+    img.src = url;
+    img.alt = c.t(`${key}.alt`);
+    scope.el('figcaption', '', frame, c.t(`${key}.credit`));
+    c.audio.play('radio');
+    await play(scope, { target: img, clipPath: 'inset(0 0% 0 0)', startAt: { clipPath: 'inset(0 100% 0 0)' }, duration: 5, ease: 'none' });
+  };
+
   return {
     machine,
     objects,
@@ -356,17 +366,32 @@ export default async function buildScene({ scene, world, materials, anisotropy, 
       },
       async launch(c, scope) {
         for (const f of flames) f.visible = true;
+        exhaust.intensity = 0;
         c.audio.play('thud');
         c.audio.play('whoosh');
         c.comic.sfx(c.t('sfx.liftoff'));
-        const smoke = (): void => c.fx.burst('dustBurst', tmp.set((Math.random() - 0.5) * 8, 0.5, (Math.random() - 0.5) * 8));
-        for (let k = 0; k < 6; k++) setTimeout(smoke, k * 180);
-        scope.frame((_dt, time) => {
+        // a billowing cloud on the pad, then a smoke column left behind as it climbs
+        for (let k = 0; k < 10; k++) c.fx.burst('smoke', tmp.set((Math.random() - 0.5) * 14, 1, (Math.random() - 0.5) * 14));
+        let puff = 0;
+        scope.frame((dt, time) => {
           for (const f of flames) f.scale.set(1, 1 + Math.sin(time * 40) * 0.12, 1);
-          c.director.shot({ pos: [46, Math.max(9, rocket.position.y * 0.55 + 9), 62], look: [0, rocket.position.y + 20, 0] });
+          exhaust.intensity = 900 + Math.sin(time * 33) * 250;
+          puff += dt;
+          if (puff > 0.08 && rocket.position.y < 200) {
+            puff = 0;
+            c.fx.burst('smoke', tmp.set((Math.random() - 0.5) * 3, rocket.position.y - 3, (Math.random() - 0.5) * 3));
+          }
+          const shake = Math.max(0, 1 - rocket.position.y / 120) * 0.35;
+          c.director.shot({
+            pos: [46 + Math.sin(time * 61) * shake, Math.max(9, rocket.position.y * 0.55 + 9) + Math.cos(time * 53) * shake, 62],
+            look: [0, rocket.position.y + 20, 0],
+          });
           c.audio.drive(1);
         });
-        scope.add(() => c.audio.drive(0));
+        scope.add(() => {
+          c.audio.drive(0);
+          exhaust.intensity = 0;
+        });
         await play(scope, { target: rocket.position, y: 260, duration: 6.5, ease: 'power2.in' });
       },
 
@@ -457,16 +482,8 @@ export default async function buildScene({ scene, world, materials, anisotropy, 
         engineFlames.visible = false;
         (descentShell.userData.heatShield as MeshStandardMaterial).emissiveIntensity = 0;
       },
-      async firstImage(c, scope) {
-        const frame = scope.el('figure', 'first-image', c.comic.gameHost);
-        const img = scope.el('img', '', frame);
-        img.src = firstImage;
-        img.alt = c.t('img.first.alt');
-        scope.el('figcaption', '', frame, c.t('img.first.credit'));
-        c.audio.play('radio');
-        // revealed from left to right, like a picture arriving line by line
-        await play(scope, { target: img, clipPath: 'inset(0 0% 0 0)', startAt: { clipPath: 'inset(0 100% 0 0)' }, duration: 5, ease: 'none' });
-      },
+      firstImage: (c, scope) => photo(c, scope, firstImage, 'img.first'),
+      utopiaPhoto: (c, scope) => photo(c, scope, utopiaColor, 'img.utopia'),
       viking2Site(c) {
         c.machine.place(0, 0, 0.4);
         c.machine.lift = 0;

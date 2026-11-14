@@ -12,9 +12,14 @@ Space Apps requires teams to disclose how AI was used. Add a row for everything 
 | 14 Nov 2026 | Vidura | AI assistant | `docs/stories/viking.md` (the Viking story brief) | Written with AI help; confirm how before submission |
 | 14 Nov 2026 | Vidura | AI assistant | `docs/BUILD_GUIDE.md` (the journey specification) | Written with AI help; confirm how before submission |
 
+## AI-generated content in the product
+
+- **Voices.** Every recorded line (narrator, Viking 1, Viking 2, Sojourner, mission control) is
+  AI-generated speech from the open Kokoro-82M model, run locally. The About page says so.
+
 ## What AI did not make
 
-- No AI-generated images, video or audio are in the product. 3D models are NASA's own (3D Resources)
+- No AI-generated images or video are in the product (the voices above are the only AI-generated media). 3D models are NASA's own (3D Resources)
   or simple ones built in code; planet textures are NASA data; sounds are synthesised in the browser.
 - No NASA logos or insignia. Mission patches are our own design.
 

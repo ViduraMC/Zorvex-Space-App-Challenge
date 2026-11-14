@@ -71,6 +71,20 @@ photo, so we show no Earth globe.
 | Blue Marble, NASA's Scientific Visualization Studio | <https://svs.gsfc.nasa.gov/2915> | Earth globe in the Viking story |
 | First image from the surface of Mars (Viking 1), NASA/JPL | <https://science.nasa.gov/mission/viking/viking-50-years-on-mars/> | Viking first-photo moment |
 | Viking orbiter drawing and spacecraft photo, NASA | <https://science.nasa.gov/mars/resources/viking-mission-resources/> | Reference for our 3D orbiter |
+| Viking 1 Lander panorama of Chryse Planitia (July 1976), NASA/JPL | <https://science.nasa.gov/mission/viking/viking-50-years-on-mars/> | 360-degree look-around in the Viking story |
+| Viking 2 Lander colour view of Utopia Planitia, NASA/JPL | <https://science.nasa.gov/mission/viking-2/> | Viking 2's photo in the Viking story |
+
+## 3c. Voices (AI-generated)
+
+All recorded voices are made with the open Kokoro-82M text-to-speech model (Apache-2.0,
+<https://huggingface.co/hexgrad/Kokoro-82M>), run on our own computer (`npm run voices`).
+Cast: `src/episodes/*/voice/cast.json` and `src/journey/voice/cast.json`.
+
+## 3d. Landing-site coordinates (hologram globe)
+
+Every coordinate in `src/data/explorers.*.json` links the page it came from: NSSDCA
+(Sojourner, Spirit, Opportunity, Phoenix's nominal site, Apollo 11, 12, 15) and the NASA mission
+pages (Viking 1, Viking 2, InSight, Surveyor 3). Ingenuity has none yet.
 
 ## 3b. Other NASA data
 

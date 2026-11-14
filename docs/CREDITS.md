@@ -11,6 +11,8 @@ Where each piece of data is used: `docs/RESOURCES.md`.
 | Mars image texture | `src/assets/planets/mars.jpg` | NASA 3D Resources |
 | Earth: Blue Marble | `src/assets/planets/earth.png` | NASA's Scientific Visualization Studio |
 | First image from the surface of Mars (Viking 1, 20 July 1976) | `src/episodes/viking/assets/first-image.jpg` | NASA/JPL |
+| Viking 1 panorama of Chryse Planitia; Viking 2 colour view of Utopia Planitia | `src/episodes/viking/assets/` | NASA/JPL |
+| Voices | `src/episodes/*/voice/en/`, `src/journey/voice/en/` | AI-generated with Kokoro-82M (Apache-2.0) |
 | Moon colour map and elevation | `src/assets/planets/moon.jpg`, `moon_bump.jpg` | NASA's Scientific Visualization Studio, CGI Moon Kit |
 
 NASA does not endorse this project. No NASA logos or insignia are used in our own artwork;
