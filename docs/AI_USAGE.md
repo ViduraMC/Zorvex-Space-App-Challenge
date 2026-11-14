@@ -8,6 +8,8 @@ Space Apps requires teams to disclose how AI was used. Add a row for everything 
 | 14 Nov 2026 | Vidura | Claude Code (Anthropic) | Re-checked every explorer and Sojourner fact against the challenge resource pages only; downloaded and compressed NASA 3D Resources models | Sources linked in the app; a person must re-read them before submission |
 | 14 Nov 2026 | Vidura | Claude Code (Anthropic) | Looked up and quoted NASA sources for the first 22 Sojourner facts (later replaced) (`src/episodes/sojourner/facts.json`) | Each fact has its source URL; a person must re-read them before submission |
 | 14 Nov 2026 | Vidura | Claude Code (Anthropic) | Draft Sinhala and Tamil text for the shared buttons (`src/i18n/si.json`, `ta.json`) | **No.** A Sinhala and a Tamil speaker must review before release |
+| 14 Nov 2026 | Vidura | Claude Code (Anthropic) | Built the Viking episode from the team's brief (`docs/stories/viking.md`), re-checking each fact on the NASA pages; built the Titan rocket, Viking orbiter and descent hardware in code | Sources linked in the app; a person must re-read them before submission |
+| 14 Nov 2026 | Vidura | AI assistant | `docs/stories/viking.md` (the Viking story brief) | Written with AI help; confirm how before submission |
 | 14 Nov 2026 | Vidura | AI assistant | `docs/BUILD_GUIDE.md` (the journey specification) | Written with AI help; confirm how before submission |
 
 ## What AI did not make
