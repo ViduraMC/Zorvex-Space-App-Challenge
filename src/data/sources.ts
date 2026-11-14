@@ -49,11 +49,21 @@ function modelUse(title: string): string {
   return 'Apollo 11 descent stage on the Moon (lower half of the model only)';
 }
 
-/** Not from the challenge list or 3D Resources. Kept only until a replacement is found. */
+/** Additional NASA sources approved for the Apollo 11 story, plus the Moon globe source to replace. */
 export const OTHER_SOURCES: Source[] = [
   {
     label: "CGI Moon Kit (LRO colour and LOLA elevation), NASA's Scientific Visualization Studio",
     url: 'https://svs.gsfc.nasa.gov/4720',
     usedFor: 'The Moon globe. NASA 3D Resources has no Moon colour map, only a printable model',
+  },
+  {
+    label: 'Apollo 11 Command and Service Module (NSSDCA)',
+    url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A',
+    usedFor: 'Apollo 11 story: Columbia, launch, flight timeline, and return to Earth',
+  },
+  {
+    label: 'Apollo 11: 25th Anniversary (NASA)',
+    url: 'https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html',
+    usedFor: 'Apollo 11 story: surface photographs, flag, samples, and timeline quotes',
   },
 ];

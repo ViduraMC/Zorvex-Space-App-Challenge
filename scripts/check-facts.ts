@@ -2,7 +2,7 @@
  * npm run check:facts [-- --strict]
  * Guards the science. For every episode it checks that
  *   - each fact has an id, text, a source URL and a source name (ERROR),
- *   - each fact id used in episode.ts exists in facts.json (ERROR),
+ *   - each fact id used in an episode TypeScript module exists in facts.json (ERROR),
  *   - nothing is still marked TODO-VERIFY (WARNING; an ERROR with --strict, used before release),
  *   - facts that no line uses are listed (WARNING).
  * Runs on plain Node (type stripping), no dependencies.
@@ -24,7 +24,7 @@ export interface Report {
 }
 
 const TODO = 'TODO-VERIFY';
-const FACT_REF = /\b(?:fact|winFact):\s*'([^']+)'/g;
+const FACT_REF = /\b(?:fact|factId2?|winFact):\s*'([^']+)'/g;
 
 /** Pure check of one episode: its facts and the text of its episode.ts (plus any other text to scan). */
 export function checkEpisode(facts: FactEntry[], script: string, otherText = ''): Report {
@@ -68,7 +68,12 @@ function main(): void {
     const i18n = existsSync(i18nDir)
       ? readdirSync(i18nDir).map((file) => readFileSync(join(i18nDir, file), 'utf8')).join('\n')
       : '';
-    const report = checkEpisode(facts, readFileSync(scriptPath, 'utf8'), i18n);
+    const scripts = readdirSync(dir, { recursive: true })
+      .filter((file): file is string => typeof file === 'string')
+      .filter((file) => file.endsWith('.ts'))
+      .map((file) => readFileSync(join(dir, file), 'utf8'))
+      .join('\n');
+    const report = checkEpisode(facts, scripts, i18n);
     if (!existsSync(factsPath)) report.errors.push('facts.json is missing');
 
     console.log(`\n${id}: ${facts.length} facts`);

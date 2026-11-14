@@ -36,3 +36,23 @@ A "no" is a bug: fix it or write down why not.
 | Three languages | **Fail.** English only; Sinhala and Tamil episode text not written |
 
 Not checked on a real phone yet. The voice is the browser's text-to-speech until we record our own.
+
+## Apollo 11 / EASEP, 14 Nov 2026
+
+| Rule | Result |
+|---|---|
+| Pace | **Needs work.** Act 1 has a long narrated runway before the deployment game, and Act 2 is six read-through cards. Add a brief interaction just after wake-up and a player action on selected machine cards, keeping a meaningful action within 30–60 seconds. |
+| Text | **Needs review.** Several narration lines are longer than two short lines on a phone. Split long narration into short, source-linked beats and check the smallest supported viewport before release. |
+| Life | Pass on desktop: eye, camera, astronaut, surface, timeline, card-entry, night and shutdown motion accompany narration. Phone playback is not checked. |
+| Payoff | Pass: deployment responds with placement feedback; timeline markers update the scene and narration; the ending shows shutdown and patch payoff. |
+| Failure is funny | Pass for deployment: incorrect placement/heading gives an immediate retry message. Other acts have no fail state. |
+| Easy start | Pass for the deployment game itself: its two sliders and confirm can be completed in under 20 seconds. The story reaches it later than ideal. |
+| Scale to the child | **Needs work.** Terms such as uplink, telemetry, and MHz are not explained in child-sized language. Add short plain-language labels beside the technical facts. |
+| Wow | Eyes open on the Moon, then the powered-descent memory is replayed from the stationary EASEP's point of view. |
+| Emotional beat | EASEP's last "Goodnight, Earth" followed by the unacknowledged-command error and its silent memorial. |
+| No dead ends | Pass: the player Skip remains available; timeline has previous/next controls and a completion action. |
+| Real numbers | Pass: deployment uses the approximately 17 m distance; mass, radio frequencies and mission events are sourced facts. |
+| True | Pass: `npm run check:facts` reports 25 Apollo facts, zero errors and zero warnings. |
+| Three languages | **Fail for this expansion.** New Apollo narration and timeline strings are English-only; Sinhala and Tamil speakers must translate/review before release. |
+
+Not tested on a phone or with Sinhala/Tamil speakers. This is a desktop smoke-test result, not a release sign-off.

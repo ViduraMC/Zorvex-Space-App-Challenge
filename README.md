@@ -29,7 +29,8 @@ Node 22.18 or newer. `npm run build` makes the static site in `dist/`.
   lists them all.
 - **After a story:** a mission patch for your shelf, and "Look up tonight", which shows where Mars
   or the Moon is in your sky right now.
-- English, Sinhala and Tamil (English is complete first). Works with keyboard and touch.
+- English, Sinhala and Tamil interface; episode translations vary (Apollo 11 story text is
+  currently English-only). Works with keyboard and touch.
 
 ## Explorers and story owners
 
@@ -37,7 +38,7 @@ Node 22.18 or newer. `npm run build` makes the static site in `dist/`.
 |---|---|---|---|
 | Sojourner | Mars | Playable (pilot episode) | Vidura |
 | Opportunity | Mars | Not started | Vidura |
-| Apollo 11 descent stage | Moon | Not started | Vidura |
+| Apollo 11 descent stage | Moon | Four-act EASEP story in progress | Vidura |
 | Ingenuity | Mars | Not started | [TBD] |
 | Kepler | Deep space | Not started (no deep-space destination yet) | [TBD] |
 | Spirit, Viking 1, Viking 2, Phoenix, InSight | Mars | Placeholder page | [TBD] |
@@ -51,10 +52,20 @@ Node 22.18 or newer. `npm run build` makes the static site in `dist/`.
 - `docs/FUN_CHECKLIST.md`, `docs/FACTS_POLICY.md`, `docs/RESOURCES.md`, `docs/CREDITS.md`,
   `docs/AI_USAGE.md`, `docs/SUBMISSION.md`, `docs/PROGRESS.md`
 
+### Apollo 11 story testing
+
+The Apollo 11 episode is launched from its Moon explorer. For local act-by-act testing, use
+`?act=1`, `?act=2`, `?act=3`, or `?act=4` before the episode hash (for example,
+`http://localhost:5173/?act=3#ep-apollo-11-descent-stage`). Omit the query parameter to play
+the selected act and everything after it. Edit part and scene values in
+`src/episodes/apollo-11-descent-stage/storyData.ts`, timeline events in `timelineData.ts`,
+verified facts in `facts.json`, and narration/UI text in `i18n/en.json`.
+
 ## Data sources
 
-Only the challenge resources plus NASA 3D Resources. The full list, and where each item is used,
-is in `docs/RESOURCES.md` and on the in-app **Sources & about** page.
+The challenge resources and NASA 3D Resources, plus the two owner-approved Apollo 11 NASA pages
+for this episode. The full list, and where each item is used, is in `docs/RESOURCES.md` and on
+the in-app **Sources & about** page.
 
 ## Credits
 

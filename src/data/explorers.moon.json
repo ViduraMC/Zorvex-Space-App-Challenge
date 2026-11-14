@@ -19,6 +19,14 @@
       {
         "label": "NASA Space Apps 2026 challenge: Resources (descent stages left behind as launch pads)",
         "url": "https://www.spaceappschallenge.org/2026/challenges/nasas-discarded-equipment-storytelling/?tab=resources"
+      },
+      {
+        "label": "NASA NSSDCA: Apollo 11 Command and Service Module (approved story source)",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A"
+      },
+      {
+        "label": "NASA: Apollo 11 25th Anniversary (approved story source)",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html"
       }
     ]
   },

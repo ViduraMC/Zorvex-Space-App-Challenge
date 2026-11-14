@@ -9,6 +9,8 @@ Space Apps requires teams to disclose how AI was used. Add a row for everything 
 | 14 Nov 2026 | Vidura | Claude Code (Anthropic) | Looked up and quoted NASA sources for the first 22 Sojourner facts (later replaced) (`src/episodes/sojourner/facts.json`) | Each fact has its source URL; a person must re-read them before submission |
 | 14 Nov 2026 | Vidura | Claude Code (Anthropic) | Draft Sinhala and Tamil text for the shared buttons (`src/i18n/si.json`, `ta.json`) | **No.** A Sinhala and a Tamil speaker must review before release |
 | 14 Nov 2026 | Vidura | AI assistant | `docs/BUILD_GUIDE.md` (the journey specification) | Written with AI help; confirm how before submission |
+| 14 Nov 2026 | Vidura | Copilot SDK in VS Code | Apollo 11 Act 1 slice, EASEP deployment mini-game, and draft English, Sinhala and Tamil story text | NASA facts checked against the linked NSSDCA page; Sinhala and Tamil need speaker review |
+| 14 Nov 2026 | Vidura | Copilot SDK in VS Code | Expanded Apollo 11 story into four acts, including episode-local timeline interaction, scene effects, and English narration; added references to the two owner-approved NASA pages | Facts and sources were checked against the NASA pages listed in the episode and `docs/RESOURCES.md`; Sinhala and Tamil remain incomplete and need speaker review |
 
 ## What AI did not make
 

@@ -54,11 +54,16 @@ Not found on 3D Resources (we keep our own simple stand-in model): Sojourner, Ph
 Lunar Roving Vehicle, ALSEP and Surveyor. Checked: the Earth images there are a relief map and a
 photo, so we show no Earth globe.
 
-## 3. Other NASA data (flagged, to replace)
+## 3. Additional sources and flagged data
 
-| Data | Link | Why it is still here |
+The two Apollo 11 pages below are additional NASA sources, approved for this episode on
+14 Nov 2026. They are listed on the Sources page and in the Apollo explorer hologram.
+
+| Data | Link | Where it is used / status |
 |---|---|---|
-| CGI Moon Kit (LRO colour, LOLA elevation), NASA's Scientific Visualization Studio | <https://svs.gsfc.nasa.gov/4720> | The Moon globe. 3D Resources has no Moon colour map, only a printable model (12 MB STL). Decide: keep it, or use a plain grey Moon |
+| Apollo 11 Command and Service Module (NSSDCA) | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A> | Apollo 11 story: Columbia, launch and flight timeline, and return to Earth. Approved 14 Nov 2026 |
+| Apollo 11: 25th Anniversary (NASA) | <https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html> | Apollo 11 story: surface photographs, flag, samples, and the two timeline quotes. Approved 14 Nov 2026 |
+| CGI Moon Kit (LRO colour, LOLA elevation), NASA's Scientific Visualization Studio | <https://svs.gsfc.nasa.gov/4720> | The Moon globe. 3D Resources has no Moon colour map, only a printable model (12 MB STL); still flagged to replace |
 
 ## 4. Not data (code and fonts)
 
