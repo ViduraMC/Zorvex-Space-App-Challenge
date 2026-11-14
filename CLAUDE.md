@@ -64,7 +64,7 @@ Not a catalogue, not a quiz site. The child does what the real team did.
 
 `waypointDrive` (plan, send, wait out the signal delay), `directDrive` (joystick, real gravity),
 `holdToScan`, `findHidden`, `timingTap` (echo or dip), `balance` (hold or drag),
-`resourceManage`, `counterRace` (plan versus what really happened).
+`resourceManage`, `counterRace` (plan versus what really happened), `seismograph` (catch the shaking).
 Each one already has the goal line, tutorial hint, instant feedback, funny fail with instant
 retry, Skip and a win moment. **Real numbers become game numbers.**
 

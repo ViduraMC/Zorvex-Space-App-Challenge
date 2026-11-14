@@ -26,10 +26,10 @@ export const CHALLENGE_RESOURCES: Source[] = [
   { label: 'Sojourner Rover', url: 'https://science.nasa.gov/mission/mars-pathfinder/', usedFor: 'Mars explorer and the Sojourner story' },
   { label: 'Spirit & Opportunity', url: 'https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/', usedFor: 'Mars explorers: Spirit and Opportunity' },
   { label: 'Viking 1 & 2 Landers', url: 'https://science.nasa.gov/mission/viking-1/', usedFor: 'Mars explorers: Viking 1 and Viking 2' },
-  { label: 'Phoenix & InSight Landers', url: 'https://science.nasa.gov/mission/insight/', usedFor: 'Mars explorers: InSight (Phoenix dates from the NSSDCA catalogue)' },
+  { label: 'Phoenix & InSight Landers', url: 'https://science.nasa.gov/mission/insight/', usedFor: 'Mars explorer and the InSight story (Phoenix dates from the NSSDCA catalogue)' },
   { label: 'Dawn Spacecraft', url: 'https://science.nasa.gov/mission/dawn/', usedFor: 'Not used yet (deep space)' },
   { label: 'NEAR Shoemaker', url: 'https://science.nasa.gov/mission/near-shoemaker/', usedFor: 'Not used yet (deep space)' },
-  { label: 'Pioneer 10 & 11', url: 'https://science.nasa.gov/mission/pioneer-10/', usedFor: 'Not used yet (deep space)' },
+  { label: 'Pioneer 10 & 11', url: 'https://science.nasa.gov/mission/pioneer-10/', usedFor: 'The Pioneer 10 and 11 story (with its sister page for Pioneer 11)' },
   { label: 'Ingenuity Helicopter', url: 'https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/', usedFor: 'Mars explorer: Ingenuity' },
   { label: 'Kepler Space Telescope', url: 'https://science.nasa.gov/mission/kepler/', usedFor: 'Not used yet (deep space)' },
 ];
@@ -41,13 +41,14 @@ export const NASA_3D_RESOURCES: Source[] = [
 ];
 
 function modelUse(title: string): string {
-  if (title === 'Saturn V') return 'The rocket on the first screen';
+  if (title === 'Saturn V') return 'The rocket on the first screen and in the ALSEP story';
   if (title === 'Advanced Crew Escape Suit') return 'The young explorer in a spacesuit on the first screen';
   if (title.startsWith('Mars Exploration Rover')) return 'Spirit and Opportunity (identical twins) on Mars';
   if (title.startsWith('Viking')) return 'Viking 1 and Viking 2 on Mars';
   if (title.startsWith('InSight')) return 'InSight on Mars';
   if (title.startsWith('Ingenuity')) return 'Ingenuity on Mars';
-  return 'Apollo 11 descent stage on the Moon (lower half of the model only)';
+  if (title.startsWith('Pioneer')) return 'Pioneer 10 and its sister Pioneer 11 in the Pioneer story';
+  return 'Apollo 11 descent stage (lower half only) and Apollo 12 Intrepid on the Moon';
 }
 
 /** NASA pages named in the team's story briefs (docs/stories/). Facts may come from these too. */

@@ -1,12 +1,14 @@
 /**
- * Catch the moonquake: a seismometer line scrolls past; tap RECORD while it shakes.
- * NASA: the crashed Lunar Module made the first recorded artificial moonquake.
- * The bursts are the game's picture of one quake, not a measured trace.
+ * seismograph: a seismometer line scrolls past; tap RECORD while it shakes, and the whole scene
+ * jolts with each burst. For machines that listened to the ground (ALSEP, InSight).
+ * The bursts are the game's picture of shaking, not a measured trace.
  */
-import type { BaseGameConfig, MiniGame } from '../../../engine/play';
+import type { BaseGameConfig, MiniGame } from './kit';
 
-export interface QuakeConfig extends BaseGameConfig {
+export interface SeismographConfig extends BaseGameConfig {
   tapLabel: string;
+  /** Sound-effect word shown when the ground shakes. */
+  burstSfx: string;
   /** Message for a tap while the line is calm. */
   calmLabel: string;
   /** Toast for a good recording. */
@@ -22,7 +24,7 @@ const SHAKE_S = 2.2;
 /** How far the whole scene jolts at the peak of a burst (metres). */
 const JOLT = 0.06;
 
-const quake: MiniGame<QuakeConfig> = ({ ctx, scope, hud }, cfg) => {
+export const seismograph: MiniGame<SeismographConfig> = ({ ctx, scope, hud }, cfg) => {
   const { t, audio, comic, scene } = ctx;
   const canvas = scope.el('canvas', 'g-scope', hud.panel);
   canvas.width = W;
@@ -76,7 +78,7 @@ const quake: MiniGame<QuakeConfig> = ({ ctx, scope, hud }, cfg) => {
         bursts.push(clock);
         next = clock + SHAKE_S + 1.5 + Math.random() * 2.5;
         audio.play('thud');
-        comic.sfx(t('sfx.boom'));
+        comic.sfx(t(cfg.burstSfx));
       }
       const now = strength(clock);
       scene.position.set((Math.random() - 0.5) * JOLT * now, (Math.random() - 0.5) * JOLT * 0.5 * now, 0);
@@ -95,5 +97,3 @@ const quake: MiniGame<QuakeConfig> = ({ ctx, scope, hud }, cfg) => {
     });
   });
 };
-
-export default quake;

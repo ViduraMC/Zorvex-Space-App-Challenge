@@ -1,0 +1,5 @@
+{
+  "narrator": { "kokoro": "bm_lewis", "gender": "male", "speed": 0.95 },
+  "machine": { "kokoro": "am_puck", "gender": "male" },
+  "p11": { "kokoro": "af_bella", "gender": "female" }
+}
