@@ -51,8 +51,9 @@ Not a catalogue, not a quiz site. The child does what the real team did.
    Sinhala and Tamil). At most two short lines on screen.
 4. **Design values** come from tokens in `src/styles/tokens.css`; product values from `src/config.ts`.
 5. Every cutscene can be skipped and respects reduced motion. Every control works by keyboard and touch.
-6. **Cost:** free tiers only. AI calls (phase 2) go through serverless functions with a small,
-   cheap model; the key lives in `ANTHROPIC_API_KEY`, never in the client.
+6. **Cost:** free tiers and the Space Apps Global Offers only (Google Cloud credit, GoDaddy Registry domain
+   and hosting). The AI chat runs on our server (server/ask) with a small Gemini model; the key lives
+   in `GEMINI_API_KEY` on the server, never in the client.
 7. **AI-use log:** add a line to `docs/AI_USAGE.md` for anything AI helped make. AI images need a
    visible watermark and must not contain NASA logos.
 8. **Git:** small commits with Conventional Commit messages; `main` always deployable; work on
@@ -85,3 +86,4 @@ Feature freeze Sunday 15 Nov 15:00. We submit by 21:00. Official deadline 23:59.
 - Facts only from the challenge resources and the NASA pages in our story briefs; models and images may come from other free sources when NASA has none (see "Data sources" above). (Vidura, 14 Nov 2026)
 - Product name: **The Abandoned Explorers**; tagline: **Abandoned but not Forgotten.** (Vidura, 14 Nov 2026)
 - When teammates' story branches are merged, review them with the checklist in CONTRIBUTING.md and fix what is wrong. (Vidura, 14 Nov 2026)
+- No paid tiers. Use only free tiers and the Space Apps Global Offers (they also earn points). (Vidura, 15 Nov 2026)

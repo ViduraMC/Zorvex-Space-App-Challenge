@@ -1,0 +1,737 @@
+{
+ "alsep-apollo-12": {
+  "name": "ALSEP",
+  "facts": [
+   {
+    "id": "landing",
+    "text": "The Apollo 12 Lunar Module Intrepid landed on 19 November 1969 in Oceanus Procellarum at 3.0128° S, 23.4219° W, within about 180 m of the Surveyor 3 spacecraft.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "crew",
+    "text": "Intrepid carried Commander Charles P. \"Pete\" Conrad and Lunar Module pilot Alan L. Bean, the third and fourth men to walk on the Moon. Richard F. Gordon Jr. piloted the Command/Service Module in orbit.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "carried",
+    "text": "The ALSEP, a set of scientific experiments to be deployed and left on the lunar surface, was carried on the Lunar Module. Apollo 12 launched on a Saturn 5 from Cape Canaveral on 14 November 1969.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "snap-27",
+    "text": "The SNAP-27 RTG powered the ALSEP. The astronauts placed an approximately 4 kg plutonium-238 fuel capsule into it on deployment; its heat was turned directly into about 70 W of electricity.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "central-station",
+    "text": "The instruments were arrayed around a 25 kg central station that supplied power and relayed their data to Earth through a 58 cm antenna pointed at Earth by the astronauts. ALSEP was controlled by commands from Earth.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "six-instruments",
+    "text": "The Apollo 12 ALSEP had six instruments: a passive seismometer, a suprathermal ion detector, a cold cathode ion gauge, a lunar dust detector, a lunar surface magnetometer and a solar wind spectrometer, all attached to the central station by cables.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "seismometer",
+    "text": "The passive seismometer was designed to measure seismic activity and the physical properties of the lunar crust and interior.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "magnetometer",
+    "text": "The lunar surface magnetometer was designed to measure the magnetic field at the lunar surface.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "solar-wind",
+    "text": "The solar wind spectrometer measured the electrons and protons that come from the Sun and reach the lunar surface.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "ion-gauge",
+    "text": "The cold cathode ion gauge was designed to measure the Moon's atmosphere and how it changes with time or solar activity.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "dust",
+    "text": "The lunar dust detector measured dust accumulation, radiation damage to solar cells, and reflected infrared energy and temperatures.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "ion-detector",
+    "text": "The suprathermal ion detector was designed to measure the flux, composition, energy and velocity of low-energy positive ions.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "alsep-on",
+    "text": "The central station, at 3.0094° S, 23.4246° W, was turned on at 14:21 UT on 19 November 1969.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "tv-camera",
+    "text": "During the first moonwalk the TV camera was accidentally pointed towards the Sun while it was being set up; its vidicon tube was damaged and the camera stopped working.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "surveyor-3",
+    "text": "Surveyor 3 launched on 17 April 1967, landed on the Moon on 20 April 1967 and was last contacted on 4 May 1967.",
+    "source": "https://science.nasa.gov/mission/surveyor-3/"
+   },
+   {
+    "id": "surveyor-visit",
+    "text": "On their second moonwalk Conrad and Bean visited Surveyor 3 and brought back about 10 kg of parts, including its soil scoop and camera system, so scientists could study what nearly two and a half years on the Moon had done to them.",
+    "source": "https://science.nasa.gov/mission/surveyor-3/"
+   },
+   {
+    "id": "liftoff",
+    "text": "The Lunar Module lifted off on 20 November 1969 at 14:25:47 UT after 31 hours 31 minutes on the Moon. The descent stage served as its launch platform and was left behind on the Moon.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "moonquake",
+    "text": "After docking with the Command/Service Module, the empty Lunar Module was jettisoned and intentionally crashed into the Moon about 60 km from the seismic station at the landing site, creating the first recorded artificial moonquake.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "rtg-decay",
+    "text": "Plutonium-238 decays with a half-life of 89.6 years. The RTG produced about 70 W, and 63.5 W after one year.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "watch-length",
+    "text": "The ALSEP was turned on on 19 November 1969 and shut down on 30 September 1977: 2,872 days, or 68,928 hours (our count from the two dates on the page).",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   },
+   {
+    "id": "alsep-shutdown",
+    "text": "The Apollo 12 ALSEP was shut down along with the other ALSEP stations on 30 September 1977.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+   }
+  ]
+ },
+ "apollo-11-descent-stage": {
+  "name": "EASEP",
+  "facts": [
+   {
+    "id": "stowed-instruments",
+    "text": "The Apollo 11 Lunar Module descent stage contained storage space for lunar equipment and experiments.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "deployment",
+    "text": "EASEP was deployed approximately 17 m south of the Lunar Module before it was turned on by ground command.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "power-on",
+    "text": "EASEP was turned on by ground command at 04:40:39 UT on 21 July 1969 while the astronauts were still on the lunar surface.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "solar-power",
+    "text": "EASEP had two solar panels that provided power, and it could operate only during lunar day. The panels faced east and west.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "astronaut-return",
+    "text": "Aldrin returned to the Lunar Module first. Armstrong followed at 05:09:32 UT after transferring sample boxes to Aldrin and placing a packet of memorial items on the ground.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "hatch-closed",
+    "text": "The extravehicular activity ended at 05:11:13 UT when the Lunar Module hatch was closed.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "flight-profile",
+    "text": "Apollo 11 launched on 16 July 1969, entered Earth orbit, used the S-IVB for translunar injection, docked Columbia with Eagle, coasted to the Moon, entered lunar orbit, and returned to Earth.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A"
+   },
+   {
+    "id": "launch-vehicle",
+    "text": "Apollo 11 launched on a Saturn V from Kennedy Space Center at 13:32 UT on 16 July 1969. The S-IVB translunar injection burn lasted 5 minutes 48 seconds.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A"
+   },
+   {
+    "id": "columbia-orbiter",
+    "text": "The Command and Service Module mass was 28,801 kg; the Service Module main engine thrust was about 91,000 N. Columbia remained in lunar orbit while Eagle was on the surface and returned the crew to Earth.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A"
+   },
+   {
+    "id": "eagle-ascent",
+    "text": "The Lunar Module ascent stage had a dry mass of 2,445 kg, carried 2,376 kg of propellant, was about 2.8 m high, had a 6.65 m3 crew compartment with no seats, used an ascent engine with about 15,000 N thrust, and lifted off on 21 July 1969.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "eagle-descent",
+    "text": "The Lunar Module descent stage was 4.2 m across and 1.7 m thick; its four landing legs held it 1.5 m above the surface with 9.4 m between opposite footpads. Its descent engine could throttle down for landing, and the stage remained on the Moon.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "surface-work",
+    "text": "The astronauts collected 21.55 kg of lunar rock and soil and traversed about 250 m on the lunar surface.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "surface-media",
+    "text": "The Apollo 11 astronauts deployed a flag and a lunar surface television camera, spoke with the U.S. President by radio, unveiled a plaque mounted on a strut, and took a photograph reflecting the photographer and Lunar Module in an astronaut's visor.",
+    "source": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html"
+   },
+   {
+    "id": "easep-instruments",
+    "text": "EASEP had a mass of 48 kg, two solar panels, a passive seismometer, a lunar dust detector, and an antenna and communications system. It received commands at 2119 MHz, sent telemetry at 2276.5 MHz, and was a forerunner of later ALSEP packages.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "retroreflector",
+    "text": "The laser ranging retroreflector was considered part of EASEP, was not attached to the station, required no power, and was deployed about 5 m north-northwest of EASEP.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "powered-descent",
+    "text": "Powered descent began at 20:05 UT on 20 July 1969 and lasted 756.3 seconds.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "landing",
+    "text": "The Lunar Module landed in the Sea of Tranquility at 20:17:40 UT on 20 July 1969.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "first-step",
+    "text": "Armstrong stepped onto the lunar surface at 02:56:15 UT on 21 July 1969; Aldrin followed 19 minutes later. This was more than six hours after landing.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "timeline-quotes",
+    "text": "NASA's Apollo 11 anniversary page records Collins saying, \"You cats take it easy on the lunar surface,\" and the landing call, \"The Eagle has landed.\"",
+    "source": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html"
+   },
+   {
+    "id": "eagle-liftoff",
+    "text": "The Lunar Module ascent stage lifted off at 17:54:01 UT on 21 July after 21 hours 36 minutes on the lunar surface, docked with Columbia, and was jettisoned into lunar orbit.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "flag-fall",
+    "text": "The flag was knocked over when the Lunar Module lifted off, and after docking the lunar samples were brought aboard the Command Module.",
+    "source": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html"
+   },
+   {
+    "id": "splashdown",
+    "text": "Apollo 11 splashed down in the Pacific Ocean at 16:50:35 UT on 24 July 1969.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A"
+   },
+   {
+    "id": "easep-operation",
+    "text": "EASEP transmission stopped by ground command about five hours before lunar sunset on 3 August 1969. It was turned on again the next lunar day.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "terminal-failure",
+    "text": "EASEP operated normally despite temperatures 30 C above its planned maximum; near noon of its second lunar day on 27 August 1969, it no longer accepted commands and the experiment was terminated.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+   },
+   {
+    "id": "footprints",
+    "text": "The Apollo 11 astronauts' lunar footprints may last millions of years barring a chance meteorite impact.",
+    "source": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html"
+   }
+  ]
+ },
+ "insight": {
+  "name": "InSight",
+  "facts": [
+   {
+    "id": "launch",
+    "text": "InSight launched on 5 May 2018 on an Atlas V-401 from Vandenberg Air Force Base, California.",
+    "source": "https://science.nasa.gov/mission/insight/"
+   },
+   {
+    "id": "marco",
+    "text": "The rocket that launched InSight also launched two briefcase-sized CubeSats called Mars Cube One, or MarCO, which flew on their own path to Mars behind InSight.",
+    "source": "https://science.nasa.gov/mission/insight/"
+   },
+   {
+    "id": "landing",
+    "text": "InSight landed on 26 November 2018 on Elysium Planitia, a flat, smooth plain near Mars' equator, chosen for safety rather than for its surface features.",
+    "source": "https://science.nasa.gov/mission/insight/"
+   },
+   {
+    "id": "purpose",
+    "text": "InSight studied the deep interior of Mars and was designed to take the planet's vital signs: its pulse, temperature and reflexes.",
+    "source": "https://science.nasa.gov/mission/insight/"
+   },
+   {
+    "id": "first-interior",
+    "text": "InSight was the first mission dedicated to investigating the deep interior of Mars. Its three main instruments were SEIS, HP3 and RISE.",
+    "source": "https://science.nasa.gov/mission/insight/science-instruments/"
+   },
+   {
+    "id": "seis",
+    "text": "SEIS, the seismometer, was a round, dome-shaped instrument that sat on the Martian surface under a domed Wind and Thermal Shield and waited for seismic waves from marsquakes and the thumps of meteorite impacts.",
+    "source": "https://science.nasa.gov/mission/insight/science-instruments/"
+   },
+   {
+    "id": "seis-specs",
+    "text": "SEIS used up to 8.5 watts and returned 38 megabits of data per day.",
+    "source": "https://science.nasa.gov/mission/insight/science-instruments/"
+   },
+   {
+    "id": "wind",
+    "text": "InSight's sensors captured the low rumble of Martian wind, estimated at 5 to 7 metres a second, on 1 December 2018.",
+    "source": "https://science.nasa.gov/mission/insight/"
+   },
+   {
+    "id": "hp3",
+    "text": "HP3, the heat probe, was designed to burrow almost 5 m into Mars to measure the heat flowing out of the planet. The arm placed it on the surface; its mole hammered itself in but met different soil than expected and could not reach the planned depth.",
+    "source": "https://science.nasa.gov/mission/insight/science-instruments/"
+   },
+   {
+    "id": "rise",
+    "text": "RISE tracked the lander's position precisely to measure how much Mars' north pole wobbles, revealing the size and composition of Mars' iron-rich core.",
+    "source": "https://science.nasa.gov/mission/insight/science-instruments/"
+   },
+   {
+    "id": "end",
+    "text": "InSight's mission ended on 15 December 2022.",
+    "source": "https://science.nasa.gov/mission/insight/"
+   }
+  ]
+ },
+ "pioneer": {
+  "name": "Pioneer 10",
+  "facts": [
+   {
+    "id": "first-mission",
+    "text": "Pioneer 10 was NASA's first mission to the outer planets. Originally designed for a 21-month mission to fly by Jupiter, it lasted more than 30 years.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "weight",
+    "text": "Pioneer 10 had a spacecraft mass of 258 kg (569 pounds); its sister Pioneer 11 had 258.5 kg.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "p10-instruments",
+    "text": "Pioneer 10 had 11 scientific instruments, including a magnetometer, a plasma analyzer, cosmic ray and radiation detectors and meteoroid detectors.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "p11-instruments",
+    "text": "Pioneer 11 carried 12 scientific instruments: the same kinds as Pioneer 10 plus a triaxial fluxgate magnetometer.",
+    "source": "https://science.nasa.gov/mission/pioneer-11/"
+   },
+   {
+    "id": "rtg-power",
+    "text": "Pioneer 10 was the first spacecraft to use all-nuclear electrical power: SNAP-19 radioisotope thermal generators (RTGs) delivering about 140 W during the Jupiter encounter.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "rtg-booms",
+    "text": "The RTGs were mounted on booms; on Pioneer 11 one of the RTG booms momentarily failed to deploy, without endangering the mission.",
+    "source": "https://science.nasa.gov/mission/pioneer-11/"
+   },
+   {
+    "id": "p10-launch",
+    "text": "Pioneer 10 launched on 2 March 1972 at 01:49:04 UT from Launch Complex 36A, Cape Canaveral, on an Atlas Centaur.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "p11-launch",
+    "text": "Pioneer 11 launched on 6 April 1973 at 02:11 UT from Launch Complex 36B, Cape Canaveral.",
+    "source": "https://science.nasa.gov/mission/pioneer-11/"
+   },
+   {
+    "id": "first-belt",
+    "text": "Pioneer 10 was the first spacecraft to fly through the main asteroid belt. It entered the belt on 15 July 1972 and emerged in February 1973, after about 435 million km.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "belt-safe",
+    "text": "In the asteroid belt Pioneer 10 encountered some asteroid hits, although fewer than expected.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "p10-jupiter",
+    "text": "Pioneer 10 made its closest approach to Jupiter at 02:26 UT on 4 December 1973, at a range of 130,354 km and a speed of about 126,000 km/h.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "first-jupiter",
+    "text": "Pioneer 10 was the first spacecraft to fly past Jupiter. Between 6 November and 31 December 1973 it took about 500 pictures of Jupiter's atmosphere, clearly showing the Great Red Spot.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "jupiter-radiation",
+    "text": "Pioneer 10 fulfilled all objectives except one, because of false commands triggered by Jupiter's intense radiation; its photopolarimeter succumbed to radiation before it could photograph Io.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "ganymede",
+    "text": "Pioneer 10 was the first spacecraft to obtain close-up images of Jupiter's moon Ganymede.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "p11-jupiter",
+    "text": "Pioneer 11's closest approach to Jupiter was at 05:22 UT on 3 December 1974, about 42,500 km from the cloud tops: three times closer than Pioneer 10.",
+    "source": "https://science.nasa.gov/mission/pioneer-11/"
+   },
+   {
+    "id": "gravity-assist",
+    "text": "Pioneer 11 used Jupiter's massive gravitational field to swing back across the solar system on a course to Saturn.",
+    "source": "https://science.nasa.gov/mission/pioneer-11/"
+   },
+   {
+    "id": "p11-saturn",
+    "text": "Pioneer 11 was the first spacecraft to fly by Saturn. It crossed the ring plane beyond the outer ring at 14:36 UT on 1 September 1979 and passed the planet at about 20,900 km.",
+    "source": "https://science.nasa.gov/mission/pioneer-11/"
+   },
+   {
+    "id": "saturn-images",
+    "text": "During the Saturn encounter Pioneer 11 took 440 images of the planetary system.",
+    "source": "https://science.nasa.gov/mission/pioneer-11/"
+   },
+   {
+    "id": "f-ring",
+    "text": "Among Pioneer 11's discoveries were a narrow ring outside the A ring, named the F ring, and a new satellite 200 km in diameter.",
+    "source": "https://science.nasa.gov/mission/pioneer-11/"
+   },
+   {
+    "id": "titan-temp",
+    "text": "A brief burst of data showed that the average global temperature of Saturn's moon Titan was minus 193 degrees Celsius.",
+    "source": "https://science.nasa.gov/mission/pioneer-11/"
+   },
+   {
+    "id": "saturn-magfield",
+    "text": "Pioneer 11 detected Saturn's bow shock about 1.5 million km from the planet, the first conclusive evidence that Saturn has a magnetic field.",
+    "source": "https://science.nasa.gov/mission/pioneer-11/"
+   },
+   {
+    "id": "p10-neptune",
+    "text": "On 13 June 1983 Pioneer 10 crossed the orbit of Neptune, then the outermost planet, becoming the first human-made object to go beyond the furthest planet.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "p11-neptune",
+    "text": "Pioneer 11 crossed the orbit of Neptune on 23 February 1990.",
+    "source": "https://science.nasa.gov/mission/pioneer-11/"
+   },
+   {
+    "id": "p10-routine",
+    "text": "Routine contact with Pioneer 10 ended on 31 March 1997, at 67 AU from Earth, for budgetary reasons. Intermittent contact continued.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "p10-last-signal",
+    "text": "Pioneer 10 sent its last signal on 23 January 2003 from 12.23 billion km away. The signal took 11 hours and 20 minutes to reach Earth.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "p10-final-search",
+    "text": "Pioneer 10's RTG power had decayed and could no longer power its radio transmitter. A final attempt to contact it on 4 March 2006 failed.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "p11-last-contact",
+    "text": "NASA Ames Research Center made last contact with Pioneer 11 on 30 September 1995, when it was 44.1 AU from Earth.",
+    "source": "https://science.nasa.gov/mission/pioneer-11/"
+   },
+   {
+    "id": "p11-last-data",
+    "text": "Scientists received a few minutes of good engineering data from Pioneer 11 on 24 November 1995, then lost contact once Earth moved out of view of its antenna.",
+    "source": "https://science.nasa.gov/mission/pioneer-11/"
+   },
+   {
+    "id": "plaque",
+    "text": "Pioneers 10 and 11 both carry small metal plaques identifying their time and place of origin. The golden plaque was the idea of Carl Sagan.",
+    "source": "https://science.nasa.gov/mission/pioneer-11/"
+   },
+   {
+    "id": "plaque-contents",
+    "text": "The plaque shows a man and a woman, the solar system, and the spacecraft's location relative to 14 pulsars, so the position of the Sun could be worked out.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "p10-heading",
+    "text": "Pioneer 10 is heading in the direction of the red star Aldebaran, the eye of Taurus, and is expected to pass by it in about two million years.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   },
+   {
+    "id": "p11-heading",
+    "text": "Pioneer 11 will pass near the star Lambda Aquila in almost four million years.",
+    "source": "https://science.nasa.gov/mission/pioneer-11/"
+   },
+   {
+    "id": "still-travelling",
+    "text": "Both Pioneers are on trajectories out of the solar system. By 5 November 2017 Pioneer 10 was about 17.7 billion km from Earth and Pioneer 11 about 14.6 billion km.",
+    "source": "https://science.nasa.gov/mission/pioneer-10/"
+   }
+  ]
+ },
+ "sojourner": {
+  "name": "Sojourner",
+  "facts": [
+   {
+    "id": "landing",
+    "text": "Mars Pathfinder landed in Ares Vallis, Mars, on 4 July 1997, carrying the Sojourner rover.",
+    "source": "https://science.nasa.gov/mission/mars-pathfinder/"
+   },
+   {
+    "id": "bounces",
+    "text": "Cushioned by airbags 5.8 metres across, Pathfinder bounced like a giant beach ball about 15 times, as high as 15 metres (50 feet), before coming to rest.",
+    "source": "https://science.nasa.gov/mission/mars-pathfinder/"
+   },
+   {
+    "id": "petals",
+    "text": "Pathfinder opened its three triangular solar-panel petals 87 minutes after landing.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A"
+   },
+   {
+    "id": "size",
+    "text": "Sojourner was 630 mm long, 480 mm wide and 280 mm high, with a mass of 10.5 kg. Standing at its full height it was 30 cm tall.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=MESURPR"
+   },
+   {
+    "id": "first-rover",
+    "text": "Mars Pathfinder delivered the first-ever robotic rover, Sojourner, to the Martian surface. Late on sol 2 it rolled down the lander's rear ramp.",
+    "source": "https://science.nasa.gov/mission/mars-pathfinder/"
+   },
+   {
+    "id": "delay",
+    "text": "The time delay between Earth and Mars was about 10 minutes, so the rover needed some control of its own.",
+    "source": "https://nssdc.gsfc.nasa.gov/planetary/mesur.html"
+   },
+   {
+    "id": "commanded",
+    "text": "The rover was controlled by an operator on Earth using images from the rover and the lander; because of the delay it also had its own hazard avoidance system.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=MESURPR"
+   },
+   {
+    "id": "rock-names",
+    "text": "The team's rock names included Barnacle Bill, Yogi and Scooby Doo.",
+    "source": "https://nssdc.gsfc.nasa.gov/planetary/marspath_results.html"
+   },
+   {
+    "id": "apxs",
+    "text": "Sojourner's Alpha Proton X-ray Spectrometer (APXS) measured what rocks and soils are made of. The mission returned more than 15 chemical analyses of rocks and soil.",
+    "source": "https://science.nasa.gov/mission/mars-pathfinder/"
+   },
+   {
+    "id": "barnacle-bill",
+    "text": "Barnacle Bill and Yogi (corrected for dust) plot in or near the field of andesites, a type of lava common at continental margins on Earth.",
+    "source": "https://nssdc.gsfc.nasa.gov/planetary/marspath/apxs.html"
+   },
+   {
+    "id": "yogi",
+    "text": "Yogi first appeared to be basalt, but it is covered with dust; with the dust subtracted, its composition is similar to Barnacle Bill's.",
+    "source": "https://nssdc.gsfc.nasa.gov/planetary/marspath_results.html"
+   },
+   {
+    "id": "scooby-doo",
+    "text": "The APXS analysis of Scooby-Doo shows only minor differences from the local soils.",
+    "source": "https://nssdc.gsfc.nasa.gov/planetary/marspath_results.html"
+   },
+   {
+    "id": "pebbles",
+    "text": "Rounded pebbles and cobbles at the landing site suggested conglomerates that formed in running water, during a warmer past when liquid water was stable.",
+    "source": "https://science.nasa.gov/mission/mars-pathfinder/"
+   },
+   {
+    "id": "lifetime",
+    "text": "The rover's primary objectives were scheduled for the first seven sols. It rolled onto Mars at about 05:40 UT on 6 July 1997 and worked until communications were lost on 27 September 1997: 83 days (our count from those two dates).",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=MESURPR"
+   },
+   {
+    "id": "near-lander",
+    "text": "The primary objectives were all planned within about 10 metres of the lander.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=MESURPR"
+   },
+   {
+    "id": "last-contact",
+    "text": "Pathfinder's final data transmission was on 27 September 1997. Communications were lost for unknown reasons.",
+    "source": "https://science.nasa.gov/mission/mars-pathfinder/"
+   },
+   {
+    "id": "relay",
+    "text": "All rover communications were done through the lander, over a UHF radio link.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=MESURPR"
+   },
+   {
+    "id": "successors",
+    "text": "The twin rovers Spirit and Opportunity landed on Mars in 2004; the Ingenuity helicopter made the first powered flight on another planet on 19 April 2021.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+   },
+   {
+    "id": "still-there",
+    "text": "Mars Pathfinder's landing site, and the place its mission ended, is Ares Vallis.",
+    "source": "https://science.nasa.gov/mission/mars-pathfinder/"
+   }
+  ]
+ },
+ "viking": {
+  "name": "Viking 1",
+  "facts": [
+   {
+    "id": "pairs",
+    "text": "NASA's Viking mission was two spacecraft, Viking 1 and Viking 2, each made of an orbiter and a lander. Each orbiter-lander pair flew together and entered Mars orbit; then the landers separated and descended.",
+    "source": "https://science.nasa.gov/mission/viking/spacecraft-and-science/"
+   },
+   {
+    "id": "objectives",
+    "text": "The primary mission objectives were to obtain high-resolution images of the Martian surface, characterize the atmosphere and surface, and search for evidence of life.",
+    "source": "https://science.nasa.gov/mission/viking/spacecraft-and-science/"
+   },
+   {
+    "id": "launch-site",
+    "text": "Both Vikings launched from Cape Canaveral, Florida, Launch Complex 41, on Titan IIIE-Centaur rockets.",
+    "source": "https://science.nasa.gov/mission/viking-1/"
+   },
+   {
+    "id": "swap",
+    "text": "The Viking-A spacecraft was scheduled to launch first, but a problem with its batteries meant it launched second. It was renamed Viking 2.",
+    "source": "https://science.nasa.gov/mission/viking-2/"
+   },
+   {
+    "id": "launch-1",
+    "text": "Viking 1 launched on 20 August 1975.",
+    "source": "https://science.nasa.gov/mission/viking-1/"
+   },
+   {
+    "id": "launch-2",
+    "text": "Viking 2 launched on 9 September 1975.",
+    "source": "https://science.nasa.gov/mission/viking-2/"
+   },
+   {
+    "id": "corrections",
+    "text": "Viking 1 made three course corrections: 27 August 1975, 10 June 1976 and 15 June 1976. Viking 2 made a course correction on 19 September 1975.",
+    "source": "https://science.nasa.gov/mission/viking-1/"
+   },
+   {
+    "id": "arrival",
+    "text": "Viking 1 entered orbit around Mars on 19 June 1976. Viking 2 entered orbit on 7 August 1976, almost 11 months after launch.",
+    "source": "https://science.nasa.gov/mission/viking-2/"
+   },
+   {
+    "id": "orbiter-role",
+    "text": "The orbiters carried the landers to Mars, photographed and certified landing sites, relayed the landers' messages, and did their own science. Each was an octagon about 2.5 metres across, powered by 8 solar panels with 34,800 solar cells giving 620 watts at Mars.",
+    "source": "https://science.nasa.gov/mission/viking/spacecraft-and-science/"
+   },
+   {
+    "id": "rough-site",
+    "text": "Orbiter photos showed that Viking 1's primary landing site in the Chryse region was rougher than expected, so scientists targeted the western slopes of Chryse Planitia instead. The lander came down about 28 kilometres from its planned target.",
+    "source": "https://science.nasa.gov/mission/viking-1/"
+   },
+   {
+    "id": "descent",
+    "text": "After separating from the orbiter, the lander's aeroshell and heat shield slowed it in the atmosphere. At 6 km altitude and about 250 m/s a 16-metre parachute opened and in 45 seconds slowed it to 60 m/s. Then the aeroshell was dropped, the three legs came out, and three hydrazine engines made the final descent.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C"
+   },
+   {
+    "id": "air-samples",
+    "text": "During its complicated atmospheric entry, the Viking 1 lander took samples of the air.",
+    "source": "https://science.nasa.gov/mission/viking-1/"
+   },
+   {
+    "id": "landing-1",
+    "text": "On 20 July 1976 Viking 1's lander touched down on the western slope of Chryse Planitia (the Plains of Gold). It was the first truly successful landing on Mars and the first U.S. landing there. The Soviet Mars 3 lander had landed in 1971, but contact was lost seconds after touchdown.",
+    "source": "https://science.nasa.gov/mission/viking-1/"
+   },
+   {
+    "id": "signal-time",
+    "text": "The radio signal confirming Viking 1's landing took 19 more minutes to travel the 212 million miles to Earth. The landing was on the seventh anniversary of the Apollo 11 Moon landing.",
+    "source": "https://science.nasa.gov/mission/viking/viking-50-years-on-mars/"
+   },
+   {
+    "id": "first-image",
+    "text": "Viking 1 was programmed to take an image 25 seconds after touchdown: a view looking down at its footpad, the first photograph ever taken from the surface of Mars.",
+    "source": "https://science.nasa.gov/mission/viking/viking-50-years-on-mars/"
+   },
+   {
+    "id": "lander-body",
+    "text": "Each lander was a six-sided aluminium base on three legs. Two radioisotope thermoelectric generators (RTGs) containing plutonium-238 gave it power; the orbiters were solar-powered.",
+    "source": "https://science.nasa.gov/mission/viking/spacecraft-and-science/"
+   },
+   {
+    "id": "sampler",
+    "text": "The sampler arm had a collector head, a temperature sensor and a magnet. On 28 July 1976 Viking 1's robot arm scooped up its first soil samples and put them into its biology laboratory, which included a gas chromatograph mass spectrometer.",
+    "source": "https://science.nasa.gov/mission/viking-1/"
+   },
+   {
+    "id": "biology",
+    "text": "The landers ran three biology experiments (Labeled Release, Gas Exchange and Pyrolytic Release). They found unexpected and enigmatic chemical activity in the soil, but no definitive evidence of living microorganisms near the landing sites.",
+    "source": "https://science.nasa.gov/astrobiology/missions/viking-project/"
+   },
+   {
+    "id": "first-life-search",
+    "text": "Viking was NASA's first attempt to search for life on another planet.",
+    "source": "https://science.nasa.gov/astrobiology/missions/viking-project/"
+   },
+   {
+    "id": "soil",
+    "text": "Viking showed that the Martian surface is a type of iron-rich clay containing a highly oxidizing substance that releases oxygen when it is wetted. No organic molecules were detected at the parts-per-billion level.",
+    "source": "https://science.nasa.gov/astrobiology/missions/viking-project/"
+   },
+   {
+    "id": "weather",
+    "text": "A meteorology boom on one lander leg held temperature, wind direction and wind velocity sensors.",
+    "source": "https://science.nasa.gov/mission/viking/spacecraft-and-science/"
+   },
+   {
+    "id": "landing-2",
+    "text": "Viking 2's lander touched down on 3 September 1976 at Utopia Planitia, about 6,460 km from Viking 1. Its site was rockier and flatter, and the lander was tilted 8.5 degrees to the west.",
+    "source": "https://science.nasa.gov/mission/viking-2/"
+   },
+   {
+    "id": "images",
+    "text": "The two orbiters returned 52,663 images of Mars and mapped about 97 percent of the surface at about 300 metres resolution. The landers returned 4,500 photos of the two landing sites.",
+    "source": "https://science.nasa.gov/mission/viking-1/"
+   },
+   {
+    "id": "valles",
+    "text": "A global mosaic made from Viking 1 Orbiter images shows the Valles Marineris canyon system, more than 3,000 km long, 600 km wide and 8 km deep.",
+    "source": "https://science.nasa.gov/astrobiology/missions/viking-project/"
+   },
+   {
+    "id": "primary-mission",
+    "text": "The primary mission of both Vikings ended in November 1976. Work continued in the Extended Mission (November 1976 to May 1978) and the Continuation Mission (May 1978 to July 1979).",
+    "source": "https://science.nasa.gov/mission/viking-1/"
+   },
+   {
+    "id": "v2-orbiter-end",
+    "text": "Viking 2's orbiter operations ended in July 1978 after 706 orbits. NASA's Viking 2 page gives 24 July; the Spacecraft and Science page gives 25 July.",
+    "source": "https://science.nasa.gov/mission/viking-2/"
+   },
+   {
+    "id": "v1-orbiter-end",
+    "text": "Viking 1's orbiter was shut down on 7 August 1980, after it ran out of attitude-control propellant on its 1,489th orbit around Mars.",
+    "source": "https://science.nasa.gov/mission/viking-1/"
+   },
+   {
+    "id": "v2-lander-end",
+    "text": "The last data from Viking 2's lander arrived on 11 April 1980; NASA's Viking 2 page lists 12 April 1980 as the end of the lander mission.",
+    "source": "https://science.nasa.gov/astrobiology/missions/viking-project/"
+   },
+   {
+    "id": "v1-lander-end",
+    "text": "On 11 November 1982 a faulty command sent from Earth interrupted communications with Viking 1's lander. NASA gives 13 November 1982 as its end of mission. It worked the longest.",
+    "source": "https://science.nasa.gov/mission/viking-1/"
+   },
+   {
+    "id": "memorials",
+    "text": "In January 1982 Viking 1's lander was renamed the Thomas Mutch Memorial Station, after the leader of the imaging team. In July 2001 Viking 2's lander was renamed the Gerald Soffen Memorial Station, after the Viking Project Scientist.",
+    "source": "https://science.nasa.gov/mission/viking-2/"
+   },
+   {
+    "id": "panorama",
+    "text": "Viking 1's cameras returned the first panoramic views ever taken from the surface of Mars, showing Chryse Planitia in July 1976 (camera 2 on 20 July, camera 1 on 23 July).",
+    "source": "https://science.nasa.gov/mission/viking/viking-50-years-on-mars/"
+   },
+   {
+    "id": "cameras",
+    "text": "Each lander had two 360-degree cylindrical scan cameras mounted near one long side of its base.",
+    "source": "https://science.nasa.gov/mission/viking/spacecraft-and-science/"
+   }
+  ]
+ }
+}

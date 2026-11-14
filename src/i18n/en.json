@@ -251,5 +251,7 @@
   "ui.ask.q.found": "What did you discover?",
   "ui.ask.q.power": "Where did your power come from?",
   "ui.ask.q.end": "How did your mission end?",
-  "ui.ask.q.size": "How big are you?"
+  "ui.ask.q.size": "How big are you?",
+  "ui.ask.thinking": "Thinking…",
+  "ui.ask.placeholderAi": "Type a question…"
 }
