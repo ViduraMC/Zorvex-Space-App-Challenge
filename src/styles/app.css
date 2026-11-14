@@ -299,3 +299,9 @@ h2.section {
     animation: none;
   }
 }
+
+/* Sinhala and Tamil letters join vowel signs to consonants; spacing letters apart breaks words */
+html:lang(si) *,
+html:lang(ta) * {
+  letter-spacing: normal !important;
+}

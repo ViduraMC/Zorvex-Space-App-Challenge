@@ -15,7 +15,7 @@ import { Renderer } from '../engine/renderer';
 import { go, type Page } from '../engine/router';
 import { Scope } from '../engine/scope';
 import { episodeFor } from '../episodes';
-import type { Explorer } from '../journey/explorers';
+import { summaryOf, type Explorer } from '../journey/explorers';
 import { NASA_MODELS, nasaModel, loadNasaModel } from '../journey/nasaModels';
 import { COLORS, createChild, createDesert, createNightSky, createPlanet, createRocket, createShootingStars, createStars } from '../journey/props';
 import { formatSite } from '../journey/geo';
@@ -227,7 +227,7 @@ export const journeyPage: Page = (root) => {
     el('span', `holo-chip ${e.status}`, t(`ui.status.${e.status}`), meta);
     el('span', '', t(`ui.type.${e.type}`), meta);
     el('span', '', years(e), meta);
-    el('p', '', e.summary, holo);
+    el('p', '', summaryOf(e), holo);
     // where it rests: a small globe of its world with the landing site marked
     const route = el('div', 'holo-route', undefined, holo);
     globe ??= new SiteGlobe();

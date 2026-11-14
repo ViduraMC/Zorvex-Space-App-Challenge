@@ -13,8 +13,8 @@
   "deploy.sceneWin": "8314178c4c0f",
   "p1.unloaded": "af3819f14fdd",
   "p1.reflector": "5eefed4b176f",
-  "p1.surfaceWork": "8a59404c2b01",
-  "p1.surfaceMedia": "fb94676b364a",
+  "p1.surfaceWork": "e36df6607803",
+  "p1.surfaceMedia": "ee8104a23541",
   "p1.surfaceImages": "011a20391571",
   "p1.present": "a15f3c18f822",
   "p2.closing": "2f536520affd",
@@ -25,7 +25,7 @@
   "p4.splashdown": "ea7c6f054da8",
   "p4.longDay": "c3bcaad17ab2",
   "p4.instruments": "65c62a097fd2",
-  "p4.letters": "9c7f8ac421fa",
+  "p4.letters": "92d618d6a760",
   "p4.firstNight": "bdced7984bad",
   "p4.lastDay": "b45dc04ef674",
   "p4.footprints": "84d9691ef517",
@@ -35,7 +35,7 @@
   "p2.ascent": "2ad9367e5c4d",
   "p2.descent": "dd065a62497c",
   "p2.surface": "b5abae32bb01",
-  "p2.surfaceMedia": "53ddd8f87578",
+  "p2.surfaceMedia": "a2e8fb3a8b78",
   "p2.easep": "922548f25773",
   "p2.reflector": "a87a64931f29",
   "timeline.launch.line": "569527df5fb0",
@@ -91,5 +91,8 @@
   "p2.ascent.3": "b199997ca8a8",
   "p2.descent.2": "48ce0ae80869",
   "p2.descent.3": "1ddb5dddc88b",
-  "p2.easep.2": "b4272eaa973e"
+  "p2.easep.2": "b4272eaa973e",
+  "p4.letters.2": "d6703a482a2f",
+  "p4.letters.3": "01301a0253d8",
+  "p2.surfaceMedia.2": "714ba3c61156"
 }
