@@ -1,0 +1,173 @@
+[
+  {
+    "id": "sojourner",
+    "name": "Sojourner",
+    "type": "rover",
+    "destination": "mars",
+    "slot": 1,
+    "status": "memorial",
+    "years": {
+      "start": 1997,
+      "end": 1997
+    },
+    "summary": "The first wheeled vehicle on another planet. No bigger than a microwave oven, it worked for 83 days instead of 7.",
+    "sources": [
+      {
+        "label": "NASA JPL: Mars Pathfinder / Sojourner Rover",
+        "url": "https://www.jpl.nasa.gov/missions/mars-pathfinder-sojourner-rover/"
+      }
+    ]
+  },
+  {
+    "id": "spirit",
+    "name": "Spirit",
+    "type": "rover",
+    "destination": "mars",
+    "slot": 2,
+    "status": "memorial",
+    "years": {
+      "start": 2004,
+      "end": 2010
+    },
+    "summary": "A Mars rover. Its verified story is coming soon.",
+    "sources": [
+      {
+        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
+        "url": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+      }
+    ]
+  },
+  {
+    "id": "opportunity",
+    "name": "Opportunity",
+    "type": "rover",
+    "destination": "mars",
+    "slot": 3,
+    "status": "memorial",
+    "years": {
+      "start": 2004,
+      "end": 2018
+    },
+    "summary": "A Mars rover. Its verified story is coming soon.",
+    "sources": [
+      {
+        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
+        "url": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+      }
+    ]
+  },
+  {
+    "id": "curiosity",
+    "name": "Curiosity",
+    "type": "rover",
+    "destination": "mars",
+    "slot": 4,
+    "status": "active",
+    "years": {
+      "start": 2012,
+      "end": null
+    },
+    "summary": "A Mars rover that is still at work. Its verified story is coming soon.",
+    "sources": [
+      {
+        "label": "TODO-VERIFY: check dates and status on the NASA NSSDCA catalogue",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/"
+      }
+    ]
+  },
+  {
+    "id": "perseverance",
+    "name": "Perseverance",
+    "type": "rover",
+    "destination": "mars",
+    "slot": 5,
+    "status": "active",
+    "years": {
+      "start": 2021,
+      "end": null
+    },
+    "summary": "A Mars rover that is still at work. Its verified story is coming soon.",
+    "sources": [
+      {
+        "label": "TODO-VERIFY: check dates and status on the NASA NSSDCA catalogue",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/"
+      }
+    ]
+  },
+  {
+    "id": "ingenuity",
+    "name": "Ingenuity",
+    "type": "helicopter",
+    "destination": "mars",
+    "slot": 6,
+    "status": "memorial",
+    "years": {
+      "start": 2021,
+      "end": 2024
+    },
+    "summary": "A small Mars helicopter. Its verified story is coming soon.",
+    "sources": [
+      {
+        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
+        "url": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+      }
+    ]
+  },
+  {
+    "id": "viking-1",
+    "name": "Viking 1",
+    "type": "lander",
+    "destination": "mars",
+    "slot": 7,
+    "status": "memorial",
+    "years": {
+      "start": 1976,
+      "end": 1982
+    },
+    "summary": "A Mars lander. Its verified story is coming soon.",
+    "sources": [
+      {
+        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
+        "url": "https://science.nasa.gov/mission/viking-1/"
+      }
+    ]
+  },
+  {
+    "id": "phoenix",
+    "name": "Phoenix",
+    "type": "lander",
+    "destination": "mars",
+    "slot": 8,
+    "status": "memorial",
+    "years": {
+      "start": 2008,
+      "end": 2008
+    },
+    "summary": "A Mars lander. Its verified story is coming soon.",
+    "sources": [
+      {
+        "label": "TODO-VERIFY: check dates and status on the NASA NSSDCA catalogue",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/"
+      }
+    ]
+  },
+  {
+    "id": "insight",
+    "name": "InSight",
+    "type": "lander",
+    "destination": "mars",
+    "slot": 9,
+    "status": "memorial",
+    "years": {
+      "start": 2018,
+      "end": 2022
+    },
+    "summary": "A Mars lander. Its verified story is coming soon.",
+    "sources": [
+      {
+        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
+        "url": "https://science.nasa.gov/mission/insight/"
+      }
+    ]
+  }
+]

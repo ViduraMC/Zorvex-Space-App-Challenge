@@ -1,0 +1,116 @@
+[
+  {
+    "id": "lrv-apollo-15",
+    "name": "Lunar Roving Vehicle, Apollo 15",
+    "type": "rover",
+    "destination": "moon",
+    "slot": 1,
+    "status": "memorial",
+    "years": {
+      "start": 1971,
+      "end": 1971
+    },
+    "summary": "A Moon car driven by astronauts. Its verified story is coming soon.",
+    "sources": [
+      {
+        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
+      }
+    ]
+  },
+  {
+    "id": "lrv-apollo-16",
+    "name": "Lunar Roving Vehicle, Apollo 16",
+    "type": "rover",
+    "destination": "moon",
+    "slot": 2,
+    "status": "memorial",
+    "years": {
+      "start": 1972,
+      "end": 1972
+    },
+    "summary": "A Moon car driven by astronauts. Its verified story is coming soon.",
+    "sources": [
+      {
+        "label": "TODO-VERIFY: check dates and status on the NASA NSSDCA catalogue",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/"
+      }
+    ]
+  },
+  {
+    "id": "lrv-apollo-17",
+    "name": "Lunar Roving Vehicle, Apollo 17",
+    "type": "rover",
+    "destination": "moon",
+    "slot": 3,
+    "status": "memorial",
+    "years": {
+      "start": 1972,
+      "end": 1972
+    },
+    "summary": "A Moon car driven by astronauts. Its verified story is coming soon.",
+    "sources": [
+      {
+        "label": "TODO-VERIFY: check dates and status on the NASA NSSDCA catalogue",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/"
+      }
+    ]
+  },
+  {
+    "id": "apollo-11-descent-stage",
+    "name": "Apollo 11 Lunar Module descent stage",
+    "type": "descent-stage",
+    "destination": "moon",
+    "slot": 4,
+    "status": "memorial",
+    "years": {
+      "start": 1969,
+      "end": 1969
+    },
+    "summary": "The landing half of a Moon lander. Its verified story is coming soon.",
+    "sources": [
+      {
+        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+      }
+    ]
+  },
+  {
+    "id": "alsep",
+    "name": "Apollo Lunar Surface Experiments Package (ALSEP)",
+    "type": "instrument",
+    "destination": "moon",
+    "slot": 5,
+    "status": "memorial",
+    "years": {
+      "start": 1969,
+      "end": 1977
+    },
+    "summary": "A set of science instruments left on the Moon. Its verified story is coming soon.",
+    "sources": [
+      {
+        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+      }
+    ]
+  },
+  {
+    "id": "retroreflector",
+    "name": "Apollo retroreflector array",
+    "type": "instrument",
+    "destination": "moon",
+    "slot": 6,
+    "status": "memorial",
+    "years": {
+      "start": 1969,
+      "end": null
+    },
+    "summary": "A mirror panel left on the Moon. Status to be confirmed with a NASA source. Its verified story is coming soon.",
+    "sources": [
+      {
+        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+      }
+    ]
+  }
+]
