@@ -14,6 +14,13 @@ import type { EpisodeContext, SceneBuild, SceneHandles } from '../../engine/type
 import type { Scope } from '../../engine/scope';
 import { APOLLO_11, APOLLO_PARTS } from './storyData';
 import { go } from '../../engine/router';
+import { nasaModel, splitAbove } from '../../journey/nasaModels';
+
+/** NASA's Lunar Module stood about 7 m tall; parts above this share of its height are the ascent stage. */
+const LM_HEIGHT = 7;
+const DESCENT_SHARE = 0.42;
+/** Turns the model so its ladder faces the station (+z). */
+const LM_TURN = 0;
 
 function buildEasep(materials: SceneBuild['materials']): MachineParts {
   const root = new Group();
@@ -234,9 +241,27 @@ function makeEarth(): Group {
   return earth;
 }
 
-export default function buildScene({ scene, materials }: SceneBuild): SceneHandles {
+export default async function buildScene({ scene, materials }: SceneBuild): Promise<SceneHandles> {
   const { group: eagle, ascent, hatch } = buildLander(materials);
   scene.add(eagle);
+  // NASA's Lunar Module replaces the box stand-in; its upper half joins the ascent group so liftoff still works
+  const lm = await nasaModel('apollo-lunar-module', { size: LM_HEIGHT, by: 'height' });
+  if (lm) {
+    for (const child of [...eagle.children, ...ascent.children]) if (child !== ascent) child.visible = false;
+    lm.rotation.y = LM_TURN;
+    eagle.add(lm);
+    ascent.attach(splitAbove(lm, DESCENT_SHARE));
+  }
+  // the Saturn V appears on the horizon as a memory while its card is shown
+  const saturn = await nasaModel('saturn-v', { size: 40, by: 'height' });
+  if (saturn) {
+    saturn.position.set(-55, -2, -80);
+    saturn.visible = false;
+    scene.add(saturn);
+  }
+  const showSaturn = (on: boolean): void => {
+    if (saturn) saturn.visible = on;
+  };
 
   const astronautA = buildAstronaut(materials);
   const astronautB = buildAstronaut(materials);
@@ -307,7 +332,11 @@ export default function buildScene({ scene, materials }: SceneBuild): SceneHandl
     stamp = null;
   };
 
-  const showPart = (ctx: EpisodeContext, scope: Scope, id: string): void => showPartCard(ctx, scope, id);
+  const showPart = (ctx: EpisodeContext, scope: Scope, id: string): void => {
+    // by now both astronauts are back inside Eagle
+    astronautA.visible = astronautB.visible = false;
+    showPartCard(ctx, scope, id);
+  };
 
   return {
     machine: buildEasep(materials),
@@ -485,8 +514,11 @@ export default function buildScene({ scene, materials }: SceneBuild): SceneHandl
         });
         storyStamp(ctx, scope, 'memory.present');
       },
-      partSaturn(ctx, scope) {
+      async partSaturn(ctx, scope) {
         showPart(ctx, scope, 'saturn');
+        showSaturn(true);
+        scope.add(() => showSaturn(false));
+        await ctx.director.shot({ pos: [2, 1.2, 3], look: [-45, 16, -80], ms: motionDuration(2200) });
       },
       partColumbia(ctx, scope) {
         showPart(ctx, scope, 'columbia');
@@ -511,6 +543,7 @@ export default function buildScene({ scene, materials }: SceneBuild): SceneHandl
         });
       },
       async liftoff(_ctx, scope) {
+        astronautA.visible = astronautB.visible = false;
         await waitForTween(scope, ascent.position, {
           y: ascent.position.y + 5,
           duration: motionDuration(1800) / 1000,

@@ -103,6 +103,25 @@ const box = new Box3();
 const size = new Vector3();
 const centre = new Vector3();
 
+/**
+ * Move every mesh whose centre sits above `share` of the model's height into a new group (added
+ * to `model`'s parent, world positions kept), so it can move on its own: the Apollo ascent stage
+ * lifting off its descent stage. `model` must already be in the scene.
+ */
+export function splitAbove(model: Object3D, share: number): Group {
+  model.updateMatrixWorld(true);
+  const bounds = new Box3().setFromObject(model);
+  const cut = bounds.min.y + (bounds.max.y - bounds.min.y) * share;
+  const upper: Mesh[] = [];
+  model.traverse((o) => {
+    if (o instanceof Mesh && new Box3().setFromObject(o).getCenter(centre).y > cut) upper.push(o);
+  });
+  const group = new Group();
+  model.parent?.add(group);
+  for (const mesh of upper) group.attach(mesh);
+  return group;
+}
+
 /** A clone standing on the ground (y = 0), centred, scaled to the requested size. */
 export async function nasaModel(key: NasaModel, fit: FitOptions): Promise<Group | null> {
   const source = await loadNasaModel(key);

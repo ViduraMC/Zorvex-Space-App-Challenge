@@ -3,6 +3,7 @@
  * The scene and timeline interaction remain episode-local; the engine is unchanged.
  */
 import { defineEpisode, type Step } from '../../engine/types';
+import en from './i18n/en.json';
 import buildScene from './scene';
 import { APOLLO_PARTS } from './storyData';
 
@@ -109,7 +110,16 @@ const actFour: Step[] = [
   { patch: true },
 ];
 
-const acts: Step[][][] = [[actOne], actTwo, [actThree], [actFour]];
+/** Long narration is stored as short beats (key, key.2, key.3, ...): each beat becomes its own bubble. */
+const beats = (steps: Step[]): Step[] =>
+  steps.flatMap((step) => {
+    if (!('say' in step)) return [step];
+    const more: Step[] = [];
+    for (let n = 2; `${step.say}.${n}` in en; n++) more.push({ ...step, say: `${step.say}.${n}` });
+    return [step, ...more];
+  });
+
+const acts: Step[][][] = [[actOne], actTwo, [actThree], [actFour]].map((act) => act.map(beats));
 const requestedAct = Number(new URLSearchParams(window.location.search).get('act'));
 const pages = Number.isInteger(requestedAct) && requestedAct >= 1 && requestedAct <= acts.length
   ? acts.slice(requestedAct - 1).flat()
@@ -117,7 +127,7 @@ const pages = Number.isInteger(requestedAct) && requestedAct >= 1 && requestedAc
 
 export default defineEpisode({
   id: 'apollo-11-descent-stage',
-  order: 2,
+  order: 5,
   world: 'moon',
   sky: 'moonDay',
   style: 'cinematic',

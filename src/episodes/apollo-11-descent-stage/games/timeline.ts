@@ -95,7 +95,7 @@ const timeline: MiniGame<TimelineConfig> = ({ ctx, scope, hud }) =>
       previous.disabled = index === 0;
       next.textContent = index === APOLLO_TIMELINE.length - 1 ? ctx.t('timeline.finish') : ctx.t('timeline.next');
       applyVignette(event.id);
-      if (speak) ctx.audio.say(ctx.t(event.line), { episode: ctx.episode.id, key: event.line, robot: true });
+      if (speak) ctx.audio.say(ctx.t(event.line), { episode: ctx.episode.id, key: event.line, role: 'machine' });
     };
 
     function move(amount: number): void {
@@ -120,7 +120,7 @@ const timeline: MiniGame<TimelineConfig> = ({ ctx, scope, hud }) =>
     });
     scope.listen(slider, 'change', () => {
       const event = APOLLO_TIMELINE[index];
-      ctx.audio.say(ctx.t(event.line), { episode: ctx.episode.id, key: event.line, robot: true });
+      ctx.audio.say(ctx.t(event.line), { episode: ctx.episode.id, key: event.line, role: 'machine' });
     });
     resetScene();
     hud.hintDone();
