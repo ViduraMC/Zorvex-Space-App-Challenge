@@ -86,7 +86,7 @@ function main(): void {
 
   // the explorer roster: records whose dates and status are not yet checked against NASA
   const dataDir = join(root, '..', 'data');
-  for (const file of existsSync(dataDir) ? readdirSync(dataDir).filter((name) => name.endsWith('.json')) : []) {
+  for (const file of existsSync(dataDir) ? readdirSync(dataDir).filter((name) => name.startsWith('explorers.') && name.endsWith('.json')) : []) {
     const records = JSON.parse(readFileSync(join(dataDir, file), 'utf8')) as { name: string; sources: { label: string }[] }[];
     const open = records.filter((r) => r.sources.some((src) => src.label.includes(TODO)));
     console.log(`\n${file}: ${records.length} explorers`);
