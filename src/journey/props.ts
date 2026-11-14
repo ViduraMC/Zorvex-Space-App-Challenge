@@ -344,3 +344,4 @@ export function createPlinth(): { group: Group; ring: Mesh } {
   ring.castShadow = false;
   return { group, ring };
 }
+

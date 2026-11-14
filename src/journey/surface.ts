@@ -11,8 +11,12 @@ import type { Quality } from '../engine/progress';
 import { Sky, SKY_PRESETS } from '../engine/sky';
 import { createWorld, type World } from '../engine/worlds';
 import { explorersOf, type Explorer } from './explorers';
+import { nasaModel, type FitOptions, type NasaModel } from './nasaModels';
 import { COLORS, createExplorerModel, createPlinth } from './props';
 import type { Destination } from './store';
+
+/** True when this explorer is shown with NASA's own 3D model. */
+export const hasNasaModel = (id: string): boolean => id in MODEL_OF;
 
 export interface ExplorerItem {
   explorer: Explorer;
@@ -36,6 +40,21 @@ export interface Surface {
 }
 
 const DUST: Record<Destination, number> = { mars: 0x8a5a3c, moon: 0x6f6d6a };
+
+/**
+ * Explorers with an official NASA 3D model (science.nasa.gov/3d-resources). The others keep a
+ * built-in stand-in until NASA publishes one. Sizes are the model's largest side on the plinth.
+ */
+const MODEL_OF: Record<string, { key: NasaModel; fit: Omit<FitOptions, 'dusty'> }> = {
+  spirit: { key: 'mer-opportunity', fit: { size: 1.9 } }, // Spirit and Opportunity were identical twins
+  opportunity: { key: 'mer-opportunity', fit: { size: 1.9 } },
+  'viking-1': { key: 'viking-lander', fit: { size: 2.0 } },
+  'viking-2': { key: 'viking-lander', fit: { size: 2.0 } },
+  insight: { key: 'insight-lander', fit: { size: 2.5 } },
+  ingenuity: { key: 'ingenuity', fit: { size: 1.3 } },
+  // only the lower half (the descent stage) stayed on the Moon
+  'apollo-11-descent-stage': { key: 'apollo-lunar-module', fit: { size: 2.1, keepBelow: 0.42 } },
+};
 /** A wide, shallow arc: about 2.5 m between neighbours, the ends only a little farther away. */
 const ARC_RADIUS = 30;
 const ARC_STEP = 0.085;
@@ -90,6 +109,17 @@ export function buildSurface(
     model.group.scale.setScalar(MODEL_SCALE);
     model.group.rotation.y = -0.5;
     root.add(model.group);
+    const nasa = MODEL_OF[explorer.id];
+    if (nasa) {
+      const dusty = active ? undefined : { color: DUST[destination], amount: 0.35 };
+      void nasaModel(nasa.key, { ...nasa.fit, dusty }).then((real) => {
+        if (!real) return; // keep the stand-in
+        real.position.y = 0.22;
+        real.rotation.y = -0.5;
+        root.remove(model.group);
+        root.add(real);
+      });
+    }
     // memorial: a warm candle. active: a green status light. (The plaque also says which, in words.)
     const color = active ? COLORS.active : COLORS.candle;
     const light = new PointLight(color, active ? 3 : 6, 5, 2);
@@ -130,7 +160,7 @@ export function updateSurface(surface: Surface, dt: number, time: number, camera
 export function disposeSurface(surface: Surface): void {
   surface.fx.dispose();
   surface.scene.traverse((obj) => {
-    if (!(obj instanceof Mesh)) return;
+    if (!(obj instanceof Mesh) || obj.userData.shared) return; // NASA model geometry is shared by every visit
     obj.geometry.dispose();
     for (const mat of Array.isArray(obj.material) ? obj.material : [obj.material]) mat.dispose();
   });

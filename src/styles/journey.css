@@ -75,6 +75,22 @@
     box-shadow: 0 0 34px rgba(243, 239, 230, 0.55);
   }
 }
+.j-sources {
+  position: absolute;
+  left: var(--edge);
+  bottom: var(--edge);
+  max-width: 60vw;
+  padding: 8px 0;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.j-sources:hover,
+.j-sources:focus-visible {
+  color: var(--text);
+}
 .j-skip {
   position: absolute;
   right: var(--edge);
@@ -348,13 +364,28 @@
 }
 .holo-route {
   flex: 1;
-  min-height: 90px;
+  min-height: 60px;
   display: grid;
   place-content: center;
   border: 1px dashed rgba(79, 216, 255, 0.5);
   color: rgba(233, 251, 255, 0.7);
   font-size: var(--text-s);
   letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.holo-sources {
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 1.35;
+  color: rgba(233, 251, 255, 0.75);
+}
+.holo-sources a {
+  color: var(--holo);
+}
+.holo-sources b {
+  font-size: 11px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 .holo .holo-note {

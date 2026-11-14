@@ -15,9 +15,10 @@ import { go, type Page } from '../engine/router';
 import { Scope } from '../engine/scope';
 import { findEpisode } from '../episodes';
 import type { Explorer } from '../journey/explorers';
+import { NASA_MODELS, nasaModel, loadNasaModel } from '../journey/nasaModels';
 import { COLORS, createChild, createDesert, createNightSky, createPlanet, createRocket, createShootingStars, createStars } from '../journey/props';
 import { journey, type Destination, type Phase } from '../journey/store';
-import { buildSurface, disposeSurface, updateSurface, type Surface } from '../journey/surface';
+import { buildSurface, disposeSurface, hasNasaModel, updateSurface, type Surface } from '../journey/surface';
 
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 /** Cutscene time factor: reduced motion plays every cutscene almost instantly. */
@@ -29,8 +30,10 @@ const HOME_CAM = { pos: [0, 1.5, 9], look: [0, 2.5, 0] } as const;
 const SPACE_CAM = { z: 28, fov: 19, halfHeight: 4.66 };
 /** Share of a wide screen that the hologram panel covers. */
 const PANEL_SHARE = 0.32;
-const ROCKET_X = 2.2;
-const CHILD_START_X = -1.6;
+const ROCKET_X = 3.4;
+const ROCKET_HEIGHT = 6.4;
+const CHILD_HEIGHT = 1.05;
+const CHILD_START_X = -0.6;
 
 export const journeyPage: Page = (root) => {
   const shell = el('div', 'journey', undefined, root);
@@ -57,9 +60,25 @@ export const journeyPage: Page = (root) => {
   const rocket = createRocket();
   const child = createChild();
   rocket.group.position.x = ROCKET_X;
+  // NASA's own Saturn V and crew escape suit replace the stand-ins as soon as they load
+  void nasaModel('saturn-v', { size: ROCKET_HEIGHT, by: 'height' }).then((model) => {
+    if (!model) return;
+    for (const part of rocket.group.children) if (part !== rocket.glow) part.visible = false;
+    rocket.group.add(model);
+  });
+  void nasaModel('crew-escape-suit', { size: CHILD_HEIGHT, by: 'height' }).then((model) => {
+    if (!model) return;
+    for (const part of child.group.children) part.visible = false;
+    child.group.add(model);
+  });
+  // the explorers' models load in the background while the child is still on Earth
+  for (const key of Object.keys(NASA_MODELS) as (keyof typeof NASA_MODELS)[]) void loadNasaModel(key);
   const moonlight = new DirectionalLight(0x9fb4ff, 2.2);
   moonlight.position.set(-6, 9, 5);
-  earth.add(createDesert(), rocket.group, child.group, shooting.group, new HemisphereLight(0x33406a, 0x120e0c, 2.4), moonlight);
+  // a soft front light so the rocket and the young explorer read clearly against the night
+  const fill = new DirectionalLight(0xc8d4ff, 1.6);
+  fill.position.set(2, 3, 10);
+  earth.add(createDesert(), rocket.group, child.group, shooting.group, new HemisphereLight(0x33406a, 0x120e0c, 2.4), moonlight, fill);
   const space = new Group();
   const sun = new DirectionalLight(0xffffff, 3.2);
   sun.position.set(-6, 4, 8);
@@ -72,6 +91,7 @@ export const journeyPage: Page = (root) => {
   const title = el('header', 'j-title', undefined, shell);
   el('h1', '', t('ui.title'), title);
   el('p', '', t('ui.subtitle'), title);
+  const homeSources = link('j-sources', t('ui.home.sources'), '#about', shell);
   const startBtn = button('j-start', t('ui.start'), () => {
     audio.init();
     journey.start();
@@ -181,7 +201,11 @@ export const journeyPage: Page = (root) => {
     el('span', '', years(e), meta);
     el('p', '', e.summary, holo);
     el('div', 'holo-route', t('ui.holo.route'), holo);
-    if (e.sources.some((s) => s.label.startsWith('TODO-VERIFY'))) el('p', 'holo-note', t('ui.holo.unverified'), holo);
+    // where every word on this panel comes from
+    const sources = el('div', 'holo-sources', undefined, holo);
+    el('b', '', t('ui.holo.sources'), sources);
+    for (const s of e.sources) link('', s.label, s.url, sources);
+    el('span', '', t(hasNasaModel(e.id) ? 'ui.holo.model' : 'ui.holo.standin'), sources);
     button('holo-explore', t('ui.holo.explore'), () => launch(e.id), holo);
     holo.classList.remove('in');
     void holo.offsetWidth; // restart the appear animation
@@ -211,9 +235,10 @@ export const journeyPage: Page = (root) => {
       stars.material.uniforms.uBright.value = 1;
       cam.pos.set(...HOME_CAM.pos);
       cam.look.set(...HOME_CAM.look);
-      gsap.set([title, startBtn], { opacity: 1 });
+      gsap.set([title, startBtn, homeSources], { opacity: 1 });
       show(title, true);
       show(startBtn, true);
+      show(homeSources, true);
       startBtn.focus();
       // idle: the child breathes and looks up at the stars
       phaseScope.frame((_dt, time) => {
@@ -225,12 +250,13 @@ export const journeyPage: Page = (root) => {
       const walk = { on: false };
       phaseScope.frame((_dt, time) => {
         const swing = walk.on ? Math.sin(time * 9) * 0.6 : 0;
+        child.group.position.y = walk.on ? Math.abs(Math.sin(time * 9)) * 0.05 : 0;
         child.legs[0].rotation.x = swing;
         child.legs[1].rotation.x = -swing;
       });
       timeline = gsap
         .timeline({ onComplete: () => journey.finish('HOME_WALK') })
-        .to([title, startBtn], { opacity: 0, duration: 0.3 * D })
+        .to([title, startBtn, homeSources], { opacity: 0, duration: 0.3 * D })
         .to(child.group.rotation, { y: Math.PI / 2, duration: 0.5 * D })
         .call(() => void (walk.on = true))
         .to(child.group.position, { x: ROCKET_X - 0.85, z: 0, duration: 3 * D, ease: 'none' })
@@ -244,6 +270,7 @@ export const journeyPage: Page = (root) => {
     TAKEOFF() {
       show(title, false);
       show(startBtn, false);
+      show(homeSources, false);
       show(cockpit, true);
       rocket.group.visible = child.group.visible = false;
       cam.pos.set(ROCKET_X, 2.7, 0);
