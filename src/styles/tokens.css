@@ -1,0 +1,137 @@
+/*
+ * Design tokens: the one place colours, fonts, sizes and layers are defined.
+ * Components use the semantic tokens below (--cap-bg, --btn-bg, ...), never raw values.
+ * A storytelling style is just a different set of semantic tokens: see "Styles" at the bottom.
+ */
+:root {
+  /* palette */
+  --paper: #f7f1e3;
+  --ink: #111111;
+  --yellow: #ffd84a;
+  --red: #e8402a;
+  --shade: rgba(0, 0, 0, 0.38);
+  --space: #06070d;
+  --space-raised: #11141f;
+  --line: rgba(255, 255, 255, 0.16);
+  --signal: #5ef2a0;
+  --text: #f3efe6;
+  --text-dim: #a49d8f;
+
+  /* type. Title face: the wide, high-contrast Didot look. "Didot" is Linotype's own cut, which
+     Apple devices already carry; everyone else gets Bodoni Moda (free, SIL OFL), the closest
+     free match. Swap in a licensed web font here and the whole product follows. */
+  --font-title: 'Didot', 'Linotype Didot', 'Bodoni Moda', 'GFS Didot', 'Noto Sans Sinhala', 'Noto Sans Tamil', serif;
+  --font-shout: 'Bangers', 'Noto Sans Sinhala', 'Noto Sans Tamil', Impact, 'Arial Black', sans-serif;
+  --font-letter: 'Comic Neue', 'Noto Sans Sinhala', 'Noto Sans Tamil', 'Comic Sans MS', sans-serif;
+  --font-ui: system-ui, -apple-system, 'Segoe UI', 'Noto Sans Sinhala', 'Noto Sans Tamil', sans-serif;
+  --track-title: 0.14em;
+
+  --text-s: 14px;
+  --text-m: clamp(16px, 1.9vw, 22px);
+  --text-l: clamp(20px, 2.4vw, 28px);
+  --text-xl: clamp(40px, 7vw, 84px);
+  --text-sfx: clamp(52px, 11vw, 150px);
+
+  /* spacing, shape */
+  --gap-s: 8px;
+  --gap-m: 14px;
+  --gap-l: 26px;
+  --edge: clamp(14px, 2.4vw, 30px);
+  --radius: 14px;
+
+  /* layers */
+  --z-art: 2;
+  --z-frame: 3;
+  --z-words: 6;
+  --z-bubble: 7;
+  --z-hud: 8;
+  --z-flash: 9;
+  --z-overlay: 12;
+}
+
+/* ---- Styles. Default: comic book. ---- */
+.player {
+  --cap-bg: var(--yellow);
+  --cap-ink: var(--ink);
+  --cap-border: 4px solid var(--ink);
+  --cap-shadow: 6px 6px 0 var(--ink);
+  --cap-font: var(--font-letter);
+  --cap-case: uppercase;
+  --cap-tilt: -1.2deg;
+  --bub-bg: #ffffff;
+  --bub-ink: var(--ink);
+  --bub-border: var(--ink);
+  --bub-radius: 28px;
+  --who-ink: var(--red);
+  --sfx-font: var(--font-shout);
+  --sfx-ink: var(--yellow);
+  --sfx-stroke: 3px var(--ink);
+  --sfx-shadow: 6px 6px 0 var(--red), 9px 9px 0 var(--ink);
+  --sfx-tilt: -8deg;
+  --sfx-track: 0.01em;
+  --btn-font: var(--font-shout);
+  --btn-bg: var(--red);
+  --btn-ink: #ffffff;
+  --btn-alt-bg: var(--yellow);
+  --btn-alt-ink: var(--ink);
+  --btn-border: 4px solid var(--ink);
+  --btn-shadow: 6px 6px 0 var(--ink);
+  --btn-radius: 0px;
+  --title-font: var(--font-shout);
+  --title-ink: var(--yellow);
+  --title-stroke: 4px var(--ink);
+  --title-shadow: 7px 7px 0 var(--red), 11px 11px 0 var(--ink);
+  --title-tilt: -3deg;
+  --title-track: 0.01em;
+  --panel-bg: var(--paper);
+  --panel-ink: var(--ink);
+  --frame: 10px solid var(--paper);
+  --frame-line: inset 0 0 0 5px var(--ink);
+  --dots: 0.16;
+  --flash: var(--paper);
+  --game-line: #ffd84a;
+  --game-dim: rgba(255, 255, 255, 0.35);
+}
+
+/* Cinematic: quiet film titles in the Didot face, letterbox instead of a paper frame. */
+.player[data-style='cinematic'] {
+  --cap-bg: rgba(6, 7, 13, 0.74);
+  --cap-ink: var(--text);
+  --cap-border: 1px solid var(--line);
+  --cap-shadow: none;
+  --cap-font: var(--font-ui);
+  --cap-case: none;
+  --cap-tilt: 0deg;
+  --bub-bg: rgba(6, 7, 13, 0.82);
+  --bub-ink: var(--text);
+  --bub-border: rgba(255, 255, 255, 0.5);
+  --bub-radius: 6px;
+  --who-ink: var(--signal);
+  --sfx-font: var(--font-title);
+  --sfx-ink: #ffffff;
+  --sfx-stroke: 0px transparent;
+  --sfx-shadow: 0 4px 30px rgba(0, 0, 0, 0.9);
+  --sfx-tilt: 0deg;
+  --sfx-track: 0.22em;
+  --btn-font: var(--font-title);
+  --btn-bg: var(--text);
+  --btn-ink: var(--space);
+  --btn-alt-bg: rgba(6, 7, 13, 0.7);
+  --btn-alt-ink: var(--text);
+  --btn-border: 1px solid var(--text);
+  --btn-shadow: none;
+  --btn-radius: 2px;
+  --title-font: var(--font-title);
+  --title-ink: #ffffff;
+  --title-stroke: 0px transparent;
+  --title-shadow: 0 4px 40px rgba(0, 0, 0, 0.8);
+  --title-tilt: 0deg;
+  --title-track: var(--track-title);
+  --panel-bg: rgba(6, 7, 13, 0.86);
+  --panel-ink: var(--text);
+  --frame: 0px solid transparent;
+  --frame-line: inset 0 5vh 0 #000, inset 0 -5vh 0 #000;
+  --dots: 0;
+  --flash: #000000;
+  --game-line: #ffffff;
+}
