@@ -8,6 +8,8 @@ Space Apps requires teams to disclose how AI was used. Add a row for everything 
 | 14 Nov 2026 | Vidura | Claude Code (Anthropic) | Re-checked every explorer and Sojourner fact against the challenge resource pages only; downloaded and compressed NASA 3D Resources models | Sources linked in the app; a person must re-read them before submission |
 | 14 Nov 2026 | Vidura | Claude Code (Anthropic) | Looked up and quoted NASA sources for the first 22 Sojourner facts (later replaced) (`src/episodes/sojourner/facts.json`) | Each fact has its source URL; a person must re-read them before submission |
 | 14 Nov 2026 | Vidura | Claude Code (Anthropic) | Draft Sinhala and Tamil text for the shared buttons (`src/i18n/si.json`, `ta.json`) | **No.** A Sinhala and a Tamil speaker must review before release |
+| 14 Nov 2026 | Vidura | Antigravity AI | Implemented Pioneer 10 & 11 episode (`src/episodes/pioneer/`) with verified NASA facts, 3D Three.js models, interactive storytelling, and mini-games based on the mission brief | Reviewed by Vidura |
+| 14 Nov 2026 | Vidura | Antigravity AI | Implemented InSight Mars Lander episode (`src/episodes/insight/`) with official NASA 3D model, deployable SEIS/HP3 props, and Marsquake mini-game | Reviewed by Vidura |
 | 14 Nov 2026 | Vidura | AI assistant | `docs/BUILD_GUIDE.md` (the journey specification) | Written with AI help; confirm how before submission |
 
 ## What AI did not make

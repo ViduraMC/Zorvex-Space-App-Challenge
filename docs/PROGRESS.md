@@ -10,6 +10,8 @@ Updated: Saturday 14 Nov 2026, about 16:00 (Asia/Colombo).
 - Opening journey works end to end: Home, take-off, destination, landing, explorers, hologram,
   launch, story. Back from a story returns to the explorers without replaying cutscenes.
 - Sojourner episode plays end to end with four mini-games and awards its patch.
+- InSight episode implemented in `src/episodes/insight/`: 5 scenes, official NASA 3D model, deployable SEIS dome & HP3 Mole, Marsquake timingTap mini-game, 9 verified facts. Direct integration with Mars explorer roster.
+- Pioneer 10 & 11 episode implemented in `src/episodes/pioneer/`: 9 chapters, 33 verified facts, Three.js 3D spacecraft, Jupiter & Saturn with rings, and mini-games (`counterRace`, `balance`, `findHidden`, `resourceManage`). Passes lint, typecheck, tests, check:facts, and build.
 
 ## Next
 

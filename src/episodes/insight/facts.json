@@ -1,0 +1,61 @@
+{
+  "episode": "insight",
+  "checked": "2026-11-14",
+  "note": "Sources: NASA Science InSight mission overview and JPL release resources.",
+  "facts": [
+    {
+      "id": "landing-elysium",
+      "text": "InSight touched down on the smooth, flat plains of Elysium Planitia on Mars on November 26, 2018.",
+      "source": "https://science.nasa.gov/mission/insight/",
+      "sourceName": "NASA Science: InSight (challenge resource)"
+    },
+    {
+      "id": "purpose-interior",
+      "text": "InSight was designed to study the deep interior of Mars — its crust, mantle, and core — using seismic, heat flow, and rotation experiments.",
+      "source": "https://science.nasa.gov/mission/insight/",
+      "sourceName": "NASA Science: InSight (challenge resource)"
+    },
+    {
+      "id": "marco-cubesats",
+      "text": "Two briefcase-sized CubeSats, MarCO-A and MarCO-B, flew past Mars during InSight's landing to relay telemetry in near real time.",
+      "source": "https://science.nasa.gov/mission/marco/",
+      "sourceName": "NASA Science: Mars Cube One (challenge resource)"
+    },
+    {
+      "id": "seis-deployment",
+      "text": "InSight used its robotic arm to place the SEIS seismometer directly onto the Martian ground, protected by a Wind and Thermal Shield dome.",
+      "source": "https://science.nasa.gov/mission/insight/science-instruments/",
+      "sourceName": "NASA Science: InSight Instruments (challenge resource)"
+    },
+    {
+      "id": "marsquakes-count",
+      "text": "SEIS recorded more than 1,300 seismic events on Mars, including its largest detected quake of magnitude 5 on May 4, 2022.",
+      "source": "https://science.nasa.gov/mission/insight/",
+      "sourceName": "NASA Science: InSight (challenge resource)"
+    },
+    {
+      "id": "hp3-mole",
+      "text": "The HP3 heat flow probe, nicknamed the Mole, could not reach its planned 5-meter depth due to unexpected soil friction and cohesion.",
+      "source": "https://science.nasa.gov/mission/insight/science-instruments/",
+      "sourceName": "NASA Science: InSight Instruments (challenge resource)"
+    },
+    {
+      "id": "rise-core",
+      "text": "The RISE experiment used radio tracking from Earth to measure Mars' wobble, helping constrain the size of its large liquid iron-rich core.",
+      "source": "https://science.nasa.gov/mission/insight/science-instruments/",
+      "sourceName": "NASA Science: InSight Instruments (challenge resource)"
+    },
+    {
+      "id": "dust-power",
+      "text": "Over four years, Martian dust accumulated on InSight's solar panels, gradually cutting electrical power output.",
+      "source": "https://science.nasa.gov/mission/insight/",
+      "sourceName": "NASA Science: InSight (challenge resource)"
+    },
+    {
+      "id": "last-contact",
+      "text": "InSight made its final communication with Earth on December 15, 2022, and NASA formally retired the mission on December 21, 2022.",
+      "source": "https://science.nasa.gov/mission/insight/",
+      "sourceName": "NASA Science: InSight (challenge resource)"
+    }
+  ]
+}
