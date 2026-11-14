@@ -1,6 +1,6 @@
 # Progress
 
-Updated: Saturday 14 Nov 2026, about 18:45 (Asia/Colombo).
+Updated: Saturday 14 Nov 2026, about 22:45 (Asia/Colombo).
 
 ## Now
 
@@ -10,8 +10,12 @@ Updated: Saturday 14 Nov 2026, about 18:45 (Asia/Colombo).
 - Opening journey works end to end: Home, take-off, destination, landing, explorers, hologram,
   launch, story. Back from a story returns to the explorers without replaying cutscenes.
 - Sojourner episode plays end to end with four mini-games and awards its patch.
-- InSight episode implemented in `src/episodes/insight/`: 5 scenes, official NASA 3D model, deployable SEIS dome & HP3 Mole, Marsquake timingTap mini-game, 9 verified facts. Direct integration with Mars explorer roster.
-- Pioneer 10 & 11 episode implemented in `src/episodes/pioneer/`: 9 chapters, 33 verified facts, Three.js 3D spacecraft, Jupiter & Saturn with rings, and mini-games (`counterRace`, `balance`, `findHidden`, `resourceManage`). Passes lint, typecheck, tests, check:facts, and build.
+- Teammates' pull requests #1 (Pioneer, InSight), #2 (Apollo 11 EASEP) and #3 (Apollo 12 ALSEP)
+  are merged into main after a review against CONTRIBUTING.md: every fact re-checked on the
+  NASA pages (claims the pages do not make were removed), long lines split, NASA models used
+  (Lunar Module, Saturn V, InSight, new Pioneer 10), voices recorded, conflicts resolved.
+- Six playable stories: Sojourner, Viking, InSight, ALSEP, Apollo 11 EASEP, Pioneer.
+- New kit game `seismograph` (catch the shaking), used by ALSEP and InSight.
 
 - Product renamed: The Abandoned Explorers, "Abandoned but not Forgotten."
 - Viking 1 & 2 story playable end to end (10 pages, 3 stages: Earth, space, Mars).
@@ -23,14 +27,20 @@ Updated: Saturday 14 Nov 2026, about 18:45 (Asia/Colombo).
 
 ## Next
 
-1. Vidura: read the changes in `CLAUDE.md` ("Decisions already made"), then say how the stories should go.
-2. Create the GitHub repository, push, connect Vercel (public URL and pull-request previews).
+1. Vidura: say what is next (deploy, phone checks, Sinhala and Tamil, the remaining explorers).
+2. Connect Vercel (public URL and pull-request previews).
 3. Decide on the Moon globe image (only non-challenge, non-3D-Resources data left; see docs/RESOURCES.md section 3).
 4. Stories for each explorer (Vidura is sending them).
 5. Route globe and filters in the hologram panel (build guide step 12): needs real traverse data.
 6. Real explorer models from NASA 3D Resources instead of the stand-ins (build guide step 15).
 7. Sinhala and Tamil episode text; our own voice recordings.
 8. Phase 2: "Ask the machine" and "Postcard" (serverless, fact-locked).
+
+## Not verified
+
+- The new stories were played page by page in a test browser (skipping ahead), not each in one
+  uninterrupted run. Hold-to-scan holds could not be completed in the throttled test browser.
+- Not tested on a phone.
 
 ## Blockers
 

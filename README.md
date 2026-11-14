@@ -37,13 +37,13 @@ Node 22.18 or newer. `npm run build` makes the static site in `dist/`.
 | Explorer | World | Story | Owner |
 |---|---|---|---|
 | Sojourner | Mars | Playable (pilot episode) | Vidura |
-| Opportunity | Mars | Not started | Vidura |
-| Apollo 11 descent stage | Moon | Four-act EASEP story in progress | Vidura |
-| Ingenuity | Mars | Not started | [TBD] |
-| Kepler | Deep space | Not started (no deep-space destination yet) | [TBD] |
-| Viking 1 and Viking 2 | Mars | Playable (10 pages, 7 play moments) | Vidura |
-| Spirit, Phoenix, InSight | Mars | Placeholder page | [TBD] |
-| Apollo 12 ALSEP, Apollo 15 LRV, Surveyor 3 | Moon | Placeholder page | [TBD] |
+| Viking 1 and Viking 2 | Mars | Playable (11 pages, 3 worlds) | Vidura |
+| InSight | Mars | Playable (5 pages: place SEIS, catch marsquakes, the mole) | Bimsara, Yasassri; fixed by Vidura |
+| Apollo 11 descent stage | Moon | Playable (EASEP, four acts) | Haritha; fixed by Vidura |
+| Apollo 12 ALSEP | Moon | Playable (9 pages: launch, instruments, moonquake, the long watch) | Kaushal; fixed by Vidura |
+| Pioneer 10 and 11 | Deep space (from the shelf) | Playable (9 pages) | Bimsara, Yasassri; fixed by Vidura |
+| Spirit, Opportunity, Phoenix, Ingenuity | Mars | Placeholder page | [TBD] |
+| Apollo 15 LRV, Surveyor 3 | Moon | Placeholder page | [TBD] |
 
 ## For the team
 
