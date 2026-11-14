@@ -22,6 +22,7 @@ export default defineEpisode({
   machine: { start: LANDER },
   patch: { color: '#C8702E', glyph: 'V' },
   lastContact: { date: '1982-11-13', fact: 'v1-lander-end' },
+  anatomy: 'viking-lander',
   lookUp: 'Mars',
   stats: [
     { value: '4', label: 'stat.machines' },

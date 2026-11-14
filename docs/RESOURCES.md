@@ -64,6 +64,7 @@ photo, so we show no Earth globe.
 | Viking Project and Astrobiology | <https://science.nasa.gov/astrobiology/missions/viking-project/> | The search for life, soil results, endings |
 | Viking: 50 Years on Mars | <https://science.nasa.gov/mission/viking/viking-50-years-on-mars/> | The first photo, the 19-minute signal |
 | NSSDCA Viking 1 Lander (challenge catalogue) | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C> | The descent sequence |
+| Spirit and Opportunity science instruments (part of the challenge page) | <https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-instruments/> | Anatomy 360°: rover tools |
 | NSSDCA Apollo 11 Command and Service Module (challenge catalogue) | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A> | Apollo 11 story: Columbia, launch, flight and return (brief: docs/stories/apollo-11.md) |
 | NSSDCA Apollo 11, 25th Anniversary (challenge catalogue) | <https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html> | Apollo 11 story: surface photographs, flag, samples, timeline quotes |
 

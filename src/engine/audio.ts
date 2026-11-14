@@ -3,6 +3,7 @@
  * Voices: an episode's recorded clip plays when one exists; otherwise the browser reads the line
  * aloud (text-to-speech fallback).
  */
+import { CONFIG } from '../config';
 import { getLang } from './i18n';
 import { progress } from './progress';
 
@@ -225,13 +226,16 @@ class AudioEngine {
     if (!this.voiceOn || !this.soundOn) return;
     this.hush();
     const lang = getLang();
-    const base = `../episodes/${opts.episode}/voice/${lang}/${opts.key}.`;
-    const url = Object.entries(clips).find(([path]) => path.startsWith(base))?.[1];
+    const clipFor = (l: string): string | undefined =>
+      Object.entries(clips).find(([path]) => path.startsWith(`../episodes/${opts.episode}/voice/${l}/${opts.key}.`))?.[1];
+    // Sinhala and Tamil have text but no recorded voices yet: they hear the English recording
+    const url = clipFor(lang) ?? clipFor(CONFIG.defaultLang);
     if (url) {
       this.clip(url);
       return;
     }
-    if (!('speechSynthesis' in window)) return;
+    // browser speech would read Sinhala or Tamil text with an English voice, so only English uses it
+    if (lang !== CONFIG.defaultLang || !('speechSynthesis' in window)) return;
     const cast = casts[`../episodes/${opts.episode}/voice/cast.json`];
     const gender = cast?.[opts.role]?.gender ?? (opts.role === 'narrator' ? 'male' : 'female');
     const u = new SpeechSynthesisUtterance(text);

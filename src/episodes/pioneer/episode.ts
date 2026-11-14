@@ -15,6 +15,7 @@ export default defineEpisode({
   style: 'cinematic',
   machine: { start: { x: 0, z: 0 } },
   patch: { color: '#3D7BE8', glyph: 'P' },
+  anatomy: 'pioneer-10',
   lastContact: { date: '2003-01-23', fact: 'p10-last-signal' },
   stats: [
     { value: '21', label: 'stat.planned' },

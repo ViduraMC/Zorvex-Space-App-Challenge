@@ -1,0 +1,149 @@
+/* Anatomy 360°: the model fills the stage; the part list and card sit in a side panel
+   (below the model on narrow screens). */
+.anatomy {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr minmax(280px, 380px);
+  background: radial-gradient(ellipse at 40% 35%, var(--space-raised), var(--space) 70%);
+  color: var(--text);
+  font-family: var(--font-ui);
+}
+
+.anatomy-stage {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.anatomy-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+}
+
+.anatomy-pins {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.anatomy-pin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--text);
+  background: var(--shade);
+  color: var(--text);
+  font: 700 var(--text-s) var(--font-ui);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.anatomy-pin.on,
+.anatomy-pin:hover,
+.anatomy-pin:focus-visible {
+  background: var(--holo);
+  color: var(--space);
+  border-color: var(--holo);
+}
+
+.anatomy-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-m);
+  padding: var(--edge);
+  overflow-y: auto;
+  background: var(--space-raised);
+  border-left: 1px solid var(--line);
+}
+
+.anatomy-back {
+  align-self: flex-start;
+}
+
+.anatomy-title {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: var(--text-l);
+  letter-spacing: var(--track-title);
+  text-transform: uppercase;
+}
+
+.anatomy-hint {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: var(--text-s);
+}
+
+.anatomy-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-s);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.anatomy-item {
+  min-height: 40px;
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  font: 600 var(--text-s) var(--font-ui);
+  cursor: pointer;
+}
+
+.anatomy-item[aria-pressed='true'] {
+  border-color: var(--holo);
+  color: var(--holo);
+}
+
+.anatomy-card {
+  padding: var(--gap-m);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--space);
+}
+
+.anatomy-card h2 {
+  margin: 0 0 var(--gap-s);
+  font-size: var(--text-m);
+}
+
+.anatomy-card b {
+  color: var(--holo);
+  font-size: var(--text-s);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.anatomy-card p {
+  margin: 2px 0 var(--gap-s);
+  font-size: var(--text-m);
+  line-height: 1.4;
+}
+
+.anatomy-source,
+.anatomy-credit {
+  color: var(--text-dim);
+  font-size: var(--text-s);
+}
+
+@media (max-width: 760px) {
+  .anatomy {
+    grid-template-columns: 1fr;
+    grid-template-rows: 52vh 1fr;
+  }
+  .anatomy-panel {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+}

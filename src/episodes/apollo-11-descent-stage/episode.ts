@@ -138,6 +138,7 @@ export default defineEpisode({
     { value: '48 kg', label: 'stats.mass' },
     { value: '2', label: 'stats.lunarDays' },
   ],
+  anatomy: 'apollo-lunar-module',
   lookUp: 'Moon',
   scene: buildScene,
   pages,

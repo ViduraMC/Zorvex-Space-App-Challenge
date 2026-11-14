@@ -17,6 +17,7 @@ import { Timeline } from '../engine/timeline';
 import type { EpisodeContext, EpisodeDef, SceneHandles, Target } from '../engine/types';
 import { createWorld, type World, type WorldKind } from '../engine/worlds';
 import { factsOf, findEpisode } from '../episodes';
+import { openAsk } from '../features/ask';
 import { patchNode } from '../features/patch';
 import { skyTonightCard } from '../features/sky-tonight';
 
@@ -329,6 +330,8 @@ function showEnd(episode: EpisodeDef, shell: HTMLElement): void {
       button('btn', t('ui.close'), () => overlay.remove(), overlay);
     }, acts);
   }
+  button('btn alt', t('ui.ask.open', { name: t('speaker.machine') === 'speaker.machine' ? t('machine') : t('speaker.machine') }), () => openAsk(shell, episode.id), acts);
+  if (episode.anatomy) link('btn alt', t('ui.parts.open'), `#parts-${episode.anatomy}`, acts);
   link('btn alt', t('ui.shelf'), '#shelf', acts);
   button('btn alt', t('ui.again'), () => go(location.hash), acts);
   link('btn alt', t('ui.home'), '#home', acts);

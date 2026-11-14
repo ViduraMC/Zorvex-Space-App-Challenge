@@ -1,6 +1,6 @@
 # Progress
 
-Updated: Saturday 14 Nov 2026, about 22:45 (Asia/Colombo).
+Updated: Sunday 15 Nov 2026, early morning (Asia/Colombo).
 
 ## Now
 
@@ -15,6 +15,10 @@ Updated: Saturday 14 Nov 2026, about 22:45 (Asia/Colombo).
   NASA pages (claims the pages do not make were removed), long lines split, NASA models used
   (Lunar Module, Saturn V, InSight, new Pioneer 10), voices recorded, conflicts resolved.
 - Six playable stories: Sojourner, Viking, InSight, ALSEP, Apollo 11 EASEP, Pioneer.
+- Sinhala and Tamil: every interface, story, game and explorer text (proper names stay English; voices stay English). Needs a review by a Sinhala and a Tamil speaker.
+- Anatomy 360°: six NASA models (Viking lander, Spirit/Opportunity, InSight, Ingenuity, Apollo Lunar Module, Pioneer 10), each part with what it did, what we learned and its NASA source. From the hologram panel and story end cards.
+- Talk to the machine (free, offline): five ready questions in all three languages, typed questions in English, answers only from the story facts with sources. A real AI answer can plug in once we pick a free Space Apps offer.
+- Pitch notes: docs/PITCH.md.
 - New kit game `seismograph` (catch the shaking), used by ALSEP and InSight.
 
 - Product renamed: The Abandoned Explorers, "Abandoned but not Forgotten."
@@ -27,7 +31,9 @@ Updated: Saturday 14 Nov 2026, about 22:45 (Asia/Colombo).
 
 ## Next
 
-1. Vidura: say what is next (deploy, phone checks, Sinhala and Tamil, the remaining explorers).
+1. Vidura: paste the Space Apps global offers list (it needs a login) so we can pick a free AI service for the chatbot.
+1b. Deploy on GoDaddy (needs Vidura's account) and make the repository public.
+1c. Stories for Spirit and Opportunity, Phoenix, Ingenuity, Apollo 15 LRV and Surveyor 3.
 2. Connect Vercel (public URL and pull-request previews).
 3. Decide on the Moon globe image (only non-challenge, non-3D-Resources data left; see docs/RESOURCES.md section 3).
 4. Stories for each explorer (Vidura is sending them).

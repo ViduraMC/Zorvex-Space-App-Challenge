@@ -1,0 +1,435 @@
+{
+  "viking-lander": {
+    "size": 2.2,
+    "by": "height",
+    "parts": [
+      {
+        "id": "cameras",
+        "at": [
+          0.45,
+          0.72,
+          0.6
+        ],
+        "fact": {
+          "text": "Each lander had two 360-degree cylindrical scan cameras mounted near one long side of its base.",
+          "source": "https://science.nasa.gov/mission/viking/spacecraft-and-science/"
+        }
+      },
+      {
+        "id": "arm",
+        "at": [
+          0.78,
+          0.55,
+          0.45
+        ],
+        "fact": {
+          "text": "The sampler arm had a collector head, a temperature sensor and a magnet. On 28 July 1976 Viking 1's arm scooped up its first soil samples for its biology laboratory.",
+          "source": "https://science.nasa.gov/mission/viking-1/"
+        }
+      },
+      {
+        "id": "biology",
+        "at": [
+          0.5,
+          0.6,
+          0.5
+        ],
+        "fact": {
+          "text": "The landers ran three biology experiments (Labeled Release, Gas Exchange and Pyrolytic Release). They found enigmatic chemical activity in the soil, but no definitive evidence of living microorganisms.",
+          "source": "https://science.nasa.gov/astrobiology/missions/viking-project/"
+        }
+      },
+      {
+        "id": "gcms",
+        "at": [
+          0.4,
+          0.6,
+          0.75
+        ],
+        "fact": {
+          "text": "Viking showed that the Martian surface is an iron-rich clay containing a highly oxidizing substance that releases oxygen when wetted. No organic molecules were detected at the parts-per-billion level.",
+          "source": "https://science.nasa.gov/astrobiology/missions/viking-project/"
+        }
+      },
+      {
+        "id": "weather",
+        "at": [
+          0.35,
+          0.85,
+          0.15
+        ],
+        "fact": {
+          "text": "A meteorology boom on one lander leg held temperature, wind direction and wind velocity sensors.",
+          "source": "https://science.nasa.gov/mission/viking/spacecraft-and-science/"
+        }
+      },
+      {
+        "id": "rtg",
+        "at": [
+          0.62,
+          0.68,
+          0.3
+        ],
+        "fact": {
+          "text": "Each lander was a six-sided aluminium base on three legs. Two radioisotope thermoelectric generators (RTGs) containing plutonium-238 gave it power.",
+          "source": "https://science.nasa.gov/mission/viking/spacecraft-and-science/"
+        }
+      },
+      {
+        "id": "legs",
+        "at": [
+          0.12,
+          0.06,
+          0.7
+        ],
+        "fact": {
+          "text": "At 6 km a 16-metre parachute slowed the lander to 60 m/s. Then the aeroshell was dropped, the three legs came out, and three hydrazine engines made the final descent.",
+          "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C"
+        }
+      }
+    ]
+  },
+  "mer-opportunity": {
+    "size": 1.9,
+    "by": "size",
+    "parts": [
+      {
+        "id": "pancam",
+        "at": [
+          0.5,
+          0.95,
+          0.36
+        ],
+        "fact": {
+          "text": "Pancam was two cameras that took detailed, multi-wavelength, 3-D panoramic pictures. Its mast stands 1.4 m tall, giving the cameras a human geologist's point of view.",
+          "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-instruments/"
+        }
+      },
+      {
+        "id": "rat",
+        "at": [
+          0.5,
+          0.38,
+          0.97
+        ],
+        "fact": {
+          "text": "The Rock Abrasion Tool (RAT) used rotating, grinding teeth to remove dust and weathered rock, exposing fresh rock underneath for the other tools.",
+          "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-instruments/"
+        }
+      },
+      {
+        "id": "apxs",
+        "at": [
+          0.42,
+          0.33,
+          0.93
+        ],
+        "fact": {
+          "text": "The Alpha Particle X-Ray Spectrometer (APXS) found which elements make up rocks and soils, with clues to weathering and water activity on Mars.",
+          "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-instruments/"
+        }
+      },
+      {
+        "id": "mossbauer",
+        "at": [
+          0.58,
+          0.33,
+          0.93
+        ],
+        "fact": {
+          "text": "The Mössbauer Spectrometer identified iron-bearing minerals, giving information about early Martian environmental conditions. One measurement took about 12 hours.",
+          "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-instruments/"
+        }
+      },
+      {
+        "id": "microscope",
+        "at": [
+          0.5,
+          0.26,
+          0.9
+        ],
+        "fact": {
+          "text": "The Microscopic Imager, on the turret at the end of the arm, took extreme close-up black-and-white views of rocks and soils.",
+          "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-instruments/"
+        }
+      },
+      {
+        "id": "solar",
+        "at": [
+          0.2,
+          0.62,
+          0.3
+        ],
+        "fact": {
+          "text": "The rovers were solar-powered. Opportunity last communicated with Earth on 10 June 2018, as a planet-wide dust storm blanketed its location.",
+          "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+        }
+      }
+    ]
+  },
+  "insight-lander": {
+    "size": 5.5,
+    "by": "size",
+    "parts": [
+      {
+        "id": "seis",
+        "at": [
+          0.55,
+          0.75,
+          0.6
+        ],
+        "fact": {
+          "text": "SEIS, the dome-shaped seismometer, sat on the Martian surface under a domed Wind and Thermal Shield and waited for marsquakes and meteorite impacts.",
+          "source": "https://science.nasa.gov/mission/insight/science-instruments/"
+        }
+      },
+      {
+        "id": "hp3",
+        "at": [
+          0.45,
+          0.75,
+          0.4
+        ],
+        "fact": {
+          "text": "HP3, the heat probe, was designed to burrow almost 5 m down. Its mole met different soil than expected and could not reach the planned depth.",
+          "source": "https://science.nasa.gov/mission/insight/science-instruments/"
+        }
+      },
+      {
+        "id": "rise",
+        "at": [
+          0.5,
+          0.8,
+          0.5
+        ],
+        "fact": {
+          "text": "RISE tracked the lander's position precisely to measure how much Mars' north pole wobbles, revealing the size and composition of its iron-rich core.",
+          "source": "https://science.nasa.gov/mission/insight/science-instruments/"
+        }
+      },
+      {
+        "id": "arm",
+        "at": [
+          0.6,
+          0.85,
+          0.55
+        ],
+        "fact": {
+          "text": "After landing, the lander's arm picked up the instruments and placed them on the surface of Mars.",
+          "source": "https://science.nasa.gov/mission/insight/science-instruments/"
+        }
+      }
+    ],
+    "zoom": 0.6,
+    "focus": [
+      0.5,
+      0.55,
+      0.5
+    ]
+  },
+  "ingenuity": {
+    "size": 1.3,
+    "by": "size",
+    "parts": [
+      {
+        "id": "rotors",
+        "at": [
+          0.5,
+          0.72,
+          0.5
+        ],
+        "fact": {
+          "text": "Ingenuity's rotors are about 1.2 m tip to tip. It could fly up to 5 m high and 300 m far in the thin Martian air.",
+          "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+        }
+      },
+      {
+        "id": "solar",
+        "at": [
+          0.5,
+          0.98,
+          0.5
+        ],
+        "fact": {
+          "text": "A solar panel charged lithium-ion batteries, giving enough energy for one 90-second flight per Martian day.",
+          "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+        }
+      },
+      {
+        "id": "body",
+        "at": [
+          0.5,
+          0.35,
+          0.5
+        ],
+        "fact": {
+          "text": "Ingenuity has a mass of 1.8 kg. Planned for no more than five test flights, it completed 72 flights; the last was on 18 January 2024.",
+          "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+        }
+      }
+    ]
+  },
+  "apollo-lunar-module": {
+    "size": 7,
+    "by": "height",
+    "parts": [
+      {
+        "id": "engine",
+        "at": [
+          0.5,
+          0.12,
+          0.5
+        ],
+        "fact": {
+          "text": "The descent engine was a deep-throttling rocket with a maximum thrust of about 45,000 N, mounted in the centre of the descent stage.",
+          "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+        }
+      },
+      {
+        "id": "legs",
+        "at": [
+          0.08,
+          0.08,
+          0.5
+        ],
+        "fact": {
+          "text": "Four landing legs with round footpads held the descent stage 1.5 m above the surface; opposite footpads were 9.4 m apart.",
+          "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+        }
+      },
+      {
+        "id": "ladder",
+        "at": [
+          0.5,
+          0.25,
+          0.92
+        ],
+        "fact": {
+          "text": "One of the legs had a small astronaut egress platform and ladder.",
+          "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+        }
+      },
+      {
+        "id": "cabin",
+        "at": [
+          0.5,
+          0.62,
+          0.8
+        ],
+        "fact": {
+          "text": "The ascent stage housed the astronauts in a 6.65 cubic metre cabin with two triangular windows and no seats.",
+          "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+        }
+      },
+      {
+        "id": "sband",
+        "at": [
+          0.75,
+          0.92,
+          0.5
+        ],
+        "fact": {
+          "text": "Telemetry, TV, voice and range communications with Earth all went through the steerable S-band antenna.",
+          "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+        }
+      },
+      {
+        "id": "radar",
+        "at": [
+          0.45,
+          0.95,
+          0.7
+        ],
+        "fact": {
+          "text": "A parabolic rendezvous radar antenna on top helped the ascent stage find and dock with the Command and Service Module.",
+          "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+        }
+      },
+      {
+        "id": "rcs",
+        "at": [
+          0.18,
+          0.7,
+          0.5
+        ],
+        "fact": {
+          "text": "Four thruster modules, each with four 450 N thrusters pointing in different directions, steered the Lunar Module.",
+          "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+        }
+      }
+    ]
+  },
+  "pioneer-10": {
+    "size": 8.2,
+    "by": "size",
+    "parts": [
+      {
+        "id": "dish",
+        "at": [
+          0.5,
+          0.95,
+          0.5
+        ],
+        "fact": {
+          "text": "Pioneer 10 talked to Earth by radio. By the time it reached Jupiter, a command and its reply took up to 92 minutes.",
+          "source": "https://science.nasa.gov/mission/pioneer-10/"
+        }
+      },
+      {
+        "id": "rtg",
+        "at": [
+          0.9,
+          0.86,
+          0.5
+        ],
+        "fact": {
+          "text": "Pioneer 10 was the first spacecraft to use all-nuclear electrical power: SNAP-19 RTGs delivering about 140 W at Jupiter.",
+          "source": "https://science.nasa.gov/mission/pioneer-10/"
+        }
+      },
+      {
+        "id": "magnetometer",
+        "at": [
+          0.5,
+          0.55,
+          0.5
+        ],
+        "fact": {
+          "text": "Pioneer 10 carried a Helium Vector Magnetometer. The spacecraft's data showed that Jupiter's magnetic tail, almost 800 million km long, stretched all the way to Saturn's orbit.",
+          "source": "https://science.nasa.gov/mission/pioneer-10/"
+        }
+      },
+      {
+        "id": "camera",
+        "at": [
+          0.4,
+          0.82,
+          0.6
+        ],
+        "fact": {
+          "text": "The Imaging Photopolarimeter took about 500 pictures of Jupiter, showing the Great Red Spot, before Jupiter's radiation stopped it.",
+          "source": "https://science.nasa.gov/mission/pioneer-10/"
+        }
+      },
+      {
+        "id": "plaque",
+        "at": [
+          0.55,
+          0.8,
+          0.35
+        ],
+        "fact": {
+          "text": "Pioneer 10 carries an aluminium plaque with a man and a woman, the solar system, and its location relative to 14 pulsars.",
+          "source": "https://science.nasa.gov/mission/pioneer-10/"
+        }
+      }
+    ],
+    "focus": [
+      0.5,
+      0.86,
+      0.5
+    ],
+    "zoom": 0.42,
+    "space": true
+  }
+}

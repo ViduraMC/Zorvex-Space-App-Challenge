@@ -5,6 +5,8 @@
  */
 import mars from '../data/explorers.mars.json';
 import moon from '../data/explorers.moon.json';
+import { CONFIG } from '../config';
+import { getLang, tEp } from '../engine/i18n';
 import type { Destination } from './store';
 
 export const EXPLORER_TYPES = ['rover', 'lander', 'helicopter', 'descent-stage', 'instrument'] as const;
@@ -64,3 +66,7 @@ const ROSTERS: Record<Destination, Explorer[]> = {
 export const explorersOf = (destination: Destination): Explorer[] => ROSTERS[destination];
 export const findExplorer = (id: string): Explorer | undefined =>
   [...ROSTERS.mars, ...ROSTERS.moon].find((e) => e.id === id);
+
+/** The summary in the chosen language: English is in the roster, Sinhala and Tamil in src/i18n. */
+export const summaryOf = (e: Explorer): string =>
+  getLang() === CONFIG.defaultLang ? e.summary : tEp('', `explorer.${e.id}`);

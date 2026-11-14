@@ -1,4 +1,4 @@
-/** Hash routes: #home, #ep-<id>, #story-<id>, #shelf, #about. A page mounts into the app root and may return a cleanup. */
+/** Hash routes: #home, #ep-<id>, #story-<id>, #parts-<model>, #shelf, #about. A page mounts into the app root and may return a cleanup. */
 export type Page = (root: HTMLElement, param: string) => void | (() => void);
 
 export interface Routes {
@@ -7,6 +7,7 @@ export interface Routes {
   story: Page;
   shelf: Page;
   about: Page;
+  parts: Page;
 }
 
 export function go(hash: string): void {
@@ -24,6 +25,7 @@ export function startRouter(root: HTMLElement, routes: Routes): void {
     window.scrollTo(0, 0);
     if (hash.startsWith('ep-')) cleanup = routes.ep(root, hash.slice(3));
     else if (hash.startsWith('story-')) cleanup = routes.story(root, hash.slice(6));
+    else if (hash.startsWith('parts-')) cleanup = routes.parts(root, hash.slice(6));
     else if (hash === 'shelf') cleanup = routes.shelf(root, '');
     else if (hash === 'about') cleanup = routes.about(root, '');
     else cleanup = routes.home(root, '');

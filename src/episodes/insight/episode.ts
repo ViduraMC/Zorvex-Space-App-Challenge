@@ -18,6 +18,7 @@ export default defineEpisode({
   machine: { start: LANDER },
   patch: { color: '#D97736', glyph: 'I' },
   lastContact: { date: '2022-12-15', fact: 'end' },
+  anatomy: 'insight-lander',
   lookUp: 'Mars',
   stats: [
     { value: '3', label: 'stat.instruments' },

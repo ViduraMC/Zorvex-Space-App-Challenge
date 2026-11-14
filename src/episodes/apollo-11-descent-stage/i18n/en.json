@@ -41,8 +41,8 @@
   "p1.unloaded": "A human lifted me from Eagle and set me down on the soil, about seventeen metres south.",
   "p1.unloaded.2": "My switch was still off.",
   "p1.reflector": "A small mirror that needed no power was placed about five metres north-northwest of me.",
-  "p1.surfaceWork": "55 kilograms of Moon rock and soil and walked about 250 metres.",
-  "p1.surfaceMedia": "S. President by radio, and shared pictures with Earth through a small camera.",
+  "p1.surfaceWork": "I was asleep, but the records tell me the humans gathered 21.55 kilograms of Moon rock and soil and walked about 250 metres.",
+  "p1.surfaceMedia": "They raised a flag, spoke to the U.S. President by radio, and shared pictures with Earth through a small camera.",
   "p1.surfaceImages": "A small camera carried pictures to Earth.",
   "p1.surfaceImages.2": "In one photograph, the other astronaut and Eagle were reflected in a visor.",
   "p1.present": "That is how I came to be here, on the plain, with the humans gone and my eyes finally open.",
@@ -70,7 +70,7 @@
   "p2.descent.2": "Four legs held it above the soil, and its engine could throttle down for landing.",
   "p2.descent.3": "It carried me in its storage bay. When the upper half left, the lower half stayed behind.",
   "p2.surface": "The humans gathered 21.55 kilograms of Moon rock and soil and walked about 250 metres across the surface.",
-  "p2.surfaceMedia": "S. President by radio. A lunar surface camera shared images with people on Earth.",
+  "p2.surfaceMedia": "The astronauts also spoke to the U.S. President by radio.",
   "p2.easep": "I am a 48-kilogram station with a passive seismometer and a lunar dust detector. My panels face east and west.",
   "p2.easep.2": "I was a forerunner of the larger science packages on later Apollo missions.",
   "p2.reflector": "A separate laser reflector sat about five metres north-northwest of me. It needed no power.",
@@ -195,7 +195,7 @@
   "p4.longDay": "The daylight moved across the plain. I stayed at my post beneath the black sky, with Earth above me.",
   "p4.longDay.2": "My instruments were made to listen to the Moon and send their signals home. I had work.",
   "p4.instruments": "My seismometer and dust detector were ready to measure the Moon and send data to Earth. I was built to listen.",
-  "p4.letters": "5 MHz. Those signals were my letters from home. As the light changed, I knew the long night was coming.",
+  "p4.letters": "I could receive commands from Earth at 2119 MHz and send telemetry at 2276.5 MHz.",
   "p4.firstNight": "About five hours before lunar sunset, Earth told my station to stop transmitting.",
   "p4.firstNight.2": "My panels could not power me in the dark. On the next lunar day, I was turned on again.",
   "p4.lastDay": "I worked through temperatures that exceeded my planned maximum by thirty degrees Celsius.",
@@ -217,5 +217,8 @@
   "shutdown.epilogue": "EASEP · Apollo 11 · Sea of Tranquility\n0.6735° N, 23.4730° E\nOperated 21 Jul to 27 Aug 1969 (two lunar days)\nLeft on the Moon.",
   "shutdown.replay": "Replay",
   "ui.sfx.win": "DEPLOYED!",
-  "speaker.machine": "EASEP"
+  "speaker.machine": "EASEP",
+  "p2.surfaceMedia.2": "A lunar surface camera shared images with people on Earth.",
+  "p4.letters.2": "Those signals were my letters from home.",
+  "p4.letters.3": "As the light changed, I knew the long night was coming."
 }

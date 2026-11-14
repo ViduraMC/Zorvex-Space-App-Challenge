@@ -5,7 +5,7 @@
 import { el, link } from '../dom';
 import { t } from '../engine/i18n';
 import { go, type Page } from '../engine/router';
-import { findExplorer } from '../journey/explorers';
+import { findExplorer, summaryOf } from '../journey/explorers';
 import { pageShell } from './chrome';
 
 export const storyPage: Page = (root, id) => {
@@ -19,6 +19,6 @@ export const storyPage: Page = (root, id) => {
   const end = explorer.years.end ?? t('ui.years.present');
   el('p', 'lede', `${t(`ui.type.${explorer.type}`)} · ${explorer.years.start} – ${end} · ${t(`ui.status.${explorer.status}`)}`, inner);
   el('h2', 'section', t('ui.story.soon'), inner);
-  el('p', 'lede', explorer.summary, inner);
+  el('p', 'lede', summaryOf(explorer), inner);
   link('btn', t('ui.story.back'), '#home', inner);
 };

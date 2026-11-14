@@ -15,14 +15,16 @@ import { Renderer } from '../engine/renderer';
 import { go, type Page } from '../engine/router';
 import { Scope } from '../engine/scope';
 import { episodeFor } from '../episodes';
-import type { Explorer } from '../journey/explorers';
+import { openAsk } from '../features/ask';
+import { summaryOf, type Explorer } from '../journey/explorers';
 import { NASA_MODELS, nasaModel, loadNasaModel } from '../journey/nasaModels';
 import { COLORS, createChild, createDesert, createNightSky, createPlanet, createRocket, createShootingStars, createStars } from '../journey/props';
 import { formatSite } from '../journey/geo';
 import { SiteGlobe } from '../journey/siteGlobe';
 import { createFlightFx } from '../journey/flight';
 import { journey, type Destination, type Phase } from '../journey/store';
-import { buildSurface, disposeSurface, hasNasaModel, updateSurface, type Surface } from '../journey/surface';
+import { buildSurface, disposeSurface, hasNasaModel, modelKeyOf, updateSurface, type Surface } from '../journey/surface';
+import { hasAnatomy } from './anatomy';
 
 /** Mission control's recorded lines (npm run voices). */
 const VOICE = import.meta.glob<string>('../journey/voice/en/*.mp3', { eager: true, query: '?url', import: 'default' });
@@ -227,7 +229,7 @@ export const journeyPage: Page = (root) => {
     el('span', `holo-chip ${e.status}`, t(`ui.status.${e.status}`), meta);
     el('span', '', t(`ui.type.${e.type}`), meta);
     el('span', '', years(e), meta);
-    el('p', '', e.summary, holo);
+    el('p', '', summaryOf(e), holo);
     // where it rests: a small globe of its world with the landing site marked
     const route = el('div', 'holo-route', undefined, holo);
     globe ??= new SiteGlobe();
@@ -246,6 +248,10 @@ export const journeyPage: Page = (root) => {
     for (const s of e.sources) link('', s.label, s.url, sources);
     el('span', '', t(hasNasaModel(e.id) ? 'ui.holo.model' : 'ui.holo.standin'), sources);
     button('holo-explore', t('ui.holo.explore'), () => launch(e.id), holo);
+    const parts = modelKeyOf(e.id);
+    if (parts && hasAnatomy(parts)) link('holo-parts', t('ui.parts.open'), `#parts-${parts}`, holo);
+    const story = episodeFor(e.id);
+    if (story) button('holo-parts', t('ui.ask.open', { name: e.name }), () => openAsk(shell, story.id), holo);
     holo.classList.remove('in');
     void holo.offsetWidth; // restart the appear animation
     holo.classList.add('in');
