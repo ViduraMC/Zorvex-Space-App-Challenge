@@ -20,7 +20,13 @@
         "label": "NASA Space Apps 2026 challenge: Resources (descent stages left behind as launch pads)",
         "url": "https://www.spaceappschallenge.org/2026/challenges/nasas-discarded-equipment-storytelling/?tab=resources"
       }
-    ]
+    ],
+    "site": {
+      "lat": 0.6735,
+      "lon": 23.473,
+      "note": "Apollo 11 science package, about 17 m from the lander",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+    }
   },
   {
     "id": "alsep-apollo-12",
@@ -39,7 +45,13 @@
         "label": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)",
         "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
       }
-    ]
+    ],
+    "site": {
+      "lat": -3.0094,
+      "lon": -23.4246,
+      "note": "ALSEP central station",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+    }
   },
   {
     "id": "lrv-apollo-15",
@@ -58,7 +70,13 @@
         "label": "NASA NSSDCA: Apollo 15 Lunar Module / ALSEP (challenge resource)",
         "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
       }
-    ]
+    ],
+    "site": {
+      "lat": 26.13239,
+      "lon": 3.6333,
+      "note": "Apollo 15 lander site",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
+    }
   },
   {
     "id": "surveyor-3",
@@ -77,6 +95,12 @@
         "label": "NASA Science: Surveyor 3 (challenge resource)",
         "url": "https://science.nasa.gov/mission/surveyor-3/"
       }
-    ]
+    ],
+    "site": {
+      "lat": -3,
+      "lon": -23.41,
+      "note": "Oceanus Procellarum",
+      "source": "https://science.nasa.gov/mission/surveyor-3/"
+    }
   }
 ]
