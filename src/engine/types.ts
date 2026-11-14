@@ -45,8 +45,8 @@ type PlayStep = { [K in keyof GameConfigs]: { play: K; config: GameConfigs[K] } 
 export type Step =
   /** Yellow narrator box. Waits for Next unless `auto` (ms) is set. */
   | { caption: string; fact?: string; auto?: number }
-  /** Speech bubble from the machine. `fact` is required: a fact id, or null for pure feeling ("Goodbye!"). */
-  | { say: string; fact: string | null; auto?: number }
+  /** Speech bubble. `fact` is required: a fact id, or null for pure feeling ("Goodbye!"). `by` names another speaker (a role in voice/cast.json). */
+  | { say: string; fact: string | null; auto?: number; by?: string }
   /** Comic sound-effect word ("WHIRRR!") with an optional sound. */
   | { sfx: string; sound?: SoundName }
   /** A sound on its own. */
@@ -162,7 +162,9 @@ export interface EpisodeContext {
   /** Screen position (CSS px) of a world point; `visible` is false behind the camera. */
   project: (point: Vector3) => { x: number; y: number; visible: boolean };
   /** Make the machine speak a line (bubble + voice) and wait for Next. */
-  say: (key: string, scope: Scope) => Promise<void>;
+  say: (key: string, scope: Scope, role?: string) => Promise<void>;
+  /** Show a role's name in the speech bubble (voice/cast.json roles; default the machine). */
+  speaker: (role?: string) => void;
 }
 
 /** Identity helper that gives episode files full type checking and autocomplete. */

@@ -189,10 +189,16 @@ async function play(
     fact: (factId) => facts.find((f) => f.id === factId),
     resolve,
     project,
-    async say(key, scope) {
+    speaker(role) {
+      // a role's name comes from "speaker.<role>"; without one, the machine's own name
+      const name = t(`speaker.${role ?? 'machine'}`);
+      comic.setSpeaker(name.startsWith('speaker.') ? t('machine') : name);
+    },
+    async say(key, scope, role) {
       machine.talking = true;
       const text = t(key);
-      audio.say(text, { episode: episode.id, key, robot: true });
+      ctx.speaker(role);
+      audio.say(text, { episode: episode.id, key, role: role ?? 'machine' });
       await scope.wait(comic.bubble(text));
       await scope.wait(comic.next());
       machine.talking = false;

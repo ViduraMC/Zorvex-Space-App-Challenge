@@ -1,0 +1,5 @@
+{
+  "narrator": { "kokoro": "bm_george", "gender": "male", "speed": 0.95 },
+  "machine": { "kokoro": "am_michael", "gender": "male" },
+  "viking2": { "kokoro": "af_heart", "gender": "female" }
+}
