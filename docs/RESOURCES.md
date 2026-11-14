@@ -64,6 +64,8 @@ photo, so we show no Earth globe.
 | Viking Project and Astrobiology | <https://science.nasa.gov/astrobiology/missions/viking-project/> | The search for life, soil results, endings |
 | Viking: 50 Years on Mars | <https://science.nasa.gov/mission/viking/viking-50-years-on-mars/> | The first photo, the 19-minute signal |
 | NSSDCA Viking 1 Lander (challenge catalogue) | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C> | The descent sequence |
+| NSSDCA Apollo 11 Command and Service Module (challenge catalogue) | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A> | Apollo 11 story: Columbia, launch, flight and return (brief: docs/stories/apollo-11.md) |
+| NSSDCA Apollo 11, 25th Anniversary (challenge catalogue) | <https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html> | Apollo 11 story: surface photographs, flag, samples, timeline quotes |
 
 ## 3. Other images (visuals only, no facts)
 
@@ -89,9 +91,9 @@ pages (Viking 1, Viking 2, InSight, Surveyor 3). Ingenuity has none yet.
 
 ## 3b. Other NASA data
 
-| Data | Link | Why it is still here |
+| Data | Link | Where it is used / status |
 |---|---|---|
-| CGI Moon Kit (LRO colour, LOLA elevation), NASA's Scientific Visualization Studio | <https://svs.gsfc.nasa.gov/4720> | The Moon globe. 3D Resources has no Moon colour map, only a printable model (12 MB STL). Decide: keep it, or use a plain grey Moon |
+| CGI Moon Kit (LRO colour, LOLA elevation), NASA's Scientific Visualization Studio | <https://svs.gsfc.nasa.gov/4720> | The Moon globe. 3D Resources has no Moon colour map, only a printable model (12 MB STL); still flagged to replace |
 
 ## 4. Not data (code and fonts)
 

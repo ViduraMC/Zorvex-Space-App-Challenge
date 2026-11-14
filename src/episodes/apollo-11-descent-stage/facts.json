@@ -1,0 +1,157 @@
+{
+  "episode": "apollo-11-descent-stage",
+  "checked": "2026-11-14",
+  "note": "Apollo 11 facts were checked against the approved NASA NSSDCA Lunar Module and CSM records and NASA's Apollo 11 anniversary page. Illustrative staging is documented in DECISIONS.md.",
+  "facts": [
+    {
+      "id": "stowed-instruments",
+      "text": "The Apollo 11 Lunar Module descent stage contained storage space for lunar equipment and experiments.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "deployment",
+      "text": "EASEP was deployed approximately 17 m south of the Lunar Module before it was turned on by ground command.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "power-on",
+      "text": "EASEP was turned on by ground command at 04:40:39 UT on 21 July 1969 while the astronauts were still on the lunar surface.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "solar-power",
+      "text": "EASEP had two solar panels that provided power, and it could operate only during lunar day. The panels faced east and west.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "astronaut-return",
+      "text": "Aldrin returned to the Lunar Module first. Armstrong followed at 05:09:32 UT after transferring sample boxes to Aldrin and placing a packet of memorial items on the ground.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "hatch-closed",
+      "text": "The extravehicular activity ended at 05:11:13 UT when the Lunar Module hatch was closed.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "flight-profile",
+      "text": "Apollo 11 launched on 16 July 1969, entered Earth orbit, used the S-IVB for translunar injection, docked Columbia with Eagle, coasted to the Moon, entered lunar orbit, and returned to Earth.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A",
+      "sourceName": "NASA NSSDCA: Apollo 11 Command and Service Module"
+    },
+    {
+      "id": "launch-vehicle",
+      "text": "Apollo 11 launched on a Saturn V from Kennedy Space Center at 13:32 UT on 16 July 1969. The S-IVB translunar injection burn lasted 5 minutes 48 seconds.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A",
+      "sourceName": "NASA NSSDCA: Apollo 11 Command and Service Module"
+    },
+    {
+      "id": "columbia-orbiter",
+      "text": "The Command and Service Module mass was 28,801 kg; the Service Module main engine thrust was about 91,000 N. Columbia remained in lunar orbit while Eagle was on the surface and returned the crew to Earth.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A",
+      "sourceName": "NASA NSSDCA: Apollo 11 Command and Service Module"
+    },
+    {
+      "id": "eagle-ascent",
+      "text": "The Lunar Module ascent stage had a dry mass of 2,445 kg, carried 2,376 kg of propellant, was about 2.8 m high, had a 6.65 m3 crew compartment with no seats, used an ascent engine with about 15,000 N thrust, and lifted off on 21 July 1969.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "eagle-descent",
+      "text": "The Lunar Module descent stage was 4.2 m across and 1.7 m thick; its four landing legs held it 1.5 m above the surface with 9.4 m between opposite footpads. Its descent engine could throttle down for landing, and the stage remained on the Moon.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "surface-work",
+      "text": "The astronauts collected 21.55 kg of lunar rock and soil and traversed about 250 m on the lunar surface.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "surface-media",
+      "text": "The Apollo 11 astronauts deployed a flag and a lunar surface television camera, spoke with the U.S. President by radio, unveiled a plaque mounted on a strut, and took a photograph reflecting the photographer and Lunar Module in an astronaut's visor.",
+      "source": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html",
+      "sourceName": "NASA: Apollo 11 25th Anniversary"
+    },
+    {
+      "id": "easep-instruments",
+      "text": "EASEP had a mass of 48 kg, two solar panels, a passive seismometer, a lunar dust detector, and an antenna and communications system. It received commands at 2119 MHz, sent telemetry at 2276.5 MHz, and was a forerunner of later ALSEP packages.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "retroreflector",
+      "text": "The laser ranging retroreflector was considered part of EASEP, was not attached to the station, required no power, and was deployed about 5 m north-northwest of EASEP.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "powered-descent",
+      "text": "Powered descent began at 20:05 UT on 20 July 1969 and lasted 756.3 seconds.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "landing",
+      "text": "The Lunar Module landed in the Sea of Tranquility at 20:17:40 UT on 20 July 1969.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "first-step",
+      "text": "Armstrong stepped onto the lunar surface at 02:56:15 UT on 21 July 1969; Aldrin followed 19 minutes later. This was more than six hours after landing.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "timeline-quotes",
+      "text": "NASA's Apollo 11 anniversary page records Collins saying, \"You cats take it easy on the lunar surface,\" and the landing call, \"The Eagle has landed.\"",
+      "source": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html",
+      "sourceName": "NASA: Apollo 11 25th Anniversary"
+    },
+    {
+      "id": "eagle-liftoff",
+      "text": "The Lunar Module ascent stage lifted off at 17:54:01 UT on 21 July after 21 hours 36 minutes on the lunar surface, docked with Columbia, and was jettisoned into lunar orbit.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "flag-fall",
+      "text": "The flag was knocked over when the Lunar Module lifted off, and after docking the lunar samples were brought aboard the Command Module.",
+      "source": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html",
+      "sourceName": "NASA: Apollo 11 25th Anniversary"
+    },
+    {
+      "id": "splashdown",
+      "text": "Apollo 11 splashed down in the Pacific Ocean at 16:50:35 UT on 24 July 1969.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A",
+      "sourceName": "NASA NSSDCA: Apollo 11 Command and Service Module"
+    },
+    {
+      "id": "easep-operation",
+      "text": "EASEP transmission stopped by ground command about five hours before lunar sunset on 3 August 1969. It was turned on again the next lunar day.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "terminal-failure",
+      "text": "EASEP operated normally despite temperatures 30 C above its planned maximum; near noon of its second lunar day on 27 August 1969, it no longer accepted commands and the experiment was terminated.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C",
+      "sourceName": "NASA NSSDCA: Apollo 11 Lunar Module"
+    },
+    {
+      "id": "footprints",
+      "text": "The Apollo 11 astronauts' lunar footprints may last millions of years barring a chance meteorite impact.",
+      "source": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html",
+      "sourceName": "NASA: Apollo 11 25th Anniversary"
+    }
+  ]
+}

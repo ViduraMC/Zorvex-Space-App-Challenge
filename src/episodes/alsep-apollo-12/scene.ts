@@ -11,7 +11,6 @@
  * Calls: launchPose, launch, landed, liftoff, longWatch.
  */
 import {
-  Box3,
   BoxGeometry,
   Color,
   ConeGeometry,
@@ -32,7 +31,7 @@ import { part, tube, type MachineMaterials } from '../../engine/models';
 import { hash } from '../../engine/noise';
 import type { Scope } from '../../engine/scope';
 import type { SceneBuild, SceneHandles } from '../../engine/types';
-import { nasaModel } from '../../journey/nasaModels';
+import { nasaModel, splitAbove } from '../../journey/nasaModels';
 
 export const INTREPID_X = 14;
 export const INTREPID_Z = -10;
@@ -261,18 +260,7 @@ async function buildLunarModule(mats: MachineMaterials, scene: Object3D, groundY
     return { lm, ascent };
   }
   lm.add(model);
-  lm.updateMatrixWorld(true);
-  const bounds = new Box3().setFromObject(model);
-  const cut = bounds.min.y + (bounds.max.y - bounds.min.y) * DESCENT_SHARE;
-  const upper: Mesh[] = [];
-  const centre = new Vector3();
-  model.traverse((o) => {
-    if (o instanceof Mesh && new Box3().setFromObject(o).getCenter(centre).y > cut) upper.push(o);
-  });
-  const ascent = new Group();
-  lm.add(ascent);
-  for (const mesh of upper) ascent.attach(mesh);
-  return { lm, ascent };
+  return { lm, ascent: splitAbove(model, DESCENT_SHARE) };
 }
 
 /** A rocket flame: an open cone glowing brighter than white. */

@@ -58,6 +58,8 @@ export const STORY_SOURCES: Source[] = [
   { label: 'NASA Science: Viking Project and Astrobiology', url: 'https://science.nasa.gov/astrobiology/missions/viking-project/', usedFor: 'Viking story: the search for life, soil results, endings' },
   { label: 'NASA Science: Viking, 50 Years on Mars', url: 'https://science.nasa.gov/mission/viking/viking-50-years-on-mars/', usedFor: 'Viking story: the first photo, the 19-minute signal' },
   { label: 'NASA NSSDCA: Viking 1 Lander', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C', usedFor: 'Viking story: the descent sequence (parachute at 6 km)' },
+  { label: 'NASA NSSDCA: Apollo 11 Command and Service Module', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A', usedFor: 'Apollo 11 story: Columbia, launch, flight timeline and return to Earth' },
+  { label: 'NASA NSSDCA: Apollo 11, 25th Anniversary', url: 'https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html', usedFor: 'Apollo 11 story: surface photographs, flag, samples and timeline quotes' },
 ];
 
 /** Images and maps from other NASA sites (allowed for visuals; no facts are taken from them). */

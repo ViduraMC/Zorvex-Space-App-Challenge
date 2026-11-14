@@ -57,7 +57,8 @@ export function spokenLines(script: string): Map<string, string> {
     const by = /\bby: '([^']+)'/.exec(body)?.[1];
     const caption = /\bcaption: '([^']+)'/.exec(body)?.[1];
     if (caption) lines.set(caption, 'narrator');
-    for (const [, key] of body.matchAll(/\b(?:say|winSay): '([^']+)'/g)) lines.set(key, by ?? 'machine');
+    // say lines, plus the story-data fields some episodes use for the machine's narration
+    for (const [, key] of body.matchAll(/\b(?:say|winSay|narration2?|line): '([^']+)'/g)) lines.set(key, by ?? 'machine');
   }
   return lines;
 }
@@ -121,8 +122,14 @@ function main(): void {
     const castPath = join(dir, 'voice', 'cast.json');
     if (!existsSync(castPath)) continue;
     console.log(`\n${id}`);
-    const lines = spokenLines(readFileSync(join(dir, 'episode.ts'), 'utf8'));
+    const scripts = readdirSync(dir, { recursive: true })
+      .filter((file): file is string => typeof file === 'string' && file.endsWith('.ts'))
+      .map((file) => readFileSync(join(dir, file), 'utf8'))
+      .join('\n');
+    const lines = spokenLines(scripts);
     const texts = JSON.parse(readFileSync(join(dir, 'i18n', 'en.json'), 'utf8')) as Record<string, string>;
+    // long narration stored as beats (key, key.2, key.3, ...) is spoken by the same voice
+    for (const [key, role] of [...lines]) for (let n = 2; `${key}.${n}` in texts; n++) lines.set(`${key}.${n}`, role);
     const cast = JSON.parse(readFileSync(castPath, 'utf8')) as Cast;
     console.log(`  ${generate(join(dir, 'voice'), lines, texts, cast)} new clip(s)`);
   }
