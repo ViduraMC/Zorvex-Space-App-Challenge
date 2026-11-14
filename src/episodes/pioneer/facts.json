@@ -1,0 +1,205 @@
+{
+  "episode": "pioneer",
+  "checked": "2026-11-14",
+  "note": "Every fact checked on the NASA Pioneer 10 page (challenge resource) and its sister Pioneer 11 page.",
+  "facts": [
+    {
+      "id": "first-mission",
+      "text": "Pioneer 10 was NASA's first mission to the outer planets. Originally designed for a 21-month mission to fly by Jupiter, it lasted more than 30 years.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "weight",
+      "text": "Pioneer 10 had a spacecraft mass of 258 kg (569 pounds); its sister Pioneer 11 had 258.5 kg.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "p10-instruments",
+      "text": "Pioneer 10 had 11 scientific instruments, including a magnetometer, a plasma analyzer, cosmic ray and radiation detectors and meteoroid detectors.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "p11-instruments",
+      "text": "Pioneer 11 carried 12 scientific instruments: the same kinds as Pioneer 10 plus a triaxial fluxgate magnetometer.",
+      "source": "https://science.nasa.gov/mission/pioneer-11/",
+      "sourceName": "NASA Science: Pioneer 11"
+    },
+    {
+      "id": "rtg-power",
+      "text": "Pioneer 10 was the first spacecraft to use all-nuclear electrical power: SNAP-19 radioisotope thermal generators (RTGs) delivering about 140 W during the Jupiter encounter.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "rtg-booms",
+      "text": "The RTGs were mounted on booms; on Pioneer 11 one of the RTG booms momentarily failed to deploy, without endangering the mission.",
+      "source": "https://science.nasa.gov/mission/pioneer-11/",
+      "sourceName": "NASA Science: Pioneer 11"
+    },
+    {
+      "id": "p10-launch",
+      "text": "Pioneer 10 launched on 2 March 1972 at 01:49:04 UT from Launch Complex 36A, Cape Canaveral, on an Atlas Centaur.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "p11-launch",
+      "text": "Pioneer 11 launched on 6 April 1973 at 02:11 UT from Launch Complex 36B, Cape Canaveral.",
+      "source": "https://science.nasa.gov/mission/pioneer-11/",
+      "sourceName": "NASA Science: Pioneer 11"
+    },
+    {
+      "id": "first-belt",
+      "text": "Pioneer 10 was the first spacecraft to fly through the main asteroid belt. It entered the belt on 15 July 1972 and emerged in February 1973, after about 435 million km.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "belt-safe",
+      "text": "In the asteroid belt Pioneer 10 encountered some asteroid hits, although fewer than expected.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "p10-jupiter",
+      "text": "Pioneer 10 made its closest approach to Jupiter at 02:26 UT on 4 December 1973, at a range of 130,354 km and a speed of about 126,000 km/h.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "first-jupiter",
+      "text": "Pioneer 10 was the first spacecraft to fly past Jupiter. Between 6 November and 31 December 1973 it took about 500 pictures of Jupiter's atmosphere, clearly showing the Great Red Spot.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "jupiter-radiation",
+      "text": "Pioneer 10 fulfilled all objectives except one, because of false commands triggered by Jupiter's intense radiation; its photopolarimeter succumbed to radiation before it could photograph Io.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "ganymede",
+      "text": "Pioneer 10 was the first spacecraft to obtain close-up images of Jupiter's moon Ganymede.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "p11-jupiter",
+      "text": "Pioneer 11's closest approach to Jupiter was at 05:22 UT on 3 December 1974, about 42,500 km from the cloud tops: three times closer than Pioneer 10.",
+      "source": "https://science.nasa.gov/mission/pioneer-11/",
+      "sourceName": "NASA Science: Pioneer 11"
+    },
+    {
+      "id": "gravity-assist",
+      "text": "Pioneer 11 used Jupiter's massive gravitational field to swing back across the solar system on a course to Saturn.",
+      "source": "https://science.nasa.gov/mission/pioneer-11/",
+      "sourceName": "NASA Science: Pioneer 11"
+    },
+    {
+      "id": "p11-saturn",
+      "text": "Pioneer 11 was the first spacecraft to fly by Saturn. It crossed the ring plane beyond the outer ring at 14:36 UT on 1 September 1979 and passed the planet at about 20,900 km.",
+      "source": "https://science.nasa.gov/mission/pioneer-11/",
+      "sourceName": "NASA Science: Pioneer 11"
+    },
+    {
+      "id": "saturn-images",
+      "text": "During the Saturn encounter Pioneer 11 took 440 images of the planetary system.",
+      "source": "https://science.nasa.gov/mission/pioneer-11/",
+      "sourceName": "NASA Science: Pioneer 11"
+    },
+    {
+      "id": "f-ring",
+      "text": "Among Pioneer 11's discoveries were a narrow ring outside the A ring, named the F ring, and a new satellite 200 km in diameter.",
+      "source": "https://science.nasa.gov/mission/pioneer-11/",
+      "sourceName": "NASA Science: Pioneer 11"
+    },
+    {
+      "id": "titan-temp",
+      "text": "A brief burst of data showed that the average global temperature of Saturn's moon Titan was minus 193 degrees Celsius.",
+      "source": "https://science.nasa.gov/mission/pioneer-11/",
+      "sourceName": "NASA Science: Pioneer 11"
+    },
+    {
+      "id": "saturn-magfield",
+      "text": "Pioneer 11 detected Saturn's bow shock about 1.5 million km from the planet, the first conclusive evidence that Saturn has a magnetic field.",
+      "source": "https://science.nasa.gov/mission/pioneer-11/",
+      "sourceName": "NASA Science: Pioneer 11"
+    },
+    {
+      "id": "p10-neptune",
+      "text": "On 13 June 1983 Pioneer 10 crossed the orbit of Neptune, then the outermost planet, becoming the first human-made object to go beyond the furthest planet.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "p11-neptune",
+      "text": "Pioneer 11 crossed the orbit of Neptune on 23 February 1990.",
+      "source": "https://science.nasa.gov/mission/pioneer-11/",
+      "sourceName": "NASA Science: Pioneer 11"
+    },
+    {
+      "id": "p10-routine",
+      "text": "Routine contact with Pioneer 10 ended on 31 March 1997, at 67 AU from Earth, for budgetary reasons. Intermittent contact continued.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "p10-last-signal",
+      "text": "Pioneer 10 sent its last signal on 23 January 2003 from 12.23 billion km away. The signal took 11 hours and 20 minutes to reach Earth.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "p10-final-search",
+      "text": "Pioneer 10's RTG power had decayed and could no longer power its radio transmitter. A final attempt to contact it on 4 March 2006 failed.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "p11-last-contact",
+      "text": "NASA Ames Research Center made last contact with Pioneer 11 on 30 September 1995, when it was 44.1 AU from Earth.",
+      "source": "https://science.nasa.gov/mission/pioneer-11/",
+      "sourceName": "NASA Science: Pioneer 11"
+    },
+    {
+      "id": "p11-last-data",
+      "text": "Scientists received a few minutes of good engineering data from Pioneer 11 on 24 November 1995, then lost contact once Earth moved out of view of its antenna.",
+      "source": "https://science.nasa.gov/mission/pioneer-11/",
+      "sourceName": "NASA Science: Pioneer 11"
+    },
+    {
+      "id": "plaque",
+      "text": "Pioneers 10 and 11 both carry small metal plaques identifying their time and place of origin. The golden plaque was the idea of Carl Sagan.",
+      "source": "https://science.nasa.gov/mission/pioneer-11/",
+      "sourceName": "NASA Science: Pioneer 11"
+    },
+    {
+      "id": "plaque-contents",
+      "text": "The plaque shows a man and a woman, the solar system, and the spacecraft's location relative to 14 pulsars, so the position of the Sun could be worked out.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "p10-heading",
+      "text": "Pioneer 10 is heading in the direction of the red star Aldebaran, the eye of Taurus, and is expected to pass by it in about two million years.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    },
+    {
+      "id": "p11-heading",
+      "text": "Pioneer 11 will pass near the star Lambda Aquila in almost four million years.",
+      "source": "https://science.nasa.gov/mission/pioneer-11/",
+      "sourceName": "NASA Science: Pioneer 11"
+    },
+    {
+      "id": "still-travelling",
+      "text": "Both Pioneers are on trajectories out of the solar system. By 5 November 2017 Pioneer 10 was about 17.7 billion km from Earth and Pioneer 11 about 14.6 billion km.",
+      "source": "https://science.nasa.gov/mission/pioneer-10/",
+      "sourceName": "NASA Science: Pioneer 10 (challenge resource)"
+    }
+  ]
+}

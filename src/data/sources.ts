@@ -1,7 +1,8 @@
 /**
  * Every place our data comes from, in one list. The About page shows it and docs/RESOURCES.md
  * mirrors it. Rule (from our mentors): use the challenge's own resources, plus NASA's official
- * 3D Resources site for models and planet images. Anything else must be listed here and flagged.
+ * 3D Resources site for models and planet images. Facts may also come from NASA pages named in a
+ * team story brief. Images and models may come from other free sources when NASA has none.
  */
 import { NASA_MODELS } from '../journey/nasaModels';
 
@@ -25,10 +26,10 @@ export const CHALLENGE_RESOURCES: Source[] = [
   { label: 'Sojourner Rover', url: 'https://science.nasa.gov/mission/mars-pathfinder/', usedFor: 'Mars explorer and the Sojourner story' },
   { label: 'Spirit & Opportunity', url: 'https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/', usedFor: 'Mars explorers: Spirit and Opportunity' },
   { label: 'Viking 1 & 2 Landers', url: 'https://science.nasa.gov/mission/viking-1/', usedFor: 'Mars explorers: Viking 1 and Viking 2' },
-  { label: 'Phoenix & InSight Landers', url: 'https://science.nasa.gov/mission/insight/', usedFor: 'Mars explorers: InSight (Phoenix dates from the NSSDCA catalogue)' },
+  { label: 'Phoenix & InSight Landers', url: 'https://science.nasa.gov/mission/insight/', usedFor: 'Mars explorer and the InSight story (Phoenix dates from the NSSDCA catalogue)' },
   { label: 'Dawn Spacecraft', url: 'https://science.nasa.gov/mission/dawn/', usedFor: 'Not used yet (deep space)' },
   { label: 'NEAR Shoemaker', url: 'https://science.nasa.gov/mission/near-shoemaker/', usedFor: 'Not used yet (deep space)' },
-  { label: 'Pioneer 10 & 11', url: 'https://science.nasa.gov/mission/pioneer-10/', usedFor: 'Not used yet (deep space)' },
+  { label: 'Pioneer 10 & 11', url: 'https://science.nasa.gov/mission/pioneer-10/', usedFor: 'The Pioneer 10 and 11 story (with its sister page for Pioneer 11)' },
   { label: 'Ingenuity Helicopter', url: 'https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/', usedFor: 'Mars explorer: Ingenuity' },
   { label: 'Kepler Space Telescope', url: 'https://science.nasa.gov/mission/kepler/', usedFor: 'Not used yet (deep space)' },
 ];
@@ -40,30 +41,62 @@ export const NASA_3D_RESOURCES: Source[] = [
 ];
 
 function modelUse(title: string): string {
-  if (title === 'Saturn V') return 'The rocket on the first screen';
+  if (title === 'Saturn V') return 'The rocket on the first screen and in the ALSEP story';
   if (title === 'Advanced Crew Escape Suit') return 'The young explorer in a spacesuit on the first screen';
   if (title.startsWith('Mars Exploration Rover')) return 'Spirit and Opportunity (identical twins) on Mars';
   if (title.startsWith('Viking')) return 'Viking 1 and Viking 2 on Mars';
   if (title.startsWith('InSight')) return 'InSight on Mars';
   if (title.startsWith('Ingenuity')) return 'Ingenuity on Mars';
-  return 'Apollo 11 descent stage on the Moon (lower half of the model only)';
+  if (title.startsWith('Pioneer')) return 'Pioneer 10 and its sister Pioneer 11 in the Pioneer story';
+  return 'Apollo 11 descent stage (lower half only) and Apollo 12 Intrepid on the Moon';
 }
 
-/** Additional NASA sources approved for the Apollo 11 story, plus the Moon globe source to replace. */
+/** NASA pages named in the team's story briefs (docs/stories/). Facts may come from these too. */
+export const STORY_SOURCES: Source[] = [
+  { label: 'NASA Science: Viking 2', url: 'https://science.nasa.gov/mission/viking-2/', usedFor: 'Viking story: launch, landing, Utopia Planitia, endings' },
+  { label: 'NASA Science: Viking Spacecraft and Science', url: 'https://science.nasa.gov/mission/viking/spacecraft-and-science/', usedFor: 'Viking story: orbiter and lander hardware, instruments' },
+  { label: 'NASA Science: Viking Project and Astrobiology', url: 'https://science.nasa.gov/astrobiology/missions/viking-project/', usedFor: 'Viking story: the search for life, soil results, endings' },
+  { label: 'NASA Science: Viking, 50 Years on Mars', url: 'https://science.nasa.gov/mission/viking/viking-50-years-on-mars/', usedFor: 'Viking story: the first photo, the 19-minute signal' },
+  { label: 'NASA NSSDCA: Viking 1 Lander', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C', usedFor: 'Viking story: the descent sequence (parachute at 6 km)' },
+  { label: 'NASA NSSDCA: Apollo 11 Command and Service Module', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A', usedFor: 'Apollo 11 story: Columbia, launch, flight timeline and return to Earth' },
+  { label: 'NASA NSSDCA: Apollo 11, 25th Anniversary', url: 'https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html', usedFor: 'Apollo 11 story: surface photographs, flag, samples and timeline quotes' },
+];
+
+/** Images and maps from other NASA sites (allowed for visuals; no facts are taken from them). */
 export const OTHER_SOURCES: Source[] = [
+  {
+    label: "Blue Marble: Land Surface, Ocean Color and Sea Ice, NASA's Scientific Visualization Studio",
+    url: 'https://svs.gsfc.nasa.gov/2915',
+    usedFor: 'The Earth globe in the Viking story and below the rocket after take-off',
+  },
+  {
+    label: 'First image from the surface of Mars (Viking 1, 20 July 1976), NASA/JPL',
+    url: 'https://science.nasa.gov/mission/viking/viking-50-years-on-mars/',
+    usedFor: 'The first-photo moment in the Viking story',
+  },
+  {
+    label: 'Viking 1 Lander panorama of Chryse Planitia (July 1976), NASA/JPL',
+    url: 'https://science.nasa.gov/mission/viking/viking-50-years-on-mars/',
+    usedFor: 'The 360-degree look-around in the Viking story',
+  },
+  {
+    label: 'Viking 2 Lander colour view of Utopia Planitia, NASA/JPL',
+    url: 'https://science.nasa.gov/mission/viking-2/',
+    usedFor: "Viking 2's photo in the Viking story",
+  },
+  {
+    label: 'Kokoro-82M text-to-speech model (Apache-2.0), run locally through the HyperFrames CLI',
+    url: 'https://huggingface.co/hexgrad/Kokoro-82M',
+    usedFor: 'All recorded voices (AI-generated speech)',
+  },
+  {
+    label: 'Viking orbiter line drawing and Viking spacecraft photo, NASA',
+    url: 'https://science.nasa.gov/mars/resources/viking-mission-resources/',
+    usedFor: 'Reference for our 3D Viking orbiter (NASA 3D Resources has no orbiter model)',
+  },
   {
     label: "CGI Moon Kit (LRO colour and LOLA elevation), NASA's Scientific Visualization Studio",
     url: 'https://svs.gsfc.nasa.gov/4720',
-    usedFor: 'The Moon globe. NASA 3D Resources has no Moon colour map, only a printable model',
-  },
-  {
-    label: 'Apollo 11 Command and Service Module (NSSDCA)',
-    url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A',
-    usedFor: 'Apollo 11 story: Columbia, launch, flight timeline, and return to Earth',
-  },
-  {
-    label: 'Apollo 11: 25th Anniversary (NASA)',
-    url: 'https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html',
-    usedFor: 'Apollo 11 story: surface photographs, flag, samples, and timeline quotes',
+    usedFor: 'The Moon globe (NASA 3D Resources has no Moon colour map)',
   },
 ];

@@ -45,17 +45,39 @@ Dev-only page with every mini-game: <http://localhost:5173/#ep-_playground>
 
    All step types are in `src/engine/types.ts`; `src/episodes/sojourner/` is a full example.
    Every `say` needs `fact`: a fact id, or `null` for pure feeling.
-5. **Write the words** in `i18n/en.json` (then `si.json` and `ta.json`). Voice clips go in
-   `voice/<lang>/<key>.mp3`; a line without a clip is read aloud by the browser.
+5. **Write the words** in `i18n/en.json` (then `si.json` and `ta.json`). Give the voices a cast in
+   `voice/cast.json` (roles: `narrator`, `machine`, plus any you add, e.g. `viking2`; a line picks a role
+   with `by: 'viking2'` and the bubble shows `speaker.<role>` from i18n). Then `npm run voices -- <id>`
+   records every line with a Kokoro voice. A line without a clip is read by the browser.
 6. **Check and send.** `npm run check:facts`, `npm run lint`, `npm run typecheck`, `npm test`,
    then run `docs/FUN_CHECKLIST.md`, log AI use in `docs/AI_USAGE.md`, and open a pull request.
 
 Custom 3D objects and actions go in a `scene.ts` beside your script (see Sojourner's). A model
 goes in `assets/` after `npm run optimize:models`; set `machine: { model: 'name.glb' }`.
 
+## Turning a story brief into an episode
+
+Story briefs live in `docs/stories/<id>.md` (Viking's brief became `src/episodes/viking/`).
+
+- Every fact in the brief is re-checked on the NASA page it names, then written to `facts.json`.
+  If the page does not say it, the line is cut or rewritten (for example, Viking's "about 90 days"
+  was on no NASA page, so the story says "the main mission ended in November 1976").
+- An episode can visit several worlds: `stages: ['earth', 'space']` plus `{ stage: 'space' }` steps.
+- One episode can cover several explorers: `covers: ['viking-1', 'viking-2']`.
+- Machines with an official NASA model use it (`nasaModel()` in `src/journey/nasaModels.ts`).
+
+## Review checklist when merging a story branch
+
+1. `npm run lint`, `npm run typecheck`, `npm test`, `npm run check:facts` (no errors, no TODO-VERIFY), `npm run build`.
+2. Every `say` and `caption` has a fact id, and each fact's `source` is a challenge resource or a page from the story brief. Open two at random and check the numbers.
+3. No edits inside `src/engine/` unless agreed; no new dependency without Vidura's OK.
+4. Every new model, image or sound is listed in `src/data/sources.ts` and `docs/CREDITS.md`.
+5. Play it end to end, use Skip on every page, and run `docs/FUN_CHECKLIST.md`.
+6. Text is in `i18n/en.json`, at most two short lines on screen.
+
 ## How to add a mini-game
 
-(The kit games are tested; this custom-game path is written but has not been run yet. Tell Vidura if it breaks.)
+(Custom games work: Viking uses three, in `src/episodes/viking/games/`.)
 
 A game that only your episode needs lives in `src/episodes/<id>/games/<name>.ts`:
 

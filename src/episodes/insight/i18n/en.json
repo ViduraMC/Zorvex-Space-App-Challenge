@@ -1,0 +1,50 @@
+{
+  "title": "InSight",
+  "tagline": "The lander that listened to the heartbeat of Mars.",
+  "kicker": "A true story from Mars · 2018 to 2022",
+  "mystery": "How do you look inside a planet without moving an inch?",
+  "machine": "InSight",
+  "speaker.machine": "InSight",
+
+  "stat.instruments": "main instruments",
+  "stat.mole": "metres the mole aimed to dig",
+  "stat.seis": "megabits a day from SEIS",
+  "stat.years": "years on Mars",
+
+  "sfx.touchdown": "TOUCHDOWN!",
+  "sfx.whirr": "WHIRRR!",
+  "sfx.clunk": "CLUNK!",
+  "sfx.thump": "THUMP!",
+  "sfx.bonk": "BONK!",
+
+  "p1.launch": "5 May 2018. A rocket leaves California, with me on board.",
+  "p1.marco": "Two tiny CubeSats called MarCO flew to Mars right behind me.",
+  "p1.date": "Elysium Planitia, Mars. 26 November 2018.",
+  "p1.hello": "I am InSight. I didn't come to roam. I came to listen.",
+  "p1.flat": "This plain is flat and smooth. Boring? Perfect! It's safe.",
+  "p1.vital": "My job: check Mars' vital signs. Its pulse, its temperature, its reflexes.",
+
+  "p2.arm": "First, my arm must set my ear on the ground.",
+  "p2.deploy": "Place the seismometer!",
+  "p2.seis": "SEIS is down! A dome shield keeps the wind and cold off it.",
+  "p2.first": "No mission had ever studied the deep inside of Mars before.",
+
+  "p3.intro": "Now I wait. And listen.",
+  "p3.goal": "Catch the marsquakes!",
+  "p3.hint": "Watch the line. Tap RECORD while it shakes.",
+  "p3.tap": "RECORD",
+  "p3.calm": "Not yet. That's just the wind!",
+  "p3.got": "Recorded!",
+  "p3.win": "Marsquakes and meteorite thumps. I can feel Mars' pulse!",
+  "p3.wind": "I even heard the Martian wind. A low, spooky rumble.",
+
+  "p4.mole": "Next: my heat probe, the mole. It must hammer almost 5 m down.",
+  "p4.go": "Start hammering!",
+  "p4.stuck": "Bonk… bonk… The soil was not what we expected. It couldn't get deep enough.",
+  "p4.rise": "But my radio kept working. Tracking me showed how Mars wobbles.",
+  "p4.core": "The wobble told scientists about Mars' iron-rich core.",
+
+  "p5.end": "15 December 2022. My mission ended.",
+  "p5.bye": "I listened to Mars for four years. Now it's your turn to listen to me.",
+  "p5.still": "Abandoned, but not forgotten."
+}

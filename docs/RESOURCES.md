@@ -1,8 +1,8 @@
 # Resources: where every piece of data comes from
 
-**Rule (from our mentors, 14 Nov 2026):** we depend on the resources the challenge gives us.
-The only other source is NASA's official 3D Resources site, for 3D models and planet images.
-Anything else is listed in section 3 and flagged for replacement.
+**Rule (from our mentors, 14 Nov 2026):** facts come only from the resources the challenge gives
+us and the NASA pages named in our story briefs (`docs/stories/`). 3D models and images come
+from NASA 3D Resources first; other free sources are allowed for visuals when NASA has none.
 
 The same list is shown in the app on the **Sources & about** page (`src/data/sources.ts`), and
 each explorer's hologram panel links its own sources.
@@ -23,10 +23,10 @@ From the Resources tab of
 | Sojourner rover | <https://science.nasa.gov/mission/mars-pathfinder/> | Mars explorer and the Sojourner story |
 | Spirit and Opportunity | <https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/> | Mars explorers: Spirit and Opportunity; Sojourner's "who came after" line |
 | Viking 1 and 2 landers | <https://science.nasa.gov/mission/viking-1/> | Mars explorers: Viking 1 and Viking 2 |
-| Phoenix and InSight landers | <https://science.nasa.gov/mission/insight/> | Mars explorer: InSight |
+| Phoenix and InSight landers | <https://science.nasa.gov/mission/insight/> | Mars explorer and the InSight story (also its page <https://science.nasa.gov/mission/insight/science-instruments/>) |
 | Dawn | <https://science.nasa.gov/mission/dawn/> | Not used yet (deep space) |
 | NEAR Shoemaker | <https://science.nasa.gov/mission/near-shoemaker/> | Not used yet (deep space) |
-| Pioneer 10 and 11 | <https://science.nasa.gov/mission/pioneer-10/> | Not used yet (deep space) |
+| Pioneer 10 and 11 | <https://science.nasa.gov/mission/pioneer-10/> | The Pioneer story (also its sister page <https://science.nasa.gov/mission/pioneer-11/>) |
 | Ingenuity helicopter | <https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/> | Mars explorer: Ingenuity; Sojourner's "who came after" line |
 | Kepler space telescope | <https://science.nasa.gov/mission/kepler/> | Not used yet (deep space) |
 
@@ -47,22 +47,52 @@ Raw downloads live in `models-src/` (git-ignored); the app uses `src/assets/mode
 | Viking Lander | <https://science.nasa.gov/3d-resources/viking-lander/> | Viking 1 and Viking 2 |
 | InSight Cruise Lander (panels deployed) | <https://science.nasa.gov/3d-resources/insight-cruise-lander/> | InSight |
 | Ingenuity Mars Helicopter | <https://science.nasa.gov/3d-resources/ingenuity-mars-helicopter/> | Ingenuity |
-| Apollo Lunar Module | <https://science.nasa.gov/3d-resources/apollo-lunar-module/> | Apollo 11 descent stage (we show only the lower half of the model) |
+| Apollo Lunar Module | <https://science.nasa.gov/3d-resources/apollo-lunar-module/> | Apollo 11 descent stage (lower half only); Intrepid in the ALSEP story |
+| Pioneer 10 | <https://science.nasa.gov/3d-resources/pioneer/> | Pioneer 10 and 11 in the Pioneer story |
 | Mars (image texture) | <https://science.nasa.gov/3d-resources/mars/> | The Mars globe on the destination screen |
 
 Not found on 3D Resources (we keep our own simple stand-in model): Sojourner, Phoenix, the
 Lunar Roving Vehicle, ALSEP and Surveyor. Checked: the Earth images there are a relief map and a
 photo, so we show no Earth globe.
 
-## 3. Additional sources and flagged data
+## 2b. NASA pages from our story briefs
 
-The two Apollo 11 pages below are additional NASA sources, approved for this episode on
-14 Nov 2026. They are listed on the Sources page and in the Apollo explorer hologram.
+| Page | Link | Used for |
+|---|---|---|
+| Viking 2 | <https://science.nasa.gov/mission/viking-2/> | Viking story: launch, Utopia Planitia, endings |
+| Viking Spacecraft and Science | <https://science.nasa.gov/mission/viking/spacecraft-and-science/> | Orbiter and lander hardware |
+| Viking Project and Astrobiology | <https://science.nasa.gov/astrobiology/missions/viking-project/> | The search for life, soil results, endings |
+| Viking: 50 Years on Mars | <https://science.nasa.gov/mission/viking/viking-50-years-on-mars/> | The first photo, the 19-minute signal |
+| NSSDCA Viking 1 Lander (challenge catalogue) | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C> | The descent sequence |
+| NSSDCA Apollo 11 Command and Service Module (challenge catalogue) | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A> | Apollo 11 story: Columbia, launch, flight and return (brief: docs/stories/apollo-11.md) |
+| NSSDCA Apollo 11, 25th Anniversary (challenge catalogue) | <https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html> | Apollo 11 story: surface photographs, flag, samples, timeline quotes |
+
+## 3. Other images (visuals only, no facts)
+
+| Image | Link | Where |
+|---|---|---|
+| Blue Marble, NASA's Scientific Visualization Studio | <https://svs.gsfc.nasa.gov/2915> | Earth globe in the Viking story |
+| First image from the surface of Mars (Viking 1), NASA/JPL | <https://science.nasa.gov/mission/viking/viking-50-years-on-mars/> | Viking first-photo moment |
+| Viking orbiter drawing and spacecraft photo, NASA | <https://science.nasa.gov/mars/resources/viking-mission-resources/> | Reference for our 3D orbiter |
+| Viking 1 Lander panorama of Chryse Planitia (July 1976), NASA/JPL | <https://science.nasa.gov/mission/viking/viking-50-years-on-mars/> | 360-degree look-around in the Viking story |
+| Viking 2 Lander colour view of Utopia Planitia, NASA/JPL | <https://science.nasa.gov/mission/viking-2/> | Viking 2's photo in the Viking story |
+
+## 3c. Voices (AI-generated)
+
+All recorded voices are made with the open Kokoro-82M text-to-speech model (Apache-2.0,
+<https://huggingface.co/hexgrad/Kokoro-82M>), run on our own computer (`npm run voices`).
+Cast: `src/episodes/*/voice/cast.json` and `src/journey/voice/cast.json`.
+
+## 3d. Landing-site coordinates (hologram globe)
+
+Every coordinate in `src/data/explorers.*.json` links the page it came from: NSSDCA
+(Sojourner, Spirit, Opportunity, Phoenix's nominal site, Apollo 11, 12, 15) and the NASA mission
+pages (Viking 1, Viking 2, InSight, Surveyor 3). Ingenuity has none yet.
+
+## 3b. Other NASA data
 
 | Data | Link | Where it is used / status |
 |---|---|---|
-| Apollo 11 Command and Service Module (NSSDCA) | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A> | Apollo 11 story: Columbia, launch and flight timeline, and return to Earth. Approved 14 Nov 2026 |
-| Apollo 11: 25th Anniversary (NASA) | <https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html> | Apollo 11 story: surface photographs, flag, samples, and the two timeline quotes. Approved 14 Nov 2026 |
 | CGI Moon Kit (LRO colour, LOLA elevation), NASA's Scientific Visualization Studio | <https://svs.gsfc.nasa.gov/4720> | The Moon globe. 3D Resources has no Moon colour map, only a printable model (12 MB STL); still flagged to replace |
 
 ## 4. Not data (code and fonts)

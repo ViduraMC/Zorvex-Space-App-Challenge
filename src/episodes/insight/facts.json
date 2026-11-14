@@ -1,0 +1,73 @@
+{
+  "episode": "insight",
+  "checked": "2026-11-14",
+  "note": "Every fact checked on the NASA InSight mission page (challenge resource) and its science instruments page.",
+  "facts": [
+    {
+      "id": "launch",
+      "text": "InSight launched on 5 May 2018 on an Atlas V-401 from Vandenberg Air Force Base, California.",
+      "source": "https://science.nasa.gov/mission/insight/",
+      "sourceName": "NASA Science: InSight (challenge resource)"
+    },
+    {
+      "id": "marco",
+      "text": "The rocket that launched InSight also launched two briefcase-sized CubeSats called Mars Cube One, or MarCO, which flew on their own path to Mars behind InSight.",
+      "source": "https://science.nasa.gov/mission/insight/",
+      "sourceName": "NASA Science: InSight (challenge resource)"
+    },
+    {
+      "id": "landing",
+      "text": "InSight landed on 26 November 2018 on Elysium Planitia, a flat, smooth plain near Mars' equator, chosen for safety rather than for its surface features.",
+      "source": "https://science.nasa.gov/mission/insight/",
+      "sourceName": "NASA Science: InSight (challenge resource)"
+    },
+    {
+      "id": "purpose",
+      "text": "InSight studied the deep interior of Mars and was designed to take the planet's vital signs: its pulse, temperature and reflexes.",
+      "source": "https://science.nasa.gov/mission/insight/",
+      "sourceName": "NASA Science: InSight (challenge resource)"
+    },
+    {
+      "id": "first-interior",
+      "text": "InSight was the first mission dedicated to investigating the deep interior of Mars. Its three main instruments were SEIS, HP3 and RISE.",
+      "source": "https://science.nasa.gov/mission/insight/science-instruments/",
+      "sourceName": "NASA Science: InSight science instruments (part of the challenge resource)"
+    },
+    {
+      "id": "seis",
+      "text": "SEIS, the seismometer, was a round, dome-shaped instrument that sat on the Martian surface under a domed Wind and Thermal Shield and waited for seismic waves from marsquakes and the thumps of meteorite impacts.",
+      "source": "https://science.nasa.gov/mission/insight/science-instruments/",
+      "sourceName": "NASA Science: InSight science instruments (part of the challenge resource)"
+    },
+    {
+      "id": "seis-specs",
+      "text": "SEIS used up to 8.5 watts and returned 38 megabits of data per day.",
+      "source": "https://science.nasa.gov/mission/insight/science-instruments/",
+      "sourceName": "NASA Science: InSight science instruments (part of the challenge resource)"
+    },
+    {
+      "id": "wind",
+      "text": "InSight's sensors captured the low rumble of Martian wind, estimated at 5 to 7 metres a second, on 1 December 2018.",
+      "source": "https://science.nasa.gov/mission/insight/",
+      "sourceName": "NASA Science: InSight (challenge resource)"
+    },
+    {
+      "id": "hp3",
+      "text": "HP3, the heat probe, was designed to burrow almost 5 m into Mars to measure the heat flowing out of the planet. The arm placed it on the surface; its mole hammered itself in but met different soil than expected and could not reach the planned depth.",
+      "source": "https://science.nasa.gov/mission/insight/science-instruments/",
+      "sourceName": "NASA Science: InSight science instruments (part of the challenge resource)"
+    },
+    {
+      "id": "rise",
+      "text": "RISE tracked the lander's position precisely to measure how much Mars' north pole wobbles, revealing the size and composition of Mars' iron-rich core.",
+      "source": "https://science.nasa.gov/mission/insight/science-instruments/",
+      "sourceName": "NASA Science: InSight science instruments (part of the challenge resource)"
+    },
+    {
+      "id": "end",
+      "text": "InSight's mission ended on 15 December 2022.",
+      "source": "https://science.nasa.gov/mission/insight/",
+      "sourceName": "NASA Science: InSight (challenge resource)"
+    }
+  ]
+}

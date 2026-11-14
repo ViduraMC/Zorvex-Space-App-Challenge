@@ -1,3 +1,4 @@
+import { createEarth } from './earth';
 import { createMars } from './mars';
 import { createMoon } from './moon';
 import { createSpace } from './space';
@@ -9,6 +10,7 @@ const BUILDERS: Record<WorldKind, (opts: WorldOptions) => World> = {
   mars: createMars,
   moon: createMoon,
   space: createSpace,
+  earth: createEarth,
 };
 
 export const createWorld = (kind: WorldKind, opts: WorldOptions): World => BUILDERS[kind](opts);

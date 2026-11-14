@@ -56,3 +56,21 @@ Not checked on a real phone yet. The voice is the browser's text-to-speech until
 | Three languages | **Fail for this expansion.** New Apollo narration and timeline strings are English-only; Sinhala and Tamil speakers must translate/review before release. |
 
 Not tested on a phone or with Sinhala/Tamil speakers. This is a desktop smoke-test result, not a release sign-off.
+
+## Viking 1 & 2, 14 Nov 2026
+
+| Rule | Result |
+|---|---|
+| Pace | Pass. A press, a drag, a hold or a tap on every page |
+| Text | Pass at 1280 x 720; not checked at phone width |
+| Life | Pass. Two launches, a cruise, an orbit, a full descent with parachute and engines |
+| Payoff | Pass. Sound-effect words and sounds on each step |
+| Failure is funny | Pass. Parachute too early or too late: "Whoops!", straight back to the top |
+| Easy start | Pass. The first play moment is one button: "Launch Viking 1!" |
+| Scale to the child | Partly. Real numbers (6 km, 250 to 60 m/s, 19 minutes) but few everyday comparisons |
+| Wow | Landing Viking 1 yourself: parachute at 6 km, drop the shield, fire the engines |
+| Emotional beat | The timeline: the four machines go silent one by one and the lander's light goes out |
+| No dead ends | Pass. Skip works on every page and game |
+| Real numbers | Pass. 6 km, 250 to 60 m/s, 19 minutes, 52,663 images, the real shutdown dates |
+| True | Pass. 30 facts from the Viking 1 challenge page, the brief's NASA pages and NSSDCA |
+| Three languages | **Fail.** English only |

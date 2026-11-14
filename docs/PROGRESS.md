@@ -1,46 +1,40 @@
 # Progress
 
-Updated: 14 Nov 2026 (Asia/Colombo).
+Updated: Saturday 14 Nov 2026, about 18:45 (Asia/Colombo).
 
 ## Now
 
-- Apollo 11 / EASEP: expanded to the four-act story. Act 1 includes the deployment game and Moon
-  Chapter A; Act 2 has all six machine cards; Act 3 has a keyboard/touch timeline with 23 events;
-  Act 4 includes the long-days sequence, shutdown error, epilogue, and patch.
-- Local test links support `?act=1..4`, starting at that act and continuing to the ending.
-- The Apollo CSM and Apollo 11 anniversary pages are approved and registered in the source page,
-  Apollo hologram, and `docs/RESOURCES.md`.
-- Browser smoke checks confirmed the Act 2 Saturn card, all 23 timeline markers through shutdown,
-  and Act 4 error/patch progression. The complete story has not been played in one browser run.
-- Validation passed with Node 22.18: lint, typecheck, all 13 tests, fact checks (25 Apollo facts;
-  0 errors and 0 warnings), and production build.
-- Fun checklist recorded in `docs/FUN_CHECKLIST.md`: phone and keyboard review and Sinhala/Tamil
-  speaker review remain outstanding; long Act 1 narration and read-through cards need pacing work.
 - Code is on GitHub (private): https://github.com/ViduraMC/Zorvex-Space-App-Challenge. Not deployed yet.
-- Sources page and hologram panel list the challenge resources, NASA 3D Resources, and the two
-  approved additional Apollo sources.
+- Data now comes only from the challenge resources plus NASA 3D Resources (mentors' rule). Sources page and hologram panel list every source.
 - First screen uses NASA's Saturn V and crew escape suit models; explorers use NASA models where they exist.
 - Opening journey works end to end: Home, take-off, destination, landing, explorers, hologram,
   launch, story. Back from a story returns to the explorers without replaying cutscenes.
 - Sojourner episode plays end to end with four mini-games and awards its patch.
+- InSight episode implemented in `src/episodes/insight/`: 5 scenes, official NASA 3D model, deployable SEIS dome & HP3 Mole, Marsquake timingTap mini-game, 9 verified facts. Direct integration with Mars explorer roster.
+- Pioneer 10 & 11 episode implemented in `src/episodes/pioneer/`: 9 chapters, 33 verified facts, Three.js 3D spacecraft, Jupiter & Saturn with rings, and mini-games (`counterRace`, `balance`, `findHidden`, `resourceManage`). Passes lint, typecheck, tests, check:facts, and build.
+
+- Product renamed: The Abandoned Explorers, "Abandoned but not Forgotten."
+- Viking 1 & 2 story playable end to end (10 pages, 3 stages: Earth, space, Mars).
+
+- Voices: narrator, Viking 1 (male), Viking 2 (female), Sojourner and mission control, recorded with Kokoro (`npm run voices`).
+- Take-off and landing: cockpit telemetry, clouds, speed streaks, curved Earth, entry heat and dust.
+- Hologram globe shows each landing site with its source.
+- Viking: 11 pages, with a real 1976 panorama to look around and Viking 2's colour photo.
 
 ## Next
 
-1. Finish Apollo phone, keyboard, and reduced-motion review; address pacing and long narration flagged in the Fun Checklist.
-2. Complete Apollo Sinhala and Tamil text with fluent-speaker review.
-3. Decide on the Moon globe image (see `docs/RESOURCES.md` section 3).
-4. Create the GitHub repository, push, connect Vercel (public URL and pull-request previews).
-5. Stories for each explorer (Vidura is sending them).
-6. Route globe and filters in the hologram panel (build guide step 12): needs real traverse data.
-7. Real explorer models from NASA 3D Resources instead of the stand-ins (build guide step 15).
+1. Vidura: read the changes in `CLAUDE.md` ("Decisions already made"), then say how the stories should go.
+2. Create the GitHub repository, push, connect Vercel (public URL and pull-request previews).
+3. Decide on the Moon globe image (only non-challenge, non-3D-Resources data left; see docs/RESOURCES.md section 3).
+4. Stories for each explorer (Vidura is sending them).
+5. Route globe and filters in the hologram panel (build guide step 12): needs real traverse data.
+6. Real explorer models from NASA 3D Resources instead of the stand-ins (build guide step 15).
+7. Sinhala and Tamil episode text; our own voice recordings.
 8. Phase 2: "Ask the machine" and "Postcard" (serverless, fact-locked).
 
 ## Blockers
 
 - No Vercel login yet, so no deploy and no preview links. The repository must be made public before submission.
-- The requested global pause/resume and subtitle shortcuts and `?debug` overlay are not implemented.
-  The episode stays within the repository's no-engine-edit rule; agree on an engine-level exception
-  before adding controls that the current player API cannot provide episode-locally.
 - Frame rate could not be measured here: the test browser window was throttled. One frame of the
   Sojourner scene costs about 12 ms to render on this laptop's Intel graphics (measured), which
   leaves room for 60 fps, but that is a calculation, not a measurement. Not tested on a phone.

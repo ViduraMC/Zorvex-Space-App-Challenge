@@ -1,4 +1,4 @@
-# ECHOES: rules for every AI session on this repo
+# The Abandoned Explorers: rules for every AI session on this repo
 
 Team Zorvex, NASA Space Apps Challenge 2026, Kandy (SLIIT Kandy UNI), 14 to 15 Nov 2026.
 Challenge: "Abandoned but not Forgotten: Storytelling about NASA's Discarded Equipment on the
@@ -6,7 +6,8 @@ Moon and Mars". Read this file, `CONTRIBUTING.md` and `docs/FUN_CHECKLIST.md` be
 
 ## What we are building
 
-An interactive 3D web experience for children aged about 8 to 14.
+**The Abandoned Explorers** (tagline: *Abandoned but not Forgotten.*): an interactive 3D web
+experience for children aged about 8 to 14.
 
 1. **The journey** (`docs/BUILD_GUIDE.md` is the source of truth): Home on Earth at night with a
    rocket and a child, first-person take-off, choose Moon or Mars, first-person landing, then the
@@ -31,10 +32,12 @@ Not a catalogue, not a quiz site. The child does what the real team did.
 
 ## Data sources (mentors' rule)
 
-Use only the challenge's own resources (see `docs/RESOURCES.md` section 1) for facts and dates,
-and NASA 3D Resources (science.nasa.gov/3d-resources) for 3D models and planet images. Anything
-else must not be added without Vidura's OK, and must be listed and flagged in `docs/RESOURCES.md`
-and `src/data/sources.ts`. Every source shows on the Sources page and in the hologram panel.
+- **Facts, dates, numbers:** only from the challenge's own resources (`docs/RESOURCES.md`
+  section 1) and the NASA pages named in a team story brief (`docs/stories/`). Check each one on
+  the page itself; a brief is a guide, not a source.
+- **3D models, textures, images:** NASA 3D Resources first. When NASA has none, another free
+  source is fine (NASA image sites, CC0 or CC-BY with credit). No facts are taken from those.
+- Every source goes in `src/data/sources.ts` (shown on the Sources page) and `docs/RESOURCES.md`.
 
 ## Rules
 
@@ -61,7 +64,7 @@ and `src/data/sources.ts`. Every source shows on the Sources page and in the hol
 
 `waypointDrive` (plan, send, wait out the signal delay), `directDrive` (joystick, real gravity),
 `holdToScan`, `findHidden`, `timingTap` (echo or dip), `balance` (hold or drag),
-`resourceManage`, `counterRace` (plan versus what really happened).
+`resourceManage`, `counterRace` (plan versus what really happened), `seismograph` (catch the shaking).
 Each one already has the goal line, tutorial hint, instant feedback, funny fail with instant
 retry, Skip and a win moment. **Real numbers become game numbers.**
 
@@ -79,4 +82,6 @@ Feature freeze Sunday 15 Nov 15:00. We submit by 21:00. Official deadline 23:59.
 ## Standing instructions
 
 - Commits are authored by the team member only. No AI co-author lines (no `Co-Authored-By: Claude`) in commit messages. (Vidura, 14 Nov 2026)
-- Facts and data come only from the challenge resources plus NASA 3D Resources (see "Data sources" above). (Vidura, from the mentors, 14 Nov 2026)
+- Facts only from the challenge resources and the NASA pages in our story briefs; models and images may come from other free sources when NASA has none (see "Data sources" above). (Vidura, 14 Nov 2026)
+- Product name: **The Abandoned Explorers**; tagline: **Abandoned but not Forgotten.** (Vidura, 14 Nov 2026)
+- When teammates' story branches are merged, review them with the checklist in CONTRIBUTING.md and fix what is wrong. (Vidura, 14 Nov 2026)
