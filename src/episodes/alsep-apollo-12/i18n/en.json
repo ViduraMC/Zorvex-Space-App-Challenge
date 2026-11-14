@@ -1,0 +1,65 @@
+{
+  "title": "Apollo 12 ALSEP",
+  "tagline": "Eight years in the Ocean of Storms. The Moon never forgot.",
+  "kicker": "A true story from the Moon · 1969–1977",
+  "mystery": "Who kept watch on the Moon for eight years — and what did it feel?",
+  "machine": "ALSEP",
+
+  "stat.operated": "years of operation",
+  "stat.instruments": "science instruments",
+  "stat.mass": "kilograms (central station)",
+  "stat.power": "watts of nuclear power",
+
+  "sfx.warmup":    "WARMTH…",
+  "sfx.beep":      "BEEP!",
+  "sfx.clunk":     "CLUNK!",
+  "sfx.whirr":     "WHIRR…",
+  "sfx.rumble":    "RUMBLE!",
+  "sfx.click":     "CLICK.",
+  "sfx.alarm":     "ALARM!",
+  "sfx.shutdown":  "SYSTEM OFF",
+  "sfx.day83":     "DAY 2922!",
+
+  "p1.boot":       "Ocean of Storms, the Moon. 19 November 1969.",
+  "p1.wake":       "Warmth. A human hand slides a glowing core of plutonium into my generator, and seventy watts of steady power surge through my wires. My eyes open. I am ALSEP, the Apollo Lunar Surface Experiments Package, awake in the Ocean of Storms.",
+  "p1.astronauts": "Across the gray dust stands Intrepid, the spider-legged lander that carried me here. Beside her, two humans in white suits—Pete and Alan—finish their work. They connected my six instruments, accidentally burned out their television camera on the blazing Sun, and gathered rocks and parts from an old robot nearby. Now they climb the ladder back inside. I watch them go.",
+  "p1.turn":       "I turn to look across the crater rim. Resting silently in the slope is an older cousin of mine—Surveyor 3, a robot that landed here more than two years before us and went to sleep. Above the airless plain hangs a small blue Earth, waiting for my voice.",
+  "p1.hatch":      "The hatch closes. The humans are sealed inside Intrepid now. Soon they will leave, and I will remain.",
+  "p1.origin":     "I began in the dark, folded inside Intrepid's lower bay. I could not see the journey from Earth, but I felt every vibration: the thunder of the giant rocket, the jolt of lightning during climb, the gentle braking onto this plain. Let me show you the machines that brought me here.",
+  "p1.go":         "Show me",
+
+  "p2.intro":      "First, the rocket. The Saturn V lifted us out of Florida on 14 November 1969 through stormy clouds. Even after lightning struck our stack twice during ascent, the rocket held steady. Its upper stage fired again in Earth orbit and threw us toward the Moon.",
+  "p2.clipper":    "Yankee Clipper was the orbiter, the crew's home across deep space. While Pete and Alan came down to the plain with me, the third human, Richard, circled alone overhead. Later, Clipper carried all three humans, thirty-four kilograms of Moon rocks, and the old robot parts safely back to the Pacific Ocean.",
+  "p2.ascent":     "Intrepid's upper half was a tiny cabin with no seats and two triangular windows. It carried Pete and Alan back up to Yankee Clipper. Then, after the humans were safe, Earth steered the empty cabin crashing back into the Moon—giving my seismometer the biggest shockwave it would ever feel.",
+  "p2.descent":    "Intrepid's lower half was built for precision. Guided down through the lunar sky, its four legs touched the Ocean of Storms just one hundred and eighty meters from Surveyor 3. It held me in its belly until the humans carried me out, and it still stands beside me as a silent monument.",
+  "p2.surveyor":   "Down in the crater sat Surveyor 3, a robot that had waited silently in the dust since 1967. Pete and Alan climbed down to visit her and carefully removed her camera and digging scoop. Together with thirty-four kilograms of Moon rocks, those robot parts went home to teach Earth how space ages metal and glass.",
+  "p2.me":         "And me. I am ALSEP. Unlike earlier stations that slept in the dark, my plutonium generator kept me warm and awake day and night. With six instruments spread around me like limbs, I listened to moonquakes, counted dust grains, and measured the solar wind for nearly eight years.",
+  "p2.closing":    "A rocket, an orbiter, a pinpoint lander, an old sleeping robot, and a nuclear watchman. Together we turned a pinpoint target on the Moon into a lasting window on the universe.",
+
+  "p3.intro":      "Now let me show you the timeline of my life. From the first robot that came before me, to my last signal home.",
+  "p3.play":       "Walk the timeline",
+
+  "p4.liftoff":    "After thirty-one hours on the surface, Intrepid's upper half fired its engine and rose into the black sky. Her four legs stayed planted in the dust beside me. Up in orbit, Pete and Alan docked with Yankee Clipper and carried their rocks and robot parts aboard.",
+  "p4.impact":     "Once the humans were safe inside Clipper, Earth steered the empty Intrepid cabin crashing back into the Moon sixty kilometers away. Even without air to carry sound, the ground beneath me erupted into a deep tremor. The Moon rang like a giant bell for nearly an hour, and I sent every trembling wave back to Earth.",
+  "p4.watchgoal":  "Keep the signal alive!",
+  "p4.winthint":   "Tap each day to keep the signal alive through the lunar nights.",
+  "p4.watch":      "Yankee Clipper splashed down safely in the Pacific, and the humans went home to parades. I stayed behind. Through ninety-six freezing lunar nights and scorching days, my plutonium heart kept beating. I felt thousands of moonquakes and watched the solar wind sweep across the dust.",
+  "p4.watchwin":   "Eight years and still transmitting! You kept my signal alive.",
+  "p4.shutdown":   "Nearly eight years after I woke, my nuclear warmth had slowly faded, and new missions had taken my place. On 30 September 1977, Earth sent one last signal—not to ask for data, but to turn my transmitter off. My long watch was over.",
+  "p4.goodbye":    "Do not be sad for me. I stood beside Intrepid and old Surveyor 3 for almost eight years, listening to the heartbeat of another world. We are still here in the Ocean of Storms, quiet beneath the stars. Goodnight, Earth. Remember what we found.",
+
+  "p6.day":        "Day {n}",
+  "p6.planChip":   "Plan: {n} days",
+
+  "ui.shutdown.line1": "> UPLINK 2119 MHz ........ TERMINATION CMD RECEIVED",
+  "ui.shutdown.line2": "> TELEMETRY 2278.5 MHz ... CARRIER OFF",
+  "ui.shutdown.line3": "> ERR_0930: TRANSMITTER POWER DOWN",
+  "ui.shutdown.line4": "> LAST CONTACT: 1977-09-30",
+  "ui.shutdown.line5": "> STATUS: ALSEP (APOLLO 12) DEACTIVATED",
+  "ui.shutdown.line6": "> SYSTEM OFF",
+
+  "ui.epilogue.name":    "ALSEP · Apollo 12 · Oceanus Procellarum",
+  "ui.epilogue.coords":  "3.0094° S, 23.4246° W",
+  "ui.epilogue.dates":   "Operated 19 Nov 1969 to 30 Sep 1977 · nearly 8 years",
+  "ui.epilogue.tagline": "Standing watch on the Moon."
+}

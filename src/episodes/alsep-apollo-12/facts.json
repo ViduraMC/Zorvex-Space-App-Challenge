@@ -1,0 +1,133 @@
+{
+  "episode": "alsep-apollo-12",
+  "checked": "2026-11-14",
+  "note": "Facts sourced from the challenge resources: NASA NSSDCA catalogue pages 1969-099C (Intrepid/ALSEP), 1969-099A (Yankee Clipper), and 1967-035A (Surveyor 3).",
+  "facts": [
+    {
+      "id": "alsep-on",
+      "text": "ALSEP (Apollo Lunar Surface Experiments Package) was powered on when astronaut Alan Bean inserted the SNAP-27 Plutonium-238 fuel capsule during the first EVA on 19 November 1969.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+      "sourceName": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "alsep-location",
+      "text": "The ALSEP Central Station was deployed at 3.0094° S, 23.4246° W in Oceanus Procellarum, approximately 130 m from the Intrepid lander.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+      "sourceName": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "snap-27",
+      "text": "ALSEP was powered by a SNAP-27 Radioisotope Thermoelectric Generator using a Plutonium-238 fuel capsule of about 4 kg, producing approximately 70 W of DC power.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+      "sourceName": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "six-instruments",
+      "text": "The ALSEP station on Apollo 12 carried six instruments: a Passive Seismometer, Suprathermal Ion Detector, Cold Cathode Ion Gauge, Lunar Dust Detector, Lunar Surface Magnetometer, and Solar Wind Spectrometer.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+      "sourceName": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "alsep-antenna",
+      "text": "The ALSEP Central Station had a 58 cm helical antenna. Uplink frequency was 2119 MHz; downlink (telemetry) was 2278.5 MHz.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+      "sourceName": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "alsep-shutdown",
+      "text": "ALSEP operations were terminated by ground command on 30 September 1977, after operating for nearly 8 years.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+      "sourceName": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "landing",
+      "text": "Intrepid (Apollo 12 Lunar Module) landed at 3.0128° S, 23.4219° W in Oceanus Procellarum on 19 November 1969 at 06:54:35 UT, within approximately 180 m of Surveyor 3.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+      "sourceName": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "tv-camera",
+      "text": "The color television camera used during the first moonwalk was accidentally pointed at the Sun, burning out its vidicon tube.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+      "sourceName": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "surveyor-visit",
+      "text": "Astronauts Conrad and Bean visited Surveyor 3 during the second EVA on 20 November 1969 and removed approximately 10 kg of hardware including its television camera, soil scoop, and tubing.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+      "sourceName": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "samples",
+      "text": "The two Apollo 12 EVAs totalled 7 hours 45 minutes and covered approximately 1.35 km. The astronauts collected 34.35 kg of lunar rocks, core tubes, and a solar wind composition foil.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+      "sourceName": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "hatch-closed",
+      "text": "The second EVA ended and the hatch was closed on 20 November 1969 at 05:14:00 UT.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+      "sourceName": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "liftoff",
+      "text": "Intrepid's ascent stage lifted off on 20 November 1969 at 14:25:47 UT after 31 hours 31 minutes on the lunar surface.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+      "sourceName": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "impact",
+      "text": "The empty Intrepid ascent stage was deliberately crashed into the Moon on 20 November 1969 at 22:17:17.7 UT, approximately 60 km from the landing site at 3.94° S, 338.80° E (21.20° W).",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+      "sourceName": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "moonquake",
+      "text": "The deliberate impact of Intrepid's ascent stage triggered a moonquake recorded by the ALSEP passive seismometer. The Moon rang like a bell for an extended period.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+      "sourceName": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "descent-stage",
+      "text": "Intrepid's descent stage (octagonal frame, 4.2 m wide, 1.7 m high, footpad span 9.4 m) remained on the lunar surface as the launch platform for the ascent stage and stands there still.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+      "sourceName": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "launch",
+      "text": "Apollo 12 lifted off from Launch Complex 39A, Kennedy Space Center on 14 November 1969 at 16:22:00 UT. The Saturn V was struck by lightning twice during ascent but continued on course.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099A",
+      "sourceName": "NASA NSSDCA: Apollo 12 Command and Service Module (Yankee Clipper) (challenge resource)"
+    },
+    {
+      "id": "tli",
+      "text": "Translunar injection was performed at 19:09:20 UT on 14 November 1969 by the Saturn V S-IVB third stage.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099A",
+      "sourceName": "NASA NSSDCA: Apollo 12 Command and Service Module (Yankee Clipper) (challenge resource)"
+    },
+    {
+      "id": "yankee-clipper",
+      "text": "Yankee Clipper (CSM-107) had a launch mass of approximately 28,833 kg. Its Service Module main engine provided about 91,000 N of thrust. Lunar orbit insertion occurred on 18 November 1969 at 03:47:23 UT.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099A",
+      "sourceName": "NASA NSSDCA: Apollo 12 Command and Service Module (Yankee Clipper) (challenge resource)"
+    },
+    {
+      "id": "splashdown",
+      "text": "Yankee Clipper splashed down in the South Pacific Ocean on 24 November 1969 at 20:58:24 UT after a total mission duration of 244 hours 36 minutes 24 seconds.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099A",
+      "sourceName": "NASA NSSDCA: Apollo 12 Command and Service Module (Yankee Clipper) (challenge resource)"
+    },
+    {
+      "id": "surveyor-3",
+      "text": "Surveyor 3 landed in Oceanus Procellarum on 20 April 1967 at 00:04:53 UT and operated until 3 May 1967. It rested inside a crater approximately 180 m from the Apollo 12 landing site.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-035A",
+      "sourceName": "NASA NSSDCA: Surveyor 3 (challenge resource)"
+    },
+    {
+      "id": "still-there",
+      "text": "The ALSEP instruments, the descent stage of Intrepid, and Surveyor 3 remain at Oceanus Procellarum on the Moon.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C",
+      "sourceName": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)"
+    }
+  ]
+}
