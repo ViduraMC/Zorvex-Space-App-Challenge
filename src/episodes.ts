@@ -21,4 +21,7 @@ export const episodes: EpisodeDef[] = Object.entries(modules)
   .sort((a, b) => a.order - b.order);
 
 export const findEpisode = (id: string): EpisodeDef | undefined => episodes.find((e) => e.id === id);
+/** The episode that tells an explorer's story (its own id, or one that covers several explorers). */
+export const episodeFor = (explorerId: string): EpisodeDef | undefined =>
+  episodes.find((e) => e.id === explorerId || e.covers?.includes(explorerId));
 export const factsOf = (id: string): Fact[] => factFiles[`./episodes/${id}/facts.json`]?.facts ?? [];

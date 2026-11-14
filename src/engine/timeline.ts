@@ -76,7 +76,7 @@ export class Timeline {
 
     if ('caption' in step) {
       const text = t(step.caption);
-      audio.say(text, { episode: episode.id, key: step.caption, robot: false });
+      audio.say(text, { episode: episode.id, key: step.caption, role: 'narrator' });
       await scope.wait(comic.caption(text));
       await scope.wait(step.auto ? scope.sleep(step.auto) : comic.next());
     } else if ('say' in step) {
@@ -86,12 +86,13 @@ export class Timeline {
       if (step.auto) {
         machine.talking = true;
         const text = t(step.say);
-        audio.say(text, { episode: episode.id, key: step.say, robot: true });
+        ctx.speaker(step.by);
+        audio.say(text, { episode: episode.id, key: step.say, role: step.by ?? 'machine' });
         await scope.wait(comic.bubble(text));
         await scope.sleep(step.auto);
         machine.talking = false;
       } else {
-        await ctx.say(step.say, scope);
+        await ctx.say(step.say, scope, step.by);
       }
     } else if ('sfx' in step) {
       comic.sfx(t(step.sfx));
@@ -101,6 +102,9 @@ export class Timeline {
     } else if ('shot' in step) {
       const move = this.#shot(step.shot);
       if (step.block) await scope.wait(move);
+    } else if ('stage' in step) {
+      ctx.setStage(step.stage);
+      if (step.sky) void ctx.sky.set(step.sky);
     } else if ('sky' in step) {
       const change = ctx.sky.set(step.sky, step.ms);
       if (step.block) await scope.wait(change);

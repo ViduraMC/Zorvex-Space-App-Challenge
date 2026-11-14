@@ -20,7 +20,13 @@
         "label": "NASA NSSDCA: Mars Pathfinder Rover",
         "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=MESURPR"
       }
-    ]
+    ],
+    "site": {
+      "lat": 19.33,
+      "lon": -33.55,
+      "note": "Mars Pathfinder lander",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A"
+    }
   },
   {
     "id": "spirit",
@@ -39,7 +45,13 @@
         "label": "NASA Science: Spirit and Opportunity (challenge resource)",
         "url": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
       }
-    ]
+    ],
+    "site": {
+      "lat": -14.572,
+      "lon": 175.478,
+      "note": "Gusev Crater",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2003-027A"
+    }
   },
   {
     "id": "opportunity",
@@ -58,7 +70,13 @@
         "label": "NASA Science: Spirit and Opportunity (challenge resource)",
         "url": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
       }
-    ]
+    ],
+    "site": {
+      "lat": -1.946,
+      "lon": 354.473,
+      "note": "Meridiani Planum",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2003-032A"
+    }
   },
   {
     "id": "viking-1",
@@ -71,13 +89,19 @@
       "start": 1976,
       "end": 1982
     },
-    "summary": "On 20 July 1976 Viking 1 made the first truly successful landing on Mars and sent the first pictures from its surface. It stopped in 1982 after a faulty command.",
+    "summary": "On 20 July 1976 Viking 1 made the first truly successful landing on Mars and sent the first photo from its surface. Its lander worked until November 1982.",
     "sources": [
       {
         "label": "NASA Science: Viking 1 (challenge resource)",
         "url": "https://science.nasa.gov/mission/viking-1/"
       }
-    ]
+    ],
+    "site": {
+      "lat": 22.483,
+      "lon": -47.94,
+      "note": "Chryse Planitia",
+      "source": "https://science.nasa.gov/mission/viking-1/"
+    }
   },
   {
     "id": "viking-2",
@@ -90,7 +114,7 @@
       "start": 1976,
       "end": 1980
     },
-    "summary": "Viking 2 landed in Utopia Planitia. It worked for 1,281 Mars days, until its batteries failed on 11 April 1980.",
+    "summary": "Viking 2 landed at Utopia Planitia on 3 September 1976, about 6,460 km from its twin. Its lander sent its last data in April 1980.",
     "sources": [
       {
         "label": "NASA NSSDCA: Viking 2 Lander (challenge catalogue)",
@@ -99,8 +123,18 @@
       {
         "label": "NASA Science: Viking 1 and 2 (challenge resource)",
         "url": "https://science.nasa.gov/mission/viking-1/"
+      },
+      {
+        "label": "NASA Science: Viking 2",
+        "url": "https://science.nasa.gov/mission/viking-2/"
       }
-    ]
+    ],
+    "site": {
+      "lat": 47.968,
+      "lon": -225.71,
+      "note": "Utopia Planitia",
+      "source": "https://science.nasa.gov/mission/viking-2/"
+    }
   },
   {
     "id": "phoenix",
@@ -119,7 +153,13 @@
         "label": "NASA NSSDCA: Phoenix Mars Lander (challenge catalogue)",
         "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A"
       }
-    ]
+    ],
+    "site": {
+      "lat": 68.15,
+      "lon": -125.9,
+      "note": "nominal site, north polar region",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A"
+    }
   },
   {
     "id": "insight",
@@ -138,7 +178,13 @@
         "label": "NASA Science: InSight (challenge resource)",
         "url": "https://science.nasa.gov/mission/insight/"
       }
-    ]
+    ],
+    "site": {
+      "lat": 4.5,
+      "lon": 135.9,
+      "note": "Elysium Planitia",
+      "source": "https://science.nasa.gov/mission/insight/"
+    }
   },
   {
     "id": "ingenuity",

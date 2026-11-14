@@ -1,5 +1,6 @@
 /** Plays any episode: builds its world, runs its script, then shows the patch and the extras. */
 import { Material, Mesh, Scene, Texture, Vector3 } from 'three';
+import type { Object3D } from 'three';
 import { button, el, link } from '../dom';
 import { audio } from '../engine/audio';
 import { Comic } from '../engine/comic/comic';
@@ -11,15 +12,24 @@ import { progress } from '../engine/progress';
 import { Renderer } from '../engine/renderer';
 import { go, type Page } from '../engine/router';
 import { runFrames, Scope } from '../engine/scope';
-import { Sky, SKY_PRESETS } from '../engine/sky';
+import { Sky, SKY_PRESETS, type SkyPreset } from '../engine/sky';
 import { Timeline } from '../engine/timeline';
 import type { EpisodeContext, EpisodeDef, SceneHandles, Target } from '../engine/types';
-import { createWorld } from '../engine/worlds';
+import { createWorld, type World, type WorldKind } from '../engine/worlds';
 import { factsOf, findEpisode } from '../episodes';
 import { patchNode } from '../features/patch';
 import { skyTonightCard } from '../features/sky-tonight';
 
 const MAX_FRAME_S = 0.05;
+/** The sky each extra stage starts with. */
+const STAGE_SKY: Record<WorldKind, SkyPreset> = { mars: 'marsDay', moon: 'moonDay', space: 'space', earth: 'earthDay' };
+
+interface Stage {
+  scene: Scene;
+  world: World;
+  sky: Sky;
+  fx: Fx;
+}
 const DEFAULT_MODEL_BUBBLE_HEIGHT = 1;
 /** Slow drift around the machine behind the cover, so even the title screen moves. */
 const COVER_SHOT = { from: [3.6, 1.0, 2.8], to: [2.7, 0.7, 2.1], look: [0, 0.3, 0], ms: 24000 } as const;
@@ -89,10 +99,36 @@ async function play(
   const sky = new Sky(scene, renderer.gl, episode.world, quality, SKY_PRESETS[episode.sky]);
   const fx = new Fx(scene, quality);
   session.add(() => fx.dispose());
+
+  // extra stages: each its own scene, world, sky and effects (a launch on Earth, a cruise in space)
+  const stages = new Map<WorldKind, Stage>([[episode.world, { scene, world, sky, fx }]]);
+  for (const kind of episode.stages ?? []) {
+    if (stages.has(kind)) continue;
+    const stageScene = new Scene();
+    const stageWorld = createWorld(kind, { quality, anisotropy });
+    stageScene.add(stageWorld.group);
+    const stageFx = new Fx(stageScene, quality);
+    stages.set(kind, {
+      scene: stageScene,
+      world: stageWorld,
+      sky: new Sky(stageScene, renderer.gl, kind, quality, SKY_PRESETS[STAGE_SKY[kind]]),
+      fx: stageFx,
+    });
+    session.add(() => {
+      stageFx.dispose();
+      disposeScene(stageScene);
+    });
+  }
+  const stageOf = (kind: WorldKind): Stage => {
+    const found = stages.get(kind);
+    if (!found) throw new Error(`[player] episode ${episode.id} has no stage "${kind}"; add it to stages`);
+    return found;
+  };
+  let current = stageOf(episode.world);
   const materials = createMaterials(anisotropy);
 
   const handles: SceneHandles = episode.scene
-    ? await session.wait(episode.scene({ scene, world, materials, quality, anisotropy }))
+    ? await session.wait(episode.scene({ scene, world, materials, quality, anisotropy, stage: stageOf }))
     : {};
   let parts = handles.machine;
   if (!parts && episode.machine.model) {
@@ -140,15 +176,29 @@ async function play(
     fx,
     machine,
     objects,
+    stageKind: episode.world,
+    setStage(kind) {
+      if (kind === ctx.stageKind) return;
+      current = stageOf(kind);
+      Object.assign(ctx, { stageKind: kind, scene: current.scene, world: current.world, sky: current.sky, fx: current.fx });
+      director.groundAt = current.world.heightAt;
+      renderer.setScene(current.scene, director.camera);
+    },
     quality,
     t,
     fact: (factId) => facts.find((f) => f.id === factId),
     resolve,
     project,
-    async say(key, scope) {
+    speaker(role) {
+      // a role's name comes from "speaker.<role>"; without one, the machine's own name
+      const name = t(`speaker.${role ?? 'machine'}`);
+      comic.setSpeaker(name.startsWith('speaker.') ? t('machine') : name);
+    },
+    async say(key, scope, role) {
       machine.talking = true;
       const text = t(key);
-      audio.say(text, { episode: episode.id, key, robot: true });
+      ctx.speaker(role);
+      audio.say(text, { episode: episode.id, key, role: role ?? 'machine' });
       await scope.wait(comic.bubble(text));
       await scope.wait(comic.next());
       machine.talking = false;
@@ -208,15 +258,22 @@ async function play(
     runFrames(dt, time);
     handles.update?.(dt, time);
     machine.update(dt, time);
-    world.update(dt, time);
-    sky.focus.set(machine.x, 0, machine.z);
-    sky.update(director.camera);
+    current.world.update(dt, time);
+    current.sky.focus.set(machine.x, 0, machine.z);
+    current.sky.update(director.camera);
     director.update(dt);
-    fx.update(dt);
+    current.fx.update(dt);
     if (comic.bubbleVisible) {
-      const anchor = project(machine.bubblePoint(under));
-      const below = project(under.set(machine.x, machine.root.position.y - 0.05, machine.z));
-      comic.placeBubble(anchor.x, anchor.y, below.y);
+      let top: Object3D = machine.root;
+      while (top.parent) top = top.parent;
+      if (top === current.scene) {
+        const anchor = project(machine.bubblePoint(under));
+        const below = project(under.set(machine.x, machine.root.position.y - 0.05, machine.z));
+        comic.placeBubble(anchor.x, anchor.y, below.y);
+      } else {
+        // the machine is not on this stage: speak from the lower middle of the screen
+        comic.placeBubble(window.innerWidth * 0.4, window.innerHeight * 0.72, window.innerHeight);
+      }
     }
     audio.drive(machine.moving ? 1 : 0);
     renderer.render(dt);

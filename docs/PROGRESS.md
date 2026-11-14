@@ -1,6 +1,6 @@
 # Progress
 
-Updated: Saturday 14 Nov 2026, about 16:00 (Asia/Colombo).
+Updated: Saturday 14 Nov 2026, about 18:45 (Asia/Colombo).
 
 ## Now
 
@@ -10,6 +10,14 @@ Updated: Saturday 14 Nov 2026, about 16:00 (Asia/Colombo).
 - Opening journey works end to end: Home, take-off, destination, landing, explorers, hologram,
   launch, story. Back from a story returns to the explorers without replaying cutscenes.
 - Sojourner episode plays end to end with four mini-games and awards its patch.
+
+- Product renamed: The Abandoned Explorers, "Abandoned but not Forgotten."
+- Viking 1 & 2 story playable end to end (10 pages, 3 stages: Earth, space, Mars).
+
+- Voices: narrator, Viking 1 (male), Viking 2 (female), Sojourner and mission control, recorded with Kokoro (`npm run voices`).
+- Take-off and landing: cockpit telemetry, clouds, speed streaks, curved Earth, entry heat and dust.
+- Hologram globe shows each landing site with its source.
+- Viking: 11 pages, with a real 1976 panorama to look around and Viking 2's colour photo.
 
 ## Next
 

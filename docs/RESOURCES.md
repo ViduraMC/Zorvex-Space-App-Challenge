@@ -1,8 +1,8 @@
 # Resources: where every piece of data comes from
 
-**Rule (from our mentors, 14 Nov 2026):** we depend on the resources the challenge gives us.
-The only other source is NASA's official 3D Resources site, for 3D models and planet images.
-Anything else is listed in section 3 and flagged for replacement.
+**Rule (from our mentors, 14 Nov 2026):** facts come only from the resources the challenge gives
+us and the NASA pages named in our story briefs (`docs/stories/`). 3D models and images come
+from NASA 3D Resources first; other free sources are allowed for visuals when NASA has none.
 
 The same list is shown in the app on the **Sources & about** page (`src/data/sources.ts`), and
 each explorer's hologram panel links its own sources.
@@ -54,7 +54,39 @@ Not found on 3D Resources (we keep our own simple stand-in model): Sojourner, Ph
 Lunar Roving Vehicle, ALSEP and Surveyor. Checked: the Earth images there are a relief map and a
 photo, so we show no Earth globe.
 
-## 3. Other NASA data (flagged, to replace)
+## 2b. NASA pages from our story briefs
+
+| Page | Link | Used for |
+|---|---|---|
+| Viking 2 | <https://science.nasa.gov/mission/viking-2/> | Viking story: launch, Utopia Planitia, endings |
+| Viking Spacecraft and Science | <https://science.nasa.gov/mission/viking/spacecraft-and-science/> | Orbiter and lander hardware |
+| Viking Project and Astrobiology | <https://science.nasa.gov/astrobiology/missions/viking-project/> | The search for life, soil results, endings |
+| Viking: 50 Years on Mars | <https://science.nasa.gov/mission/viking/viking-50-years-on-mars/> | The first photo, the 19-minute signal |
+| NSSDCA Viking 1 Lander (challenge catalogue) | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C> | The descent sequence |
+
+## 3. Other images (visuals only, no facts)
+
+| Image | Link | Where |
+|---|---|---|
+| Blue Marble, NASA's Scientific Visualization Studio | <https://svs.gsfc.nasa.gov/2915> | Earth globe in the Viking story |
+| First image from the surface of Mars (Viking 1), NASA/JPL | <https://science.nasa.gov/mission/viking/viking-50-years-on-mars/> | Viking first-photo moment |
+| Viking orbiter drawing and spacecraft photo, NASA | <https://science.nasa.gov/mars/resources/viking-mission-resources/> | Reference for our 3D orbiter |
+| Viking 1 Lander panorama of Chryse Planitia (July 1976), NASA/JPL | <https://science.nasa.gov/mission/viking/viking-50-years-on-mars/> | 360-degree look-around in the Viking story |
+| Viking 2 Lander colour view of Utopia Planitia, NASA/JPL | <https://science.nasa.gov/mission/viking-2/> | Viking 2's photo in the Viking story |
+
+## 3c. Voices (AI-generated)
+
+All recorded voices are made with the open Kokoro-82M text-to-speech model (Apache-2.0,
+<https://huggingface.co/hexgrad/Kokoro-82M>), run on our own computer (`npm run voices`).
+Cast: `src/episodes/*/voice/cast.json` and `src/journey/voice/cast.json`.
+
+## 3d. Landing-site coordinates (hologram globe)
+
+Every coordinate in `src/data/explorers.*.json` links the page it came from: NSSDCA
+(Sojourner, Spirit, Opportunity, Phoenix's nominal site, Apollo 11, 12, 15) and the NASA mission
+pages (Viking 1, Viking 2, InSight, Surveyor 3). Ingenuity has none yet.
+
+## 3b. Other NASA data
 
 | Data | Link | Why it is still here |
 |---|---|---|

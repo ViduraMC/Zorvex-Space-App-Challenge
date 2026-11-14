@@ -1,6 +1,6 @@
-# ECHOES
+# The Abandoned Explorers
 
-**Humanity explored. Humanity departed. History remained.**
+**Abandoned but not Forgotten.**
 
 An interactive 3D journey for young explorers (ages 8 to 14) about the machines NASA left on the
 Moon and Mars. Board a rocket, choose a world, meet its explorers, and **play** each machine's
@@ -40,7 +40,8 @@ Node 22.18 or newer. `npm run build` makes the static site in `dist/`.
 | Apollo 11 descent stage | Moon | Not started | Vidura |
 | Ingenuity | Mars | Not started | [TBD] |
 | Kepler | Deep space | Not started (no deep-space destination yet) | [TBD] |
-| Spirit, Viking 1, Viking 2, Phoenix, InSight | Mars | Placeholder page | [TBD] |
+| Viking 1 and Viking 2 | Mars | Playable (10 pages, 7 play moments) | Vidura |
+| Spirit, Phoenix, InSight | Mars | Placeholder page | [TBD] |
 | Apollo 12 ALSEP, Apollo 15 LRV, Surveyor 3 | Moon | Placeholder page | [TBD] |
 
 ## For the team

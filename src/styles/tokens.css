@@ -127,6 +127,7 @@
   --title-shadow: 0 4px 40px rgba(0, 0, 0, 0.8);
   --title-tilt: 0deg;
   --title-track: var(--track-title);
+  --cover-title-size: clamp(40px, 6.5vw, 96px);
   --panel-bg: rgba(6, 7, 13, 0.86);
   --panel-ink: var(--text);
   --frame: 0px solid transparent;
