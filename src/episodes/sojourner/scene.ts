@@ -27,8 +27,8 @@ const RAMP_START = 1.86;
 const RAMP_END = 2.8;
 const RAMP_HALF_WIDTH = 0.7;
 const WHEEL_RADIUS = 0.065;
-/** The real airbag ball was 5.2 m across (NSSDCA). */
-const AIRBAG_RADIUS = 2.6;
+/** The real airbag ball was 5.8 m across (NASA Science, Mars Pathfinder). */
+const AIRBAG_RADIUS = 2.9;
 export const ROVER_START = { x: 1.05, z: 0, heading: 0 };
 export const RAMP_FOOT = { x: 3.35, z: 0 };
 

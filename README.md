@@ -20,10 +20,11 @@ Node 22.18 or newer. `npm run build` makes the static site in `dist/`.
 
 ## What is in it
 
-- **The journey:** Earth at night, first-person take-off, Moon or Mars (real NASA imagery on the
-  globes), first-person landing, nine explorers on plinths, a hologram panel, Explore.
+- **The journey:** Earth at night with NASA's own Saturn V, first-person take-off, Moon or Mars,
+  first-person landing, the explorers on plinths (NASA 3D models where NASA publishes one),
+  a hologram panel with each explorer's sources, Explore.
 - **Stories you play:** each episode turns what the machine really did into mini-games.
-  Real numbers are the game numbers (an 11-minute signal delay, 7 planned days against 83).
+  Real numbers are the game numbers (a 10-minute signal delay, 7 planned days against 83).
 - **Every fact is sourced.** Each line a machine speaks links to a NASA page; the About page
   lists them all.
 - **After a story:** a mission patch for your shelf, and "Look up tonight", which shows where Mars
@@ -36,10 +37,11 @@ Node 22.18 or newer. `npm run build` makes the static site in `dist/`.
 |---|---|---|---|
 | Sojourner | Mars | Playable (pilot episode) | Vidura |
 | Opportunity | Mars | Not started | Vidura |
-| Apollo (descent stage, LRV, retroreflector) | Moon | Not started | Vidura |
+| Apollo 11 descent stage | Moon | Not started | Vidura |
 | Ingenuity | Mars | Not started | [TBD] |
 | Kepler | Deep space | Not started (no deep-space destination yet) | [TBD] |
-| Spirit, Curiosity, Perseverance, Viking 1, Phoenix, InSight | Mars | Placeholder page | [TBD] |
+| Spirit, Viking 1, Viking 2, Phoenix, InSight | Mars | Placeholder page | [TBD] |
+| Apollo 12 ALSEP, Apollo 15 LRV, Surveyor 3 | Moon | Placeholder page | [TBD] |
 
 ## For the team
 
@@ -49,9 +51,14 @@ Node 22.18 or newer. `npm run build` makes the static site in `dist/`.
 - `docs/FUN_CHECKLIST.md`, `docs/FACTS_POLICY.md`, `docs/RESOURCES.md`, `docs/CREDITS.md`,
   `docs/AI_USAGE.md`, `docs/SUBMISSION.md`, `docs/PROGRESS.md`
 
+## Data sources
+
+Only the challenge resources plus NASA 3D Resources. The full list, and where each item is used,
+is in `docs/RESOURCES.md` and on the in-app **Sources & about** page.
+
 ## Credits
 
 Built with three.js, postprocessing, camera-controls, GSAP, three.quarks and Astronomy Engine.
-Planet imagery: NASA/JPL/USGS and NASA's Scientific Visualization Studio. Mission facts: NASA
-NSSDCA, NASA Science, NASA JPL, HiRISE. Full list in `docs/CREDITS.md`.
+3D models and the Mars image: NASA 3D Resources. Mission facts: NASA NSSDCA and NASA Science
+(the challenge resources). Moon map: NASA's Scientific Visualization Studio (flagged). Full list in `docs/CREDITS.md`.
 NASA does not endorse this project. MIT licence.

@@ -7,11 +7,6 @@ import type { EpisodeDef, Fact } from './engine/types';
 
 const modules = import.meta.glob<EpisodeDef>('./episodes/*/episode.ts', { eager: true, import: 'default' });
 const factFiles = import.meta.glob<{ facts: Fact[] }>('./episodes/*/facts.json', { eager: true, import: 'default' });
-const assetUrls = import.meta.glob<string>('./episodes/*/assets/*.{jpg,jpeg,png,webp,svg}', {
-  eager: true,
-  query: '?url',
-  import: 'default',
-});
 
 const isShipped = (path: string): boolean =>
   !path.includes('/_') || (import.meta.env.DEV && path.includes('/_playground/'));
@@ -27,4 +22,3 @@ export const episodes: EpisodeDef[] = Object.entries(modules)
 
 export const findEpisode = (id: string): EpisodeDef | undefined => episodes.find((e) => e.id === id);
 export const factsOf = (id: string): Fact[] => factFiles[`./episodes/${id}/facts.json`]?.facts ?? [];
-export const assetUrl = (id: string, file: string): string | undefined => assetUrls[`./episodes/${id}/assets/${file}`];

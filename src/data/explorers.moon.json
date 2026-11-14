@@ -1,115 +1,81 @@
 [
   {
-    "id": "lrv-apollo-15",
-    "name": "Lunar Roving Vehicle, Apollo 15",
-    "type": "rover",
-    "destination": "moon",
-    "slot": 1,
-    "status": "memorial",
-    "years": {
-      "start": 1971,
-      "end": 1971
-    },
-    "summary": "A Moon car driven by astronauts. Its verified story is coming soon.",
-    "sources": [
-      {
-        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
-        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
-      }
-    ]
-  },
-  {
-    "id": "lrv-apollo-16",
-    "name": "Lunar Roving Vehicle, Apollo 16",
-    "type": "rover",
-    "destination": "moon",
-    "slot": 2,
-    "status": "memorial",
-    "years": {
-      "start": 1972,
-      "end": 1972
-    },
-    "summary": "A Moon car driven by astronauts. Its verified story is coming soon.",
-    "sources": [
-      {
-        "label": "TODO-VERIFY: check dates and status on the NASA NSSDCA catalogue",
-        "url": "https://nssdc.gsfc.nasa.gov/nmc/"
-      }
-    ]
-  },
-  {
-    "id": "lrv-apollo-17",
-    "name": "Lunar Roving Vehicle, Apollo 17",
-    "type": "rover",
-    "destination": "moon",
-    "slot": 3,
-    "status": "memorial",
-    "years": {
-      "start": 1972,
-      "end": 1972
-    },
-    "summary": "A Moon car driven by astronauts. Its verified story is coming soon.",
-    "sources": [
-      {
-        "label": "TODO-VERIFY: check dates and status on the NASA NSSDCA catalogue",
-        "url": "https://nssdc.gsfc.nasa.gov/nmc/"
-      }
-    ]
-  },
-  {
     "id": "apollo-11-descent-stage",
     "name": "Apollo 11 Lunar Module descent stage",
     "type": "descent-stage",
     "destination": "moon",
-    "slot": 4,
+    "slot": 1,
     "status": "memorial",
     "years": {
       "start": 1969,
       "end": 1969
     },
-    "summary": "The landing half of a Moon lander. Its verified story is coming soon.",
+    "summary": "The lower half of Eagle, the first crewed vehicle to land on the Moon. It stayed behind as a launch pad when the astronauts flew home in the top half.",
     "sources": [
       {
-        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
+        "label": "NASA NSSDCA: Apollo 11 Lunar Module (challenge resource)",
         "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C"
+      },
+      {
+        "label": "NASA Space Apps 2026 challenge: Resources (descent stages left behind as launch pads)",
+        "url": "https://www.spaceappschallenge.org/2026/challenges/nasas-discarded-equipment-storytelling/?tab=resources"
       }
     ]
   },
   {
-    "id": "alsep",
-    "name": "Apollo Lunar Surface Experiments Package (ALSEP)",
+    "id": "alsep-apollo-12",
+    "name": "Apollo 12 ALSEP",
     "type": "instrument",
     "destination": "moon",
-    "slot": 5,
+    "slot": 2,
     "status": "memorial",
     "years": {
       "start": 1969,
       "end": 1977
     },
-    "summary": "A set of science instruments left on the Moon. Its verified story is coming soon.",
+    "summary": "A set of science instruments the Apollo 12 astronauts left on the Moon, including a seismometer to feel moonquakes. Earth controlled it until all ALSEP stations were shut down on 30 September 1977.",
     "sources": [
       {
-        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
+        "label": "NASA NSSDCA: Apollo 12 Lunar Module / ALSEP (challenge resource)",
         "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
       }
     ]
   },
   {
-    "id": "retroreflector",
-    "name": "Apollo retroreflector array",
-    "type": "instrument",
+    "id": "lrv-apollo-15",
+    "name": "Lunar Roving Vehicle, Apollo 15",
+    "type": "rover",
     "destination": "moon",
-    "slot": 6,
+    "slot": 3,
     "status": "memorial",
     "years": {
-      "start": 1969,
-      "end": null
+      "start": 1971,
+      "end": 1971
     },
-    "summary": "A mirror panel left on the Moon. Status to be confirmed with a NASA source. Its verified story is coming soon.",
+    "summary": "An electric moon buggy that the Apollo 15 astronauts drove to explore up to 5 kilometres from their lander. It is parked on the Moon for good.",
     "sources": [
       {
-        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
-        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C"
+        "label": "NASA NSSDCA: Apollo 15 Lunar Module / ALSEP (challenge resource)",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
+      }
+    ]
+  },
+  {
+    "id": "surveyor-3",
+    "name": "Surveyor 3",
+    "type": "lander",
+    "destination": "moon",
+    "slot": 4,
+    "status": "memorial",
+    "years": {
+      "start": 1967,
+      "end": 1967
+    },
+    "summary": "A robot that landed on the Moon in 1967, bouncing twice first. It dug trenches and showed that the ground could hold a lunar module. Two years later, Apollo 12 astronauts walked over and visited it.",
+    "sources": [
+      {
+        "label": "NASA Science: Surveyor 3 (challenge resource)",
+        "url": "https://science.nasa.gov/mission/surveyor-3/"
       }
     ]
   }

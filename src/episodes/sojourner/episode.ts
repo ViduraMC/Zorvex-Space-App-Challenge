@@ -24,8 +24,8 @@ export default defineEpisode({
   stats: [
     { value: '7', label: 'stat.planned' },
     { value: '83', label: 'stat.worked' },
-    { value: '100 m', label: 'stat.driven' },
-    { value: '1 cm/s', label: 'stat.speed' },
+    { value: '10.5', label: 'stat.mass' },
+    { value: '63', label: 'stat.length' },
   ],
   scene: buildScene,
   pages: [
@@ -61,7 +61,7 @@ export default defineEpisode({
       { call: 'rollDown' },
       { sfx: 'sfx.bump', sound: 'thud' },
       { fx: 'dustPuff', at: 'machine' },
-      { say: 'p2.wheels', fact: 'first-wheels' },
+      { say: 'p2.wheels', fact: 'first-rover' },
     ],
     // 3. PLAY: "Send to Mars". Plan a path, send it, wait out the signal delay
     [
@@ -69,7 +69,6 @@ export default defineEpisode({
       { place: { ...RAMP_FOOT, heading: 0 } },
       { shot: { pos: [4.25, 0.16, 1.05], look: [3.35, 0.2, 0] } },
       { shot: { pos: [4.6, 0.2, 0.75], look: [3.35, 0.2, 0], ms: 12000 } },
-      { say: 'p3.slow', fact: 'speed' },
       { say: 'p3.delay', fact: 'delay' },
       { say: 'p3.plan', fact: 'commanded' },
       {
@@ -85,7 +84,7 @@ export default defineEpisode({
             { at: 'barnacleBill', radius: 0.3 },
           ],
           maxWaypoints: 3,
-          delayMinutes: 11,
+          delayMinutes: 10,
           delaySeconds: 4,
           msPerMetre: 1400,
           camera: { pos: [4.3, 5.4, 4.2], look: [4.3, 0, 0.4] },
@@ -167,7 +166,7 @@ export default defineEpisode({
         },
       },
       { sky: 'marsDay', ms: 600 },
-      { say: 'p6.far', fact: 'distance' },
+      { say: 'p6.far', fact: 'near-lander' },
     ],
     // 7. The emotional beat: a blue sunset, and the lander goes quiet
     [
@@ -176,10 +175,9 @@ export default defineEpisode({
       { call: 'landerQuiet' },
       { shot: { rel: 'machine', pos: [-1.36, 0.55, 1.84], look: [1.18, 0.45, -1.6] } },
       { shot: { rel: 'machine', pos: [-1.66, 0.62, 2.24], look: [1.18, 0.5, -1.6], ms: 14000 } },
-      { caption: 'p7.blue', fact: 'blue-sunset' },
       { caption: 'p7.quiet', fact: 'last-contact' },
       { say: 'p7.hello', fact: 'relay' },
-      { say: 'p7.backup', fact: 'backup-plan' },
+      { say: 'p7.backup', fact: 'last-contact' },
     ],
     // 8. Relay hand-off: who came after, and the teaser for the next signal
     [

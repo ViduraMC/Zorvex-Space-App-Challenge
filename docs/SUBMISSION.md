@@ -26,10 +26,11 @@ The rules below come from the 2025 Space Apps guides. **Not yet re-checked for 2
 
 ## Before we submit
 
-- [ ] `npm run check:facts -- --strict` passes (today: 14 roster records are still `TODO-VERIFY`)
+- [ ] `npm run check:facts -- --strict` passes (passes on 14 Nov 2026)
+- [ ] Make the GitHub repository public (it is private now)
 - [ ] Every episode passed `docs/FUN_CHECKLIST.md`
 - [ ] The site is deployed at a public URL and tested on a laptop and a phone
-- [ ] The repository is public with the MIT licence
+- [ ] The repository is public with the MIT licence (now private: ViduraMC/Zorvex-Space-App-Challenge)
 - [ ] Sinhala and Tamil text reviewed by speakers
 
 Judging criteria: Impact, Creativity, Validity, Relevance, Presentation.

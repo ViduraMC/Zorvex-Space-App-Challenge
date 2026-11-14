@@ -90,8 +90,6 @@ export interface EpisodeDef {
   patch: { color: string; glyph: string };
   /** Day the machine was last heard from; the hub shows how long it has been waiting. */
   lastContact?: { date: string; fact: string };
-  /** "Spot the machine": a real orbital photo in assets/ and where the machine is on it (0..1). */
-  spot?: { image: string; credit: string; source: string; x: number; y: number; r: number };
   /** Real numbers for the end card ("83" + "days worked"). */
   stats?: { value: string; label: string }[];
   /** Which body "Look up tonight" points the child to. */

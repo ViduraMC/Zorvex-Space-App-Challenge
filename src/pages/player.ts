@@ -15,10 +15,9 @@ import { Sky, SKY_PRESETS } from '../engine/sky';
 import { Timeline } from '../engine/timeline';
 import type { EpisodeContext, EpisodeDef, SceneHandles, Target } from '../engine/types';
 import { createWorld } from '../engine/worlds';
-import { assetUrl, factsOf, findEpisode } from '../episodes';
+import { factsOf, findEpisode } from '../episodes';
 import { patchNode } from '../features/patch';
 import { skyTonightCard } from '../features/sky-tonight';
-import { openSpotTheMachine } from '../features/spot-the-machine';
 
 const MAX_FRAME_S = 0.05;
 const DEFAULT_MODEL_BUBBLE_HEIGHT = 1;
@@ -265,9 +264,6 @@ function showEnd(episode: EpisodeDef, shell: HTMLElement): void {
     }
   }
   const acts = el('div', 'end-acts', undefined, body);
-  if (episode.spot && assetUrl(episode.id, episode.spot.image)) {
-    button('btn', t('ui.spot.open'), () => openSpotTheMachine(shell, episode), acts);
-  }
   const lookUp = episode.lookUp;
   if (lookUp) {
     button('btn alt', t('ui.sky.open'), () => {

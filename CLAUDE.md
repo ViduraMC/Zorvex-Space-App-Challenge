@@ -29,6 +29,13 @@ Not a catalogue, not a quiz site. The child does what the real team did.
 - Episodes register themselves by existing; an explorer opens `#ep-<id>` when an episode with the
   same id exists, otherwise the "Story coming soon" page.
 
+## Data sources (mentors' rule)
+
+Use only the challenge's own resources (see `docs/RESOURCES.md` section 1) for facts and dates,
+and NASA 3D Resources (science.nasa.gov/3d-resources) for 3D models and planet images. Anything
+else must not be added without Vidura's OK, and must be listed and flagged in `docs/RESOURCES.md`
+and `src/data/sources.ts`. Every source shows on the Sources page and in the hologram panel.
+
 ## Rules
 
 1. **Verify, never assume.** Every fact, number, date and link is checked on a NASA source before
@@ -68,3 +75,8 @@ fix). Show the owner and wait for their OK.
 ## Deadlines (Asia/Colombo)
 
 Feature freeze Sunday 15 Nov 15:00. We submit by 21:00. Official deadline 23:59.
+
+## Standing instructions
+
+- Commits are authored by the team member only. No AI co-author lines (no `Co-Authored-By: Claude`) in commit messages. (Vidura, 14 Nov 2026)
+- Facts and data come only from the challenge resources plus NASA 3D Resources (see "Data sources" above). (Vidura, from the mentors, 14 Nov 2026)

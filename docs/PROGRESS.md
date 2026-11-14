@@ -1,10 +1,12 @@
 # Progress
 
-Updated: Saturday 14 Nov 2026, about 13:45 (Asia/Colombo).
+Updated: Saturday 14 Nov 2026, about 16:00 (Asia/Colombo).
 
 ## Now
 
-- Foundation built and running locally. Nothing is pushed or deployed yet.
+- Code is on GitHub (private): https://github.com/ViduraMC/Zorvex-Space-App-Challenge. Not deployed yet.
+- Data now comes only from the challenge resources plus NASA 3D Resources (mentors' rule). Sources page and hologram panel list every source.
+- First screen uses NASA's Saturn V and crew escape suit models; explorers use NASA models where they exist.
 - Opening journey works end to end: Home, take-off, destination, landing, explorers, hologram,
   launch, story. Back from a story returns to the explorers without replaying cutscenes.
 - Sojourner episode plays end to end with four mini-games and awards its patch.
@@ -13,8 +15,8 @@ Updated: Saturday 14 Nov 2026, about 13:45 (Asia/Colombo).
 
 1. Vidura: read the changes in `CLAUDE.md` ("Decisions already made"), then say how the stories should go.
 2. Create the GitHub repository, push, connect Vercel (public URL and pull-request previews).
-3. Verify the 14 roster records marked `TODO-VERIFY` (`npm run check:facts`).
-4. Real terrain for the Pathfinder site and the "Spot the machine" photo (recipe in `docs/RESOURCES.md`).
+3. Decide on the Moon globe image (only non-challenge, non-3D-Resources data left; see docs/RESOURCES.md section 3).
+4. Stories for each explorer (Vidura is sending them).
 5. Route globe and filters in the hologram panel (build guide step 12): needs real traverse data.
 6. Real explorer models from NASA 3D Resources instead of the stand-ins (build guide step 15).
 7. Sinhala and Tamil episode text; our own voice recordings.
@@ -22,7 +24,7 @@ Updated: Saturday 14 Nov 2026, about 13:45 (Asia/Colombo).
 
 ## Blockers
 
-- No GitHub repository and no Vercel login yet, so no deploy and no preview links.
+- No Vercel login yet, so no deploy and no preview links. The repository must be made public before submission.
 - Frame rate could not be measured here: the test browser window was throttled. One frame of the
   Sojourner scene costs about 12 ms to render on this laptop's Intel graphics (measured), which
   leaves room for 60 fps, but that is a calculation, not a measurement. Not tested on a phone.

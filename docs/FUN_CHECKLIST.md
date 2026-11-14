@@ -27,12 +27,12 @@ A "no" is a bug: fix it or write down why not.
 | Payoff | Pass. Each game action answers with a sound, a word or sparks |
 | Failure is funny | Pass. BONK! into a rock and straight back to planning |
 | Easy start | Pass. One tap and SEND wins the first game; the signal wait is 4 seconds |
-| Scale to the child | Pass. Microwave oven, tortoise, four-storey building |
+| Scale to the child | Pass. "Smaller than you", a five-storey building |
 | Wow | The airbag ball bouncing in; sending a command and waiting for it to cross space |
-| Emotional beat | "Hello? … Earth? … Can anybody hear me?" under the blue sunset |
+| Emotional beat | "Hello? … Earth? … Can anybody hear me?" at dusk |
 | No dead ends | Pass. Skip leaves any game or page |
-| Real numbers | Pass. 11 minutes of delay, 7 planned days against 83, 15 bounces |
-| True | Pass. 22 facts, all with NASA or HiRISE sources |
+| Real numbers | Pass. About 10 minutes of delay, 7 planned days against 83, about 15 bounces |
+| True | Pass. 19 facts, all from the challenge resources (Pathfinder mission page, NSSDCA) |
 | Three languages | **Fail.** English only; Sinhala and Tamil episode text not written |
 
 Not checked on a real phone yet. The voice is the browser's text-to-speech until we record our own.

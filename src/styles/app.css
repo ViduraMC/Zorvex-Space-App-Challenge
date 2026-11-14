@@ -286,47 +286,6 @@ h2.section {
 .sky-card .btn {
   margin-top: var(--gap-m);
 }
-.spot-frame {
-  position: relative;
-  width: min(92vw, 78vh, 760px);
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  cursor: crosshair;
-  touch-action: none;
-}
-.spot-frame img {
-  display: block;
-  width: 100%;
-  user-select: none;
-}
-.spot-ring {
-  position: absolute;
-  translate: -50% -50%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 4px solid var(--yellow);
-  pointer-events: none;
-}
-.spot-ring.helping {
-  animation: blink 1s ease-in-out infinite;
-}
-.spot-ring.found {
-  border-color: var(--signal);
-  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.5);
-}
-.spot-prompt {
-  margin: 0;
-  text-align: center;
-  font-size: var(--text-m);
-}
-.spot-foot {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: var(--gap-m);
-}
 .credit {
   font-size: 12px;
   color: var(--text-dim);

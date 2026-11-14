@@ -1,55 +1,73 @@
-# Resources
+# Resources: where every piece of data comes from
 
-Every link the challenge gives us, plus the other sources we use. Read on 14 Nov 2026.
+**Rule (from our mentors, 14 Nov 2026):** we depend on the resources the challenge gives us.
+The only other source is NASA's official 3D Resources site, for 3D models and planet images.
+Anything else is listed in section 3 and flagged for replacement.
 
-## Official challenge resources
+The same list is shown in the app on the **Sources & about** page (`src/data/sources.ts`), and
+each explorer's hologram panel links its own sources.
+
+## 1. Challenge resources
 
 From the Resources tab of
-<https://www.spaceappschallenge.org/2026/challenges/nasas-discarded-equipment-storytelling/?tab=resources>.
-The page only renders in a browser (it needs JavaScript).
+<https://www.spaceappschallenge.org/2026/challenges/nasas-discarded-equipment-storytelling/?tab=resources>
+(read 14 Nov 2026; the page only renders in a browser).
 
-| Resource | Link | What we use it for |
+| Resource | Link | Where we use it |
 |---|---|---|
-| NSSDCA catalogue | <https://nssdc.gsfc.nasa.gov/> | The reference for every machine: dates, sizes, where it rests, its status |
-| Apollo Lunar Modules | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C> | Apollo 11 descent stage (Moon roster, slot 4) |
-| Lunar Roving Vehicles | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C> | The three Moon rovers (Moon roster, slots 1 to 3) |
-| ALSEP science packages | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C> | ALSEP and the retroreflector (Moon roster, slots 5 and 6) |
-| Surveyor landers | <https://science.nasa.gov/mission/surveyor-3/> | Candidate for the free Moon slots 7 to 9 |
-| Sojourner rover | <https://science.nasa.gov/mission/mars-pathfinder/> | **Used.** Sojourner episode facts |
-| Spirit and Opportunity | <https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/> | Mars roster, slots 2 and 3 |
-| Viking 1 and 2 landers | <https://science.nasa.gov/mission/viking-1/> | Mars roster, slot 7 |
-| Phoenix and InSight landers | <https://science.nasa.gov/mission/insight/> | Mars roster, slots 8 and 9 |
+| NSSDCA catalogue | <https://nssdc.gsfc.nasa.gov/> | Dates, sizes and status of the machines; most Sojourner facts. Pages used: Mars Pathfinder (`1996-068A`), Pathfinder Rover (`MESURPR`), Pathfinder project page, Pathfinder results and APXS results, Viking 2 Lander (`1975-083C`), Phoenix (`2007-034A`) |
+| Apollo Lunar Modules | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C> | Moon explorer: Apollo 11 descent stage |
+| Lunar Roving Vehicles | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C> | Moon explorer: Apollo 15 Lunar Roving Vehicle |
+| ALSEP science packages | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C> | Moon explorer: Apollo 12 ALSEP |
+| Surveyor landers | <https://science.nasa.gov/mission/surveyor-3/> | Moon explorer: Surveyor 3 |
+| Sojourner rover | <https://science.nasa.gov/mission/mars-pathfinder/> | Mars explorer and the Sojourner story |
+| Spirit and Opportunity | <https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/> | Mars explorers: Spirit and Opportunity; Sojourner's "who came after" line |
+| Viking 1 and 2 landers | <https://science.nasa.gov/mission/viking-1/> | Mars explorers: Viking 1 and Viking 2 |
+| Phoenix and InSight landers | <https://science.nasa.gov/mission/insight/> | Mars explorer: InSight |
 | Dawn | <https://science.nasa.gov/mission/dawn/> | Not used yet (deep space) |
 | NEAR Shoemaker | <https://science.nasa.gov/mission/near-shoemaker/> | Not used yet (deep space) |
 | Pioneer 10 and 11 | <https://science.nasa.gov/mission/pioneer-10/> | Not used yet (deep space) |
-| Ingenuity helicopter | <https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/> | Mars roster, slot 6 |
+| Ingenuity helicopter | <https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/> | Mars explorer: Ingenuity; Sojourner's "who came after" line |
 | Kepler space telescope | <https://science.nasa.gov/mission/kepler/> | Not used yet (deep space) |
 
-Dawn, NEAR Shoemaker, Pioneer and Kepler are not on the Moon or Mars, so the destination screen
-has no place for them yet. Adding a third "Deep space" destination would bring them in.
+The explorer list follows these resources exactly: 8 on Mars, 4 on the Moon. Curiosity and
+Perseverance were removed because the challenge resources do not cover them, so no explorer is
+shown as "active" today.
 
-## NASA data in the product now
+## 2. NASA 3D Resources (<https://science.nasa.gov/3d-resources/>)
 
-| Data | Link | Where |
+Downloaded 14 Nov 2026 and compressed with `gltf-transform optimize --compress meshopt`.
+Raw downloads live in `models-src/` (git-ignored); the app uses `src/assets/models/`.
+
+| Model or image | Page | Where we use it |
 |---|---|---|
-| Mars global colour mosaic (Viking MDIM 2.1), NASA/JPL/USGS | File: <https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/6afad901-1caa-48a7-8b62-3911da0004c2/download/mars_viking_mdim21_clrmosaic_global_1024.jpg> (TODO-VERIFY: the catalogue page and exact credit line) | The Mars globe (`src/assets/planets/mars.jpg`) |
-| CGI Moon Kit: LRO colour and LOLA elevation, NASA's Scientific Visualization Studio | <https://svs.gsfc.nasa.gov/4720> | The Moon globe and its relief (`moon.jpg`, `moon_bump.jpg`) |
-| NSSDCA, NASA Science, NASA JPL and NASA History pages | see `src/episodes/sojourner/facts.json` | Every fact in the Sojourner episode (22 facts, each with its source) |
+| Saturn V | <https://science.nasa.gov/3d-resources/saturn-v/> | The rocket on the first screen |
+| Advanced Crew Escape Suit | <https://science.nasa.gov/3d-resources/advanced-crew-escape-suit/> | The young explorer in a spacesuit on the first screen |
+| Mars Exploration Rover - Opportunity (MER-B) | <https://science.nasa.gov/3d-resources/mars-exploration-rover-opportunity-mer-b/> | Spirit and Opportunity (identical twins) |
+| Viking Lander | <https://science.nasa.gov/3d-resources/viking-lander/> | Viking 1 and Viking 2 |
+| InSight Cruise Lander (panels deployed) | <https://science.nasa.gov/3d-resources/insight-cruise-lander/> | InSight |
+| Ingenuity Mars Helicopter | <https://science.nasa.gov/3d-resources/ingenuity-mars-helicopter/> | Ingenuity |
+| Apollo Lunar Module | <https://science.nasa.gov/3d-resources/apollo-lunar-module/> | Apollo 11 descent stage (we show only the lower half of the model) |
+| Mars (image texture) | <https://science.nasa.gov/3d-resources/mars/> | The Mars globe on the destination screen |
 
-## NASA data ready to add next
+Not found on 3D Resources (we keep our own simple stand-in model): Sojourner, Phoenix, the
+Lunar Roving Vehicle, ALSEP and Surveyor. Checked: the Earth images there are a relief map and a
+photo, so we show no Earth globe.
 
-| Data | Link | Note |
+## 3. Other NASA data (flagged, to replace)
+
+| Data | Link | Why it is still here |
 |---|---|---|
-| HiRISE terrain model of the Pathfinder site (1 m per pixel) | <https://www.uahirise.org/dtm/PSP_002391_1995> | 376 MB. The engine already accepts a real height grid (`site` in `worlds/mars.ts`). Byte-range download of only the rows we need works at about 50 KB/s; the label says 6579 x 14277 samples, 32-bit floats, 26316 bytes per row. The lander's pixel still has to be located (it is near line 3060, sample 4820, give or take a few hundred metres). |
-| HiRISE photo of the Pathfinder site, 21 Dec 2006 | <https://www.uahirise.org/PSP_001890_1995> | For "Spot the machine". The feature is built; it needs the cropped photo and the lander's position on it. |
-| NASA 3D Resources (official models) | <https://science.nasa.gov/3d-resources/> | Real models for the explorers; there is no official Sojourner model. |
-| NASA Image and Video Library | <https://images.nasa.gov/> | Photos for the story pages |
-| LROC (Moon orbital photos of the Apollo sites) | <https://lroc.asu.edu/> | "Spot the machine" for the Moon |
+| CGI Moon Kit (LRO colour, LOLA elevation), NASA's Scientific Visualization Studio | <https://svs.gsfc.nasa.gov/4720> | The Moon globe. 3D Resources has no Moon colour map, only a printable model (12 MB STL). Decide: keep it, or use a plain grey Moon |
 
-## Space Apps rules
+## 4. Not data (code and fonts)
 
-- Submission guide: <https://www.spaceappschallenge.org/resources/project-submission-guide/>
-- Judging and awards: <https://www.spaceappschallenge.org/resources/judging-awards-guide>
-- Participant FAQs: <https://www.spaceappschallenge.org/resources/participant-faqs/>
+three.js, postprocessing, camera-controls, GSAP, three.quarks, Astronomy Engine (computes where
+Mars and the Moon are tonight), Google Fonts. Licences in `docs/CREDITS.md`.
 
-These three pages were not re-read for 2026 yet (see `docs/SUBMISSION.md`).
+## Removed on 14 Nov 2026 (not challenge resources)
+
+USGS Viking Mars mosaic, HiRISE images and terrain (and the "Spot the machine" feature that
+needed them), JPL news, NASA History and NASA Space Place pages, and the Curiosity and
+Perseverance explorers. Sojourner facts that only those pages supported (top speed, 100 m driven,
+the blue-sunset line, the rover's backup plan) were removed from the story.

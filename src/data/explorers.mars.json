@@ -10,11 +10,15 @@
       "start": 1997,
       "end": 1997
     },
-    "summary": "The first wheeled vehicle on another planet. No bigger than a microwave oven, it worked for 83 days instead of 7.",
+    "summary": "The first rover on Mars. It rolled off its lander in 1997 and studied rocks and soil in a valley called Ares Vallis.",
     "sources": [
       {
-        "label": "NASA JPL: Mars Pathfinder / Sojourner Rover",
-        "url": "https://www.jpl.nasa.gov/missions/mars-pathfinder-sojourner-rover/"
+        "label": "NASA Science: Mars Pathfinder (challenge resource)",
+        "url": "https://science.nasa.gov/mission/mars-pathfinder/"
+      },
+      {
+        "label": "NASA NSSDCA: Mars Pathfinder Rover",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=MESURPR"
       }
     ]
   },
@@ -29,10 +33,10 @@
       "start": 2004,
       "end": 2010
     },
-    "summary": "A Mars rover. Its verified story is coming soon.",
+    "summary": "One of twin robot geologists. Spirit landed in Gusev Crater, a possible old lake, and drove 7.7 kilometres before its mission ended in 2010.",
     "sources": [
       {
-        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
+        "label": "NASA Science: Spirit and Opportunity (challenge resource)",
         "url": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
       }
     ]
@@ -48,68 +52,11 @@
       "start": 2004,
       "end": 2018
     },
-    "summary": "A Mars rover. Its verified story is coming soon.",
+    "summary": "Spirit's twin. Opportunity drove 45.16 kilometres on Mars and last talked to Earth on 10 June 2018, during a dust storm that covered the whole planet.",
     "sources": [
       {
-        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
+        "label": "NASA Science: Spirit and Opportunity (challenge resource)",
         "url": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
-      }
-    ]
-  },
-  {
-    "id": "curiosity",
-    "name": "Curiosity",
-    "type": "rover",
-    "destination": "mars",
-    "slot": 4,
-    "status": "active",
-    "years": {
-      "start": 2012,
-      "end": null
-    },
-    "summary": "A Mars rover that is still at work. Its verified story is coming soon.",
-    "sources": [
-      {
-        "label": "TODO-VERIFY: check dates and status on the NASA NSSDCA catalogue",
-        "url": "https://nssdc.gsfc.nasa.gov/nmc/"
-      }
-    ]
-  },
-  {
-    "id": "perseverance",
-    "name": "Perseverance",
-    "type": "rover",
-    "destination": "mars",
-    "slot": 5,
-    "status": "active",
-    "years": {
-      "start": 2021,
-      "end": null
-    },
-    "summary": "A Mars rover that is still at work. Its verified story is coming soon.",
-    "sources": [
-      {
-        "label": "TODO-VERIFY: check dates and status on the NASA NSSDCA catalogue",
-        "url": "https://nssdc.gsfc.nasa.gov/nmc/"
-      }
-    ]
-  },
-  {
-    "id": "ingenuity",
-    "name": "Ingenuity",
-    "type": "helicopter",
-    "destination": "mars",
-    "slot": 6,
-    "status": "memorial",
-    "years": {
-      "start": 2021,
-      "end": 2024
-    },
-    "summary": "A small Mars helicopter. Its verified story is coming soon.",
-    "sources": [
-      {
-        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
-        "url": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
       }
     ]
   },
@@ -118,16 +65,39 @@
     "name": "Viking 1",
     "type": "lander",
     "destination": "mars",
-    "slot": 7,
+    "slot": 4,
     "status": "memorial",
     "years": {
       "start": 1976,
       "end": 1982
     },
-    "summary": "A Mars lander. Its verified story is coming soon.",
+    "summary": "On 20 July 1976 Viking 1 made the first truly successful landing on Mars and sent the first pictures from its surface. It stopped in 1982 after a faulty command.",
     "sources": [
       {
-        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
+        "label": "NASA Science: Viking 1 (challenge resource)",
+        "url": "https://science.nasa.gov/mission/viking-1/"
+      }
+    ]
+  },
+  {
+    "id": "viking-2",
+    "name": "Viking 2",
+    "type": "lander",
+    "destination": "mars",
+    "slot": 5,
+    "status": "memorial",
+    "years": {
+      "start": 1976,
+      "end": 1980
+    },
+    "summary": "Viking 2 landed in Utopia Planitia. It worked for 1,281 Mars days, until its batteries failed on 11 April 1980.",
+    "sources": [
+      {
+        "label": "NASA NSSDCA: Viking 2 Lander (challenge catalogue)",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-083C"
+      },
+      {
+        "label": "NASA Science: Viking 1 and 2 (challenge resource)",
         "url": "https://science.nasa.gov/mission/viking-1/"
       }
     ]
@@ -137,17 +107,17 @@
     "name": "Phoenix",
     "type": "lander",
     "destination": "mars",
-    "slot": 8,
+    "slot": 6,
     "status": "memorial",
     "years": {
       "start": 2008,
       "end": 2008
     },
-    "summary": "A Mars lander. Its verified story is coming soon.",
+    "summary": "Phoenix landed in 2008 on the far northern plains of Mars, the Martian arctic. As summer ended its power ran out, and its last signal came on 2 November 2008.",
     "sources": [
       {
-        "label": "TODO-VERIFY: check dates and status on the NASA NSSDCA catalogue",
-        "url": "https://nssdc.gsfc.nasa.gov/nmc/"
+        "label": "NASA NSSDCA: Phoenix Mars Lander (challenge catalogue)",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A"
       }
     ]
   },
@@ -156,17 +126,36 @@
     "name": "InSight",
     "type": "lander",
     "destination": "mars",
-    "slot": 9,
+    "slot": 7,
     "status": "memorial",
     "years": {
       "start": 2018,
       "end": 2022
     },
-    "summary": "A Mars lander. Its verified story is coming soon.",
+    "summary": "InSight landed on Elysium Planitia in 2018 to study the inside of Mars. Its robotic arm placed a seismometer on the ground. Its mission ended on 15 December 2022.",
     "sources": [
       {
-        "label": "TODO-VERIFY: check dates and status on this NASA page (from the challenge Resources tab)",
+        "label": "NASA Science: InSight (challenge resource)",
         "url": "https://science.nasa.gov/mission/insight/"
+      }
+    ]
+  },
+  {
+    "id": "ingenuity",
+    "name": "Ingenuity",
+    "type": "helicopter",
+    "destination": "mars",
+    "slot": 8,
+    "status": "memorial",
+    "years": {
+      "start": 2021,
+      "end": 2024
+    },
+    "summary": "The first aircraft to make a powered, controlled flight on another planet. Planned for at most five test flights, it flew 72 times. Its last flight was on 18 January 2024.",
+    "sources": [
+      {
+        "label": "NASA Science: Ingenuity Mars Helicopter (challenge resource)",
+        "url": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
       }
     ]
   }
