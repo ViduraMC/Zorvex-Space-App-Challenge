@@ -5,10 +5,11 @@
  */
 import gsap from 'gsap';
 import type { Object3D } from 'three';
-import { DirectionalLight, Group, HemisphereLight, PerspectiveCamera, Raycaster, Scene, Vector2, Vector3 } from 'three';
+import { DirectionalLight, Group, HemisphereLight, Mesh, PerspectiveCamera, Raycaster, Scene, Vector2, Vector3 } from 'three';
+import type { FogExp2, MeshStandardMaterial, ShaderMaterial } from 'three';
 import { button, el, link } from '../dom';
 import { audio } from '../engine/audio';
-import { t } from '../engine/i18n';
+import { getLang, t } from '../engine/i18n';
 import { progress } from '../engine/progress';
 import { Renderer } from '../engine/renderer';
 import { go, type Page } from '../engine/router';
@@ -17,9 +18,14 @@ import { episodeFor } from '../episodes';
 import type { Explorer } from '../journey/explorers';
 import { NASA_MODELS, nasaModel, loadNasaModel } from '../journey/nasaModels';
 import { COLORS, createChild, createDesert, createNightSky, createPlanet, createRocket, createShootingStars, createStars } from '../journey/props';
+import { formatSite } from '../journey/geo';
+import { SiteGlobe } from '../journey/siteGlobe';
+import { createFlightFx } from '../journey/flight';
 import { journey, type Destination, type Phase } from '../journey/store';
 import { buildSurface, disposeSurface, hasNasaModel, updateSurface, type Surface } from '../journey/surface';
 
+/** Mission control's recorded lines (npm run voices). */
+const VOICE = import.meta.glob<string>('../journey/voice/en/*.mp3', { eager: true, query: '?url', import: 'default' });
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 /** Cutscene time factor: reduced motion plays every cutscene almost instantly. */
 const D = REDUCED ? 0.02 : 1;
@@ -52,7 +58,9 @@ export const journeyPage: Page = (root) => {
   // ---------- the flight scene: Earth at night, then open space ----------
   const scene = new Scene();
   const camera = new PerspectiveCamera(50, 1, 0.1, 3000);
-  const cam = { pos: new Vector3(...HOME_CAM.pos), look: new Vector3(...HOME_CAM.look), shake: 0 };
+  const cam = { pos: new Vector3(...HOME_CAM.pos), look: new Vector3(...HOME_CAM.look), shake: 0, speed: 0 };
+  /** The way the world rushes past the window (speed streaks). */
+  const rush = new Vector3(0, -1, 0);
   const stars = createStars(3000, 120);
   const nightSky = createNightSky();
   const shooting = createShootingStars();
@@ -86,6 +94,10 @@ export const journeyPage: Page = (root) => {
   const planets = DESTINATIONS.map((kind) => createPlanet(kind, anisotropy));
   for (const p of planets) space.add(p.group);
   scene.add(nightSky.mesh, stars.points, earth, space);
+  const flight = createFlightFx(new Vector3(ROCKET_X, 0, 0));
+  scene.add(flight.group);
+  const desertMat = (earth.children[0] as Mesh).material as MeshStandardMaterial;
+  desertMat.transparent = true;
 
   // ---------- HTML overlays (all text lives here, never inside WebGL) ----------
   const title = el('header', 'j-title', undefined, shell);
@@ -97,8 +109,19 @@ export const journeyPage: Page = (root) => {
     journey.start();
   }, shell);
   const cockpit = el('div', 'j-cockpit', undefined, shell);
-  const dash = el('div', 'j-dash', undefined, el('div', 'j-window', undefined, cockpit));
+  const windowFrame = el('div', 'j-window', undefined, cockpit);
+  el('div', 'j-glass', undefined, windowFrame);
+  const dash = el('div', 'j-dash', undefined, windowFrame);
   for (let i = 0; i < 7; i++) el('i', '', undefined, dash);
+  // telemetry readouts on the console under the window (our own rocket: these are not NASA numbers)
+  const tele = el('div', 'j-tele', undefined, cockpit);
+  const teleAlt = el('b', '', '0', el('span', '', t('ui.tele.alt'), tele));
+  const teleSpeed = el('b', '', '0', el('span', '', t('ui.tele.speed'), tele));
+  const teleG = el('b', '', '1.0', el('span', '', t('ui.tele.g'), tele));
+  for (const side of ['left', 'right']) {
+    const panel = el('div', `j-side ${side}`, undefined, cockpit);
+    for (let i = 0; i < 6; i++) el('i', '', undefined, panel);
+  }
   const hud = el('div', 'j-hud', undefined, shell);
   hud.setAttribute('aria-live', 'assertive');
   const pick = el('div', 'j-pick', undefined, shell);
@@ -119,6 +142,7 @@ export const journeyPage: Page = (root) => {
 
   // ---------- state shared by the phases ----------
   let surface: Surface | null = null;
+  let globe: SiteGlobe | null = null;
   let timeline: gsap.core.Timeline | null = null;
   let phaseScope = session.child();
   let focused = 0;
@@ -128,6 +152,10 @@ export const journeyPage: Page = (root) => {
 
   const show = (node: HTMLElement, visible: boolean): void => {
     node.hidden = !visible;
+  };
+  const voice = (key: string): void => {
+    const url = VOICE[`../journey/voice/en/${key}.mp3`];
+    if (url && getLang() === 'en') audio.clip(url);
   };
   const say = (text: string): void => {
     hud.textContent = text;
@@ -200,7 +228,18 @@ export const journeyPage: Page = (root) => {
     el('span', '', t(`ui.type.${e.type}`), meta);
     el('span', '', years(e), meta);
     el('p', '', e.summary, holo);
-    el('div', 'holo-route', t('ui.holo.route'), holo);
+    // where it rests: a small globe of its world with the landing site marked
+    const route = el('div', 'holo-route', undefined, holo);
+    globe ??= new SiteGlobe();
+    route.appendChild(globe.canvas);
+    globe.show(e.destination, e.site ?? null);
+    const where = el('p', 'holo-site', undefined, route);
+    if (e.site) {
+      where.append(`${t('ui.holo.site')} ${formatSite(e.site.lat, e.site.lon)} · ${e.site.note} `);
+      link('', t('ui.holo.siteSource'), e.site.source, where);
+    } else {
+      where.textContent = t('ui.holo.siteSoon');
+    }
     // where every word on this panel comes from
     const sources = el('div', 'holo-sources', undefined, holo);
     el('b', '', t('ui.holo.sources'), sources);
@@ -232,6 +271,10 @@ export const journeyPage: Page = (root) => {
       child.group.scale.setScalar(1);
       rocket.door.position.z = 0.52;
       nightSky.bottom.set(COLORS.duskBlue);
+      desertMat.opacity = 1;
+      flight.earth.visible = false;
+      ((flight.earth.children[0] as Mesh).material as MeshStandardMaterial).opacity = 0;
+      cam.speed = 0;
       stars.material.uniforms.uBright.value = 1;
       cam.pos.set(...HOME_CAM.pos);
       cam.look.set(...HOME_CAM.look);
@@ -275,28 +318,63 @@ export const journeyPage: Page = (root) => {
       rocket.group.visible = child.group.visible = false;
       cam.pos.set(ROCKET_X, 2.7, 0);
       cam.look.set(ROCKET_X, 2.9, -60);
-      phaseScope.frame(() => audio.drive(cam.shake));
-      phaseScope.add(() => audio.drive(0));
-      const count = (n: string): void => {
+      cam.speed = 0;
+      rush.set(0, -1, 0);
+      flight.earth.visible = true;
+      phaseScope.frame(() => audio.drive(Math.max(cam.shake, cam.speed)));
+      phaseScope.add(() => {
+        audio.drive(0);
+        flight.exhaust.intensity = 0;
+        cockpit.classList.remove('rumble', 'ignite');
+      });
+      const count = (n: string, key: string): void => {
         say(n);
+        voice(key);
         audio.play('beep');
       };
+      const ignite = { glow: 0 };
+      phaseScope.frame((_dt, time) => {
+        flight.exhaust.intensity = ignite.glow * (40 + Math.sin(time * 37) * 12);
+      });
       timeline = gsap
         .timeline({ onComplete: () => journey.finish('TAKEOFF') })
         .fromTo(cockpit, { opacity: 0 }, { opacity: 1, duration: 0.4 * D })
-        .to(cam, { shake: 0.3, duration: 2 * D }, 1 * D)
-        .call(() => count('3'), [], 1 * D)
-        .call(() => count('2'), [], 1.67 * D)
-        .call(() => count('1'), [], 2.33 * D)
-        .call(() => say(t('ui.journey.liftoff')), [], 3 * D)
-        .to(cam, { shake: 1, duration: 1 * D }, 3 * D)
-        .to(cam.pos, { y: 420, duration: 3 * D, ease: 'power2.in' }, 3 * D)
-        .to(cam.look, { y: 520, duration: 3 * D, ease: 'power2.in' }, 3 * D)
-        .to(nightSky.bottom, { r: 0.004, g: 0.005, b: 0.01, duration: 3 * D }, 3 * D)
-        .to(stars.material.uniforms.uBright, { value: 1.9, duration: 3 * D }, 3 * D)
-        .to(cam, { shake: 0, duration: 1.1 * D }, 6 * D)
-        .call(() => say(''), [], 6 * D)
-        .to(blackout, { opacity: 1, duration: 0.4 * D }, 7.1 * D);
+        .call(() => count('3', 'voice.count3'), [], 0.9 * D)
+        .call(() => count('2', 'voice.count2'), [], 1.9 * D)
+        .call(() => count('1', 'voice.count1'), [], 2.9 * D)
+        // ignition: the ground lights up orange, everything starts to shake
+        .to(ignite, { glow: 1, duration: 1.2 * D }, 2.4 * D)
+        .call(() => cockpit.classList.add('ignite'), [], 2.4 * D)
+        .call(() => cockpit.classList.remove('ignite'), [], 6.2 * D)
+        .to(cam, { shake: 0.6, duration: 1.4 * D }, 2.4 * D)
+        .call(() => {
+          say(t('ui.journey.liftoff'));
+          voice('voice.liftoff');
+          audio.play('whoosh');
+          cockpit.classList.add('rumble');
+        }, [], 3.8 * D)
+        // climb: slow at first, then faster and faster through the clouds
+        .to(cam, { shake: 1.6, speed: 1, duration: 3.2 * D, ease: 'power2.in' }, 3.8 * D)
+        .to(cam.pos, { y: 470, duration: 6 * D, ease: 'power3.in' }, 3.8 * D)
+        .to(cam.look, { y: 380, z: -460, duration: 6 * D, ease: 'power2.in' }, 3.8 * D)
+        .to(ignite, { glow: 0, duration: 2 * D }, 5.2 * D)
+        .to(desertMat, { opacity: 0, duration: 1.6 * D }, 7.4 * D)
+        .to(nightSky.bottom, { r: 0.004, g: 0.005, b: 0.01, duration: 3 * D }, 6 * D)
+        .to(stars.material.uniforms.uBright, { value: 2.1, duration: 3 * D }, 6 * D)
+        .to((flight.earth.children[0] as Mesh).material as MeshStandardMaterial, { opacity: 1, duration: 2 * D }, 7.2 * D)
+        .to(((flight.earth.children[1] as Mesh).material as ShaderMaterial).uniforms.strength, { value: 1, duration: 2 * D }, 7.4 * D)
+        // engines off: the shaking stops, the Earth curves away below
+        .to(cam, { shake: 0, speed: 0.15, duration: 1.4 * D }, 9.8 * D)
+        .call(() => {
+          say('');
+          cockpit.classList.remove('rumble');
+        }, [], 9.8 * D)
+        .to(cam.look, { y: 300, duration: 2 * D, ease: 'sine.inOut' }, 9.8 * D)
+        // a last burst of speed, then on to the destinations
+        .to(cam, { speed: 1.4, duration: 0.6 * D, ease: 'power3.in' }, 11.8 * D)
+        .set(blackout, { backgroundColor: '#dff3ff' }, 12.3 * D)
+        .to(blackout, { opacity: 1, duration: 0.25 * D }, 12.3 * D)
+        .to(blackout, { backgroundColor: '#000000', duration: 0.3 * D }, 12.55 * D);
     },
     DESTINATION() {
       useScene(scene);
@@ -306,6 +384,9 @@ export const journeyPage: Page = (root) => {
       show(cockpit, false);
       show(pick, true);
       cam.shake = 0;
+      cam.speed = 0;
+      flight.earth.visible = false;
+      voice('voice.select');
       setFov(SPACE_CAM.fov);
       cam.pos.set(0, 0, SPACE_CAM.z);
       cam.look.set(0, 0, 0);
@@ -347,13 +428,19 @@ export const journeyPage: Page = (root) => {
       show(pick, false);
       show(cockpit, true);
       say(t('ui.journey.landing', { place }));
-      phaseScope.frame(() => audio.drive(cam.shake));
-      phaseScope.add(() => audio.drive(0));
+      voice(`voice.landing.${destination}`);
+      rush.set(0, 0, 1);
+      phaseScope.frame(() => audio.drive(Math.max(cam.shake, cam.speed)));
+      phaseScope.add(() => {
+        audio.drive(0);
+        cam.speed = 0;
+        cockpit.classList.remove('entry', 'rumble');
+      });
       const reach = (target.userData.size as number) + 0.9;
       timeline = gsap
         .timeline({ onComplete: () => journey.finish('LANDING') })
         .fromTo(cockpit, { opacity: 0 }, { opacity: 1, duration: 0.5 * D })
-        .to(cam, { shake: 0.25, duration: 1 * D }, 0)
+        .to(cam, { shake: 0.25, speed: 0.9, duration: 1.6 * D, ease: 'power2.in' }, 0)
         .to(cam.look, { x: target.position.x, y: target.position.y, duration: 1 * D }, 0)
         .to(cam.pos, { x: target.position.x, y: target.position.y, z: reach, duration: 3 * D, ease: 'power2.in' }, 1 * D)
         .to(blackout, { opacity: 1, duration: 0.3 * D })
@@ -364,7 +451,13 @@ export const journeyPage: Page = (root) => {
           setFov(s.view.fov, PANEL_SHARE);
           cam.pos.set(0, 46, 30);
           cam.look.copy(s.view.look);
+          rush.set(0, 1, 0);
+          cockpit.classList.add('entry', 'rumble');
+          // Mars: drop through a haze of dust that clears near the ground
+          const fog = s.scene.fog as FogExp2 | null;
+          if (fog) gsap.fromTo(fog, { density: 0.06 }, { density: fog.density, duration: 2.4 * D, ease: 'power2.out' });
         })
+        .to(cam, { shake: 1, speed: 0.7, duration: 0.3 * D })
         .to(blackout, { opacity: 0, duration: 0.3 * D })
         .to(cam.pos, { x: () => ensureSurface(destination).view.pos.x, y: () => ensureSurface(destination).view.pos.y, z: () => ensureSurface(destination).view.pos.z, duration: 2.2 * D, ease: 'power2.out' })
         .call(() => {
@@ -372,6 +465,9 @@ export const journeyPage: Page = (root) => {
           const dust = destination === 'moon' ? 'moonDust' : 'dustBurst';
           for (const x of [-3, 0, 3]) s.fx.burst(dust, tmp.set(x, s.world.heightAt(x, 11), 11));
           audio.play('thud');
+          voice('voice.touchdown');
+          cam.speed = 0;
+          cockpit.classList.remove('entry', 'rumble');
         }, [], '-=0.7')
         .fromTo(cam, { shake: 1 }, { shake: 0, duration: 0.6 * D }, '-=0.6')
         .to(cockpit, { opacity: 0, duration: 0.5 * D });
@@ -481,10 +577,19 @@ export const journeyPage: Page = (root) => {
     parallax.y += (-mouse.y * 0.12 * drift - parallax.y) * 0.05;
     const shake = REDUCED ? 0 : cam.shake;
     camera.position.set(
-      cam.pos.x + parallax.x + Math.sin(time * 60) * 0.03 * shake,
-      cam.pos.y + parallax.y + Math.cos(time * 55) * 0.03 * shake,
-      cam.pos.z,
+      cam.pos.x + parallax.x + Math.sin(time * 60) * 0.06 * shake,
+      cam.pos.y + parallax.y + Math.cos(time * 55) * 0.06 * shake,
+      cam.pos.z + Math.sin(time * 47) * 0.03 * shake,
     );
+    if (!cockpit.hidden) {
+      flight.update(dt, camera.position, REDUCED ? 0 : cam.speed, rush);
+      const altitude = Math.max(0, cam.pos.y - 2.7);
+      teleAlt.textContent = altitude.toFixed(altitude < 10 ? 1 : 0);
+      teleSpeed.textContent = Math.round(cam.speed * 7800).toLocaleString();
+      teleG.textContent = (1 + cam.shake * 2.1).toFixed(1);
+    } else if (cam.speed === 0) {
+      flight.update(dt, camera.position, 0, rush);
+    }
     camera.lookAt(cam.look);
     stars.points.position.copy(camera.position);
     nightSky.mesh.position.copy(camera.position);
@@ -506,6 +611,7 @@ export const journeyPage: Page = (root) => {
   enter(journey.get().phase);
   raf = requestAnimationFrame(frame);
   session.add(() => {
+    globe?.dispose();
     cancelAnimationFrame(raf);
     timeline?.kill();
     if (surface) disposeSurface(surface);
