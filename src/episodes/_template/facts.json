@@ -1,0 +1,12 @@
+{
+  "episode": "__ID__",
+  "checked": "",
+  "facts": [
+    {
+      "id": "sample",
+      "text": "Replace me with a real fact, in plain English, exactly as the source states it.",
+      "source": "TODO-VERIFY",
+      "sourceName": "Paste the NASA page URL in \"source\" and its name here"
+    }
+  ]
+}

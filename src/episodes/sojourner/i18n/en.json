@@ -1,0 +1,79 @@
+{
+  "title": "Sojourner",
+  "tagline": "The little rover who went first. Mars, 1997.",
+  "kicker": "A true story from Mars · 1997",
+  "mystery": "Who drove the first wheels on Mars? And is it still there?",
+  "machine": "Sojourner",
+
+  "stat.planned": "days planned",
+  "stat.worked": "days worked",
+  "stat.driven": "driven",
+  "stat.speed": "top speed",
+
+  "sfx.boing": "BOING!",
+  "sfx.clunk": "CLUNK!",
+  "sfx.beep": "BEEP!",
+  "sfx.whirr": "WHIRRR",
+  "sfx.bump": "BUMP!",
+  "sfx.clue": "A CLUE!",
+  "sfx.day83": "DAY 83!",
+
+  "rock.barnacleBill": "Barnacle Bill",
+  "rock.yogi": "Yogi",
+  "rock.scoobyDoo": "Scooby-Doo",
+
+  "p1.date": "Mars. 4 July 1997. Something is falling from the sky…",
+  "p1.bounce": "Wrapped in airbags, it bounced at least 15 times. The first bounce was as high as a four-storey building!",
+  "p1.petals": "Its metal petals open like a flower. Something small is riding inside.",
+
+  "p2.hello": "Hello, Mars! My name is Sojourner.",
+  "p2.size": "I am no bigger than a microwave oven. But I have a very big job.",
+  "p2.roll": "Roll down the ramp!",
+  "p2.wheels": "My wheels are the first wheels ever to roll on another planet!",
+
+  "p3.slow": "My top speed is one centimetre a second. A tortoise would win!",
+  "p3.delay": "Earth is so far away that a message takes more than 10 minutes to reach me.",
+  "p3.plan": "So nobody can steer me. Plan my path, then send it!",
+  "p3.goal": "Plan a path to the first rock",
+  "p3.hint": "Tap the ground to add stops. Stay clear of the red rings. Then press SEND.",
+  "p3.win": "Your plan flew across space, and I followed every step!",
+
+  "p4.names": "My team named these rocks after cartoon characters!",
+  "p4.apxs": "My sensor can tell what a rock is made of. Pick a rock!",
+  "p4.goal": "Scan two rocks",
+  "p4.hint": "Tap a rock's name. When I get there, hold the button until the bar is full.",
+  "p4.barnacleBill": "Barnacle Bill is made like andesite, a rock from volcanoes. Nobody expected that!",
+  "p4.yogi": "Yogi wears a coat of dust. Under the dust, it is a lot like Barnacle Bill.",
+  "p4.scoobyDoo": "Scooby-Doo is almost the same as the soil around it.",
+  "p4.win": "I told Earth what the rocks of Mars are made of!",
+
+  "p5.look": "Wait. Some of these stones look different. Can you spot them?",
+  "p5.goal": "Find 3 smooth, round pebbles",
+  "p5.hint": "Tap the stones that look like pebbles from a river. Sharp rocks do not count.",
+  "p5.miss": "Too sharp! Look for smooth ones.",
+  "p5.water": "Smooth and round, like pebbles in a river!",
+  "p5.wet": "That is a clue. Long ago, water may have flowed right here on Mars.",
+
+  "p6.plan": "The plan: Sojourner would work for just 7 days.",
+  "p6.goal": "Ask for one more day!",
+  "p6.hint": "Tap fast. How far past the plan can Sojourner go?",
+  "p6.day": "Day {n}",
+  "p6.planChip": "Plan: {n} days",
+  "p6.tap": "One more day!",
+  "p6.win": "Every morning I asked for one more day. I worked for 83!",
+  "p6.far": "I drove about 100 metres, and never went farther than 12 metres from my lander.",
+
+  "p7.blue": "A sunset on Mars is blue. That is real: fine dust in the air makes it so.",
+  "p7.quiet": "On 27 September 1997 the lander went quiet. It was the little rover's only way to call home.",
+  "p7.hello": "Hello? … Earth? … Can anybody hear me?",
+  "p7.backup": "My backup plan was to circle the lander and wait. Maybe I did. Nobody on Earth knows.",
+
+  "p8.sad": "Do not be sad for me.",
+  "p8.after": "After me came Spirit and Opportunity. Then Curiosity. Then Perseverance.",
+  "p8.tracks": "I went first, so that they could go far.",
+
+  "p9.done": "My part is done. For Mars, and for the Earth.",
+  "p9.bye": "Goodbye, my friend!",
+  "p9.still": "Sojourner is still there today, in a valley called Ares Vallis.",
+  "p9.next": "Next signal: the rover that would not stop…"
+}

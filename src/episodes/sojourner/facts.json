@@ -1,0 +1,138 @@
+{
+  "episode": "sojourner",
+  "checked": "2026-11-14",
+  "facts": [
+    {
+      "id": "landing",
+      "text": "Mars Pathfinder landed in Ares Vallis, Mars, on 4 July 1997, carrying the Sojourner rover.",
+      "source": "https://science.nasa.gov/mission/mars-pathfinder/",
+      "sourceName": "NASA Science: Mars Pathfinder"
+    },
+    {
+      "id": "bounces",
+      "text": "Protected by airbags, the lander bounced about 12 metres (40 feet) into the air on first impact and then at least another 15 times before it stopped.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A",
+      "sourceName": "NASA NSSDCA: Mars Pathfinder"
+    },
+    {
+      "id": "petals",
+      "text": "The lander opened its three triangular solar-panel petals 87 minutes after landing. The inflated airbag ball was 5.2 metres across.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A",
+      "sourceName": "NASA NSSDCA: Mars Pathfinder"
+    },
+    {
+      "id": "size",
+      "text": "Sojourner was about the size of a microwave oven: 63 cm long, 48 cm wide, 28 cm high, with a mass of 10.5 kg.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=MESURPR",
+      "sourceName": "NASA NSSDCA: Mars Pathfinder Rover (size comparison: NASA Space Place, https://spaceplace.nasa.gov/mars-sojourner)"
+    },
+    {
+      "id": "first-wheels",
+      "text": "Sojourner was the first wheeled vehicle to be used on any other planet in the solar system. It rolled down its ramp at about 05:40 UT on 6 July 1997.",
+      "source": "https://www.jpl.nasa.gov/missions/mars-pathfinder-sojourner-rover/",
+      "sourceName": "NASA JPL: Mars Pathfinder / Sojourner Rover"
+    },
+    {
+      "id": "speed",
+      "text": "Sojourner's maximum speed was 0.39 inch per second, which is about 1 centimetre per second.",
+      "source": "https://www.nasa.gov/history/25-years-ago-mars-pathfinder-launches-to-mars-to-deploy-sojourner-the-first-planetary-rover/",
+      "sourceName": "NASA History: 25 Years Ago, Mars Pathfinder Launches"
+    },
+    {
+      "id": "delay",
+      "text": "The radio time delay between Earth and the rover was about 10 minutes. (On landing day Mars was 191.5 million km from Earth, 10.6 minutes at the speed of light: our own calculation with the Astronomy Engine library.)",
+      "source": "https://nssdc.gsfc.nasa.gov/planetary/mesur.html",
+      "sourceName": "NASA NSSDCA: Mars Pathfinder Project Information"
+    },
+    {
+      "id": "commanded",
+      "text": "The rover was controlled by an operator on Earth using images from the rover and the lander. Because of the time delay it needed some autonomous control, with its own hazard avoidance.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=MESURPR",
+      "sourceName": "NASA NSSDCA: Mars Pathfinder Rover"
+    },
+    {
+      "id": "rock-names",
+      "text": "Controllers nicknamed notable rocks after cartoon characters, such as Barnacle Bill, Yogi and Scooby Doo.",
+      "source": "https://www.nasa.gov/history/25-years-ago-mars-pathfinder-launches-to-mars-to-deploy-sojourner-the-first-planetary-rover/",
+      "sourceName": "NASA History: 25 Years Ago, Mars Pathfinder Launches"
+    },
+    {
+      "id": "apxs",
+      "text": "Sojourner's Alpha Proton X-ray Spectrometer (APXS) determined the elemental composition of rocks and soils; the mission returned more than 15 chemical analyses.",
+      "source": "https://science.nasa.gov/mission/mars-pathfinder/",
+      "sourceName": "NASA Science: Mars Pathfinder"
+    },
+    {
+      "id": "barnacle-bill",
+      "text": "Barnacle Bill has the chemical composition of an andesitic volcanic rock (though it may have formed in other ways).",
+      "source": "https://science.nasa.gov/resource/sojourner-barnacle-bill-yogi/",
+      "sourceName": "NASA Science: Sojourner, Barnacle Bill and Yogi"
+    },
+    {
+      "id": "yogi",
+      "text": "Yogi first appeared to be basalt, but it is covered with dust; with the dust subtracted, its composition is similar to Barnacle Bill's.",
+      "source": "https://nssdc.gsfc.nasa.gov/planetary/marspath_results.html",
+      "sourceName": "NASA NSSDCA: Mars Pathfinder Preliminary Results"
+    },
+    {
+      "id": "scooby-doo",
+      "text": "The APXS analysis of Scooby-Doo shows only minor differences from the local soils.",
+      "source": "https://nssdc.gsfc.nasa.gov/planetary/marspath_results.html",
+      "sourceName": "NASA NSSDCA: Mars Pathfinder Preliminary Results"
+    },
+    {
+      "id": "pebbles",
+      "text": "Rounded pebbles and cobbles at the landing site suggested conglomerates that formed in running water, during a warmer past when liquid water was stable on Mars.",
+      "source": "https://science.nasa.gov/mission/mars-pathfinder/",
+      "sourceName": "NASA Science: Mars Pathfinder"
+    },
+    {
+      "id": "lifetime",
+      "text": "Sojourner spent 83 days of a planned seven-day mission exploring Mars: 12 times its design lifetime.",
+      "source": "https://www.jpl.nasa.gov/missions/mars-pathfinder-sojourner-rover/",
+      "sourceName": "NASA JPL: Mars Pathfinder / Sojourner Rover"
+    },
+    {
+      "id": "distance",
+      "text": "The rover travelled a total of 330 feet (about 100 metres), never venturing more than 39 feet (about 12 metres) from the lander.",
+      "source": "https://www.nasa.gov/history/25-years-ago-mars-pathfinder-launches-to-mars-to-deploy-sojourner-the-first-planetary-rover/",
+      "sourceName": "NASA History: 25 Years Ago, Mars Pathfinder Launches"
+    },
+    {
+      "id": "last-contact",
+      "text": "The last successful data transmission from Pathfinder was completed on 27 September 1997, sol 83 of the mission. Why contact was lost may never be known.",
+      "source": "https://www.jpl.nasa.gov/news/mars-pathfinder-winds-down-after-phenomenal-mission/",
+      "sourceName": "NASA JPL News, 4 Nov 1997: Mars Pathfinder Winds Down"
+    },
+    {
+      "id": "relay",
+      "text": "All rover communications were done through the lander, over a UHF radio link. Sojourner could not talk to Earth on its own.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=MESURPR",
+      "sourceName": "NASA NSSDCA: Mars Pathfinder Rover"
+    },
+    {
+      "id": "backup-plan",
+      "text": "When contact was lost, the rover's onboard backup (contingency) plan took over; JPL said the rover was 'probably circling the vicinity of the lander'. Nobody knows what it finally did.",
+      "source": "https://www.jpl.nasa.gov/news/mars-pathfinder-winds-down-after-phenomenal-mission/",
+      "sourceName": "NASA JPL News, 4 Nov 1997: Mars Pathfinder Winds Down"
+    },
+    {
+      "id": "blue-sunset",
+      "text": "Sunsets on Mars look blue near the Sun: the very fine dust is the right size for blue light to pass through the atmosphere slightly more efficiently, and it stays close to the Sun's direction.",
+      "source": "https://www.jpl.nasa.gov/news/nasas-curiosity-rover-views-serene-sundown-on-mars/",
+      "sourceName": "NASA JPL News, 8 May 2015: Curiosity Views Serene Sundown on Mars"
+    },
+    {
+      "id": "successors",
+      "text": "Sojourner was the forerunner of later, more advanced Mars rovers: Spirit and Opportunity, Curiosity and Perseverance.",
+      "source": "https://spaceplace.nasa.gov/mars-sojourner",
+      "sourceName": "NASA Space Place: The Mars Rovers (and NASA History, 25 Years Ago)"
+    },
+    {
+      "id": "still-there",
+      "text": "The Pathfinder lander is still in Ares Vallis: the HiRISE camera on Mars Reconnaissance Orbiter photographed it from orbit on 21 December 2006, showing its ramps, science deck and airbags.",
+      "source": "https://www.uahirise.org/PSP_001890_1995",
+      "sourceName": "HiRISE (NASA/JPL-Caltech/UArizona): HiRISE Images Mars Pathfinder Site"
+    }
+  ]
+}

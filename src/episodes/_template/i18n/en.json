@@ -1,0 +1,22 @@
+{
+  "title": "__TITLE__",
+  "tagline": "One line that makes a child want to answer this signal.",
+  "kicker": "A true story",
+  "mystery": "Ask the mystery question this episode answers.",
+  "machine": "__TITLE__",
+
+  "sfx.whirr": "WHIRRR",
+
+  "p1.where": "Where and when are we? One short line.",
+  "p1.hello": "Hello! I am the machine of this story.",
+  "p1.go": "Wake me up!",
+
+  "p2.ask": "Can you help me study this?",
+  "p2.goal": "Scan the target",
+  "p2.hint": "Tap its name, then hold the button until the bar is full.",
+  "p2.target": "Target",
+  "p2.result": "Here is what I found. (Make this a real, sourced fact.)",
+  "p2.win": "We did it together!",
+
+  "p3.bye": "My part is done. Goodbye, my friend!"
+}
