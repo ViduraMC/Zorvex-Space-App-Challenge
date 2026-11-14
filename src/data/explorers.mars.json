@@ -71,7 +71,7 @@
       "start": 1976,
       "end": 1982
     },
-    "summary": "On 20 July 1976 Viking 1 made the first truly successful landing on Mars and sent the first pictures from its surface. It stopped in 1982 after a faulty command.",
+    "summary": "On 20 July 1976 Viking 1 made the first truly successful landing on Mars and sent the first photo from its surface. Its lander worked until November 1982.",
     "sources": [
       {
         "label": "NASA Science: Viking 1 (challenge resource)",
@@ -90,7 +90,7 @@
       "start": 1976,
       "end": 1980
     },
-    "summary": "Viking 2 landed in Utopia Planitia. It worked for 1,281 Mars days, until its batteries failed on 11 April 1980.",
+    "summary": "Viking 2 landed at Utopia Planitia on 3 September 1976, about 6,460 km from its twin. Its lander sent its last data in April 1980.",
     "sources": [
       {
         "label": "NASA NSSDCA: Viking 2 Lander (challenge catalogue)",
@@ -99,6 +99,10 @@
       {
         "label": "NASA Science: Viking 1 and 2 (challenge resource)",
         "url": "https://science.nasa.gov/mission/viking-1/"
+      },
+      {
+        "label": "NASA Science: Viking 2",
+        "url": "https://science.nasa.gov/mission/viking-2/"
       }
     ]
   },

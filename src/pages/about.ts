@@ -3,7 +3,7 @@
  * lists the app uses (src/data/sources.ts, the explorer rosters, each episode's facts.json), so
  * it cannot drift from what is on screen.
  */
-import { CHALLENGE_PAGE, CHALLENGE_RESOURCES, NASA_3D_RESOURCES, OTHER_SOURCES, type Source } from '../data/sources';
+import { CHALLENGE_PAGE, CHALLENGE_RESOURCES, NASA_3D_RESOURCES, OTHER_SOURCES, STORY_SOURCES, type Source } from '../data/sources';
 import { el, link } from '../dom';
 import { t, tEp } from '../engine/i18n';
 import type { Page } from '../engine/router';
@@ -45,6 +45,9 @@ export const aboutPage: Page = (root) => {
   const models = el('p', '', `${t('ui.about.modelsNote')} `, about);
   link('', 'science.nasa.gov/3d-resources', 'https://science.nasa.gov/3d-resources/', models);
   sourceList(about, NASA_3D_RESOURCES);
+
+  el('h3', '', t('ui.about.story'), about);
+  sourceList(about, STORY_SOURCES);
 
   el('h3', '', t('ui.about.other'), about);
   sourceList(about, OTHER_SOURCES);

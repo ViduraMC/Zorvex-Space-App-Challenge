@@ -39,9 +39,10 @@
   pointer-events: none;
 }
 .j-title h1 {
-  font-size: clamp(48px, 9vw, 120px);
-  letter-spacing: 0.3em;
-  margin-right: -0.3em;
+  font-size: clamp(30px, 5.6vw, 76px);
+  letter-spacing: 0.22em;
+  margin-right: -0.22em;
+  line-height: 1.12;
   line-height: 1;
 }
 .j-title p {

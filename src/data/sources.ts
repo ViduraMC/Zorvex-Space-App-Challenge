@@ -1,7 +1,8 @@
 /**
  * Every place our data comes from, in one list. The About page shows it and docs/RESOURCES.md
  * mirrors it. Rule (from our mentors): use the challenge's own resources, plus NASA's official
- * 3D Resources site for models and planet images. Anything else must be listed here and flagged.
+ * 3D Resources site for models and planet images. Facts may also come from NASA pages named in a
+ * team story brief. Images and models may come from other free sources when NASA has none.
  */
 import { NASA_MODELS } from '../journey/nasaModels';
 
@@ -49,11 +50,35 @@ function modelUse(title: string): string {
   return 'Apollo 11 descent stage on the Moon (lower half of the model only)';
 }
 
-/** Not from the challenge list or 3D Resources. Kept only until a replacement is found. */
+/** NASA pages named in the team's story briefs (docs/stories/). Facts may come from these too. */
+export const STORY_SOURCES: Source[] = [
+  { label: 'NASA Science: Viking 2', url: 'https://science.nasa.gov/mission/viking-2/', usedFor: 'Viking story: launch, landing, Utopia Planitia, endings' },
+  { label: 'NASA Science: Viking Spacecraft and Science', url: 'https://science.nasa.gov/mission/viking/spacecraft-and-science/', usedFor: 'Viking story: orbiter and lander hardware, instruments' },
+  { label: 'NASA Science: Viking Project and Astrobiology', url: 'https://science.nasa.gov/astrobiology/missions/viking-project/', usedFor: 'Viking story: the search for life, soil results, endings' },
+  { label: 'NASA Science: Viking, 50 Years on Mars', url: 'https://science.nasa.gov/mission/viking/viking-50-years-on-mars/', usedFor: 'Viking story: the first photo, the 19-minute signal' },
+  { label: 'NASA NSSDCA: Viking 1 Lander', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C', usedFor: 'Viking story: the descent sequence (parachute at 6 km)' },
+];
+
+/** Images and maps from other NASA sites (allowed for visuals; no facts are taken from them). */
 export const OTHER_SOURCES: Source[] = [
+  {
+    label: "Blue Marble: Land Surface, Ocean Color and Sea Ice, NASA's Scientific Visualization Studio",
+    url: 'https://svs.gsfc.nasa.gov/2915',
+    usedFor: 'The Earth globe in the Viking story',
+  },
+  {
+    label: 'First image from the surface of Mars (Viking 1, 20 July 1976), NASA/JPL',
+    url: 'https://science.nasa.gov/mission/viking/viking-50-years-on-mars/',
+    usedFor: 'The first-photo moment in the Viking story',
+  },
+  {
+    label: 'Viking orbiter line drawing and Viking spacecraft photo, NASA',
+    url: 'https://science.nasa.gov/mars/resources/viking-mission-resources/',
+    usedFor: 'Reference for our 3D Viking orbiter (NASA 3D Resources has no orbiter model)',
+  },
   {
     label: "CGI Moon Kit (LRO colour and LOLA elevation), NASA's Scientific Visualization Studio",
     url: 'https://svs.gsfc.nasa.gov/4720',
-    usedFor: 'The Moon globe. NASA 3D Resources has no Moon colour map, only a printable model',
+    usedFor: 'The Moon globe (NASA 3D Resources has no Moon colour map)',
   },
 ];
