@@ -36,6 +36,7 @@ function allowed(ip) {
   if (new Date().toDateString() !== day) {
     day = new Date().toDateString();
     today = 0;
+    hits.clear(); // drop yesterday's visitors so the map cannot grow without end
   }
   const recent = (hits.get(ip) ?? []).filter((t) => now - t < 3_600_000);
   if (recent.length >= ENV.perIpPerHour || today >= ENV.perDay) return false;
@@ -108,6 +109,8 @@ createServer((req, res) => {
   const origin = ENV.origins.includes(req.headers.origin) ? req.headers.origin : ENV.origins[0];
   if (req.method === 'OPTIONS') return send(res, 204, {}, origin);
   if (req.method !== 'POST' || !req.url?.startsWith('/ask')) return send(res, 404, { error: 'not_found' }, origin);
+  // only our own pages may spend the quota (the daily cap still bounds anything that forges this)
+  if (!ENV.origins.includes(req.headers.origin)) return send(res, 403, { error: 'forbidden' }, origin);
   let raw = '';
   req.setEncoding('utf8');
   req.on('data', (chunk) => {
@@ -127,7 +130,8 @@ createServer((req, res) => {
     if (extra.length || !story || !question || question.length > MAX_QUESTION || !(body.lang in LANGS)) {
       return send(res, 400, { error: 'bad_request' }, origin);
     }
-    const ip = String(req.headers['x-forwarded-for'] ?? req.socket.remoteAddress ?? '').split(',')[0].trim();
+    // Cloud Run's front end appends the address it saw as the right-most entry; earlier entries can be forged
+    const ip = String(req.headers['x-forwarded-for'] ?? req.socket.remoteAddress ?? '').split(',').pop().trim();
     if (!allowed(ip)) return send(res, 429, { error: 'busy' }, origin);
     try {
       send(res, 200, await ask(story, question, body.lang), origin);
