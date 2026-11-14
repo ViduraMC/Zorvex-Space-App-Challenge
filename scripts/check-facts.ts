@@ -68,7 +68,15 @@ function main(): void {
     const i18n = existsSync(i18nDir)
       ? readdirSync(i18nDir).map((file) => readFileSync(join(i18nDir, file), 'utf8')).join('\n')
       : '';
-    const report = checkEpisode(facts, readFileSync(scriptPath, 'utf8'), i18n);
+    // custom games may tie their own text to facts too
+    const gamesDir = join(dir, 'games');
+    const games = existsSync(gamesDir)
+      ? readdirSync(gamesDir)
+          .filter((file) => file.endsWith('.ts'))
+          .map((file) => readFileSync(join(gamesDir, file), 'utf8'))
+          .join('\n')
+      : '';
+    const report = checkEpisode(facts, `${readFileSync(scriptPath, 'utf8')}\n${games}`, i18n);
     if (!existsSync(factsPath)) report.errors.push('facts.json is missing');
 
     console.log(`\n${id}: ${facts.length} facts`);

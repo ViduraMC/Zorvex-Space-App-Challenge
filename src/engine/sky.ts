@@ -49,10 +49,12 @@ export const SKY_PRESETS = {
   marsNight: { day: 0, sunset: 0.12, az: AZ_SET },
   moonDay: { day: 1, sunset: 0, az: AZ_DAY },
   space: { day: 1, sunset: 0, az: AZ_DAY },
+  earthDay: { day: 0.9, sunset: 0.15, az: AZ_DAY },
+  earthDusk: { day: 0.25, sunset: 1, az: AZ_SET },
 } satisfies Record<string, SkyState>;
 export type SkyPreset = keyof typeof SKY_PRESETS;
 
-export type SkyKind = 'mars' | 'moon' | 'space';
+export type SkyKind = 'mars' | 'moon' | 'space' | 'earth';
 
 const hex = (h: number): Color => new Color(h);
 const PALETTE = {
@@ -71,6 +73,22 @@ const PALETTE = {
     sunPower: 2.5,
     fill: 0.55,
   },
+  // Blue sky, orange sunset, light haze over the sea.
+  earth: {
+    dayZenith: hex(0x2f6fb5),
+    dayHorizon: hex(0xbcd6ec),
+    nightZenith: hex(0x03050c),
+    nightHorizon: hex(0x0c1424),
+    setZenith: hex(0x3a3d6c),
+    setHorizon: hex(0xe8945a),
+    sunDay: hex(0xfff4e0),
+    sunSet: hex(0xffa060),
+    groundDay: hex(0x5a5a40),
+    glow: hex(0xffb070),
+    fog: 0.0022,
+    sunPower: 2.6,
+    fill: 0.6,
+  },
   // No air: the sky stays black in full daylight and nothing softens the shadows.
   airless: {
     dayZenith: hex(0x000000),
@@ -84,8 +102,8 @@ const PALETTE = {
     groundDay: hex(0x3a3a3a),
     glow: hex(0xffffff),
     fog: 0,
-    sunPower: 2.4,
-    fill: 0.04,
+    sunPower: 1.5,
+    fill: 0.05,
   },
 };
 
@@ -134,7 +152,7 @@ export class Sky {
   constructor(scene: Scene, renderer: WebGLRenderer, kind: SkyKind, quality: Quality, start: SkyState) {
     this.#scene = scene;
     this.#kind = kind;
-    this.#pal = kind === 'mars' ? PALETTE.mars : PALETTE.airless;
+    this.#pal = kind === 'mars' ? PALETTE.mars : kind === 'earth' ? PALETTE.earth : PALETTE.airless;
     this.state = { ...start };
     if (this.#pal.fog > 0) scene.fog = new FogExp2(0xffffff, this.#pal.fog);
 
@@ -156,7 +174,8 @@ export class Sky {
     this.#group.add(new Mesh(new SphereGeometry(1500, 32, 16), this.#mat));
 
     const starPos: number[] = [];
-    const starCount = kind === 'mars' ? 1400 : 2600;
+    const hasAir = kind === 'mars' || kind === 'earth';
+    const starCount = hasAir ? 1400 : 2600;
     // airless worlds see stars all around, Mars only above the horizon
     const minElevation = kind === 'space' ? -1 : 0.02;
     for (let i = 0; i < starCount; i++) {
@@ -239,7 +258,8 @@ export class Sky {
 
     const elevation = lerp(0.045, 0.86, day);
     this.sunDir.set(Math.cos(elevation) * Math.cos(az), Math.sin(elevation), Math.cos(elevation) * Math.sin(az));
-    u.glowAmt.value = this.#kind === 'mars' ? sunset : 0;
+    const hasAir = this.#kind === 'mars' || this.#kind === 'earth';
+    u.glowAmt.value = hasAir ? sunset : 0;
     u.disc.value = clamp(day * 3 + sunset, 0, 1);
 
     this.sun.target.position.copy(this.focus);
@@ -248,11 +268,11 @@ export class Sky {
     this.sun.intensity = (p.sunPower * day + 0.7 * sunset * (1 - day)) * LIGHT_SCALE;
     this.#hemi.color.copy(this.#zenith).lerp(this.#horizon, 0.5);
     this.#hemi.groundColor.setScalar(0).lerp(p.groundDay, day);
-    this.#hemi.intensity = (this.#kind === 'mars' ? 0.1 + p.fill * day + 0.25 * sunset : p.fill + 0.1 * day) * LIGHT_SCALE;
+    this.#hemi.intensity = (hasAir ? 0.1 + p.fill * day + 0.25 * sunset : p.fill + 0.1 * day) * LIGHT_SCALE;
 
     const dark = clamp(1 - day * 2.2 - sunset * 0.55, 0, 1);
     this.#night.intensity = 0.5 * dark * LIGHT_SCALE;
-    this.#stars.opacity = this.#kind === 'mars' ? dark : 1;
+    this.#stars.opacity = hasAir ? dark : 1;
   }
 
   update(camera: Camera): void {

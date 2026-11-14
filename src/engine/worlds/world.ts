@@ -1,7 +1,7 @@
 import type { Group, Object3D } from 'three';
 import type { Quality } from '../progress';
 
-export type WorldKind = 'mars' | 'moon' | 'space';
+export type WorldKind = 'mars' | 'moon' | 'space' | 'earth';
 
 export interface World {
   kind: WorldKind;

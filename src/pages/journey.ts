@@ -13,7 +13,7 @@ import { progress } from '../engine/progress';
 import { Renderer } from '../engine/renderer';
 import { go, type Page } from '../engine/router';
 import { Scope } from '../engine/scope';
-import { findEpisode } from '../episodes';
+import { episodeFor } from '../episodes';
 import type { Explorer } from '../journey/explorers';
 import { NASA_MODELS, nasaModel, loadNasaModel } from '../journey/nasaModels';
 import { COLORS, createChild, createDesert, createNightSky, createPlanet, createRocket, createShootingStars, createStars } from '../journey/props';
@@ -425,7 +425,8 @@ export const journeyPage: Page = (root) => {
     },
     STORY() {
       const id = journey.get().selectedId!;
-      go(findEpisode(id) ? `#ep-${id}` : `#story-${id}`);
+      const episode = episodeFor(id);
+      go(episode ? `#ep-${episode.id}` : `#story-${id}`);
     },
   };
 

@@ -101,6 +101,9 @@ export class Timeline {
     } else if ('shot' in step) {
       const move = this.#shot(step.shot);
       if (step.block) await scope.wait(move);
+    } else if ('stage' in step) {
+      ctx.setStage(step.stage);
+      if (step.sky) void ctx.sky.set(step.sky);
     } else if ('sky' in step) {
       const change = ctx.sky.set(step.sky, step.ms);
       if (step.block) await scope.wait(change);
