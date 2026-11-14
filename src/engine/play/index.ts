@@ -14,6 +14,7 @@ import { findHidden } from './findHidden';
 import { holdToScan } from './holdToScan';
 import { GameHud, type BaseGameConfig, type MiniGame } from './kit';
 import { resourceManage } from './resourceManage';
+import { seismograph } from './seismograph';
 import { timingTap } from './timingTap';
 import { waypointDrive } from './waypointDrive';
 
@@ -26,6 +27,7 @@ export const GAMES = {
   balance,
   resourceManage,
   counterRace,
+  seismograph,
 };
 
 export type GameConfigs = { [K in keyof typeof GAMES]: Parameters<(typeof GAMES)[K]>[1] };

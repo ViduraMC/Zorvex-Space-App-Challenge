@@ -23,10 +23,10 @@ From the Resources tab of
 | Sojourner rover | <https://science.nasa.gov/mission/mars-pathfinder/> | Mars explorer and the Sojourner story |
 | Spirit and Opportunity | <https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/> | Mars explorers: Spirit and Opportunity; Sojourner's "who came after" line |
 | Viking 1 and 2 landers | <https://science.nasa.gov/mission/viking-1/> | Mars explorers: Viking 1 and Viking 2 |
-| Phoenix and InSight landers | <https://science.nasa.gov/mission/insight/> | Mars explorer: InSight |
+| Phoenix and InSight landers | <https://science.nasa.gov/mission/insight/> | Mars explorer and the InSight story (also its page <https://science.nasa.gov/mission/insight/science-instruments/>) |
 | Dawn | <https://science.nasa.gov/mission/dawn/> | Not used yet (deep space) |
 | NEAR Shoemaker | <https://science.nasa.gov/mission/near-shoemaker/> | Not used yet (deep space) |
-| Pioneer 10 and 11 | <https://science.nasa.gov/mission/pioneer-10/> | Not used yet (deep space) |
+| Pioneer 10 and 11 | <https://science.nasa.gov/mission/pioneer-10/> | The Pioneer story (also its sister page <https://science.nasa.gov/mission/pioneer-11/>) |
 | Ingenuity helicopter | <https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/> | Mars explorer: Ingenuity; Sojourner's "who came after" line |
 | Kepler space telescope | <https://science.nasa.gov/mission/kepler/> | Not used yet (deep space) |
 
@@ -47,7 +47,8 @@ Raw downloads live in `models-src/` (git-ignored); the app uses `src/assets/mode
 | Viking Lander | <https://science.nasa.gov/3d-resources/viking-lander/> | Viking 1 and Viking 2 |
 | InSight Cruise Lander (panels deployed) | <https://science.nasa.gov/3d-resources/insight-cruise-lander/> | InSight |
 | Ingenuity Mars Helicopter | <https://science.nasa.gov/3d-resources/ingenuity-mars-helicopter/> | Ingenuity |
-| Apollo Lunar Module | <https://science.nasa.gov/3d-resources/apollo-lunar-module/> | Apollo 11 descent stage (we show only the lower half of the model) |
+| Apollo Lunar Module | <https://science.nasa.gov/3d-resources/apollo-lunar-module/> | Apollo 11 descent stage (lower half only); Intrepid in the ALSEP story |
+| Pioneer 10 | <https://science.nasa.gov/3d-resources/pioneer/> | Pioneer 10 and 11 in the Pioneer story |
 | Mars (image texture) | <https://science.nasa.gov/3d-resources/mars/> | The Mars globe on the destination screen |
 
 Not found on 3D Resources (we keep our own simple stand-in model): Sojourner, Phoenix, the

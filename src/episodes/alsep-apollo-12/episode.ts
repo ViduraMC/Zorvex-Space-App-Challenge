@@ -141,11 +141,12 @@ export default defineEpisode({
       { shot: { rel: 'machine', pos: [-4, 1.8, 5], look: [0, 1, 0] } },
       { say: 'p7.plan', fact: 'moonquake' },
       {
-        play: 'custom:quake',
+        play: 'seismograph',
         config: {
           goal: 'p7.goal',
           hint: 'p7.hint',
           tapLabel: 'p7.tap',
+          burstSfx: 'sfx.boom',
           calmLabel: 'p7.calm',
           gotLabel: 'p7.got',
           rounds: 3,

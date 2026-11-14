@@ -25,6 +25,16 @@ import gsap from 'gsap';
 import { part, tube, type MachineMaterials, type MachineParts } from '../../engine/models';
 import { hash } from '../../engine/noise';
 import type { EpisodeContext, SceneBuild, SceneHandles } from '../../engine/types';
+import { nasaModel } from '../../journey/nasaModels';
+
+const PLAQUE_Z = 14;
+/** Planets sit on the far side from the Sun (sky.ts AZ_DAY), so the camera sees their lit face. */
+const JUPITER_AT = new Vector3(-10, -2, -30);
+const SATURN_AT = new Vector3(-26, 0, -24);
+/** NASA's Pioneer 10 model, fitted to about its real size (the magnetometer boom is the longest side). */
+const MODEL_SIZE = 8.2;
+/** Share of the model's height below the dish: lifts the dish and body to the origin. */
+const DISH_SHARE = 0.82;
 
 // ---------- constants ----------
 const DISH_RADIUS = 1.37;
@@ -361,8 +371,15 @@ function buildSignalLine(): Group {
 // ============================================================
 // Main scene builder
 // ============================================================
-export default function buildScene({ scene, materials, quality, anisotropy }: SceneBuild): SceneHandles {
+export default async function buildScene({ scene, materials, quality, anisotropy }: SceneBuild): Promise<SceneHandles> {
   const { parts, boomA, boomB, magBoom } = buildPioneer(materials);
+  // NASA's model replaces the stand-in when it loads (its booms are fixed, so the deploy is a spin-up)
+  const model = await nasaModel('pioneer-10', { size: MODEL_SIZE });
+  if (model) {
+    parts.body.clear();
+    model.position.y = -MODEL_SIZE * DISH_SHARE;
+    parts.body.add(model);
+  }
 
   // Fold booms initially (will deploy after launch)
   boomA.rotation.y = -Math.PI / 2;
@@ -372,12 +389,12 @@ export default function buildScene({ scene, materials, quality, anisotropy }: Sc
   // Planets
   const jupiter = buildJupiterGroup(anisotropy);
   jupiter.visible = false;
-  jupiter.position.set(30, -2, -15);
+  jupiter.position.copy(JUPITER_AT);
   scene.add(jupiter);
 
   const saturn = buildSaturnGroup();
   saturn.visible = false;
-  saturn.position.set(40, 0, 12);
+  saturn.position.copy(SATURN_AT);
   saturn.rotation.z = 0.47; // axial tilt
   scene.add(saturn);
 
@@ -422,6 +439,7 @@ export default function buildScene({ scene, materials, quality, anisotropy }: Sc
 
   let ctx: EpisodeContext | null = null;
   let spinning = true;
+  let spinRate = 0.3;
 
   return {
     machine: parts,
@@ -436,7 +454,7 @@ export default function buildScene({ scene, materials, quality, anisotropy }: Sc
       if (!ctx) return;
       // Gentle spin (spin-stabilised spacecraft)
       if (spinning) {
-        ctx.machine.heading += dt * 0.3;
+        ctx.machine.heading += dt * spinRate;
       }
       // Rotate planets slowly
       if (jupiter.visible) jupiter.rotation.y += dt * 0.02;
@@ -453,6 +471,7 @@ export default function buildScene({ scene, materials, quality, anisotropy }: Sc
     calls: {
       /** Page 1: initial setup — spacecraft visible with Earth behind */
       reset() {
+        parts.root.scale.setScalar(1);
         spinning = true;
         earth.visible = true;
         earth.position.set(-8, 1, -4);
@@ -468,6 +487,7 @@ export default function buildScene({ scene, materials, quality, anisotropy }: Sc
 
       /** Page 1 (post-skip): booms out, ready to go */
       readyState() {
+        parts.root.scale.setScalar(1);
         earth.visible = true;
         boomA.rotation.y = 0;
         boomB.rotation.y = 0;
@@ -480,7 +500,12 @@ export default function buildScene({ scene, materials, quality, anisotropy }: Sc
       },
 
       /** Page 2: deploy booms animation */
-      async deployBooms(_context: EpisodeContext, scope) {
+      async deployBooms(c: EpisodeContext, scope) {
+        c.fx.burst('sparkle', new Vector3(0, 0.5, 0));
+        // spin up fast, then settle back to the cruise spin
+        const spin = { v: 2.4 };
+        scope.add(() => (spinRate = 0.3));
+        void scope.wait(gsap.to(spin, { v: 0.3, duration: 3, onUpdate: () => void (spinRate = spin.v) }));
         gsap.to(boomA.rotation, { y: 0, duration: 1.5, ease: 'power2.out' });
         gsap.to(boomB.rotation, { y: 0, duration: 1.5, ease: 'power2.out', delay: 0.3 });
         await scope.wait(
@@ -490,6 +515,7 @@ export default function buildScene({ scene, materials, quality, anisotropy }: Sc
 
       /** Page 3: show asteroids */
       showBelt() {
+        parts.root.scale.setScalar(1);
         earth.visible = false;
         asteroids.visible = true;
         jupiter.visible = false;
@@ -503,6 +529,8 @@ export default function buildScene({ scene, materials, quality, anisotropy }: Sc
 
       /** Page 4: show Jupiter */
       showJupiter() {
+        jupiter.position.copy(JUPITER_AT);
+        parts.root.scale.setScalar(1);
         asteroids.visible = false;
         jupiter.visible = true;
         saturn.visible = false;
@@ -516,6 +544,8 @@ export default function buildScene({ scene, materials, quality, anisotropy }: Sc
 
       /** Page 5: show Saturn */
       showSaturn() {
+        saturn.position.copy(SATURN_AT);
+        parts.root.scale.setScalar(1);
         jupiter.visible = false;
         saturn.visible = true;
         asteroids.visible = false;
@@ -535,6 +565,7 @@ export default function buildScene({ scene, materials, quality, anisotropy }: Sc
         asteroids.visible = false;
         signalLine.visible = false;
         plaqueDetail.visible = false;
+        parts.root.scale.setScalar(0.12);
         // Scale down for overview
         earth.position.set(-3, 0, 0);
         jupiter.position.set(15, 0, -3);
@@ -546,6 +577,7 @@ export default function buildScene({ scene, materials, quality, anisotropy }: Sc
 
       /** Page 7: show signal fading */
       showSignalFade() {
+        parts.root.scale.setScalar(1);
         signalLine.visible = true;
         jupiter.visible = false;
         saturn.visible = false;
@@ -570,9 +602,10 @@ export default function buildScene({ scene, materials, quality, anisotropy }: Sc
 
       /** Page 8: plaque close-up */
       showPlaque() {
+        parts.root.scale.setScalar(1);
         spinning = false;
         plaqueDetail.visible = true;
-        plaqueDetail.position.set(0, 0, 1.5);
+        plaqueDetail.position.set(0, 0, PLAQUE_Z);
         signalLine.visible = false;
         jupiter.visible = false;
         saturn.visible = false;
@@ -582,6 +615,7 @@ export default function buildScene({ scene, materials, quality, anisotropy }: Sc
 
       /** Page 9: pull back */
       pullBack() {
+        parts.root.scale.setScalar(1);
         spinning = true;
         plaqueDetail.visible = false;
         signalLine.visible = false;
