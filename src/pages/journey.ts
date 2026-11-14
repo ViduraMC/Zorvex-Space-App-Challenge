@@ -22,7 +22,8 @@ import { formatSite } from '../journey/geo';
 import { SiteGlobe } from '../journey/siteGlobe';
 import { createFlightFx } from '../journey/flight';
 import { journey, type Destination, type Phase } from '../journey/store';
-import { buildSurface, disposeSurface, hasNasaModel, updateSurface, type Surface } from '../journey/surface';
+import { buildSurface, disposeSurface, hasNasaModel, modelKeyOf, updateSurface, type Surface } from '../journey/surface';
+import { hasAnatomy } from './anatomy';
 
 /** Mission control's recorded lines (npm run voices). */
 const VOICE = import.meta.glob<string>('../journey/voice/en/*.mp3', { eager: true, query: '?url', import: 'default' });
@@ -246,6 +247,8 @@ export const journeyPage: Page = (root) => {
     for (const s of e.sources) link('', s.label, s.url, sources);
     el('span', '', t(hasNasaModel(e.id) ? 'ui.holo.model' : 'ui.holo.standin'), sources);
     button('holo-explore', t('ui.holo.explore'), () => launch(e.id), holo);
+    const parts = modelKeyOf(e.id);
+    if (parts && hasAnatomy(parts)) link('holo-parts', t('ui.parts.open'), `#parts-${parts}`, holo);
     holo.classList.remove('in');
     void holo.offsetWidth; // restart the appear animation
     holo.classList.add('in');

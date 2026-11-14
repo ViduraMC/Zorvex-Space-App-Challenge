@@ -329,6 +329,7 @@ function showEnd(episode: EpisodeDef, shell: HTMLElement): void {
       button('btn', t('ui.close'), () => overlay.remove(), overlay);
     }, acts);
   }
+  if (episode.anatomy) link('btn alt', t('ui.parts.open'), `#parts-${episode.anatomy}`, acts);
   link('btn alt', t('ui.shelf'), '#shelf', acts);
   button('btn alt', t('ui.again'), () => go(location.hash), acts);
   link('btn alt', t('ui.home'), '#home', acts);

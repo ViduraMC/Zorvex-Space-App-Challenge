@@ -17,6 +17,8 @@ import type { Destination } from './store';
 
 /** True when this explorer is shown with NASA's own 3D model. */
 export const hasNasaModel = (id: string): boolean => id in MODEL_OF;
+/** The NASA model an explorer is shown with (also the key of its Anatomy 360° data). */
+export const modelKeyOf = (id: string): NasaModel | undefined => MODEL_OF[id]?.key;
 
 export interface ExplorerItem {
   explorer: Explorer;

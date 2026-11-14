@@ -28,3 +28,17 @@ for (const dir of dirs) {
     });
   }
 }
+
+test('anatomy: every part has a sourced fact and its text in English, Sinhala and Tamil', () => {
+  const data = JSON.parse(readFileSync('src/data/anatomy.json', 'utf8')) as Record<string, { parts: { id: string; at: number[]; fact: { text: string; source: string } }[] }>;
+  const langs = ['en', 'si', 'ta'].map((l) => read(join('src/i18n', `${l}.json`)));
+  for (const [model, { parts }] of Object.entries(data)) {
+    for (const part of parts) {
+      assert.ok(part.fact.text.length > 20 && part.fact.source.startsWith('https://'), `${model}.${part.id}: needs a fact and source`);
+      assert.equal(part.at.length, 3, `${model}.${part.id}: at needs x, y, z`);
+      for (const field of ['name', 'job', 'science']) {
+        for (const dict of langs) assert.ok(`parts.${model}.${part.id}.${field}` in dict, `missing parts.${model}.${part.id}.${field}`);
+      }
+    }
+  }
+});

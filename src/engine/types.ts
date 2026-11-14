@@ -100,6 +100,8 @@ export interface EpisodeDef {
   stats?: { value: string; label: string }[];
   /** Which body "Look up tonight" points the child to. */
   lookUp?: 'Mars' | 'Moon';
+  /** Opens Anatomy 360° from the end card: a key of src/data/anatomy.json (a NASA model). */
+  anatomy?: string;
   /** Mars only: real terrain grid, see scripts/prep-terrain.ts. */
   site?: () => Promise<HeightGrid>;
   /** Keep boulders out of the play area. */

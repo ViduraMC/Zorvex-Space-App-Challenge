@@ -1,6 +1,5 @@
 /* The opening journey: title, Start, cockpit, destination picker, explorer plaques, hologram panel. */
 .journey {
-  --holo: #4fd8ff;
   --candle: #fff3d6;
   --active: #5be38a;
   position: fixed;
@@ -587,4 +586,12 @@
     0 0 0 100vmax #0a0c13,
     inset 0 -80px 120px rgba(255, 130, 40, 0.55);
   transition: box-shadow 0.8s;
+}
+
+.holo-parts {
+  display: block;
+  margin-top: var(--gap-s);
+  text-align: center;
+  color: var(--holo);
+  font-weight: 700;
 }
