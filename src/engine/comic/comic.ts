@@ -17,7 +17,7 @@ const SFX_LIFETIME_MS = 1700;
 /** Bubble margins (px): below the top controls, off the screen edges, above the Next button. */
 const BUBBLE_MIN_TOP = 74;
 const BUBBLE_EDGE = 16;
-const BUBBLE_BOTTOM_ROOM = 96;
+const BUBBLE_BOTTOM_ROOM = 124; // clears the Next button and the floating Talk button
 
 function div(className: string, parent: HTMLElement): HTMLDivElement {
   const el = document.createElement('div');
@@ -191,6 +191,15 @@ export class Comic {
       if (!below) top = minTop;
     }
     top = clamp(top, minTop, maxTop);
+    // story panels marked data-bubble-avoid (an info card, say) are never covered: go above or below
+    for (const node of document.querySelectorAll<HTMLElement>('[data-bubble-avoid]')) {
+      const r = node.getBoundingClientRect();
+      const overlaps = left < r.right && left + bw > r.left && top < r.bottom && top + bh > r.top;
+      if (!overlaps || r.width === 0) continue;
+      if (r.top - bh - 12 >= minTop) top = r.top - bh - 12;
+      else if (r.bottom + 12 <= maxTop) top = r.bottom + 12;
+      below = top > anchorY;
+    }
     this.#bub.style.left = `${left}px`;
     this.#bub.style.top = `${top}px`;
     this.#bub.classList.toggle('below', below);
