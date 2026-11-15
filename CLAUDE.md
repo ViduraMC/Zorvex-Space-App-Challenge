@@ -56,9 +56,9 @@ Not a catalogue, not a quiz site. The child does what the real team did.
    and hosting). The AI chat runs on our server (server/ask) with a small Gemini model; the key lives
    in `GEMINI_API_KEY` on the server, never in the client.
 7. **AI-use log:** add a line to `docs/AI_USAGE.md` for anything AI helped make. AI images need a
-   visible watermark and must not contain NASA logos. (Exception, Vidura, 15 Nov 2026: the Home
-   opening film has no on-screen label and keeps the suit patch the generator drew; both are
-   disclosed in `docs/AI_USAGE.md`.)
+   visible watermark and must not contain NASA logos. (The Home opening film carries a small
+   on-screen "AI-generated film" label; its waiting clip was regenerated without a NASA patch,
+   Vidura, 15 Nov 2026. Details in `docs/AI_USAGE.md`.)
 8. **Git:** small commits with Conventional Commit messages; `main` always deployable; work on
    `episode/<id>` or `feature/<name>` and open a pull request. Never push without Vidura's OK.
 9. After each step run `npm run lint`, `npm run typecheck`, `npm test`, `npm run check:facts`

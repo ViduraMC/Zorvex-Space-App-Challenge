@@ -100,6 +100,8 @@ export const journeyPage: Page = (root) => {
     launch: clip(launchVideo, launchPoster, false, FILM_FRAMING.launch),
   };
   el('div', 'j-scrim', undefined, shell);
+  // the Space Apps rules ask for a visible label on AI-generated video
+  el('div', 'j-film-tag', t('ui.journey.aiFilm'), shell);
   /** Show one clip from its start; reduced motion keeps its first frame only. */
   const roll = (next: HTMLVideoElement): void => {
     if (active && active !== next) {

@@ -28,6 +28,9 @@ Updated: Sunday 15 Nov 2026, morning (Asia/Colombo).
   on each cut), the 3D scene stops drawing under the film, and the timeline waits if a clip buffers.
   Measured in Chrome: 24 fps, 0 dropped frames in all three clips (before: boarding buffered, launch
   froze). Clips re-encoded from the originals, NASA suit patch no longer blurred (Vidura's decision).
+- Opening film, final (15 Nov, evening): the waiting clip is a new version without the NASA patch
+  (same encode: 1280x720 H.264, GOP 24, faststart, no audio), and a small "AI-generated film" label
+  (English, Sinhala, Tamil) shows in the corner while any clip plays, as the Space Apps rules ask.
 - Round 2 (15 Nov, midday): chat is a side panel with memory (last 6 turns), a floating
   "Talk to …" button in every story, Gemini answers in the machine's voice from the facts only;
   first screen has the real NASA star map all around (drag to look), the Moon, a tappable rocket and

@@ -763,6 +763,20 @@ select.chip option {
 .filming .j-scrim {
   display: block;
 }
+/* small and quiet in the corner, away from the title, the Start button and the sources link */
+.j-film-tag {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  display: none;
+  pointer-events: none;
+  font: var(--text-xs) / 1.2 var(--font-ui);
+  color: var(--text);
+  opacity: 0.6;
+}
+.filming .j-film-tag {
+  display: block;
+}
 /* on a tall screen the title sits centred at the top, so the shade comes from the top */
 @media (max-aspect-ratio: 1/1) {
   .j-scrim {
