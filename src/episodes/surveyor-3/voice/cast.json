@@ -1,0 +1,11 @@
+{
+  "narrator": {
+    "kokoro": "bf_isabella",
+    "gender": "female",
+    "speed": 0.95
+  },
+  "machine": {
+    "kokoro": "af_kore",
+    "gender": "female"
+  }
+}
