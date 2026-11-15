@@ -1,6 +1,6 @@
-# Every push to main: check, build, and publish the static site to the "site" branch.
-# Porkbun Static Hosting (zorvex.earth) is connected to that branch with GitHub Connect,
-# so the site updates itself. The branch holds only the built files, at its root.
+# Every push to main: check, build, and publish the static site to Firebase Hosting
+# (Google Cloud project zorvex-space-apps, free; zorvex.earth points at it through DNS at Porkbun).
+# The deploy uses a service account that may only manage Hosting (secret FIREBASE_SERVICE_ACCOUNT).
 name: Deploy site
 
 on:
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: deploy
@@ -33,12 +33,9 @@ jobs:
       - run: npm run build
         env:
           VITE_ASK_URL: ${{ vars.ASK_URL }}
-      - name: Publish dist/ to the site branch
-        run: |
-          cd dist
-          git init -q -b site
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -q -m "site: build of ${GITHUB_SHA}"
-          git push -f -q "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" site
+      - name: Publish to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: zorvex-space-apps
+          channelId: live

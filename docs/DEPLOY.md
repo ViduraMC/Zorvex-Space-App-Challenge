@@ -4,25 +4,24 @@ Two free pieces, both from the Space Apps Global Offers:
 
 | Piece | Where | Offer |
 |---|---|---|
-| The website (static files) | `zorvex.earth`, Porkbun Static Hosting | GoDaddy Registry: free domain and website hosting |
+| The website (static files) | Firebase Hosting (`zorvex-space-apps.web.app`), domain `zorvex.earth` | Google Cloud (Firebase Hosting is free); GoDaddy Registry: free domain |
 | "Talk to the machine" AI answers | Google Cloud Run (`server/ask`), Gemini model | Google Cloud: free credit, no auto-charge |
 
 The site works without the AI server: the chat then gives free offline answers from the facts.
 
-## 1. Website (automatic after setup)
+## 1. Website (automatic)
 
 Every push to `main` runs `.github/workflows/deploy.yml`: lint, type check, tests, fact check,
-build, then it publishes `dist/` to the **`site`** branch (built files at the root).
+build, then it publishes `dist/` to **Firebase Hosting** in the Google Cloud project
+`zorvex-space-apps` (free). Live at <https://zorvex-space-apps.web.app>.
 
-One-time setup in Porkbun:
+The deploy signs in as the service account `github-deploy@zorvex-space-apps.iam.gserviceaccount.com`
+(role: Firebase Hosting Admin only); its key is the GitHub secret `FIREBASE_SERVICE_ACCOUNT`.
 
-1. Porkbun → Domain Management → `zorvex.earth` → **Website** (house icon) → choose **Static Hosting**.
-2. On the Static Hosting page, scroll to **GitHub Connect** → **Connect** → authorise GitHub.
-3. Repository: `ViduraMC/Zorvex-Space-App-Challenge`, branch: **`site`**.
-4. Wait for the SSL certificate, then open <https://zorvex.earth>.
+Why not Porkbun Static Hosting: it is a 15-day trial, then a paid plan (no paid tiers for this project).
 
-Manual fallback: `npm run build`, zip the contents of `dist/` (not the folder), and use
-**Upload Zip File** on the Static Hosting page (limit 40 MB; our build is about 17 MB).
+`zorvex.earth` points at Firebase through DNS records at Porkbun (Firebase console → Hosting →
+Add custom domain gives the records; Porkbun → Domain Management → `zorvex.earth` → DNS).
 
 ## 2. AI answers (Google Cloud)
 
