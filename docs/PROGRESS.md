@@ -4,7 +4,11 @@ Updated: Sunday 15 Nov 2026, morning (Asia/Colombo).
 
 ## Now
 
-- Code is on GitHub (private): https://github.com/ViduraMC/Zorvex-Space-App-Challenge. Not deployed yet.
+- Live: https://zorvex-space-apps.web.app (Firebase Hosting, free, deployed by every push to main).
+  zorvex.earth waits for two DNS records at Porkbun (see docs/DEPLOY.md).
+- AI chat live on Cloud Run (zorvex-ask, asia-south1, Gemini 3.5 Flash-Lite); answers in English,
+  Sinhala and Tamil from the facts only; an answer with an invented number is dropped.
+- Code is on GitHub (private): https://github.com/ViduraMC/Zorvex-Space-App-Challenge.
 - Data now comes only from the challenge resources plus NASA 3D Resources (mentors' rule). Sources page and hologram panel list every source.
 - First screen uses NASA's Saturn V and crew escape suit models; explorers use NASA models where they exist.
 - Opening journey works end to end: Home, take-off, destination, landing, explorers, hologram,
@@ -44,7 +48,7 @@ Updated: Sunday 15 Nov 2026, morning (Asia/Colombo).
 
 1. Vidura: paste the Space Apps global offers list (it needs a login) so we can pick a free AI service for the chatbot.
 1b. Deploy on GoDaddy (needs Vidura's account) and make the repository public.
-1c. Vidura: Porkbun GitHub Connect (branch `site`) for zorvex.earth; Google Cloud key for the AI chat.
+1c. Vidura: DNS at Porkbun for zorvex.earth (A 199.36.158.100, TXT hosting-site=zorvex-space-apps, www CNAME zorvex-space-apps.web.app).
 1d. A Sinhala and a Tamil speaker review the new story text.
 2. Connect Vercel (public URL and pull-request previews).
 3. Decide on the Moon globe image (only non-challenge, non-3D-Resources data left; see docs/RESOURCES.md section 3).
