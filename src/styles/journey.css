@@ -763,7 +763,20 @@ select.chip option {
 .filming .j-scrim {
   display: block;
 }
-/* the 3D sky cannot be dragged under the film */
+/* on a tall screen the title sits centred at the top, so the shade comes from the top */
+@media (max-aspect-ratio: 1/1) {
+  .j-scrim {
+    background:
+      linear-gradient(180deg, rgba(3, 5, 12, 0.75) 0%, rgba(3, 5, 12, 0.4) 30%, transparent 50%),
+      linear-gradient(0deg, rgba(3, 5, 12, 0.6) 0%, transparent 25%);
+  }
+}
+/* the three clips sit stacked and ready; only the playing one shows */
+.j-film:not(.on) {
+  visibility: hidden;
+}
+/* the 3D scene is hidden under the film (it also stops drawing), and cannot be dragged */
+.filming .gl,
 .filming .j-hint {
-  display: none;
+  visibility: hidden;
 }

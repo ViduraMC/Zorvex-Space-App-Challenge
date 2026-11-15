@@ -70,29 +70,54 @@ export const journeyPage: Page = (root) => {
   const canvas = el('canvas', 'gl', undefined, shell);
   // the opening film (docs/AI_USAGE.md): the child waits, boards and lifts off. When a clip cannot
   // play, the 3D launch site underneath stays and the old 3D cutscenes run instead.
-  const film = el('video', 'j-film', undefined, shell);
-  film.muted = true;
-  film.playsInline = true;
-  film.preload = 'auto';
-  film.setAttribute('aria-hidden', 'true');
-  el('div', 'j-scrim', undefined, shell);
+  // Each clip has its own player, all loading from the start, so a cut never waits for a download.
+  // While a clip shows, the 3D scene stops drawing (it is hidden anyway) and leaves the GPU to the video.
   let filmOk = true;
-  film.addEventListener('error', () => {
-    filmOk = false;
-    shell.classList.remove('filming');
-  });
-  /** Show one clip: loop it (Home) or play it once; reduced motion keeps its first frame only. */
-  const roll = (src: string, poster: string, loop: boolean, framing: string): void => {
-    film.poster = poster;
-    film.loop = loop;
-    film.style.objectPosition = framing;
-    if (film.getAttribute('src') !== src) film.src = src;
-    else film.currentTime = 0;
+  let filming = false;
+  let active: HTMLVideoElement | null = null;
+  const clip = (src: string, poster: string, loop: boolean, framing: string): HTMLVideoElement => {
+    const v = el('video', 'j-film', undefined, shell);
+    v.muted = true;
+    v.playsInline = true;
+    v.loop = loop;
+    v.preload = 'auto';
+    v.poster = poster;
+    v.style.objectPosition = framing;
+    v.setAttribute('aria-hidden', 'true');
+    v.src = src;
+    v.addEventListener('error', () => {
+      filmOk = false;
+      cut();
+    });
+    // if the clip stalls to buffer, the story's timeline waits for it instead of running ahead
+    v.addEventListener('waiting', () => v === active && timeline?.pause());
+    v.addEventListener('playing', () => v === active && timeline?.resume());
+    return v;
+  };
+  const clips = {
+    waiting: clip(waitingVideo, waitingPoster, true, FILM_FRAMING.waiting),
+    boarding: clip(boardingVideo, boardingPoster, false, FILM_FRAMING.boarding),
+    launch: clip(launchVideo, launchPoster, false, FILM_FRAMING.launch),
+  };
+  el('div', 'j-scrim', undefined, shell);
+  /** Show one clip from its start; reduced motion keeps its first frame only. */
+  const roll = (next: HTMLVideoElement): void => {
+    if (active && active !== next) {
+      active.pause();
+      active.classList.remove('on');
+    }
+    active = next;
+    next.currentTime = 0;
+    next.classList.add('on');
+    filming = true;
     shell.classList.add('filming');
-    if (!REDUCED) void film.play().catch(() => undefined);
+    if (!REDUCED) void next.play().catch(() => undefined);
   };
   const cut = (): void => {
-    film.pause();
+    active?.pause();
+    active?.classList.remove('on');
+    active = null;
+    filming = false;
     shell.classList.remove('filming');
   };
   canvas.setAttribute('aria-hidden', 'true');
@@ -388,7 +413,7 @@ export const journeyPage: Page = (root) => {
       show(homeSources, true);
       startBtn.focus();
       audio.music(1);
-      if (filmOk) roll(waitingVideo, waitingPoster, true, FILM_FRAMING.waiting);
+      if (filmOk) roll(clips.waiting);
       // drag to look around the night sky; tap the rocket to launch
       const base = new Vector3().subVectors(cam.look, cam.pos);
       const dist = base.length();
@@ -447,7 +472,7 @@ export const journeyPage: Page = (root) => {
     },
     HOME_WALK() {
       if (filmOk) {
-        roll(boardingVideo, boardingPoster, false, FILM_FRAMING.boarding);
+        roll(clips.boarding);
         timeline = gsap
           .timeline({ onComplete: () => journey.finish('HOME_WALK') })
           .to([title, startBtn, homeSources], { opacity: 0, duration: 0.4 }, 0)
@@ -479,7 +504,7 @@ export const journeyPage: Page = (root) => {
     },
     TAKEOFF() {
       if (filmOk) {
-        roll(launchVideo, launchPoster, false, FILM_FRAMING.launch);
+        roll(clips.launch);
         audio.music(0);
         audio.ambience('earth');
         const roar = { level: 0 };
@@ -828,7 +853,7 @@ export const journeyPage: Page = (root) => {
         plaque.style.top = `${(-tmp.y * 0.5 + 0.5) * 100}%`;
       });
     }
-    renderer.render(dt);
+    if (!filming) renderer.render(dt);
   };
 
   for (const node of [cockpit, pick, field, skip]) show(node, false);

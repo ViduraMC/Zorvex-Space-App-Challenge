@@ -24,6 +24,10 @@ Updated: Sunday 15 Nov 2026, morning (Asia/Colombo).
 - Home is now an opening film (AI-generated, see docs/AI_USAGE.md): the child waits by the rocket,
   boards it on Start, and it lifts off, then the destination choice. Falls back to the 3D launch site
   if a clip cannot play; reduced motion shows still frames.
+- Opening film smoothness fix (15 Nov, afternoon): each clip has its own preloaded player (no reload
+  on each cut), the 3D scene stops drawing under the film, and the timeline waits if a clip buffers.
+  Measured in Chrome: 24 fps, 0 dropped frames in all three clips (before: boarding buffered, launch
+  froze). Clips re-encoded from the originals, NASA suit patch no longer blurred (Vidura's decision).
 - Round 2 (15 Nov, midday): chat is a side panel with memory (last 6 turns), a floating
   "Talk to …" button in every story, Gemini answers in the machine's voice from the facts only;
   first screen has the real NASA star map all around (drag to look), the Moon, a tappable rocket and
