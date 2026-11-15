@@ -5,7 +5,7 @@ Updated: Sunday 15 Nov 2026, morning (Asia/Colombo).
 ## Now
 
 - Live: https://zorvex-space-apps.web.app (Firebase Hosting, free, deployed by every push to main).
-  zorvex.earth: DNS done; Firebase confirmed the domain, the certificate was propagating at 12:00.
+  https://zorvex.earth is live (DNS at Porkbun, Firebase certificate active since about 12:50).
 - AI chat live on Cloud Run (zorvex-ask, asia-south1, Gemini 3.5 Flash-Lite); answers in English,
   Sinhala and Tamil from the facts only; an answer with an invented number is dropped.
 - Code is on GitHub (private): https://github.com/ViduraMC/Zorvex-Space-App-Challenge.
