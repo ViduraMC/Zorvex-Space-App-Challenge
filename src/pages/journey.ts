@@ -19,7 +19,7 @@ import { episodeFor } from '../episodes';
 import { closeAsk, openAsk } from '../features/ask';
 import { summaryOf, type Explorer } from '../journey/explorers';
 import { NASA_MODELS, nasaModel, loadNasaModel } from '../journey/nasaModels';
-import { COLORS, createChild, createDesert, createNightSky, createPlanet, createRocket, createShootingStars, createStars } from '../journey/props';
+import { COLORS, createChild, createDesert, createLaunchSite, createNightSky, createPlanet, createRocket, createShootingStars, createStars } from '../journey/props';
 import { formatSite } from '../journey/geo';
 import { SiteGlobe } from '../journey/siteGlobe';
 import { createFlightFx } from '../journey/flight';
@@ -111,7 +111,9 @@ export const journeyPage: Page = (root) => {
   const skyMoon = createPlanet('moon', anisotropy);
   skyMoon.group.position.set(...SKY_MOON.at);
   skyMoon.group.scale.setScalar(SKY_MOON.size);
-  earth.add(skyDome, createDesert(), rocket.group, child.group, shooting.group, skyMoon.group, new HemisphereLight(0x33406a, 0x120e0c, 2.4), moonlight, fill);
+  const site = createLaunchSite(ROCKET_X);
+  const desert = createDesert(anisotropy);
+  earth.add(skyDome, desert, site.group, rocket.group, child.group, shooting.group, skyMoon.group, new HemisphereLight(0x33406a, 0x120e0c, 2.4), moonlight, fill);
   const space = new Group();
   const sun = new DirectionalLight(0xffffff, 3.2);
   sun.position.set(-6, 4, 8);
@@ -121,7 +123,7 @@ export const journeyPage: Page = (root) => {
   scene.add(nightSky.mesh, stars.points, earth, space);
   const flight = createFlightFx(new Vector3(ROCKET_X, 0, 0));
   scene.add(flight.group);
-  const desertMat = (earth.children[0] as Mesh).material as MeshStandardMaterial;
+  const desertMat = desert.material as MeshStandardMaterial;
   desertMat.transparent = true;
 
   // ---------- HTML overlays (all text lives here, never inside WebGL) ----------
@@ -323,6 +325,7 @@ export const journeyPage: Page = (root) => {
       rocket.door.position.z = 0.52;
       nightSky.bottom.set(COLORS.duskBlue);
       desertMat.opacity = 1;
+      site.group.visible = true;
       flight.earth.visible = false;
       ((flight.earth.children[0] as Mesh).material as MeshStandardMaterial).opacity = 0;
       cam.speed = 0;
@@ -473,6 +476,7 @@ export const journeyPage: Page = (root) => {
         .to(cam.look, { y: 380, z: -460, duration: 6 * D, ease: 'power2.in' }, 3.8 * D)
         .to(ignite, { glow: 0, duration: 2 * D }, 5.2 * D)
         .to(desertMat, { opacity: 0, duration: 1.6 * D }, 7.4 * D)
+        .call(() => void (site.group.visible = false), [], 8.4 * D)
         .to(nightSky.bottom, { r: 0.004, g: 0.005, b: 0.01, duration: 3 * D }, 6 * D)
         .to(stars.material.uniforms.uBright, { value: 2.1, duration: 3 * D }, 6 * D)
         .to((flight.earth.children[0] as Mesh).material as MeshStandardMaterial, { opacity: 1, duration: 2 * D }, 7.2 * D)
@@ -695,6 +699,8 @@ export const journeyPage: Page = (root) => {
     last = now;
     const { phase, hoveredId } = journey.get();
     stars.material.uniforms.uTime.value = time;
+    // the pad's warning beacons blink once a second
+    for (const b of site.beacons) b.visible = Math.sin(time * Math.PI * 2) > -0.2;
     if (!REDUCED && earth.visible && rocket.group.visible) shooting.update(dt);
     planets.forEach((p, i) => {
       p.globe.rotation.y += dt * 0.12;
