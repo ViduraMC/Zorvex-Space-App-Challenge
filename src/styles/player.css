@@ -1188,6 +1188,7 @@ select.mini {
   .apollo-signal-pulse {
     animation: none;
   }
+}
 /* ---- story-specific game parts (Viking) ---- */
 .g-signal {
   position: relative;
