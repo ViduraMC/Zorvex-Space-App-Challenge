@@ -7,7 +7,7 @@ Where each piece of data is used: `docs/RESOURCES.md`.
 | Asset | Files | Credit |
 |---|---|---|
 | Mission facts and explorer dates | `src/episodes/*/facts.json`, `src/data/explorers.*.json` | NASA NSSDCA and NASA Science mission pages (the challenge resources) |
-| Saturn V, Advanced Crew Escape Suit, Mars Exploration Rover (Opportunity), Viking Lander, InSight, Ingenuity, Apollo Lunar Module, Pioneer 10 | `src/assets/models/*.glb` | NASA 3D Resources, science.nasa.gov/3d-resources |
+| Saturn V, Advanced Crew Escape Suit, Mars Exploration Rover (Opportunity), Viking Lander, InSight, Ingenuity, Apollo Lunar Module, Pioneer 10, Mars 2020 Perseverance Rover | `src/assets/models/*.glb` | NASA 3D Resources, science.nasa.gov/3d-resources |
 | Mars image texture | `src/assets/planets/mars.jpg` | NASA 3D Resources |
 | Earth: Blue Marble | `src/assets/planets/earth.png` | NASA's Scientific Visualization Studio |
 | First image from the surface of Mars (Viking 1, 20 July 1976) | `src/episodes/viking/assets/first-image.jpg` | NASA/JPL |

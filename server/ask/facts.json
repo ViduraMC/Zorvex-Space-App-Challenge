@@ -239,6 +239,71 @@
    }
   ]
  },
+ "ingenuity": {
+  "name": "Ingenuity",
+  "facts": [
+   {
+    "id": "ride",
+    "text": "After riding to Mars strapped beneath the Perseverance rover (launched 30 July 2020 from Cape Canaveral; landed 18 February 2021 in Jezero Crater), Ingenuity set its four feet on Mars on 3 April 2021.",
+    "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+   },
+   {
+    "id": "first-night",
+    "text": "Ingenuity survived its first night on Mars on 4 April 2021, and spun its rotors for the first time on 8 April 2021.",
+    "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+   },
+   {
+    "id": "power",
+    "text": "A solar panel charged lithium-ion batteries, giving enough energy for one 90-second flight per Martian day.",
+    "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+   },
+   {
+    "id": "size",
+    "text": "Ingenuity has a mass of 1.8 kg, and its rotors are about 1.2 m tip to tip.",
+    "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+   },
+   {
+    "id": "thin-air",
+    "text": "Ingenuity flew successfully in the extremely thin Martian atmosphere.",
+    "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+   },
+   {
+    "id": "first-flight",
+    "text": "On 19 April 2021 Ingenuity made the first powered, controlled flight on another planet, a feat called a Wright Brothers moment.",
+    "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+   },
+   {
+    "id": "rover-photo",
+    "text": "Ingenuity took its first photo of the Perseverance rover on 25 April 2021.",
+    "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+   },
+   {
+    "id": "demo",
+    "text": "Ingenuity was designed as a technology demonstration of no more than five test flights in 30 days. The technology demonstration was complete on 7 May 2021.",
+    "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+   },
+   {
+    "id": "scout",
+    "text": "Ingenuity then became an aerial scout for scientists and rover planners, previewing areas of interest for Perseverance; its first scouting flight was on 24 July 2021.",
+    "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+   },
+   {
+    "id": "flights",
+    "text": "Ingenuity completed 72 flights across nearly three years.",
+    "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+   },
+   {
+    "id": "totals",
+    "text": "In all, Ingenuity flew 128.8 minutes, covered 17.0 km, and reached altitudes as high as 24.0 m.",
+    "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+   },
+   {
+    "id": "last",
+    "text": "Ingenuity flew for the last time on 18 January 2024. The mission ended on 25 January 2024.",
+    "source": "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+   }
+  ]
+ },
  "insight": {
   "name": "InSight",
   "facts": [
@@ -296,6 +361,236 @@
     "id": "end",
     "text": "InSight's mission ended on 15 December 2022.",
     "source": "https://science.nasa.gov/mission/insight/"
+   }
+  ]
+ },
+ "lrv-apollo-15": {
+  "name": "Lunar Rover",
+  "facts": [
+   {
+    "id": "landing",
+    "text": "The Apollo 15 Lunar Module Falcon landed on 30 July 1971 at 22:16:29 UT in the Mare Imbrium region at the foot of the Apennine mountains, at 26.13 N, 3.63 E.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
+   },
+   {
+    "id": "crew",
+    "text": "Falcon carried Commander David R. Scott and Lunar Module pilot James B. Irwin, the seventh and eighth men to walk on the Moon. Alfred M. Worden piloted the Command/Service Module.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
+   },
+   {
+    "id": "carried",
+    "text": "The Lunar Module also carried a Lunar Roving Vehicle (LRV); the descent stage held storage space for the lunar rover on Apollo 15, 16 and 17.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
+   },
+   {
+    "id": "first",
+    "text": "The LRV was used to explore regions within 5 km of the landing site. This was the first time a vehicle of this type had been used, and its performance on the lunar terrain was very successful.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
+   },
+   {
+    "id": "totals",
+    "text": "Scott and Irwin made three moonwalks totalling 18 hours 35 minutes. They covered 27.9 km and collected 77.31 kg of rock and soil samples.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
+   },
+   {
+    "id": "eva1",
+    "text": "On the first moonwalk, 31 July, the LRV was unloaded, deployed and driven. The 10.3 km traverse went to the edge of Hadley Rille, to Elbow Crater and near St. George Crater and back; a core sample was taken from three metres below the surface.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
+   },
+   {
+    "id": "eva2",
+    "text": "On 1 August the LRV was driven on a 12.5 km traverse southeast along the base of the Apennine Mountains, near Index, Arbeit, Crescent, Dune and Spur craters.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
+   },
+   {
+    "id": "eva3",
+    "text": "On 2 August the LRV was driven 5.1 km west to Scarp Crater and northwest along the edge of Hadley Rille, and back east across the mare.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
+   },
+   {
+    "id": "feather",
+    "text": "After the final moonwalk Scott performed a televised demonstration of a hammer and a feather falling at the same rate in the lunar vacuum.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
+   },
+   {
+    "id": "memorial",
+    "text": "The astronauts left a plaque and a small figure on the surface in memory of all fourteen American and Soviet space explorers who had died in the two nations' space programs.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
+   },
+   {
+    "id": "liftoff",
+    "text": "The Lunar Module lifted off the Moon on 2 August 1971 at 17:11:22 UT after 66 hours 55 minutes on the lunar surface.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C"
+   }
+  ]
+ },
+ "mer": {
+  "name": "Spirit",
+  "facts": [
+   {
+    "id": "twins",
+    "text": "NASA's Spirit and Opportunity rovers were identical twin robots that helped rewrite our understanding of the early history of Mars. Their objective was to look for signs of past water.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+   },
+   {
+    "id": "landings",
+    "text": "Spirit landed on 3 January 2004 and Opportunity on 24 January 2004, at sites on opposite sides of Mars that looked as though they were affected by liquid water in the past.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+   },
+   {
+    "id": "gusev",
+    "text": "Spirit landed at Gusev Crater, a possible former lake in a giant impact crater.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+   },
+   {
+    "id": "meridiani",
+    "text": "Opportunity landed at Meridiani Planum, a place where mineral deposits suggested that Mars had a wet history.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+   },
+   {
+    "id": "pancam",
+    "text": "Pancam was two cameras that took detailed, multi-wavelength, 3-D panoramic pictures; the camera mast stands 1.4 m tall, giving a human geologist's perspective.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-instruments/"
+   },
+   {
+    "id": "rat",
+    "text": "The Rock Abrasion Tool used a grinding wheel to remove dust and weathered rock, exposing fresh rock underneath for the rover's scientific tools.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-instruments/"
+   },
+   {
+    "id": "apxs",
+    "text": "The Alpha Particle X-Ray Spectrometer determined the elements that make up rocks and soils, giving information about weathering and water activity on Mars.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-instruments/"
+   },
+   {
+    "id": "blueberries",
+    "text": "By landing in a crater, Opportunity scored a hole in one: it found small, spherical deposits of the mineral hematite, which typically forms in water. They were nicknamed blueberries.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-highlights/"
+   },
+   {
+    "id": "acidic",
+    "text": "The blueberries showed a watery ancient environment, but acidic water soaked that area, making conditions harder for life.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-highlights/"
+   },
+   {
+    "id": "comanche",
+    "text": "At a place called Comanche, Spirit found rocks 10 times richer in magnesium and iron carbonates than any other Martian rocks studied before. They formed when Mars was warm and wet, with near-neutral water.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-highlights/"
+   },
+   {
+    "id": "silica",
+    "text": "While dragging a wheel, Spirit churned up soil and found 90% pure silica at Home Plate. On Earth this kind of silica usually exists in hot springs or hot steam vents.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-highlights/"
+   },
+   {
+    "id": "home-plate",
+    "text": "Spirit discovered that an ancient volcano erupted at Home Plate, the rover's final resting place.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-highlights/"
+   },
+   {
+    "id": "wind",
+    "text": "Wind cleaned much of the dust off Opportunity's solar panels, as a self-portrait taken in March 2014 shows.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+   },
+   {
+    "id": "water",
+    "text": "By studying the rock record, Spirit and Opportunity confirmed that water was long-standing on the surface of Mars in ancient times.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+   },
+   {
+    "id": "distance",
+    "text": "By the end of its mission Spirit drove 7.7 km. Opportunity drove 45.16 km, the off-Earth driving record until Perseverance passed it on 11 October 2026.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+   },
+   {
+    "id": "endings",
+    "text": "Spirit concluded its mission in 2010. Opportunity last communicated with Earth on 10 June 2018, as a planet-wide dust storm blanketed the solar-powered rover's location.",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+   }
+  ]
+ },
+ "phoenix": {
+  "name": "Phoenix",
+  "facts": [
+   {
+    "id": "launch",
+    "text": "Phoenix launched on 4 August 2007 on a Delta II from Cape Canaveral. The 681 million km cruise to Mars took about 10 months.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A"
+   },
+   {
+    "id": "descent",
+    "text": "During descent the parachute opened, the heat shield was ejected 15 seconds later and the legs deployed 10 seconds after that. At 1 km the parachute was released and 8 pulsed thrusters made a soft landing, turning off when footpad sensors felt touchdown.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A"
+   },
+   {
+    "id": "landing",
+    "text": "Phoenix landed on 25 May 2008 at 23:53:44 UT, at 68.22 degrees north on the arctic plains of Mars (Vastitas Borealis), farther north than any previous mission: a latitude like northern Alaska.",
+    "source": "https://science.nasa.gov/mission/phoenix/"
+   },
+   {
+    "id": "signal",
+    "text": "At touchdown Mars was 275 million km from Earth, a light travel time of about 15 minutes.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A"
+   },
+   {
+    "id": "dust",
+    "text": "The lander waited 15 minutes for the dust to settle before unfurling its solar panels. The first images showed a flat surface with pebbles and troughs, but no large rocks or hills.",
+    "source": "https://science.nasa.gov/mission/phoenix/"
+   },
+   {
+    "id": "body",
+    "text": "Phoenix had an octagonal base on three landing legs, with two octagonal solar panel wings for power. Its science payload had a mass of 55 kg.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A"
+   },
+   {
+    "id": "first-days",
+    "text": "Within four days Phoenix sent a full 360-degree panorama, deployed its 2.5 m robotic arm and started returning weather reports. Its stereo camera stood on a 2 m mast.",
+    "source": "https://science.nasa.gov/mission/phoenix/"
+   },
+   {
+    "id": "goal",
+    "text": "Phoenix studied the history of water in the Martian arctic, where water ice is found, and searched for complex organic molecules.",
+    "source": "https://science.nasa.gov/mission/phoenix/"
+   },
+   {
+    "id": "ice",
+    "text": "On 31 May the robotic arm began sampling the soil for ice. By 19 June scientists concluded that bright clumps in the Dodo-Goldilocks trench were probably water ice: they vaporized four days after being scooped.",
+    "source": "https://science.nasa.gov/mission/phoenix/"
+   },
+   {
+    "id": "tega",
+    "text": "Phoenix carried tiny ovens (TEGA) that heated soil samples. On 31 July NASA announced that there is water on Mars, based on a sample analyzed by TEGA.",
+    "source": "https://science.nasa.gov/mission/phoenix/"
+   },
+   {
+    "id": "perchlorate",
+    "text": "On 5 August the team announced perchlorates in the soil: a possible energy source for microbes and a potentially valuable resource for human explorers, which neither confirmed nor refuted the possibility of life.",
+    "source": "https://science.nasa.gov/mission/phoenix/"
+   },
+   {
+    "id": "wet-lab",
+    "text": "The wet chemistry laboratory (MECA) mixed water brought from Earth with the soil. Early results suggested the soil was alkaline, with salts such as perchlorate, sodium, magnesium, chloride and potassium.",
+    "source": "https://science.nasa.gov/mission/phoenix/"
+   },
+   {
+    "id": "sun",
+    "text": "At 68 degrees north the Sun stayed in the sky all the time after landing and did not dip below the horizon until August.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A"
+   },
+   {
+    "id": "mission",
+    "text": "By the end of August Phoenix had completed its planned 90-day mission, which was extended to 30 September.",
+    "source": "https://science.nasa.gov/mission/phoenix/"
+   },
+   {
+    "id": "end",
+    "text": "As the summer ended Phoenix had less solar energy, and it made its last transmission on 2 November 2008 before its power was depleted.",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A"
+   },
+   {
+    "id": "days",
+    "text": "From landing on 25 May 2008 to the last signal on 2 November 2008 is 161 days (our count from the two dates).",
+    "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A"
    }
   ]
  },
@@ -566,6 +861,66 @@
     "id": "still-there",
     "text": "Mars Pathfinder's landing site, and the place its mission ended, is Ares Vallis.",
     "source": "https://science.nasa.gov/mission/mars-pathfinder/"
+   }
+  ]
+ },
+ "surveyor-3": {
+  "name": "Surveyor 3",
+  "facts": [
+   {
+    "id": "launch",
+    "text": "Surveyor 3 launched on 17 April 1967. Unlike earlier Surveyors it began its trip from a parking orbit around Earth, with a burn from a Centaur upper stage that could now fire more than once.",
+    "source": "https://science.nasa.gov/mission/surveyor-3/"
+   },
+   {
+    "id": "sampler",
+    "text": "Surveyor 3 was the third engineering flight of the series, but for the first time carried a surface-sampling instrument that could reach up to 1.5 m from the lander and dig up to 18 cm deep.",
+    "source": "https://science.nasa.gov/mission/surveyor-3/"
+   },
+   {
+    "id": "bounces",
+    "text": "During descent, highly reflective rocks confused the radar and the main engine did not cut off at about 4.3 m. Surveyor 3 bounced twice, first to 10 m and then to 3 m, and the third time it settled into a soft landing.",
+    "source": "https://science.nasa.gov/mission/surveyor-3/"
+   },
+   {
+    "id": "landing",
+    "text": "Surveyor 3 landed at 00:04:17 UT on 20 April 1967 in the southeastern Oceanus Procellarum, at 3 degrees south, 23.41 degrees west.",
+    "source": "https://science.nasa.gov/mission/surveyor-3/"
+   },
+   {
+    "id": "pictures",
+    "text": "Less than an hour after landing it began transmitting the first of 6,326 TV pictures of its surroundings.",
+    "source": "https://science.nasa.gov/mission/surveyor-3/"
+   },
+   {
+    "id": "camera",
+    "text": "The TV camera had two lenses, 25 and 100 mm, under a mirror that could move left, right, up and down. A 200-line picture took about 20 seconds to send.",
+    "source": "https://science.nasa.gov/mission/surveyor-3/"
+   },
+   {
+    "id": "tests",
+    "text": "On commands from Earth the sampler dug four trenches and made four bearing tests and thirteen impact tests.",
+    "source": "https://science.nasa.gov/mission/surveyor-3/"
+   },
+   {
+    "id": "soil",
+    "text": "The tests showed lunar soil is like wet sand, with a bearing strength of about 0.7 kg per square centimetre: solid enough to support an Apollo Lunar Module.",
+    "source": "https://science.nasa.gov/mission/surveyor-3/"
+   },
+   {
+    "id": "end",
+    "text": "The last contact with Surveyor 3 was on 4 May 1967, two days after the lunar night began.",
+    "source": "https://science.nasa.gov/mission/surveyor-3/"
+   },
+   {
+    "id": "visit",
+    "text": "More than two years later, Apollo 12 astronauts Charles Conrad and Alan Bean landed the Intrepid Lunar Module about 180 m from the inactive Surveyor 3.",
+    "source": "https://science.nasa.gov/mission/surveyor-3/"
+   },
+   {
+    "id": "parts",
+    "text": "On their second moonwalk the astronauts walked over to Surveyor 3 and recovered parts, including the soil scoop and camera system, to study the effects of nearly two and a half years on the Moon.",
+    "source": "https://science.nasa.gov/mission/surveyor-3/"
    }
   ]
  },

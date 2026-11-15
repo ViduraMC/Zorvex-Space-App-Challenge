@@ -18,10 +18,12 @@ Space Apps requires teams to disclose how AI was used. Add a row for everything 
 | 14 Nov 2026 | Vidura | Claude Code (Anthropic) | Reworked the ALSEP episode by Kaushal: re-checked every fact on NSSDCA 1969-099C and the Surveyor 3 page, shortened the lines, added the moonquake game and NASA's Lunar Module and Saturn V models | Sources linked in the app; a person must re-read them before submission |
 | 14 Nov 2026 | Vidura | Claude Code (Anthropic) | Reworked the Pioneer and InSight episodes by Bimsara and Yasassri: re-checked every fact on the NASA pages, removed claims they do not make, added NASA's Pioneer 10 and InSight models, the seismograph game and voices | Sources linked in the app; a person must re-read them before submission |
 | 14 Nov 2026 | Vidura | Claude Code (Anthropic) | Merged the Apollo 11 EASEP episode by Haritha: re-checked its facts on the three NSSDCA pages, split long narration into short beats, added NASA's Lunar Module and Saturn V models and voices | Sources linked in the app; a person must re-read them before submission |
+| 15 Nov 2026 | Vidura | Claude Code (Anthropic) | Built the Spirit and Opportunity, Phoenix, Ingenuity, Apollo 15 LRV and Surveyor 3 stories (facts read on the challenge pages, scenes, games, English text, draft Sinhala and Tamil text, voices) and the mixed sound design (rocket, rotor, ignition, wind and world ambience) | Sources linked in the app; a person must re-read them. **Sinhala and Tamil need speaker review** |
+| 15 Nov 2026 | Vidura | Claude Code (Anthropic) | UX pass over every screen on desktop and phone: language and sound controls everywhere, layout and touch fixes | Screens checked in a test browser; a person should try it on a real phone |
 
 ## AI-generated content in the product
 
-- **Voices.** Every recorded line (narrators, Viking 1, Viking 2, Sojourner, ALSEP, EASEP, InSight, Pioneer 10 and 11, mission control) is
+- **Voices.** Every recorded line (narrators, Viking 1, Viking 2, Sojourner, ALSEP, EASEP, InSight, Pioneer 10 and 11, Spirit, Opportunity, Phoenix, Ingenuity, the Apollo 15 rover, Surveyor 3, mission control) is
   AI-generated speech from the open Kokoro-82M model, run locally. The About page says so.
 
 ## What AI did not make

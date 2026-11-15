@@ -1,0 +1,103 @@
+{
+  "episode": "mer",
+  "checked": "2026-11-15",
+  "note": "Every fact checked on the NASA Spirit and Opportunity mission page (challenge resource) and its instruments and science highlights pages.",
+  "facts": [
+    {
+      "id": "twins",
+      "text": "NASA's Spirit and Opportunity rovers were identical twin robots that helped rewrite our understanding of the early history of Mars. Their objective was to look for signs of past water.",
+      "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/",
+      "sourceName": "NASA Science: Mars Exploration Rovers Spirit and Opportunity (challenge resource)"
+    },
+    {
+      "id": "landings",
+      "text": "Spirit landed on 3 January 2004 and Opportunity on 24 January 2004, at sites on opposite sides of Mars that looked as though they were affected by liquid water in the past.",
+      "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/",
+      "sourceName": "NASA Science: Mars Exploration Rovers Spirit and Opportunity (challenge resource)"
+    },
+    {
+      "id": "gusev",
+      "text": "Spirit landed at Gusev Crater, a possible former lake in a giant impact crater.",
+      "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/",
+      "sourceName": "NASA Science: Mars Exploration Rovers Spirit and Opportunity (challenge resource)"
+    },
+    {
+      "id": "meridiani",
+      "text": "Opportunity landed at Meridiani Planum, a place where mineral deposits suggested that Mars had a wet history.",
+      "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/",
+      "sourceName": "NASA Science: Mars Exploration Rovers Spirit and Opportunity (challenge resource)"
+    },
+    {
+      "id": "pancam",
+      "text": "Pancam was two cameras that took detailed, multi-wavelength, 3-D panoramic pictures; the camera mast stands 1.4 m tall, giving a human geologist's perspective.",
+      "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-instruments/",
+      "sourceName": "NASA Science: Spirit and Opportunity science instruments (part of the challenge resource)"
+    },
+    {
+      "id": "rat",
+      "text": "The Rock Abrasion Tool used a grinding wheel to remove dust and weathered rock, exposing fresh rock underneath for the rover's scientific tools.",
+      "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-instruments/",
+      "sourceName": "NASA Science: Spirit and Opportunity science instruments (part of the challenge resource)"
+    },
+    {
+      "id": "apxs",
+      "text": "The Alpha Particle X-Ray Spectrometer determined the elements that make up rocks and soils, giving information about weathering and water activity on Mars.",
+      "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-instruments/",
+      "sourceName": "NASA Science: Spirit and Opportunity science instruments (part of the challenge resource)"
+    },
+    {
+      "id": "blueberries",
+      "text": "By landing in a crater, Opportunity scored a hole in one: it found small, spherical deposits of the mineral hematite, which typically forms in water. They were nicknamed blueberries.",
+      "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-highlights/",
+      "sourceName": "NASA Science: Spirit and Opportunity science highlights (part of the challenge resource)"
+    },
+    {
+      "id": "acidic",
+      "text": "The blueberries showed a watery ancient environment, but acidic water soaked that area, making conditions harder for life.",
+      "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-highlights/",
+      "sourceName": "NASA Science: Spirit and Opportunity science highlights (part of the challenge resource)"
+    },
+    {
+      "id": "comanche",
+      "text": "At a place called Comanche, Spirit found rocks 10 times richer in magnesium and iron carbonates than any other Martian rocks studied before. They formed when Mars was warm and wet, with near-neutral water.",
+      "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-highlights/",
+      "sourceName": "NASA Science: Spirit and Opportunity science highlights (part of the challenge resource)"
+    },
+    {
+      "id": "silica",
+      "text": "While dragging a wheel, Spirit churned up soil and found 90% pure silica at Home Plate. On Earth this kind of silica usually exists in hot springs or hot steam vents.",
+      "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-highlights/",
+      "sourceName": "NASA Science: Spirit and Opportunity science highlights (part of the challenge resource)"
+    },
+    {
+      "id": "home-plate",
+      "text": "Spirit discovered that an ancient volcano erupted at Home Plate, the rover's final resting place.",
+      "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-highlights/",
+      "sourceName": "NASA Science: Spirit and Opportunity science highlights (part of the challenge resource)"
+    },
+    {
+      "id": "wind",
+      "text": "Wind cleaned much of the dust off Opportunity's solar panels, as a self-portrait taken in March 2014 shows.",
+      "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/",
+      "sourceName": "NASA Science: Mars Exploration Rovers Spirit and Opportunity (challenge resource)"
+    },
+    {
+      "id": "water",
+      "text": "By studying the rock record, Spirit and Opportunity confirmed that water was long-standing on the surface of Mars in ancient times.",
+      "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/",
+      "sourceName": "NASA Science: Mars Exploration Rovers Spirit and Opportunity (challenge resource)"
+    },
+    {
+      "id": "distance",
+      "text": "By the end of its mission Spirit drove 7.7 km. Opportunity drove 45.16 km, the off-Earth driving record until Perseverance passed it on 11 October 2026.",
+      "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/",
+      "sourceName": "NASA Science: Mars Exploration Rovers Spirit and Opportunity (challenge resource)"
+    },
+    {
+      "id": "endings",
+      "text": "Spirit concluded its mission in 2010. Opportunity last communicated with Earth on 10 June 2018, as a planet-wide dust storm blanketed the solar-powered rover's location.",
+      "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/",
+      "sourceName": "NASA Science: Mars Exploration Rovers Spirit and Opportunity (challenge resource)"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "narrator": {
+    "kokoro": "bm_daniel",
+    "gender": "male",
+    "speed": 0.95
+  },
+  "machine": {
+    "kokoro": "am_liam",
+    "gender": "male"
+  },
+  "opportunity": {
+    "kokoro": "af_river",
+    "gender": "female"
+  }
+}

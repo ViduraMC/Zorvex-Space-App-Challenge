@@ -63,8 +63,10 @@
   border-left: 1px solid var(--line);
 }
 
-.anatomy-back {
-  align-self: flex-start;
+.anatomy-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-s);
 }
 
 .anatomy-title {

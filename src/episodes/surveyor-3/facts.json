@@ -1,0 +1,73 @@
+{
+  "episode": "surveyor-3",
+  "checked": "2026-11-15",
+  "note": "Every fact checked on the NASA Surveyor 3 page (challenge resource).",
+  "facts": [
+    {
+      "id": "launch",
+      "text": "Surveyor 3 launched on 17 April 1967. Unlike earlier Surveyors it began its trip from a parking orbit around Earth, with a burn from a Centaur upper stage that could now fire more than once.",
+      "source": "https://science.nasa.gov/mission/surveyor-3/",
+      "sourceName": "NASA Science: Surveyor 3 (challenge resource)"
+    },
+    {
+      "id": "sampler",
+      "text": "Surveyor 3 was the third engineering flight of the series, but for the first time carried a surface-sampling instrument that could reach up to 1.5 m from the lander and dig up to 18 cm deep.",
+      "source": "https://science.nasa.gov/mission/surveyor-3/",
+      "sourceName": "NASA Science: Surveyor 3 (challenge resource)"
+    },
+    {
+      "id": "bounces",
+      "text": "During descent, highly reflective rocks confused the radar and the main engine did not cut off at about 4.3 m. Surveyor 3 bounced twice, first to 10 m and then to 3 m, and the third time it settled into a soft landing.",
+      "source": "https://science.nasa.gov/mission/surveyor-3/",
+      "sourceName": "NASA Science: Surveyor 3 (challenge resource)"
+    },
+    {
+      "id": "landing",
+      "text": "Surveyor 3 landed at 00:04:17 UT on 20 April 1967 in the southeastern Oceanus Procellarum, at 3 degrees south, 23.41 degrees west.",
+      "source": "https://science.nasa.gov/mission/surveyor-3/",
+      "sourceName": "NASA Science: Surveyor 3 (challenge resource)"
+    },
+    {
+      "id": "pictures",
+      "text": "Less than an hour after landing it began transmitting the first of 6,326 TV pictures of its surroundings.",
+      "source": "https://science.nasa.gov/mission/surveyor-3/",
+      "sourceName": "NASA Science: Surveyor 3 (challenge resource)"
+    },
+    {
+      "id": "camera",
+      "text": "The TV camera had two lenses, 25 and 100 mm, under a mirror that could move left, right, up and down. A 200-line picture took about 20 seconds to send.",
+      "source": "https://science.nasa.gov/mission/surveyor-3/",
+      "sourceName": "NASA Science: Surveyor 3 (challenge resource)"
+    },
+    {
+      "id": "tests",
+      "text": "On commands from Earth the sampler dug four trenches and made four bearing tests and thirteen impact tests.",
+      "source": "https://science.nasa.gov/mission/surveyor-3/",
+      "sourceName": "NASA Science: Surveyor 3 (challenge resource)"
+    },
+    {
+      "id": "soil",
+      "text": "The tests showed lunar soil is like wet sand, with a bearing strength of about 0.7 kg per square centimetre: solid enough to support an Apollo Lunar Module.",
+      "source": "https://science.nasa.gov/mission/surveyor-3/",
+      "sourceName": "NASA Science: Surveyor 3 (challenge resource)"
+    },
+    {
+      "id": "end",
+      "text": "The last contact with Surveyor 3 was on 4 May 1967, two days after the lunar night began.",
+      "source": "https://science.nasa.gov/mission/surveyor-3/",
+      "sourceName": "NASA Science: Surveyor 3 (challenge resource)"
+    },
+    {
+      "id": "visit",
+      "text": "More than two years later, Apollo 12 astronauts Charles Conrad and Alan Bean landed the Intrepid Lunar Module about 180 m from the inactive Surveyor 3.",
+      "source": "https://science.nasa.gov/mission/surveyor-3/",
+      "sourceName": "NASA Science: Surveyor 3 (challenge resource)"
+    },
+    {
+      "id": "parts",
+      "text": "On their second moonwalk the astronauts walked over to Surveyor 3 and recovered parts, including the soil scoop and camera system, to study the effects of nearly two and a half years on the Moon.",
+      "source": "https://science.nasa.gov/mission/surveyor-3/",
+      "sourceName": "NASA Science: Surveyor 3 (challenge resource)"
+    }
+  ]
+}

@@ -90,6 +90,22 @@
 .mini.skip {
   background: var(--yellow);
 }
+/* the language picker in the HUD: a native select dressed as a HUD button */
+select.mini {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 24px;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 13px) 55%,
+    calc(100% - 8px) 55%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+.hud {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
 .pageno {
   position: absolute;
   left: var(--edge);
@@ -293,7 +309,7 @@
   font-family: var(--title-font);
   font-weight: 400;
   font-size: var(--cover-title-size, clamp(60px, 12vw, 160px));
-  line-height: 0.86;
+  line-height: 0.95;
   margin: 12px 0 6px;
   color: var(--title-ink);
   -webkit-text-stroke: var(--title-stroke);

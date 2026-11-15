@@ -1,0 +1,11 @@
+{
+  "narrator": {
+    "kokoro": "bm_fable",
+    "gender": "male",
+    "speed": 0.95
+  },
+  "machine": {
+    "kokoro": "am_echo",
+    "gender": "male"
+  }
+}

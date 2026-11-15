@@ -1,0 +1,103 @@
+{
+  "episode": "phoenix",
+  "checked": "2026-11-15",
+  "note": "Every fact checked on the NSSDCA Phoenix page (challenge catalogue) and NASA's Phoenix mission page.",
+  "facts": [
+    {
+      "id": "launch",
+      "text": "Phoenix launched on 4 August 2007 on a Delta II from Cape Canaveral. The 681 million km cruise to Mars took about 10 months.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A",
+      "sourceName": "NASA NSSDCA: Phoenix Mars Lander (challenge catalogue)"
+    },
+    {
+      "id": "descent",
+      "text": "During descent the parachute opened, the heat shield was ejected 15 seconds later and the legs deployed 10 seconds after that. At 1 km the parachute was released and 8 pulsed thrusters made a soft landing, turning off when footpad sensors felt touchdown.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A",
+      "sourceName": "NASA NSSDCA: Phoenix Mars Lander (challenge catalogue)"
+    },
+    {
+      "id": "landing",
+      "text": "Phoenix landed on 25 May 2008 at 23:53:44 UT, at 68.22 degrees north on the arctic plains of Mars (Vastitas Borealis), farther north than any previous mission: a latitude like northern Alaska.",
+      "source": "https://science.nasa.gov/mission/phoenix/",
+      "sourceName": "NASA Science: Phoenix (mission page)"
+    },
+    {
+      "id": "signal",
+      "text": "At touchdown Mars was 275 million km from Earth, a light travel time of about 15 minutes.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A",
+      "sourceName": "NASA NSSDCA: Phoenix Mars Lander (challenge catalogue)"
+    },
+    {
+      "id": "dust",
+      "text": "The lander waited 15 minutes for the dust to settle before unfurling its solar panels. The first images showed a flat surface with pebbles and troughs, but no large rocks or hills.",
+      "source": "https://science.nasa.gov/mission/phoenix/",
+      "sourceName": "NASA Science: Phoenix (mission page)"
+    },
+    {
+      "id": "body",
+      "text": "Phoenix had an octagonal base on three landing legs, with two octagonal solar panel wings for power. Its science payload had a mass of 55 kg.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A",
+      "sourceName": "NASA NSSDCA: Phoenix Mars Lander (challenge catalogue)"
+    },
+    {
+      "id": "first-days",
+      "text": "Within four days Phoenix sent a full 360-degree panorama, deployed its 2.5 m robotic arm and started returning weather reports. Its stereo camera stood on a 2 m mast.",
+      "source": "https://science.nasa.gov/mission/phoenix/",
+      "sourceName": "NASA Science: Phoenix (mission page)"
+    },
+    {
+      "id": "goal",
+      "text": "Phoenix studied the history of water in the Martian arctic, where water ice is found, and searched for complex organic molecules.",
+      "source": "https://science.nasa.gov/mission/phoenix/",
+      "sourceName": "NASA Science: Phoenix (mission page)"
+    },
+    {
+      "id": "ice",
+      "text": "On 31 May the robotic arm began sampling the soil for ice. By 19 June scientists concluded that bright clumps in the Dodo-Goldilocks trench were probably water ice: they vaporized four days after being scooped.",
+      "source": "https://science.nasa.gov/mission/phoenix/",
+      "sourceName": "NASA Science: Phoenix (mission page)"
+    },
+    {
+      "id": "tega",
+      "text": "Phoenix carried tiny ovens (TEGA) that heated soil samples. On 31 July NASA announced that there is water on Mars, based on a sample analyzed by TEGA.",
+      "source": "https://science.nasa.gov/mission/phoenix/",
+      "sourceName": "NASA Science: Phoenix (mission page)"
+    },
+    {
+      "id": "perchlorate",
+      "text": "On 5 August the team announced perchlorates in the soil: a possible energy source for microbes and a potentially valuable resource for human explorers, which neither confirmed nor refuted the possibility of life.",
+      "source": "https://science.nasa.gov/mission/phoenix/",
+      "sourceName": "NASA Science: Phoenix (mission page)"
+    },
+    {
+      "id": "wet-lab",
+      "text": "The wet chemistry laboratory (MECA) mixed water brought from Earth with the soil. Early results suggested the soil was alkaline, with salts such as perchlorate, sodium, magnesium, chloride and potassium.",
+      "source": "https://science.nasa.gov/mission/phoenix/",
+      "sourceName": "NASA Science: Phoenix (mission page)"
+    },
+    {
+      "id": "sun",
+      "text": "At 68 degrees north the Sun stayed in the sky all the time after landing and did not dip below the horizon until August.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A",
+      "sourceName": "NASA NSSDCA: Phoenix Mars Lander (challenge catalogue)"
+    },
+    {
+      "id": "mission",
+      "text": "By the end of August Phoenix had completed its planned 90-day mission, which was extended to 30 September.",
+      "source": "https://science.nasa.gov/mission/phoenix/",
+      "sourceName": "NASA Science: Phoenix (mission page)"
+    },
+    {
+      "id": "end",
+      "text": "As the summer ended Phoenix had less solar energy, and it made its last transmission on 2 November 2008 before its power was depleted.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A",
+      "sourceName": "NASA NSSDCA: Phoenix Mars Lander (challenge catalogue)"
+    },
+    {
+      "id": "days",
+      "text": "From landing on 25 May 2008 to the last signal on 2 November 2008 is 161 days (our count from the two dates).",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A",
+      "sourceName": "NASA NSSDCA: Phoenix Mars Lander (challenge catalogue)"
+    }
+  ]
+}

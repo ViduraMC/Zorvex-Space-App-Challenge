@@ -20,6 +20,7 @@ import { factsOf, findEpisode } from '../episodes';
 import { openAsk } from '../features/ask';
 import { patchNode } from '../features/patch';
 import { skyTonightCard } from '../features/sky-tonight';
+import { langSelect } from './chrome';
 
 const MAX_FRAME_S = 0.05;
 /** The sky each extra stage starts with. */
@@ -72,6 +73,8 @@ export const playerPage: Page = (root, id) => {
     renderer.dispose();
     audio.hush();
     audio.drive(0);
+    audio.rocket(0);
+    audio.rotor(0);
     useEpisode('');
   });
   void play(episode, shell, canvas, renderer, session);
@@ -184,6 +187,7 @@ async function play(
       Object.assign(ctx, { stageKind: kind, scene: current.scene, world: current.world, sky: current.sky, fx: current.fx });
       director.groundAt = current.world.heightAt;
       renderer.setScene(current.scene, director.camera);
+      audio.ambience(kind);
     },
     quality,
     t,
@@ -220,24 +224,44 @@ async function play(
 
   // ---- HUD: always-available controls ----
   const hud = el('div', 'hud', undefined, shell);
-  button('mini', t('ui.home'), () => go('#home'), hud);
-  const toggle = (label: string, on: boolean, set: (on: boolean) => void): void => {
-    const b = button('mini', label, () => {
-      const next = b.getAttribute('aria-pressed') !== 'true';
-      b.setAttribute('aria-pressed', String(next));
-      set(next);
+  let started = false;
+  let skip: HTMLButtonElement;
+  /** Draws the HUD in the current language (again after a language change, keeping the story's place). */
+  const drawHud = (): void => {
+    const skipHidden = skip?.hidden ?? true;
+    hud.replaceChildren();
+    button('mini', t('ui.home'), () => go('#home'), hud);
+    const toggle = (label: string, on: boolean, set: (on: boolean) => void): void => {
+      const b = button('mini', label, () => {
+        const next = b.getAttribute('aria-pressed') !== 'true';
+        b.setAttribute('aria-pressed', String(next));
+        set(next);
+      }, hud);
+      b.setAttribute('aria-pressed', String(on));
+    };
+    toggle(t('ui.sound'), audio.soundOn, (on) => audio.setSound(on));
+    toggle(t('ui.voice'), audio.voiceOn, (on) => audio.setVoice(on));
+    const q = button('mini', t(quality === 'high' ? 'ui.quality.high' : 'ui.quality.low'), () => {
+      // world detail and shadow sizes are chosen at build time, so the episode restarts
+      progress.set({ quality: quality === 'high' ? 'low' : 'high' });
+      go(location.hash);
     }, hud);
-    b.setAttribute('aria-pressed', String(on));
+    q.title = t('ui.quality.hint');
+    // before the story starts the whole screen reopens; once it runs, the next lines switch language
+    langSelect(hud, 'mini lang', () => {
+      if (!started) return go(location.hash);
+      drawHud();
+      ctx.speaker();
+      const end = shell.querySelector('.endcard');
+      if (end) {
+        end.remove();
+        showEnd(episode, shell);
+      }
+    });
+    skip = button('mini skip', t('ui.skip'), () => timeline.skip(), hud);
+    skip.hidden = skipHidden;
   };
-  toggle(t('ui.sound'), audio.soundOn, (on) => audio.setSound(on));
-  toggle(t('ui.voice'), audio.voiceOn, (on) => audio.setVoice(on));
-  button('mini', t(quality === 'high' ? 'ui.quality.high' : 'ui.quality.low'), () => {
-    // world detail and shadow sizes are chosen at build time, so the episode restarts
-    progress.set({ quality: quality === 'high' ? 'low' : 'high' });
-    go(location.hash);
-  }, hud);
-  const skip = button('mini skip', t('ui.skip'), () => timeline.skip(), hud);
-  skip.hidden = true;
+  drawHud();
 
   session.listen(window, 'keydown', (e: KeyboardEvent) => {
     const onButton = document.activeElement instanceof HTMLButtonElement;
@@ -294,8 +318,11 @@ async function play(
   const open = button('btn wait', t('ui.answerSignal'), () => {
     void (async () => {
       audio.init();
+      audio.ambience(ctx.stageKind);
+      audio.play('static');
       audio.play('radio');
       cover.remove();
+      started = true;
       skip.hidden = false;
       await session.wait(timeline.run(session));
       skip.hidden = true;

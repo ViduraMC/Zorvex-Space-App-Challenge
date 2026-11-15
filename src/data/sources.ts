@@ -20,17 +20,17 @@ export const CHALLENGE_PAGE =
 export const CHALLENGE_RESOURCES: Source[] = [
   { label: 'NASA Space Science Data Coordinated Archive (NSSDCA)', url: 'https://nssdc.gsfc.nasa.gov/', usedFor: 'Dates, sizes and status of every machine; most Sojourner facts' },
   { label: 'Apollo Lunar Modules', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C', usedFor: 'Moon explorer: Apollo 11 descent stage' },
-  { label: 'Lunar Roving Vehicles (LRVs)', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C', usedFor: 'Moon explorer: Apollo 15 Lunar Roving Vehicle' },
+  { label: 'Lunar Roving Vehicles (LRVs)', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C', usedFor: 'Moon explorer and the Apollo 15 Lunar Roving Vehicle story' },
   { label: 'ALSEP Scientific Packages', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C', usedFor: 'Moon explorer: Apollo 12 ALSEP' },
-  { label: 'Surveyor Landers', url: 'https://science.nasa.gov/mission/surveyor-3/', usedFor: 'Moon explorer: Surveyor 3' },
+  { label: 'Surveyor Landers', url: 'https://science.nasa.gov/mission/surveyor-3/', usedFor: 'Moon explorer and the Surveyor 3 story' },
   { label: 'Sojourner Rover', url: 'https://science.nasa.gov/mission/mars-pathfinder/', usedFor: 'Mars explorer and the Sojourner story' },
-  { label: 'Spirit & Opportunity', url: 'https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/', usedFor: 'Mars explorers: Spirit and Opportunity' },
+  { label: 'Spirit & Opportunity', url: 'https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/', usedFor: 'Mars explorers and the Spirit and Opportunity story' },
   { label: 'Viking 1 & 2 Landers', url: 'https://science.nasa.gov/mission/viking-1/', usedFor: 'Mars explorers: Viking 1 and Viking 2' },
-  { label: 'Phoenix & InSight Landers', url: 'https://science.nasa.gov/mission/insight/', usedFor: 'Mars explorer and the InSight story (Phoenix dates from the NSSDCA catalogue)' },
+  { label: 'Phoenix & InSight Landers', url: 'https://science.nasa.gov/mission/insight/', usedFor: 'Mars explorer and the InSight story' },
   { label: 'Dawn Spacecraft', url: 'https://science.nasa.gov/mission/dawn/', usedFor: 'Not used yet (deep space)' },
   { label: 'NEAR Shoemaker', url: 'https://science.nasa.gov/mission/near-shoemaker/', usedFor: 'Not used yet (deep space)' },
   { label: 'Pioneer 10 & 11', url: 'https://science.nasa.gov/mission/pioneer-10/', usedFor: 'The Pioneer 10 and 11 story (with its sister page for Pioneer 11)' },
-  { label: 'Ingenuity Helicopter', url: 'https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/', usedFor: 'Mars explorer: Ingenuity' },
+  { label: 'Ingenuity Helicopter', url: 'https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/', usedFor: 'Mars explorer and the Ingenuity story' },
   { label: 'Kepler Space Telescope', url: 'https://science.nasa.gov/mission/kepler/', usedFor: 'Not used yet (deep space)' },
 ];
 
@@ -47,6 +47,7 @@ function modelUse(title: string): string {
   if (title.startsWith('Viking')) return 'Viking 1 and Viking 2 on Mars';
   if (title.startsWith('InSight')) return 'InSight on Mars';
   if (title.startsWith('Ingenuity')) return 'Ingenuity on Mars';
+  if (title.startsWith('Mars 2020')) return 'Perseverance, which carried Ingenuity, in the Ingenuity story';
   if (title.startsWith('Pioneer')) return 'Pioneer 10 and its sister Pioneer 11 in the Pioneer story';
   return 'Apollo 11 descent stage (lower half only) and Apollo 12 Intrepid on the Moon';
 }
@@ -61,6 +62,9 @@ export const STORY_SOURCES: Source[] = [
   { label: 'NASA Science: Spirit and Opportunity science instruments', url: 'https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-instruments/', usedFor: 'Anatomy 360°: the rover tools (part of the challenge resource)' },
   { label: 'NASA Science: InSight science instruments', url: 'https://science.nasa.gov/mission/insight/science-instruments/', usedFor: 'InSight story and Anatomy 360° (part of the challenge resource)' },
   { label: 'NASA NSSDCA: Apollo 11 Command and Service Module', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A', usedFor: 'Apollo 11 story: Columbia, launch, flight timeline and return to Earth' },
+  { label: 'NASA Science: Phoenix', url: 'https://science.nasa.gov/mission/phoenix/', usedFor: 'Phoenix story: landing, the robotic arm, ice, the lab instruments, the end (sibling of the challenge InSight page)' },
+  { label: 'NASA NSSDCA: Phoenix Mars Lander', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A', usedFor: 'Phoenix story: launch, landing site, mission length, last contact' },
+  { label: 'NASA Science: Spirit and Opportunity science highlights', url: 'https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-highlights/', usedFor: 'Spirit and Opportunity story: blueberries, Home Plate, signs of water (part of the challenge resource)' },
   { label: 'NASA NSSDCA: Apollo 11, 25th Anniversary', url: 'https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html', usedFor: 'Apollo 11 story: surface photographs, flag, samples and timeline quotes' },
 ];
 

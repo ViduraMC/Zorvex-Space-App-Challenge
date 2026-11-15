@@ -1,0 +1,73 @@
+{
+  "episode": "lrv-apollo-15",
+  "checked": "2026-11-15",
+  "note": "Every fact checked on the NSSDCA Apollo 15 Lunar Module / ALSEP page (challenge resource).",
+  "facts": [
+    {
+      "id": "landing",
+      "text": "The Apollo 15 Lunar Module Falcon landed on 30 July 1971 at 22:16:29 UT in the Mare Imbrium region at the foot of the Apennine mountains, at 26.13 N, 3.63 E.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C",
+      "sourceName": "NASA NSSDCA: Apollo 15 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "crew",
+      "text": "Falcon carried Commander David R. Scott and Lunar Module pilot James B. Irwin, the seventh and eighth men to walk on the Moon. Alfred M. Worden piloted the Command/Service Module.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C",
+      "sourceName": "NASA NSSDCA: Apollo 15 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "carried",
+      "text": "The Lunar Module also carried a Lunar Roving Vehicle (LRV); the descent stage held storage space for the lunar rover on Apollo 15, 16 and 17.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C",
+      "sourceName": "NASA NSSDCA: Apollo 15 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "first",
+      "text": "The LRV was used to explore regions within 5 km of the landing site. This was the first time a vehicle of this type had been used, and its performance on the lunar terrain was very successful.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C",
+      "sourceName": "NASA NSSDCA: Apollo 15 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "totals",
+      "text": "Scott and Irwin made three moonwalks totalling 18 hours 35 minutes. They covered 27.9 km and collected 77.31 kg of rock and soil samples.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C",
+      "sourceName": "NASA NSSDCA: Apollo 15 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "eva1",
+      "text": "On the first moonwalk, 31 July, the LRV was unloaded, deployed and driven. The 10.3 km traverse went to the edge of Hadley Rille, to Elbow Crater and near St. George Crater and back; a core sample was taken from three metres below the surface.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C",
+      "sourceName": "NASA NSSDCA: Apollo 15 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "eva2",
+      "text": "On 1 August the LRV was driven on a 12.5 km traverse southeast along the base of the Apennine Mountains, near Index, Arbeit, Crescent, Dune and Spur craters.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C",
+      "sourceName": "NASA NSSDCA: Apollo 15 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "eva3",
+      "text": "On 2 August the LRV was driven 5.1 km west to Scarp Crater and northwest along the edge of Hadley Rille, and back east across the mare.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C",
+      "sourceName": "NASA NSSDCA: Apollo 15 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "feather",
+      "text": "After the final moonwalk Scott performed a televised demonstration of a hammer and a feather falling at the same rate in the lunar vacuum.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C",
+      "sourceName": "NASA NSSDCA: Apollo 15 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "memorial",
+      "text": "The astronauts left a plaque and a small figure on the surface in memory of all fourteen American and Soviet space explorers who had died in the two nations' space programs.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C",
+      "sourceName": "NASA NSSDCA: Apollo 15 Lunar Module / ALSEP (challenge resource)"
+    },
+    {
+      "id": "liftoff",
+      "text": "The Lunar Module lifted off the Moon on 2 August 1971 at 17:11:22 UT after 66 hours 55 minutes on the lunar surface.",
+      "source": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C",
+      "sourceName": "NASA NSSDCA: Apollo 15 Lunar Module / ALSEP (challenge resource)"
+    }
+  ]
+}

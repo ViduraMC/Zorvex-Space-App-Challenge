@@ -1,0 +1,11 @@
+{
+  "narrator": {
+    "kokoro": "bf_lily",
+    "gender": "female",
+    "speed": 0.95
+  },
+  "machine": {
+    "kokoro": "am_fenrir",
+    "gender": "male"
+  }
+}

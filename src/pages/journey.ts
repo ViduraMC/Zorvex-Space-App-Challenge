@@ -25,6 +25,7 @@ import { createFlightFx } from '../journey/flight';
 import { journey, type Destination, type Phase } from '../journey/store';
 import { buildSurface, disposeSurface, hasNasaModel, modelKeyOf, updateSurface, type Surface } from '../journey/surface';
 import { hasAnatomy } from './anatomy';
+import { langSelect, soundToggle } from './chrome';
 
 /** Mission control's recorded lines (npm run voices). */
 const VOICE = import.meta.glob<string>('../journey/voice/en/*.mp3', { eager: true, query: '?url', import: 'default' });
@@ -34,6 +35,9 @@ const D = REDUCED ? 0.02 : 1;
 const DESTINATIONS: Destination[] = ['moon', 'mars'];
 const CUTSCENES: Phase[] = ['HOME_WALK', 'TAKEOFF', 'LANDING'];
 const HOME_CAM = { pos: [0, 1.5, 9], look: [0, 2.5, 0] } as const;
+/** Tall screens: further back and centred between the child and the rocket, so both fit. */
+const HOME_CAM_TALL = { pos: [1.4, 1.9, 14], look: [1.4, 2.8, 0] } as const;
+const homeCam = (): typeof HOME_CAM | typeof HOME_CAM_TALL => (window.innerWidth < window.innerHeight ? HOME_CAM_TALL : HOME_CAM);
 /** The destination screen uses a long lens from far away, so the globes stay round at the screen edges. */
 const SPACE_CAM = { z: 28, fov: 19, halfHeight: 4.66 };
 /** Share of a wide screen that the hologram panel covers. */
@@ -60,7 +64,7 @@ export const journeyPage: Page = (root) => {
   // ---------- the flight scene: Earth at night, then open space ----------
   const scene = new Scene();
   const camera = new PerspectiveCamera(50, 1, 0.1, 3000);
-  const cam = { pos: new Vector3(...HOME_CAM.pos), look: new Vector3(...HOME_CAM.look), shake: 0, speed: 0 };
+  const cam = { pos: new Vector3(...homeCam().pos), look: new Vector3(...homeCam().look), shake: 0, speed: 0 };
   /** The way the world rushes past the window (speed streaks). */
   const rush = new Vector3(0, -1, 0);
   const stars = createStars(3000, 120);
@@ -106,6 +110,14 @@ export const journeyPage: Page = (root) => {
   el('h1', '', t('ui.title'), title);
   el('p', '', t('ui.subtitle'), title);
   const homeSources = link('j-sources', t('ui.home.sources'), '#about', shell);
+  // language and sound on every screen that waits for the child (hidden during cutscenes)
+  const top = el('nav', 'j-top', undefined, shell);
+  top.setAttribute('aria-label', t('ui.menu'));
+  const homeLinks = el('div', 'j-top-links', undefined, top);
+  link('chip', t('ui.shelf'), '#shelf', homeLinks);
+  link('chip', t('ui.about'), '#about', homeLinks);
+  langSelect(top, 'chip j-lang');
+  soundToggle(top, 'chip sound');
   const startBtn = button('j-start', t('ui.start'), () => {
     audio.init();
     journey.start();
@@ -131,11 +143,13 @@ export const journeyPage: Page = (root) => {
   const pickBtns = DESTINATIONS.map((kind) => button('j-planet', t(`ui.journey.${kind}`), () => journey.choose(kind), pick));
   const field = el('div', 'j-field', undefined, shell);
   const fieldTitle = el('h2', '', undefined, field);
-  el('p', '', t('ui.journey.hint'), field);
+  el('p', '', t(matchMedia('(pointer: coarse)').matches ? 'ui.journey.hintTouch' : 'ui.journey.hint'), field);
   const nav = el('nav', 'j-nav', undefined, field);
   button('chip', t('ui.journey.change'), () => journey.travel(), nav);
   link('chip', t('ui.shelf'), '#shelf', nav);
   link('chip', t('ui.about'), '#about', nav);
+  langSelect(nav, 'chip j-lang');
+  soundToggle(nav, 'chip sound');
   const plaques = el('div', 'j-plaques', undefined, field);
   const holo = el('aside', 'holo', undefined, field);
   holo.hidden = true;
@@ -205,17 +219,25 @@ export const journeyPage: Page = (root) => {
     for (const item of s.items) {
       const e = item.explorer;
       // neighbours stand close together, so every second plaque sits one row lower
-      const row = s.items.indexOf(item) % 2 ? ' low' : '';
-      const plaque = button(`j-plaque ${e.status}${row}`, '', (event) => {
-        // touch: first tap selects, the Explore button continues. Mouse and keyboard: go.
-        const touch = event instanceof PointerEvent && event.pointerType === 'touch';
-        if (touch && journey.get().hoveredId !== e.id) journey.hover(e.id);
+      const row = window.innerWidth > window.innerHeight && s.items.indexOf(item) % 2 ? ' low' : '';
+      // touch: first tap selects (the panel opens), the Explore button continues. Mouse and keyboard: go.
+      // A tap also fires pointerenter and focus before the click, so whether this explorer was
+      // already selected is read at pointerdown, before those change it.
+      let touchFirst = false;
+      const plaque = button(`j-plaque ${e.status}${row}`, '', () => {
+        if (touchFirst) journey.hover(e.id);
         else launch(e.id);
+        touchFirst = false;
       }, plaques);
       el('b', '', e.name, plaque);
       el('span', '', `${t(`ui.status.${e.status}`)} · ${years(e)}`, plaque);
+      plaque.addEventListener('pointerdown', (ev) => {
+        touchFirst = ev.pointerType === 'touch' && journey.get().hoveredId !== e.id;
+      });
       plaque.addEventListener('focus', () => journey.hover(e.id));
-      plaque.addEventListener('pointerenter', () => journey.hover(e.id));
+      plaque.addEventListener('pointerenter', (ev) => {
+        if (ev.pointerType !== 'touch') journey.hover(e.id);
+      });
     }
   }
 
@@ -251,7 +273,7 @@ export const journeyPage: Page = (root) => {
     const parts = modelKeyOf(e.id);
     if (parts && hasAnatomy(parts)) link('holo-parts', t('ui.parts.open'), `#parts-${parts}`, holo);
     const story = episodeFor(e.id);
-    if (story) button('holo-parts', t('ui.ask.open', { name: e.name }), () => openAsk(shell, story.id), holo);
+    if (story) button('holo-parts', t('ui.ask.open', { name: e.name }), () => openAsk(shell, story.id, e.name), holo);
     holo.classList.remove('in');
     void holo.offsetWidth; // restart the appear animation
     holo.classList.add('in');
@@ -267,6 +289,7 @@ export const journeyPage: Page = (root) => {
   // ---------- the phases ----------
   const ENTER: Record<Phase, () => void> = {
     HOME() {
+      audio.ambience('earth');
       useScene(scene);
       setFov(50);
       earth.visible = nightSky.mesh.visible = true;
@@ -282,8 +305,10 @@ export const journeyPage: Page = (root) => {
       ((flight.earth.children[0] as Mesh).material as MeshStandardMaterial).opacity = 0;
       cam.speed = 0;
       stars.material.uniforms.uBright.value = 1;
-      cam.pos.set(...HOME_CAM.pos);
-      cam.look.set(...HOME_CAM.look);
+      const home = homeCam();
+      cam.pos.set(home.pos[0], home.pos[1], home.pos[2]);
+      cam.look.set(home.look[0], home.look[1], home.look[2]);
+      flight.clouds.visible = false;
       gsap.set([title, startBtn, homeSources], { opacity: 1 });
       show(title, true);
       show(startBtn, true);
@@ -321,15 +346,18 @@ export const journeyPage: Page = (root) => {
       show(startBtn, false);
       show(homeSources, false);
       show(cockpit, true);
+      flight.clouds.visible = true;
       rocket.group.visible = child.group.visible = false;
       cam.pos.set(ROCKET_X, 2.7, 0);
       cam.look.set(ROCKET_X, 2.9, -60);
       cam.speed = 0;
       rush.set(0, -1, 0);
       flight.earth.visible = true;
-      phaseScope.frame(() => audio.drive(Math.max(cam.shake, cam.speed)));
+      audio.ambience('earth');
+      // the roar follows the shaking; it thins out as the air does
+      phaseScope.frame(() => audio.rocket(Math.min(1, cam.shake * 0.7) * (1 - Math.min(0.75, Math.max(0, cam.pos.y - 200) / 400))));
       phaseScope.add(() => {
-        audio.drive(0);
+        audio.rocket(0);
         flight.exhaust.intensity = 0;
         cockpit.classList.remove('rumble', 'ignite');
       });
@@ -350,7 +378,10 @@ export const journeyPage: Page = (root) => {
         .call(() => count('1', 'voice.count1'), [], 2.9 * D)
         // ignition: the ground lights up orange, everything starts to shake
         .to(ignite, { glow: 1, duration: 1.2 * D }, 2.4 * D)
-        .call(() => cockpit.classList.add('ignite'), [], 2.4 * D)
+        .call(() => {
+          cockpit.classList.add('ignite');
+          audio.play('ignition');
+        }, [], 2.4 * D)
         .call(() => cockpit.classList.remove('ignite'), [], 6.2 * D)
         .to(cam, { shake: 0.6, duration: 1.4 * D }, 2.4 * D)
         .call(() => {
@@ -383,12 +414,17 @@ export const journeyPage: Page = (root) => {
         .to(blackout, { backgroundColor: '#000000', duration: 0.3 * D }, 12.55 * D);
     },
     DESTINATION() {
+      audio.ambience('space');
       useScene(scene);
       layout();
       earth.visible = nightSky.mesh.visible = false;
       space.visible = true;
       show(cockpit, false);
       show(pick, true);
+      show(title, false);
+      show(startBtn, false);
+      show(homeSources, false);
+      flight.clouds.visible = false;
       cam.shake = 0;
       cam.speed = 0;
       flight.earth.visible = false;
@@ -436,9 +472,11 @@ export const journeyPage: Page = (root) => {
       say(t('ui.journey.landing', { place }));
       voice(`voice.landing.${destination}`);
       rush.set(0, 0, 1);
-      phaseScope.frame(() => audio.drive(Math.max(cam.shake, cam.speed)));
+      audio.ambience('space');
+      // landing engines fire hard near the ground (on the Moon the roar is what the crew feels)
+      phaseScope.frame(() => audio.rocket(cam.shake * 0.8));
       phaseScope.add(() => {
-        audio.drive(0);
+        audio.rocket(0);
         cam.speed = 0;
         cockpit.classList.remove('entry', 'rumble');
       });
@@ -459,6 +497,8 @@ export const journeyPage: Page = (root) => {
           cam.look.copy(s.view.look);
           rush.set(0, 1, 0);
           cockpit.classList.add('entry', 'rumble');
+          audio.ambience(destination);
+          audio.play('hiss');
           // Mars: drop through a haze of dust that clears near the ground
           const fog = s.scene.fog as FogExp2 | null;
           if (fog) gsap.fromTo(fog, { density: 0.06 }, { density: fog.density, duration: 2.4 * D, ease: 'power2.out' });
@@ -471,6 +511,7 @@ export const journeyPage: Page = (root) => {
           const dust = destination === 'moon' ? 'moonDust' : 'dustBurst';
           for (const x of [-3, 0, 3]) s.fx.burst(dust, tmp.set(x, s.world.heightAt(x, 11), 11));
           audio.play('thud');
+          audio.play('hiss');
           voice('voice.touchdown');
           cam.speed = 0;
           cockpit.classList.remove('entry', 'rumble');
@@ -479,6 +520,7 @@ export const journeyPage: Page = (root) => {
         .to(cockpit, { opacity: 0, duration: 0.5 * D });
     },
     EXPLORERS() {
+      audio.ambience(journey.get().destination ?? 'mars');
       const s = ensureSurface(journey.get().destination!);
       useScene(s.scene);
       setFov(s.view.fov, PANEL_SHARE);
@@ -500,6 +542,7 @@ export const journeyPage: Page = (root) => {
         return (node?.userData.explorerId as string | undefined) ?? null;
       };
       phaseScope.listen(canvas, 'pointermove', (e: PointerEvent) => {
+        if (e.pointerType === 'touch') return; // a tap selects through click below
         const id = pickAt(e);
         canvas.style.cursor = id ? 'pointer' : '';
         if (id) journey.hover(id);
@@ -538,6 +581,8 @@ export const journeyPage: Page = (root) => {
     phaseScope.dispose();
     phaseScope = session.child();
     show(skip, CUTSCENES.includes(phase));
+    show(top, phase === 'HOME' || phase === 'DESTINATION');
+    show(homeLinks, phase === 'HOME');
     if (phase !== 'EXPLORERS' && phase !== 'HOLOGRAM_LAUNCH') show(field, false);
     ENTER[phase]();
   }

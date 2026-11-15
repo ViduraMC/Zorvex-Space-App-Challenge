@@ -361,7 +361,7 @@ export default async function buildScene({ scene, world, materials, stage }: Sce
 
     async launch(c, scope) {
       for (const f of engines.children) f.visible = true;
-      c.audio.play('thud');
+      c.audio.play('ignition');
       c.audio.play('whoosh');
       c.comic.sfx(c.t('sfx.liftoff'));
       for (let k = 0; k < 12; k++) c.fx.burst('smoke', tmp.set((Math.random() - 0.5) * 18, 1, (Math.random() - 0.5) * 18));
@@ -379,10 +379,10 @@ export default async function buildScene({ scene, world, materials, stage }: Sce
           pos: [80 + Math.sin(time * 61) * shake, Math.max(12, rocket.position.y * 0.5 + 12) + Math.cos(time * 53) * shake, 105],
           look: [0, rocket.position.y + 30, 0],
         });
-        c.audio.drive(1);
+        c.audio.rocket(Math.max(0.35, 1 - rocket.position.y / 320));
       });
       scope.add(() => {
-        c.audio.drive(0);
+        c.audio.rocket(0);
         exhaust.intensity = 0;
       });
       await play(scope, { target: rocket.position, y: 320, duration: 7, ease: 'power2.in' });

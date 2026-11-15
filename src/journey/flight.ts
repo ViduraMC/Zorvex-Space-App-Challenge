@@ -53,6 +53,8 @@ function puff(): CanvasTexture {
 
 export interface FlightFx {
   group: Group;
+  /** Shown only while climbing; from the ground they would hang in the night sky as blobs. */
+  clouds: Group;
   earth: Group;
   exhaust: PointLight;
   /** Speed 0..1 drives streak length and brightness; dir is the way the scene rushes past. */
@@ -63,6 +65,9 @@ export function createFlightFx(around: Vector3): FlightFx {
   const group = new Group();
 
   // clouds to climb through, between 40 and 230 units up
+  const clouds = new Group();
+  clouds.visible = false;
+  group.add(clouds);
   const cloudMat = new SpriteMaterial({ map: puff(), transparent: true, depthWrite: false, opacity: 0.9, fog: false });
   for (let k = 0; k < CLOUDS; k++) {
     const s = new Sprite(cloudMat);
@@ -70,7 +75,7 @@ export function createFlightFx(around: Vector3): FlightFx {
     const d = 12 + hash(k, 13) * 90;
     s.position.set(around.x + Math.cos(a) * d, 40 + hash(k, 17) * 190, around.z - 20 + Math.sin(a) * d);
     s.scale.setScalar(30 + hash(k, 19) * 50);
-    group.add(s);
+    clouds.add(s);
   }
 
   // speed streaks, moved around the camera every frame
@@ -117,6 +122,7 @@ export function createFlightFx(around: Vector3): FlightFx {
   const tail = new Vector3();
   return {
     group,
+    clouds,
     earth,
     exhaust,
     update(dt, camera, speed, dir) {

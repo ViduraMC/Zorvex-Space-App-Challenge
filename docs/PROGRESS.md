@@ -1,6 +1,6 @@
 # Progress
 
-Updated: Sunday 15 Nov 2026, early morning (Asia/Colombo).
+Updated: Sunday 15 Nov 2026, morning (Asia/Colombo).
 
 ## Now
 
@@ -14,7 +14,18 @@ Updated: Sunday 15 Nov 2026, early morning (Asia/Colombo).
   are merged into main after a review against CONTRIBUTING.md: every fact re-checked on the
   NASA pages (claims the pages do not make were removed), long lines split, NASA models used
   (Lunar Module, Saturn V, InSight, new Pioneer 10), voices recorded, conflicts resolved.
-- Six playable stories: Sojourner, Viking, InSight, ALSEP, Apollo 11 EASEP, Pioneer.
+- Eleven playable stories: Sojourner, Viking, InSight, ALSEP, Apollo 11 EASEP, Pioneer, and new
+  Spirit and Opportunity, Phoenix, Ingenuity, Apollo 15 LRV and Surveyor 3 (all three languages,
+  English voices, every fact from the challenge pages; branch feature/remaining-stories).
+- UX pass over every screen (desktop and phone, English, Sinhala, Tamil): a language picker and a
+  sound switch on Home, the destination choice, the explorers, the story player and Anatomy (a
+  language change inside a story keeps the child's place); hologram panel no longer overlaps
+  itself; tapping an explorer on a phone first opens its panel; the explorers fit a phone screen;
+  every patch on the shelf names its machine; chat closes with Escape or a tap outside; no cloud
+  blobs in the Home sky; the title no longer runs into the rocket.
+- Sound design: WebAudio mix with a compressor, separate effects and ambience buses; rocket roar
+  that follows the camera shake at take-off and landing, ignition, rotor, wind and world ambience
+  (Earth, space, Moon, Mars); voices duck the ambience.
 - Sinhala and Tamil: every interface, story, game and explorer text (proper names stay English; voices stay English). Needs a review by a Sinhala and a Tamil speaker.
 - Anatomy 360°: six NASA models (Viking lander, Spirit/Opportunity, InSight, Ingenuity, Apollo Lunar Module, Pioneer 10), each part with what it did, what we learned and its NASA source. From the hologram panel and story end cards.
 - Talk to the machine (free, offline): five ready questions in all three languages, typed questions in English, answers only from the story facts with sources. A real AI answer can plug in once we pick a free Space Apps offer.
@@ -33,10 +44,10 @@ Updated: Sunday 15 Nov 2026, early morning (Asia/Colombo).
 
 1. Vidura: paste the Space Apps global offers list (it needs a login) so we can pick a free AI service for the chatbot.
 1b. Deploy on GoDaddy (needs Vidura's account) and make the repository public.
-1c. Stories for Spirit and Opportunity, Phoenix, Ingenuity, Apollo 15 LRV and Surveyor 3.
+1c. Vidura: Porkbun GitHub Connect (branch `site`) for zorvex.earth; Google Cloud key for the AI chat.
+1d. A Sinhala and a Tamil speaker review the new story text.
 2. Connect Vercel (public URL and pull-request previews).
 3. Decide on the Moon globe image (only non-challenge, non-3D-Resources data left; see docs/RESOURCES.md section 3).
-4. Stories for each explorer (Vidura is sending them).
 5. Route globe and filters in the hologram panel (build guide step 12): needs real traverse data.
 6. Real explorer models from NASA 3D Resources instead of the stand-ins (build guide step 15).
 7. Sinhala and Tamil episode text; our own voice recordings.
