@@ -61,7 +61,13 @@ const MODEL_OF: Record<string, { key: NasaModel; fit: Omit<FitOptions, 'dusty'> 
 const ARC_RADIUS = 30;
 const ARC_STEP = 0.085;
 const MODEL_SCALE = 1.25;
-const GRID_COLUMNS = 3;
+/** Tall screens: a grid of plinths, two across for a short roster so each one stays big. */
+const GRID_STEP = 2.8;
+const ROW_STEP = 4;
+const PORTRAIT_FOV = 62;
+/** How far (radians) above the screen centre the grid of plinths sits on a tall screen. */
+const PORTRAIT_RAISE = 0.17;
+const gridColumns = (count: number): number => (count <= 4 ? 2 : 3);
 const LIGHT_HEIGHT = 1.9;
 
 /** Materials of a machine that has stood silent for years: darker, and coated in local dust. */
@@ -78,7 +84,10 @@ function dustyMaterials(anisotropy: number, destination: Destination): MachineMa
 
 /** Wide screens: a gentle arc. Tall (phone) screens: a grid of three columns going back. */
 function slotPosition(index: number, count: number, portrait: boolean): [number, number] {
-  if (portrait) return [((index % GRID_COLUMNS) - 1) * 2.7, 4 - Math.floor(index / GRID_COLUMNS) * 3.3];
+  if (portrait) {
+    const cols = gridColumns(count);
+    return [((index % cols) - (cols - 1) / 2) * GRID_STEP, 4 - Math.floor(index / cols) * ROW_STEP];
+  }
   const angle = (index - (count - 1) / 2) * ARC_STEP;
   return [Math.sin(angle) * ARC_RADIUS, 4 - ARC_RADIUS * (1 - Math.cos(angle))];
 }
@@ -137,8 +146,17 @@ export function buildSurface(
   // half the width of the row of plinths, in metres
   const halfRow = Math.sin(((roster.length - 1) / 2) * ARC_STEP) * ARC_RADIUS + 1.4;
   const aspect = window.innerWidth / window.innerHeight;
+  // tall screens: back far enough that the front row (with its plaques) fits the width
+  const cols = gridColumns(roster.length);
+  const rows = Math.ceil(roster.length / cols);
+  const frontHalf = ((cols - 1) / 2) * GRID_STEP + 1.9;
+  const tallDist = Math.max(8, frontHalf / (Math.tan((PORTRAIT_FOV / 2) * (Math.PI / 180)) * aspect));
+  // aim below the grid so it sits in the upper half: the info sheet covers the lower part of a phone
+  const tallPos = new Vector3(0, 2 + tallDist * 0.62, 4 + tallDist);
+  const gridZ = 4 - ((rows - 1) * ROW_STEP) / 2;
+  const down = Math.atan((tallPos.y - 0.5) / (tallPos.z - gridZ)) + PORTRAIT_RAISE;
   const view = portrait
-    ? { pos: new Vector3(0, 6, 14), look: new Vector3(0, 0.4, 0.5), fov: 68 }
+    ? { pos: tallPos, look: new Vector3(0, tallPos.y - (tallPos.z - gridZ) * Math.tan(down), gridZ), fov: PORTRAIT_FOV }
     : // far enough back that the whole arc fits beside the hologram panel (68% of the width)
       { pos: new Vector3(0, 3.1, 4 + Math.max(9, halfRow / (0.466 * 0.68 * aspect))), look: new Vector3(0, 0.9, 2), fov: 50 };
   return { destination, scene, world, sky, fx, items, view };

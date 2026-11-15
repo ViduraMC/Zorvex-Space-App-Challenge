@@ -44,6 +44,22 @@
   line-height: 1.12;
   line-height: 1;
 }
+/* wide screens: the title stands on the left so the rocket on the right stays clear */
+@media (min-aspect-ratio: 1/1) {
+  .j-title {
+    top: clamp(64px, 12vh, 120px);
+    left: calc(var(--edge) * 2);
+    right: auto;
+    max-width: 52vw;
+    text-align: left;
+  }
+  .j-title h1 {
+    font-size: clamp(30px, 4.6vw, 64px);
+  }
+  .journey .j-title p {
+    margin-left: 0;
+  }
+}
 .j-title p {
   margin: 14px auto 0;
   max-width: 30ch;
@@ -255,7 +271,7 @@
   pointer-events: auto;
   display: grid;
   gap: 1px;
-  max-width: 122px;
+  max-width: 150px;
   min-height: 44px;
   padding: 5px 9px;
   text-align: center;
@@ -270,8 +286,8 @@
   font-size: 13px;
   letter-spacing: 0.04em;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -294,6 +310,7 @@
 .holo {
   position: absolute;
   top: 8vh;
+  /* children keep their size; the panel scrolls instead of squeezing the globe over the text */
   right: var(--edge);
   bottom: 8vh;
   width: clamp(280px, 30vw, 420px);
@@ -362,8 +379,11 @@
   font-size: 16px;
   line-height: 1.5;
 }
+.holo > * {
+  flex-shrink: 0;
+}
 .holo-route {
-  flex: 1;
+  flex: 1 0 auto;
   min-height: 60px;
   display: grid;
   place-content: center;
@@ -430,6 +450,14 @@
   }
   .j-plaque span {
     display: none;
+  }
+  .j-plaque {
+    min-height: 32px;
+    padding: 3px 7px;
+  }
+  .j-plaque b {
+    font-size: 12px;
+    letter-spacing: 0;
   }
   .j-planet {
     translate: 0 -26vh;
@@ -594,4 +622,59 @@
   text-align: center;
   color: var(--holo);
   font-weight: 700;
+}
+
+/* ---- language and sound: top right on Home and the destination choice ---- */
+.j-top {
+  position: absolute;
+  top: var(--edge);
+  right: var(--edge);
+  z-index: 4;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--gap-s);
+  pointer-events: auto;
+}
+.j-top-links {
+  display: flex;
+  gap: var(--gap-s);
+}
+.j-top .chip {
+  background: rgba(6, 7, 13, 0.7);
+}
+/* a native select dressed as a chip, so every screen offers the language the same way */
+select.chip {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 30px;
+  font: inherit;
+  font-size: var(--text-s);
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 16px) 50%,
+    calc(100% - 11px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  background-color: rgba(6, 7, 13, 0.7);
+}
+select.chip option {
+  color: #000;
+}
+.chip.sound[aria-pressed='true'] {
+  background-color: rgba(6, 7, 13, 0.7);
+  color: var(--text);
+}
+.chip.sound[aria-pressed='false'] {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+@media (max-width: 700px) {
+  .j-title {
+    top: calc(var(--edge) + 104px);
+  }
+  .j-top-links {
+    flex-basis: 100%;
+    justify-content: flex-end;
+  }
 }

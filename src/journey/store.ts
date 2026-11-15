@@ -70,7 +70,8 @@ export function createJourney() {
     /** Coming back from a story: straight to the explorers, no cutscenes replayed. */
     resume(): void {
       if (state.destination) set({ phase: 'EXPLORERS', selectedId: null });
-      else set({ phase: 'HOME' });
+      // a language change reopens the screen: stay on the destination choice
+      else if (state.phase !== 'DESTINATION') set({ phase: 'HOME' });
     },
     /** "Change destination" on the explorers screen. */
     travel(): void {

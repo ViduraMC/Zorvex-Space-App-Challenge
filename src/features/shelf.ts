@@ -17,6 +17,9 @@ export const shelfPage: Page = (root) => {
     const done = progress.isDone(episode.id);
     const item = link('shelf-item', '', `#ep-${episode.id}`, grid);
     item.appendChild(patchNode(episode, done));
-    el('div', '', done ? tEp(episode.id, 'title') : t('ui.shelf.locked'), item);
+    // every patch names its machine, so a child knows which story to open next
+    el('b', 'shelf-name', tEp(episode.id, 'title'), item);
+    if (!done) el('span', 'shelf-hint', t('ui.shelf.locked'), item);
+    item.setAttribute('aria-label', `${tEp(episode.id, 'title')}: ${t(done ? 'ui.end.earned' : 'ui.shelf.locked')}`);
   }
 };

@@ -159,6 +159,22 @@ h2.section {
   font-size: var(--text-s);
   letter-spacing: 0.08em;
 }
+.shelf-item {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+.shelf-name {
+  font-size: var(--text-m);
+  letter-spacing: 0.04em;
+}
+.shelf-hint {
+  color: var(--text-dim);
+}
+.shelf-item:hover .shelf-name,
+.shelf-item:focus-visible .shelf-name {
+  text-decoration: underline;
+}
 .shelf-item .patch.earned {
   animation: float 5s ease-in-out infinite;
 }

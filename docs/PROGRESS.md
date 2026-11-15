@@ -17,6 +17,12 @@ Updated: Sunday 15 Nov 2026, morning (Asia/Colombo).
 - Eleven playable stories: Sojourner, Viking, InSight, ALSEP, Apollo 11 EASEP, Pioneer, and new
   Spirit and Opportunity, Phoenix, Ingenuity, Apollo 15 LRV and Surveyor 3 (all three languages,
   English voices, every fact from the challenge pages; branch feature/remaining-stories).
+- UX pass over every screen (desktop and phone, English, Sinhala, Tamil): a language picker and a
+  sound switch on Home, the destination choice, the explorers, the story player and Anatomy (a
+  language change inside a story keeps the child's place); hologram panel no longer overlaps
+  itself; tapping an explorer on a phone first opens its panel; the explorers fit a phone screen;
+  every patch on the shelf names its machine; chat closes with Escape or a tap outside; no cloud
+  blobs in the Home sky; the title no longer runs into the rocket.
 - Sound design: WebAudio mix with a compressor, separate effects and ambience buses; rocket roar
   that follows the camera shake at take-off and landing, ignition, rotor, wind and world ambience
   (Earth, space, Moon, Mars); voices duck the ambience.

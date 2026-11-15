@@ -27,6 +27,8 @@ import anatomy from '../data/anatomy.json';
 import { button, el, link } from '../dom';
 import { useEpisode, t } from '../engine/i18n';
 import { NASA_MODELS, nasaModel, type NasaModel } from '../journey/nasaModels';
+import { go } from '../engine/router';
+import { langSelect } from './chrome';
 
 interface Part {
   id: string;
@@ -88,7 +90,12 @@ export function anatomyPage(root: HTMLElement, key: string): () => void {
   const stage = el('div', 'anatomy-stage', undefined, page);
   const pins = el('div', 'anatomy-pins', undefined, stage);
   const panel = el('aside', 'anatomy-panel', undefined, page);
-  button('mini anatomy-back', t('ui.parts.back'), () => history.back(), panel);
+  const bar = el('nav', 'anatomy-bar', undefined, panel);
+  bar.setAttribute('aria-label', t('ui.menu'));
+  // opened from a link inside the app: back returns there; opened directly: back goes Home
+  button('chip', `← ${t('ui.parts.back')}`, () => (history.length > 1 ? history.back() : go('#home')), bar);
+  link('chip', t('ui.home'), '#home', bar);
+  langSelect(bar, 'chip');
   el('h1', 'anatomy-title', model.title, panel);
   el('p', 'anatomy-hint', t('ui.parts.hint'), panel);
   const list = el('ol', 'anatomy-list', undefined, panel);

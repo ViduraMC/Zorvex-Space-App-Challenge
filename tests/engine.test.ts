@@ -92,3 +92,16 @@ test('journey: the full path reaches the story, and coming back lands on the exp
   j.resume();
   assert.equal(j.get().phase, 'EXPLORERS');
 });
+
+test('journey: reopening the screen (a language change) keeps the destination choice, a cutscene restarts at Home', () => {
+  const j = createJourney();
+  j.start();
+  j.finish('HOME_WALK');
+  j.finish('TAKEOFF');
+  j.resume();
+  assert.equal(j.get().phase, 'DESTINATION');
+  const k = createJourney();
+  k.start();
+  k.resume();
+  assert.equal(k.get().phase, 'HOME');
+});

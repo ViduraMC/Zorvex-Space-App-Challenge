@@ -45,10 +45,11 @@ const STARTERS: { key: string; words: string }[] = [
 ];
 
 /** Opens the panel over `host` for one story. */
-export function openAsk(host: HTMLElement, episodeId: string): void {
+/** `as` names the machine when one story covers several (Opportunity shares Spirit's story). */
+export function openAsk(host: HTMLElement, episodeId: string, as?: string): void {
   const facts = factsOf(episodeId);
   const t = (key: string, vars?: Record<string, string | number>): string => tEp(episodeId, key, vars);
-  const name = t('speaker.machine') === 'speaker.machine' ? t('machine') : t('speaker.machine');
+  const name = as ?? (t('speaker.machine') === 'speaker.machine' ? t('machine') : t('speaker.machine'));
   const overlay = el('div', 'overlay ask', undefined, host);
   overlay.setAttribute('role', 'dialog');
   overlay.setAttribute('aria-label', t('ui.ask.title', { name }));
@@ -97,6 +98,21 @@ export function openAsk(host: HTMLElement, episodeId: string): void {
     void answer(q, q);
   });
   el('p', 'ask-note', t('ui.ask.note'), box);
-  button('btn alt', t('ui.close'), () => overlay.remove(), box);
+  // Escape or a tap outside the box closes it, and focus returns where it was
+  const opener = document.activeElement as HTMLElement | null;
+  const close = (): void => {
+    overlay.remove();
+    document.removeEventListener('keydown', onKey);
+    opener?.focus();
+  };
+  const onKey = (e: KeyboardEvent): void => {
+    if (e.key === 'Escape') close();
+  };
+  document.addEventListener('keydown', onKey);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) close();
+  });
+  overlay.setAttribute('aria-modal', 'true');
+  button('btn alt', t('ui.close'), close, box);
   input.focus();
 }
