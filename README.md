@@ -42,8 +42,11 @@ Node 22.18 or newer. `npm run build` makes the static site in `dist/`.
 | Apollo 11 descent stage | Moon | Playable (EASEP, four acts) | Haritha; fixed by Vidura |
 | Apollo 12 ALSEP | Moon | Playable (9 pages: launch, instruments, moonquake, the long watch) | Kaushal; fixed by Vidura |
 | Pioneer 10 and 11 | Deep space (from the shelf) | Playable (9 pages) | Bimsara, Yasassri; fixed by Vidura |
-| Spirit, Opportunity, Phoenix, Ingenuity | Mars | Placeholder page | [TBD] |
-| Apollo 15 LRV, Surveyor 3 | Moon | Placeholder page | [TBD] |
+| Spirit and Opportunity | Mars | Playable (6 pages: the twins, Comanche and Home Plate, blueberries, dust storms, drive) | Vidura |
+| Phoenix | Mars | Playable (6 pages: landing, dig for ice, the lab, the long winter) | Vidura |
+| Ingenuity | Mars | Playable (6 pages: drop-off, first night, first flight, 72 flights) | Vidura |
+| Apollo 15 Lunar Roving Vehicle | Moon | Playable (6 pages: unfold, drive at Hadley, samples, hammer and feather) | Vidura |
+| Surveyor 3 | Moon | Playable (6 pages: bouncy landing, first pictures, soil tests, Apollo 12 visit) | Vidura |
 
 ## For the team
 

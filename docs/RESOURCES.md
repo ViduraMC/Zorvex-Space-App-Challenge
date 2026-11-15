@@ -17,17 +17,17 @@ From the Resources tab of
 |---|---|---|
 | NSSDCA catalogue | <https://nssdc.gsfc.nasa.gov/> | Dates, sizes and status of the machines; most Sojourner facts. Pages used: Mars Pathfinder (`1996-068A`), Pathfinder Rover (`MESURPR`), Pathfinder project page, Pathfinder results and APXS results, Viking 2 Lander (`1975-083C`), Phoenix (`2007-034A`) |
 | Apollo Lunar Modules | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C> | Moon explorer: Apollo 11 descent stage |
-| Lunar Roving Vehicles | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C> | Moon explorer: Apollo 15 Lunar Roving Vehicle |
+| Lunar Roving Vehicles | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C> | Moon explorer and the Apollo 15 LRV story (all its facts) |
 | ALSEP science packages | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-099C> | Moon explorer: Apollo 12 ALSEP |
-| Surveyor landers | <https://science.nasa.gov/mission/surveyor-3/> | Moon explorer: Surveyor 3 |
+| Surveyor landers | <https://science.nasa.gov/mission/surveyor-3/> | Moon explorer and the Surveyor 3 story (all its facts) |
 | Sojourner rover | <https://science.nasa.gov/mission/mars-pathfinder/> | Mars explorer and the Sojourner story |
-| Spirit and Opportunity | <https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/> | Mars explorers: Spirit and Opportunity; Sojourner's "who came after" line |
+| Spirit and Opportunity | <https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/> | Mars explorers and the Spirit and Opportunity story; Sojourner's "who came after" line |
 | Viking 1 and 2 landers | <https://science.nasa.gov/mission/viking-1/> | Mars explorers: Viking 1 and Viking 2 |
 | Phoenix and InSight landers | <https://science.nasa.gov/mission/insight/> | Mars explorer and the InSight story (also its page <https://science.nasa.gov/mission/insight/science-instruments/>) |
 | Dawn | <https://science.nasa.gov/mission/dawn/> | Not used yet (deep space) |
 | NEAR Shoemaker | <https://science.nasa.gov/mission/near-shoemaker/> | Not used yet (deep space) |
 | Pioneer 10 and 11 | <https://science.nasa.gov/mission/pioneer-10/> | The Pioneer story (also its sister page <https://science.nasa.gov/mission/pioneer-11/>) |
-| Ingenuity helicopter | <https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/> | Mars explorer: Ingenuity; Sojourner's "who came after" line |
+| Ingenuity helicopter | <https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/> | Mars explorer and the Ingenuity story (all its facts); Sojourner's "who came after" line |
 | Kepler space telescope | <https://science.nasa.gov/mission/kepler/> | Not used yet (deep space) |
 
 The explorer list follows these resources exactly: 8 on Mars, 4 on the Moon. Curiosity and
@@ -65,7 +65,10 @@ photo, so we show no Earth globe.
 | Viking Project and Astrobiology | <https://science.nasa.gov/astrobiology/missions/viking-project/> | The search for life, soil results, endings |
 | Viking: 50 Years on Mars | <https://science.nasa.gov/mission/viking/viking-50-years-on-mars/> | The first photo, the 19-minute signal |
 | NSSDCA Viking 1 Lander (challenge catalogue) | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C> | The descent sequence |
-| Spirit and Opportunity science instruments (part of the challenge page) | <https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-instruments/> | Anatomy 360°: rover tools |
+| Spirit and Opportunity science instruments (part of the challenge page) | <https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-instruments/> | Anatomy 360°: rover tools; Spirit and Opportunity story |
+| Spirit and Opportunity science highlights (part of the challenge page) | <https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/science-highlights/> | Spirit and Opportunity story: blueberries, Home Plate, water |
+| Phoenix (sibling of the challenge InSight page) | <https://science.nasa.gov/mission/phoenix/> | Phoenix story: landing, arm, ice, lab instruments, the end |
+| NSSDCA Phoenix Mars Lander (challenge catalogue) | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2007-034A> | Phoenix story: launch, site, mission length, last contact |
 | NSSDCA Apollo 11 Command and Service Module (challenge catalogue) | <https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059A> | Apollo 11 story: Columbia, launch, flight and return (brief: docs/stories/apollo-11.md) |
 | NSSDCA Apollo 11, 25th Anniversary (challenge catalogue) | <https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo11.html> | Apollo 11 story: surface photographs, flag, samples, timeline quotes |
 
