@@ -693,3 +693,48 @@ select.chip option {
 .holo-talk:focus-visible {
   background: rgba(79, 216, 255, 0.24);
 }
+
+/* the hologram's two secondary actions, side by side under Explore */
+.holo-more {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+.holo-btn {
+  display: grid;
+  gap: 2px;
+  align-content: center;
+  min-height: 60px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--holo);
+  background: rgba(79, 216, 255, 0.1);
+  color: #e9fbff;
+  text-align: center;
+  text-decoration: none;
+  font: inherit;
+  cursor: pointer;
+  box-shadow: 0 0 14px rgba(79, 216, 255, 0.25);
+  transition:
+    background 0.15s,
+    transform 0.15s;
+}
+.holo-btn b {
+  font-size: 15px;
+}
+.holo-btn small {
+  font-size: 12px;
+  color: rgba(233, 251, 255, 0.7);
+}
+.holo-btn:hover,
+.holo-btn:focus-visible {
+  background: rgba(79, 216, 255, 0.24);
+  transform: translateY(-1px);
+}
+/* a smaller site globe so the whole panel fits without scrolling on laptop screens */
+.holo .holo-globe {
+  width: min(130px, 16vh);
+}
+.holo .holo-route {
+  flex: 0 0 auto;
+}

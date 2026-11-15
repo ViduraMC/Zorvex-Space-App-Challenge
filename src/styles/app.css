@@ -491,10 +491,8 @@ html:lang(ta) * {
 }
 .ask-chips {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-  scrollbar-width: thin;
 }
 .ask-chips .chip {
   flex: none;

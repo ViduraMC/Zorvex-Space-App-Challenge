@@ -174,7 +174,14 @@ export function openAsk(host: HTMLElement, episodeId: string, as?: string): void
   if (history.length === 0) say({ role: 'it', text: t('ui.ask.hello', { name }) });
   else for (const turn of history) draw(turn, false);
 
-  for (const s of STARTERS) button('chip', t(s.key), () => void answer(s.words, t(s.key)), chips);
+  // each ready question disappears once asked, so the row only offers new ones
+  for (const s of STARTERS) {
+    const chip = button('chip', t(s.key), () => {
+      if (busy) return;
+      chip.remove();
+      void answer(s.words, t(s.key));
+    }, chips);
+  }
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const q = input.value.trim();

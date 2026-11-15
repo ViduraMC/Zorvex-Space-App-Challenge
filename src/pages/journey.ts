@@ -294,9 +294,19 @@ export const journeyPage: Page = (root) => {
     el('span', '', t(hasNasaModel(e.id) ? 'ui.holo.model' : 'ui.holo.standin'), sources);
     button('holo-explore', t('ui.holo.explore'), () => launch(e.id), holo);
     const parts = modelKeyOf(e.id);
-    if (parts && hasAnatomy(parts)) link('holo-parts', t('ui.parts.open'), `#parts-${parts}`, holo);
+    // two clear next steps beside Explore: see its parts in 3D, and talk to it
+    const more = el('div', 'holo-more', undefined, holo);
+    if (parts && hasAnatomy(parts)) {
+      const view = link('holo-btn', '', `#parts-${parts}`, more);
+      el('b', '', `⟳ ${t('ui.parts.btn')}`, view);
+      el('small', '', t('ui.parts.btnHint'), view);
+    }
     const story = episodeFor(e.id);
-    if (story) button('holo-talk', `💬 ${t('ui.ask.open', { name: e.name })}`, () => openAsk(shell, story.id, e.name), holo);
+    if (story) {
+      const talk = button('holo-btn', '', () => openAsk(shell, story.id, e.name), more);
+      el('b', '', `💬 ${t('ui.ask.open', { name: e.name })}`, talk);
+      el('small', '', t('ui.ask.btnHint'), talk);
+    }
     holo.classList.remove('in');
     void holo.offsetWidth; // restart the appear animation
     holo.classList.add('in');
