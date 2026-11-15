@@ -183,6 +183,7 @@ export function anatomyPage(root: HTMLElement, key: string): () => void {
       const label = t(`parts.${key}.${part.id}.name`);
       const pin = button('anatomy-pin', String(i + 1), () => select(i), pins);
       pin.setAttribute('aria-label', label);
+      pin.dataset.label = label; // shown beside the pin when it is chosen or pointed at
       const li = el('li', '', undefined, list);
       const item = button('anatomy-item', `${i + 1}. ${label}`, () => select(i), li);
       item.setAttribute('aria-pressed', 'false');

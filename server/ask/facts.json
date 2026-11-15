@@ -1,6 +1,7 @@
 {
  "alsep-apollo-12": {
   "name": "ALSEP",
+  "about": "Eight years of listening in the Ocean of Storms. What did a little science station hear on the Moon for eight years?",
   "facts": [
    {
     "id": "landing",
@@ -111,6 +112,7 @@
  },
  "apollo-11-descent-stage": {
   "name": "EASEP",
+  "about": "A quiet machine's first moments on the Moon. How did my work on the Moon begin?",
   "facts": [
    {
     "id": "stowed-instruments",
@@ -241,6 +243,7 @@
  },
  "ingenuity": {
   "name": "Ingenuity",
+  "about": "The first aircraft to fly on another planet. Can anything fly in air that thin?",
   "facts": [
    {
     "id": "ride",
@@ -306,6 +309,7 @@
  },
  "insight": {
   "name": "InSight",
+  "about": "The lander that listened to the heartbeat of Mars. How do you look inside a planet without moving an inch?",
   "facts": [
    {
     "id": "launch",
@@ -366,6 +370,7 @@
  },
  "lrv-apollo-15": {
   "name": "Lunar Rover",
+  "about": "The first car on the Moon. How do you drive a car on the Moon?",
   "facts": [
    {
     "id": "landing",
@@ -426,6 +431,7 @@
  },
  "mer": {
   "name": "Spirit",
+  "about": "The twin rovers that found Mars once had water. Was Mars ever wet? Two robot geologists went to find out.",
   "facts": [
    {
     "id": "twins",
@@ -511,6 +517,7 @@
  },
  "phoenix": {
   "name": "Phoenix",
+  "about": "The lander that touched ice in the Martian arctic. Is there water hiding under the soil of Mars?",
   "facts": [
    {
     "id": "launch",
@@ -596,6 +603,7 @@
  },
  "pioneer": {
   "name": "Pioneer 10",
+  "about": "The spacecraft that opened the way to the outer planets. Who flew past Jupiter first? And where are they now?",
   "facts": [
    {
     "id": "first-mission",
@@ -766,6 +774,7 @@
  },
  "sojourner": {
   "name": "Sojourner",
+  "about": "The little rover who went first. Mars, 1997. Who drove the first rover on Mars? And where is it now?",
   "facts": [
    {
     "id": "landing",
@@ -866,6 +875,7 @@
  },
  "surveyor-3": {
   "name": "Surveyor 3",
+  "about": "The robot that checked the Moon was safe for astronauts. Would a spacecraft with people sink into the Moon's dust?",
   "facts": [
    {
     "id": "launch",
@@ -926,6 +936,7 @@
  },
  "viking": {
   "name": "Viking 1",
+  "about": "Two explorers, four machines, one question: could Mars support life? Two explorers. Four machines. One question: could Mars support life?",
   "facts": [
    {
     "id": "pairs",

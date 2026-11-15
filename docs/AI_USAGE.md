@@ -20,6 +20,7 @@ Space Apps requires teams to disclose how AI was used. Add a row for everything 
 | 14 Nov 2026 | Vidura | Claude Code (Anthropic) | Merged the Apollo 11 EASEP episode by Haritha: re-checked its facts on the three NSSDCA pages, split long narration into short beats, added NASA's Lunar Module and Saturn V models and voices | Sources linked in the app; a person must re-read them before submission |
 | 15 Nov 2026 | Vidura | Claude Code (Anthropic) | Built the Spirit and Opportunity, Phoenix, Ingenuity, Apollo 15 LRV and Surveyor 3 stories (facts read on the challenge pages, scenes, games, English text, draft Sinhala and Tamil text, voices) and the mixed sound design (rocket, rotor, ignition, wind and world ambience) | Sources linked in the app; a person must re-read them. **Sinhala and Tamil need speaker review** |
 | 15 Nov 2026 | Vidura | Claude Code (Anthropic) | UX pass over every screen on desktop and phone: language and sound controls everywhere, layout and touch fixes | Screens checked in a test browser; a person should try it on a real phone |
+| 15 Nov 2026 | Vidura | Claude Code (Anthropic) | Chat panel with memory and Gemini answers from the facts, interactive first screen (NASA star map, drag to look, our own synthesised theme music), Home navigation, child-friendly Sources page, layout sweep of every story | Checked in a test browser on desktop and phone sizes |
 
 ## AI-generated content in the product
 

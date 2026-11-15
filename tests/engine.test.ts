@@ -105,3 +105,22 @@ test('journey: reopening the screen (a language change) keeps the destination ch
   k.resume();
   assert.equal(k.get().phase, 'HOME');
 });
+
+test('journey: Home is reachable from the destination choice and the explorers, never mid-cutscene', () => {
+  const j = createJourney();
+  j.start();
+  j.home();
+  assert.equal(j.get().phase, 'HOME_WALK');
+  j.finish('HOME_WALK');
+  j.finish('TAKEOFF');
+  j.home();
+  assert.deepEqual(j.get(), { phase: 'HOME', destination: null, hoveredId: null, selectedId: null });
+  j.start();
+  j.finish('HOME_WALK');
+  j.finish('TAKEOFF');
+  j.choose('mars');
+  j.finish('LANDING');
+  j.home();
+  assert.equal(j.get().phase, 'HOME');
+  assert.equal(j.get().destination, null);
+});

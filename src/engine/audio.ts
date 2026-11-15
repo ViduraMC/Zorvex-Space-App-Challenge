@@ -78,6 +78,21 @@ const AMBIENCE: Record<Ambience, { wind: number; cutoff: number; pad: number }> 
 };
 /** How far the background (wind, engines) dips while a voice line plays. */
 const DUCK = 0.45;
+/**
+ * The opening theme: an uplifting D major loop (D, A, B minor, G: hopeful, like setting out),
+ * bar length (s), loudness, and how it builds: pad first, then the arpeggio, the pulse, the melody.
+ * Frequencies in Hz: chord tones, plus the bass note and the melody note for each bar.
+ */
+const MUSIC_BAR_S = 4;
+const MUSIC_VOLUME = 0.6;
+const MUSIC_CHORDS: { pad: number[]; bass: number; arp: number[]; lead: number }[] = [
+  { pad: [146.83, 220, 293.66, 369.99], bass: 73.42, arp: [587.33, 739.99, 880, 1174.66], lead: 1479.98 },
+  { pad: [110, 164.81, 277.18, 329.63], bass: 55, arp: [554.37, 659.25, 880, 1108.73], lead: 1318.51 },
+  { pad: [123.47, 185, 246.94, 293.66], bass: 61.74, arp: [493.88, 587.33, 739.99, 987.77], lead: 1174.66 },
+  { pad: [98, 146.83, 246.94, 293.66], bass: 49, arp: [493.88, 587.33, 783.99, 987.77], lead: 1479.98 },
+];
+/** Bars before each layer joins in. */
+const MUSIC_BUILD = { arp: 1, pulse: 3, lead: 5 };
 
 /** A looping layer whose loudness follows a 0..1 level (rocket roar, helicopter rotors, motor). */
 interface Loop {
@@ -100,6 +115,11 @@ class AudioEngine {
   #rotor: Loop | null = null;
   #riser: { osc: OscillatorNode; gain: GainNode } | null = null;
   #clip: HTMLAudioElement | null = null;
+  #music: { gain: GainNode; timer: number; step: number } | null = null;
+  /** A long echo for the theme's plucks and melody (space feels big). */
+  #echo: DelayNode | null = null;
+  /** The music level asked for before the first tap made audio possible. */
+  #musicWanted = 0;
 
   get soundOn(): boolean {
     return progress.get().sound;
@@ -134,6 +154,7 @@ class AudioEngine {
       this.#bed = bed;
       this.#noise = makeNoise(ctx);
       this.#startBed(ctx, bed);
+      if (this.#musicWanted > 0) this.music(this.#musicWanted);
     } catch {
       this.#ctx = null; // no audio device: the game stays fully playable in silence
     }
@@ -292,6 +313,127 @@ class AudioEngine {
     const ctx = this.#ctx;
     if (!ctx || !loop) return;
     loop.gain.gain.setTargetAtTime(Math.max(0, Math.min(1, level)) * loop.max, ctx.currentTime, smooth);
+  }
+
+  /**
+   * Our own slow theme for the opening screens (0 = off, 1 = full): a church-organ swell over four
+   * chords and a soft clock tick, in the spirit of big space films. Synthesised here, no recording.
+   */
+  music(level: number): void {
+    this.#musicWanted = level;
+    const ctx = this.#ctx;
+    if (!ctx || !this.#bed) return;
+    if (!this.#music) {
+      if (level <= 0) return;
+      const gain = ctx.createGain();
+      gain.gain.value = 0;
+      gain.connect(this.#bed);
+      const echo = ctx.createDelay(1);
+      echo.delayTime.value = 0.375;
+      const feedback = ctx.createGain();
+      feedback.gain.value = 0.42;
+      echo.connect(feedback);
+      feedback.connect(echo);
+      echo.connect(gain);
+      this.#echo = echo;
+      const state = { gain, timer: 0, step: 0 };
+      const play = (): void => this.#musicBar(ctx, gain, state.step++);
+      play();
+      state.timer = window.setInterval(play, MUSIC_BAR_S * 1000);
+      this.#music = state;
+    }
+    const music = this.#music;
+    music.gain.gain.setTargetAtTime(level * MUSIC_VOLUME, ctx.currentTime, 1.2);
+    if (level <= 0) {
+      // let it fade, then stop scheduling bars
+      window.setTimeout(() => {
+        if (this.#musicWanted > 0 || this.#music !== music) return;
+        window.clearInterval(music.timer);
+        music.gain.disconnect();
+        this.#echo = null;
+        this.#music = null;
+      }, 5000);
+    }
+  }
+
+  /** One bar of the theme: a swelling pad, a bass note, a sparkling arpeggio, a heartbeat pulse and a soaring melody. */
+  #musicBar(ctx: AudioContext, out: GainNode, step: number): void {
+    const t = ctx.currentTime + 0.05;
+    const bar = MUSIC_CHORDS[step % MUSIC_CHORDS.length];
+    const voice = (freq: number, type: OscillatorType, start: number, attack: number, hold: number, release: number, vol: number, dest: AudioNode): void => {
+      const osc = ctx.createOscillator();
+      osc.type = type;
+      osc.frequency.value = freq;
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0.0001, start);
+      g.gain.linearRampToValueAtTime(vol, start + attack);
+      g.gain.setTargetAtTime(0.0001, start + attack + hold, release / 3);
+      osc.connect(g);
+      g.connect(dest);
+      osc.start(start);
+      osc.stop(start + attack + hold + release + 0.1);
+    };
+    // warm pad: soft saws through a low-pass, swelling over the bar
+    const padFilter = ctx.createBiquadFilter();
+    padFilter.type = 'lowpass';
+    padFilter.frequency.setValueAtTime(700, t);
+    padFilter.frequency.linearRampToValueAtTime(1600, t + MUSIC_BAR_S * 0.6);
+    padFilter.connect(out);
+    for (const f of bar.pad) {
+      voice(f, 'sawtooth', t, MUSIC_BAR_S * 0.4, MUSIC_BAR_S * 0.45, MUSIC_BAR_S * 0.6, 0.035, padFilter);
+      voice(f * 1.003, 'triangle', t, MUSIC_BAR_S * 0.4, MUSIC_BAR_S * 0.45, MUSIC_BAR_S * 0.6, 0.05, padFilter);
+    }
+    voice(bar.bass, 'sine', t, 0.08, MUSIC_BAR_S * 0.7, 0.8, 0.22, out);
+    // the arpeggio: eight bright plucks per bar, echoing into the night
+    if (step >= MUSIC_BUILD.arp && this.#echo) {
+      const echo = this.#echo;
+      for (let k = 0; k < 8; k++) {
+        const f = bar.arp[[0, 1, 2, 3, 2, 1, 2, 3][k]];
+        const at = t + (k * MUSIC_BAR_S) / 8;
+        voice(f, 'triangle', at, 0.01, 0.05, 0.45, 0.05, out);
+        voice(f, 'triangle', at, 0.01, 0.05, 0.45, 0.03, echo);
+      }
+    }
+    // a heartbeat pulse on beats one and three
+    if (step >= MUSIC_BUILD.pulse) {
+      for (const beat of [0, 2]) {
+        const at = t + (beat * MUSIC_BAR_S) / 4;
+        const osc = ctx.createOscillator();
+        osc.frequency.setValueAtTime(90, at);
+        osc.frequency.exponentialRampToValueAtTime(42, at + 0.3);
+        const g = ctx.createGain();
+        g.gain.setValueAtTime(0.0001, at);
+        g.gain.linearRampToValueAtTime(0.28, at + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.0001, at + 0.45);
+        osc.connect(g);
+        g.connect(out);
+        osc.start(at);
+        osc.stop(at + 0.5);
+      }
+    }
+    // the soaring melody: one long note per bar, gently vibrato, like a horn far away
+    if (step >= MUSIC_BUILD.lead && this.#echo) {
+      const osc = ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = bar.lead / 2;
+      const lfo = ctx.createOscillator();
+      lfo.frequency.value = 5;
+      const depth = ctx.createGain();
+      depth.gain.value = 3;
+      lfo.connect(depth);
+      depth.connect(osc.frequency);
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.linearRampToValueAtTime(0.07, t + 1.2);
+      g.gain.setTargetAtTime(0.0001, t + MUSIC_BAR_S * 0.8, 0.5);
+      osc.connect(g);
+      g.connect(out);
+      g.connect(this.#echo);
+      osc.start(t);
+      lfo.start(t);
+      osc.stop(t + MUSIC_BAR_S + 1.5);
+      lfo.stop(t + MUSIC_BAR_S + 1.5);
+    }
   }
 
   /** Rocket engines, 0 (off) to 1 (full roar). It glides, so calling it every frame is fine. */

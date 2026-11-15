@@ -76,6 +76,7 @@ photo, so we show no Earth globe.
 
 | Image | Link | Where |
 |---|---|---|
+| Deep Star Maps 2020, NASA/Goddard SVS (Gaia DR2: ESA/Gaia/DPAC) | <https://svs.gsfc.nasa.gov/4851> | The 360° night sky and Milky Way on the first screen |
 | Blue Marble, NASA's Scientific Visualization Studio | <https://svs.gsfc.nasa.gov/2915> | Earth globe in the Viking story |
 | First image from the surface of Mars (Viking 1), NASA/JPL | <https://science.nasa.gov/mission/viking/viking-50-years-on-mars/> | Viking first-photo moment |
 | Viking orbiter drawing and spacecraft photo, NASA | <https://science.nasa.gov/mars/resources/viking-mission-resources/> | Reference for our 3D orbiter |

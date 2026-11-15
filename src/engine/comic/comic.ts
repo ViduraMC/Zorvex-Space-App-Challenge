@@ -14,6 +14,10 @@ gsap.registerPlugin(SplitText);
 
 const REDUCED_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const SFX_LIFETIME_MS = 1700;
+/** Bubble margins (px): below the top controls, off the screen edges, above the Next button. */
+const BUBBLE_MIN_TOP = 74;
+const BUBBLE_EDGE = 16;
+const BUBBLE_BOTTOM_ROOM = 124; // clears the Next button and the floating Talk button
 
 function div(className: string, parent: HTMLElement): HTMLDivElement {
   const el = document.createElement('div');
@@ -151,22 +155,50 @@ export class Comic {
     this.#cap.hidden = true;
   }
 
-  /** Position the bubble above a screen point (or below it when there is no room). */
+  /**
+   * Position the bubble above a screen point (or below it when there is no room). It always stays
+   * fully on screen, clear of the top controls, the caption and the Next button.
+   */
+  /** Where the top controls end (px); the page sets it, since they wrap onto two rows on phones. */
+  topInset = BUBBLE_MIN_TOP;
+
   placeBubble(anchorX: number, anchorY: number, underY: number): void {
     if (!this.bubbleVisible) return;
     const w = window.innerWidth;
     const h = window.innerHeight;
     const bw = this.#bub.offsetWidth;
     const bh = this.#bub.offsetHeight;
-    let minTop = 74;
-    if (!this.#cap.hidden && w <= CONFIG.wideLayoutPx) minTop = this.#cap.getBoundingClientRect().bottom + 12;
-    const left = clamp(anchorX - bw * 0.42, 24, Math.max(24, w - bw - 24));
+    // the machine is off screen or behind the camera: speak from the lower middle instead
+    if (!Number.isFinite(anchorX) || !Number.isFinite(anchorY) || anchorX < 0 || anchorX > w || anchorY < 0 || anchorY > h) {
+      anchorX = w * 0.45;
+      anchorY = h * 0.62;
+      underY = h * 0.62;
+    }
+    let minTop = Math.max(BUBBLE_MIN_TOP, this.topInset);
+    if (!this.#cap.hidden) {
+      const cap = this.#cap.getBoundingClientRect();
+      const left0 = clamp(anchorX - bw * 0.42, BUBBLE_EDGE, Math.max(BUBBLE_EDGE, w - bw - BUBBLE_EDGE));
+      const overlapsCaption = left0 < cap.right && left0 + bw > cap.left;
+      if (w <= CONFIG.wideLayoutPx || overlapsCaption) minTop = Math.max(minTop, cap.bottom + 12);
+    }
+    const maxTop = Math.max(minTop, h - bh - BUBBLE_BOTTOM_ROOM);
+    const left = clamp(anchorX - bw * 0.42, BUBBLE_EDGE, Math.max(BUBBLE_EDGE, w - bw - BUBBLE_EDGE));
     let top = anchorY - bh - 34;
     let below = false;
     if (top < minTop) {
-      top = Math.min(underY + 40, h - bh - 96);
+      top = Math.min(underY + 40, maxTop);
       below = top > anchorY;
       if (!below) top = minTop;
+    }
+    top = clamp(top, minTop, maxTop);
+    // story panels marked data-bubble-avoid (an info card, say) are never covered: go above or below
+    for (const node of document.querySelectorAll<HTMLElement>('[data-bubble-avoid]')) {
+      const r = node.getBoundingClientRect();
+      const overlaps = left < r.right && left + bw > r.left && top < r.bottom && top + bh > r.top;
+      if (!overlaps || r.width === 0) continue;
+      if (r.top - bh - 12 >= minTop) top = r.top - bh - 12;
+      else if (r.bottom + 12 <= maxTop) top = r.bottom + 12;
+      below = top > anchorY;
     }
     this.#bub.style.left = `${left}px`;
     this.#bub.style.top = `${top}px`;

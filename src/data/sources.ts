@@ -71,6 +71,11 @@ export const STORY_SOURCES: Source[] = [
 /** Images and maps from other NASA sites (allowed for visuals; no facts are taken from them). */
 export const OTHER_SOURCES: Source[] = [
   {
+    label: 'Deep Star Maps 2020, NASA/Goddard Space Flight Center Scientific Visualization Studio (Gaia DR2: ESA/Gaia/DPAC)',
+    url: 'https://svs.gsfc.nasa.gov/4851',
+    usedFor: 'The real 360° night sky and Milky Way above the launch site on the first screen',
+  },
+  {
     label: "Blue Marble: Land Surface, Ocean Color and Sea Ice, NASA's Scientific Visualization Studio",
     url: 'https://svs.gsfc.nasa.gov/2915',
     usedFor: 'The Earth globe in the Viking story and below the rocket after take-off',

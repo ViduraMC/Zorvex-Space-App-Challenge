@@ -14,6 +14,7 @@ import {
   CircleGeometry,
   Color,
   CylinderGeometry,
+  DoubleSide,
   Group,
   LatheGeometry,
   Mesh,
@@ -21,6 +22,8 @@ import {
   MeshStandardMaterial,
   PlaneGeometry,
   PointLight,
+  RepeatWrapping,
+  SpotLight,
   Points,
   ShaderMaterial,
   SphereGeometry,
@@ -36,6 +39,7 @@ import moonBump from '../assets/planets/moon_bump.jpg';
 import moonMap from '../assets/planets/moon.jpg';
 import { part, tube, type MachineMaterials } from '../engine/models';
 import { fbm, smooth } from '../engine/noise';
+import { canvasTexture, speckle } from '../engine/textures';
 import type { ExplorerType } from './explorers';
 import type { Destination } from './store';
 
@@ -163,18 +167,103 @@ export function createNightSky(): { mesh: Mesh; top: Color; bottom: Color } {
   return { mesh, top, bottom };
 }
 
-/** A dark desert with gentle dunes, flat where the rocket stands. */
-export function createDesert(): Mesh {
+/** Ground near the launch site and far away: the far colour melts into the dusk at the horizon. */
+const GROUND_NEAR = new Color(0x5a4a3a);
+const GROUND_FAR = new Color(0x141c30);
+
+/**
+ * A night desert with gentle dunes, flat where the rocket stands. Sandy speckle up close, and it
+ * fades into the blue of the horizon with distance, so the ground meets the sky softly.
+ */
+export function createDesert(anisotropy = 1): Mesh {
   const geo = new PlaneGeometry(1600, 1600, 160, 160);
   geo.rotateX(-Math.PI / 2);
   const p = geo.attributes.position;
+  const colors = new Float32Array(p.count * 3);
+  const c = new Color();
   for (let i = 0; i < p.count; i++) {
     const x = p.getX(i);
     const z = p.getZ(i);
-    p.setY(i, (fbm(x * 0.02 + 5, z * 0.02 + 9) - 0.5) * 7 * smooth(8, 70, Math.hypot(x, z)));
+    const d = Math.hypot(x, z);
+    p.setY(i, (fbm(x * 0.02 + 5, z * 0.02 + 9) - 0.5) * 7 * smooth(8, 70, d));
+    c.copy(GROUND_NEAR).lerp(GROUND_FAR, smooth(12, 260, d));
+    colors.set([c.r, c.g, c.b], i * 3);
   }
+  geo.setAttribute('color', new BufferAttribute(colors, 3));
   geo.computeVertexNormals();
-  return new Mesh(geo, new MeshStandardMaterial({ color: 0x3a3028, roughness: 1, metalness: 0 }));
+  const map = canvasTexture(512, speckle('#b9a58c', [70, 55, 40], 31), true, anisotropy);
+  map.wrapS = map.wrapT = RepeatWrapping;
+  map.repeat.set(160, 160);
+  return new Mesh(geo, new MeshStandardMaterial({ map, vertexColors: true, roughness: 1, metalness: 0 }));
+}
+
+/** Far mountains all around: a dark ridge line that breaks the flat horizon. */
+function createRidge(): Mesh {
+  const SEGMENTS = 256;
+  const RADIUS = 560;
+  const positions: number[] = [];
+  for (let i = 0; i <= SEGMENTS; i++) {
+    const a = (i / SEGMENTS) * Math.PI * 2;
+    const h = 10 + fbm(Math.cos(a) * 3 + 11, Math.sin(a) * 3 + 4) * 70;
+    const x = Math.cos(a) * RADIUS;
+    const z = Math.sin(a) * RADIUS;
+    positions.push(x, -2, z, x, h, z);
+  }
+  const index: number[] = [];
+  for (let i = 0; i < SEGMENTS; i++) {
+    const k = i * 2;
+    index.push(k, k + 1, k + 2, k + 1, k + 3, k + 2);
+  }
+  const geo = new BufferGeometry();
+  geo.setAttribute('position', new BufferAttribute(new Float32Array(positions), 3));
+  geo.setIndex(index);
+  return new Mesh(geo, new MeshBasicMaterial({ color: 0x0a0f1d, side: DoubleSide, fog: false }));
+}
+
+/**
+ * The launch site at night: a concrete pad under the rocket, four floodlight towers aimed at it,
+ * red warning beacons, and mountains far away. Returns the group and the beacons (they blink).
+ */
+export function createLaunchSite(rocketX: number): { group: Group; beacons: Mesh[] } {
+  const group = new Group();
+  group.add(createRidge());
+  const concrete = new MeshStandardMaterial({ color: 0x5e5a55, roughness: 0.95 });
+  const pad = new Mesh(new CylinderGeometry(2.6, 2.8, 0.14, 8), concrete);
+  pad.position.set(rocketX, 0.02, 0);
+  group.add(pad);
+  const stripe = new Mesh(new TorusGeometry(2.62, 0.022, 4, 8), new MeshBasicMaterial({ color: 0xffc23d }));
+  stripe.rotation.x = Math.PI / 2;
+  stripe.position.set(rocketX, 0.1, 0);
+  group.add(stripe);
+  const steel = new MeshStandardMaterial({ color: 0x3c4048, roughness: 0.6, metalness: 0.5 });
+  const lampMat = new MeshBasicMaterial({ color: 0xfff4d6 });
+  const beaconMat = new MeshBasicMaterial({ color: 0xff3b2f });
+  const beacons: Mesh[] = [];
+  for (const [dx, dz] of [
+    [-9, -9],
+    [9, -9],
+    [-10, 7],
+    [10, 6],
+  ]) {
+    const x = rocketX + dx;
+    const pole = new Mesh(new CylinderGeometry(0.07, 0.1, 5, 6), steel);
+    pole.position.set(x, 2.5, dz);
+    group.add(pole);
+    const lamp = new Mesh(new BoxGeometry(0.5, 0.3, 0.2), lampMat);
+    lamp.position.set(x, 5, dz);
+    lamp.lookAt(rocketX, 3, 0);
+    group.add(lamp);
+    // a floodlight washing the rocket in white, as at a real night launch
+    const flood = new SpotLight(0xfff1d8, 60, 40, 0.3, 0.6, 1.4);
+    flood.position.set(x, 5, dz);
+    flood.target.position.set(rocketX, 3, 0);
+    group.add(flood, flood.target);
+    const beacon = new Mesh(new SphereGeometry(0.08, 8, 6), beaconMat);
+    beacon.position.set(x, 5.25, dz);
+    group.add(beacon);
+    beacons.push(beacon);
+  }
+  return { group, beacons };
 }
 
 export interface Rocket {

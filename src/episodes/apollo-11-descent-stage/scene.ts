@@ -148,6 +148,7 @@ function showPartCard(ctx: EpisodeContext, scope: Scope, id: string): void {
   const entry = APOLLO_PARTS.find((partEntry) => partEntry.id === id);
   if (!entry) throw new Error(`Unknown Apollo story part "${id}".`);
   const card = scope.el('section', 'apollo-part-card', shell);
+  card.dataset.bubbleAvoid = ''; // the speech bubble moves out of the card's way
   card.setAttribute('aria-label', ctx.t(entry.name));
   scope.el('p', 'apollo-part-card__eyebrow', card, ctx.t('p2.memory'));
   scope.el('h2', 'apollo-part-card__title', card, ctx.t(entry.name));

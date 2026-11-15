@@ -38,9 +38,10 @@
   pointer-events: none;
 }
 .j-title h1 {
-  font-size: clamp(30px, 5.6vw, 76px);
-  letter-spacing: 0.22em;
-  margin-right: -0.22em;
+  font-size: clamp(28px, 5vw, 68px);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  margin-right: -0.1em;
   line-height: 1.12;
   line-height: 1;
 }
@@ -78,7 +79,7 @@
   font-family: var(--font-title);
   font-weight: 700;
   font-size: var(--text-l);
-  letter-spacing: 0.3em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--space);
   background: var(--text);
@@ -212,7 +213,7 @@
   font-family: var(--font-title);
   font-weight: 700;
   font-size: var(--text-l);
-  letter-spacing: 0.3em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text);
   background: transparent;
@@ -420,7 +421,7 @@
   font-family: var(--font-title);
   font-weight: 700;
   font-size: var(--text-l);
-  letter-spacing: 0.3em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #04121a;
   background: var(--holo);
@@ -677,4 +678,63 @@ select.chip option {
     flex-basis: 100%;
     justify-content: flex-end;
   }
+}
+.holo-talk {
+  min-height: 46px;
+  border-radius: 999px;
+  border: 1px solid var(--holo);
+  background: rgba(79, 216, 255, 0.12);
+  color: #e9fbff;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: 0 0 14px rgba(79, 216, 255, 0.3);
+}
+.holo-talk:hover,
+.holo-talk:focus-visible {
+  background: rgba(79, 216, 255, 0.24);
+}
+
+/* the hologram's two secondary actions, side by side under Explore */
+.holo-more {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+.holo-btn {
+  display: grid;
+  gap: 2px;
+  align-content: center;
+  min-height: 60px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--holo);
+  background: rgba(79, 216, 255, 0.1);
+  color: #e9fbff;
+  text-align: center;
+  text-decoration: none;
+  font: inherit;
+  cursor: pointer;
+  box-shadow: 0 0 14px rgba(79, 216, 255, 0.25);
+  transition:
+    background 0.15s,
+    transform 0.15s;
+}
+.holo-btn b {
+  font-size: 15px;
+}
+.holo-btn small {
+  font-size: 12px;
+  color: rgba(233, 251, 255, 0.7);
+}
+.holo-btn:hover,
+.holo-btn:focus-visible {
+  background: rgba(79, 216, 255, 0.24);
+  transform: translateY(-1px);
+}
+/* a smaller site globe so the whole panel fits without scrolling on laptop screens */
+.holo .holo-globe {
+  width: min(130px, 16vh);
+}
+.holo .holo-route {
+  flex: 0 0 auto;
 }

@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const episodes = join(root, 'src', 'episodes');
-const out: Record<string, { name: string; facts: { id: string; text: string; source: string }[] }> = {};
+const out: Record<string, { name: string; about: string; facts: { id: string; text: string; source: string }[] }> = {};
 
 for (const id of readdirSync(episodes).filter((name) => !name.startsWith('_'))) {
   const factsPath = join(episodes, id, 'facts.json');
@@ -18,6 +18,8 @@ for (const id of readdirSync(episodes).filter((name) => !name.startsWith('_'))) 
   const en = JSON.parse(readFileSync(join(episodes, id, 'i18n', 'en.json'), 'utf8')) as Record<string, string>;
   out[id] = {
     name: en['speaker.machine'] ?? en.machine ?? id,
+    // who the machine is, in the story's own words (its tagline and its mystery question)
+    about: [en.tagline, en.mystery].filter(Boolean).join(' '),
     facts: facts.map(({ id: factId, text, source }) => ({ id: factId, text, source })),
   };
 }
