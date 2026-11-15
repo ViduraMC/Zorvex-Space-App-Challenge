@@ -31,6 +31,9 @@ Updated: Sunday 15 Nov 2026, morning (Asia/Colombo).
 - Opening film, final (15 Nov, evening): the waiting clip is a new version without the NASA patch
   (same encode: 1280x720 H.264, GOP 24, faststart, no audio), and a small "AI-generated film" label
   (English, Sinhala, Tamil) shows in the corner while any clip plays, as the Space Apps rules ask.
+- Submission documents (15 Nov, night): project overview, NASA fact register (207 facts, 28 NASA
+  pages), technical architecture, AI-use disclosure and screenshots, as PDFs for the Space Apps form;
+  the AI-use log now credits each teammate (Vidura, Yasassri, Kaushal, Haritha) by git authorship.
 - Round 2 (15 Nov, midday): chat is a side panel with memory (last 6 turns), a floating
   "Talk to …" button in every story, Gemini answers in the machine's voice from the facts only;
   first screen has the real NASA star map all around (drag to look), the Moon, a tappable rocket and
