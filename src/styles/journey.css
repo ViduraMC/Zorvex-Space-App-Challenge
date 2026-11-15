@@ -738,3 +738,45 @@ select.chip option {
 .holo .holo-route {
   flex: 0 0 auto;
 }
+
+/* ---- the opening film: full screen behind the title and buttons ---- */
+.j-film,
+.j-scrim {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  pointer-events: none;
+}
+.j-film {
+  object-fit: cover;
+  background: #000;
+}
+/* darkens the top-left a little so the title always reads, whatever the frame shows */
+.j-scrim {
+  background:
+    linear-gradient(100deg, rgba(3, 5, 12, 0.72) 0%, rgba(3, 5, 12, 0.35) 38%, transparent 60%),
+    linear-gradient(0deg, rgba(3, 5, 12, 0.55) 0%, transparent 28%);
+}
+.filming .j-film,
+.filming .j-scrim {
+  display: block;
+}
+/* on a tall screen the title sits centred at the top, so the shade comes from the top */
+@media (max-aspect-ratio: 1/1) {
+  .j-scrim {
+    background:
+      linear-gradient(180deg, rgba(3, 5, 12, 0.75) 0%, rgba(3, 5, 12, 0.4) 30%, transparent 50%),
+      linear-gradient(0deg, rgba(3, 5, 12, 0.6) 0%, transparent 25%);
+  }
+}
+/* the three clips sit stacked and ready; only the playing one shows */
+.j-film:not(.on) {
+  visibility: hidden;
+}
+/* the 3D scene is hidden under the film (it also stops drawing), and cannot be dragged */
+.filming .gl,
+.filming .j-hint {
+  visibility: hidden;
+}
