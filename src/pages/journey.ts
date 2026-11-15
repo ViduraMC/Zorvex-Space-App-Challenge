@@ -7,6 +7,12 @@ import gsap from 'gsap';
 import type { Object3D } from 'three';
 import { AdditiveBlending, BackSide, DirectionalLight, Group, HemisphereLight, Mesh, MeshBasicMaterial, PerspectiveCamera, Raycaster, Scene, SphereGeometry, SRGBColorSpace, TextureLoader, Vector2, Vector3 } from 'three';
 import starMap from '../assets/sky/nasa-starmap-2020.jpg';
+import boardingPoster from '../assets/video/home-boarding.jpg';
+import boardingVideo from '../assets/video/home-boarding.mp4';
+import launchPoster from '../assets/video/home-launch.jpg';
+import launchVideo from '../assets/video/home-launch.mp4';
+import waitingPoster from '../assets/video/home-looking.jpg';
+import waitingVideo from '../assets/video/home-looking.mp4';
 import type { FogExp2, MeshStandardMaterial, ShaderMaterial } from 'three';
 import { button, el, link } from '../dom';
 import { audio } from '../engine/audio';
@@ -44,6 +50,11 @@ const SPACE_CAM = { z: 28, fov: 19, halfHeight: 4.66 };
 /** Share of a wide screen that the hologram panel covers. */
 const PANEL_SHARE = 0.32;
 const ROCKET_X = 3.4;
+/** The opening film: clip lengths (s), when the engines light and the rocket leaves (s into the launch clip). */
+const FILM_SECONDS = { boarding: 10, launch: 10 };
+const FILM_CUES = { ignition: 0.8, liftoff: 2.4 };
+/** Which part of each 16:9 clip stays in view on a tall phone screen (CSS object-position). */
+const FILM_FRAMING = { waiting: '34% 50%', boarding: '50% 50%', launch: '50% 50%' };
 /** The Moon in the Home sky: where it hangs and how big it is (scene units). */
 /** The star-map dome: size, brightness, and the turn that lifts the Milky Way above the horizon. */
 const SKY_DOME = { radius: 850, opacity: 0.9, tilt: [0.9, 3.5, 0] as [number, number, number] };
@@ -57,6 +68,33 @@ const CHILD_START_X = -0.6;
 export const journeyPage: Page = (root) => {
   const shell = el('div', 'journey', undefined, root);
   const canvas = el('canvas', 'gl', undefined, shell);
+  // the opening film (docs/AI_USAGE.md): the child waits, boards and lifts off. When a clip cannot
+  // play, the 3D launch site underneath stays and the old 3D cutscenes run instead.
+  const film = el('video', 'j-film', undefined, shell);
+  film.muted = true;
+  film.playsInline = true;
+  film.preload = 'auto';
+  film.setAttribute('aria-hidden', 'true');
+  el('div', 'j-scrim', undefined, shell);
+  let filmOk = true;
+  film.addEventListener('error', () => {
+    filmOk = false;
+    shell.classList.remove('filming');
+  });
+  /** Show one clip: loop it (Home) or play it once; reduced motion keeps its first frame only. */
+  const roll = (src: string, poster: string, loop: boolean, framing: string): void => {
+    film.poster = poster;
+    film.loop = loop;
+    film.style.objectPosition = framing;
+    if (film.getAttribute('src') !== src) film.src = src;
+    else film.currentTime = 0;
+    shell.classList.add('filming');
+    if (!REDUCED) void film.play().catch(() => undefined);
+  };
+  const cut = (): void => {
+    film.pause();
+    shell.classList.remove('filming');
+  };
   canvas.setAttribute('aria-hidden', 'true');
   let renderer: Renderer;
   try {
@@ -350,6 +388,7 @@ export const journeyPage: Page = (root) => {
       show(homeSources, true);
       startBtn.focus();
       audio.music(1);
+      if (filmOk) roll(waitingVideo, waitingPoster, true, FILM_FRAMING.waiting);
       // drag to look around the night sky; tap the rocket to launch
       const base = new Vector3().subVectors(cam.look, cam.pos);
       const dist = base.length();
@@ -407,6 +446,14 @@ export const journeyPage: Page = (root) => {
       });
     },
     HOME_WALK() {
+      if (filmOk) {
+        roll(boardingVideo, boardingPoster, false, FILM_FRAMING.boarding);
+        timeline = gsap
+          .timeline({ onComplete: () => journey.finish('HOME_WALK') })
+          .to([title, startBtn, homeSources], { opacity: 0, duration: 0.4 }, 0)
+          .to({}, { duration: REDUCED ? 0.6 : FILM_SECONDS.boarding }, 0);
+        return;
+      }
       const walk = { on: false };
       phaseScope.frame((_dt, time) => {
         const swing = walk.on ? Math.sin(time * 9) * 0.6 : 0;
@@ -431,6 +478,31 @@ export const journeyPage: Page = (root) => {
         .call(() => audio.play('thud'));
     },
     TAKEOFF() {
+      if (filmOk) {
+        roll(launchVideo, launchPoster, false, FILM_FRAMING.launch);
+        audio.music(0);
+        audio.ambience('earth');
+        const roar = { level: 0 };
+        phaseScope.frame(() => audio.rocket(roar.level));
+        phaseScope.add(() => {
+          audio.rocket(0);
+          cut();
+        });
+        timeline = gsap
+          .timeline({ onComplete: () => journey.finish('TAKEOFF') })
+          .call(() => audio.play('ignition'), [], FILM_CUES.ignition)
+          .to(roar, { level: 1, duration: 1.2 }, FILM_CUES.ignition)
+          .call(() => {
+            say(t('ui.journey.liftoff'));
+            voice('voice.liftoff');
+          }, [], FILM_CUES.liftoff)
+          .call(() => say(''), [], FILM_CUES.liftoff + 2)
+          .to(roar, { level: 0.25, duration: 3 }, FILM_SECONDS.launch - 4)
+          .set(blackout, { backgroundColor: '#000000' }, FILM_SECONDS.launch - 0.6)
+          .to(blackout, { opacity: 1, duration: 0.6 }, FILM_SECONDS.launch - 0.6);
+        if (REDUCED) timeline.timeScale(20);
+        return;
+      }
       show(title, false);
       show(startBtn, false);
       show(homeSources, false);
@@ -505,6 +577,7 @@ export const journeyPage: Page = (root) => {
         .to(blackout, { backgroundColor: '#000000', duration: 0.3 * D }, 12.55 * D);
     },
     DESTINATION() {
+      cut();
       audio.ambience('space');
       audio.music(0.8);
       useScene(scene);

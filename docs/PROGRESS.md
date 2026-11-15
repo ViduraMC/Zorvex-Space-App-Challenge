@@ -21,6 +21,9 @@ Updated: Sunday 15 Nov 2026, morning (Asia/Colombo).
 - Eleven playable stories: Sojourner, Viking, InSight, ALSEP, Apollo 11 EASEP, Pioneer, and new
   Spirit and Opportunity, Phoenix, Ingenuity, Apollo 15 LRV and Surveyor 3 (all three languages,
   English voices, every fact from the challenge pages; branch feature/remaining-stories).
+- Home is now an opening film (AI-generated, see docs/AI_USAGE.md): the child waits by the rocket,
+  boards it on Start, and it lifts off, then the destination choice. Falls back to the 3D launch site
+  if a clip cannot play; reduced motion shows still frames.
 - Round 2 (15 Nov, midday): chat is a side panel with memory (last 6 turns), a floating
   "Talk to …" button in every story, Gemini answers in the machine's voice from the facts only;
   first screen has the real NASA star map all around (drag to look), the Moon, a tappable rocket and
