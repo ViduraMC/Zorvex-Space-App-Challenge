@@ -21,7 +21,8 @@ Space Apps requires teams to disclose how AI was used. Add a row for everything 
 | 15 Nov 2026 | Vidura | Claude Code (Anthropic) | Built the Spirit and Opportunity, Phoenix, Ingenuity, Apollo 15 LRV and Surveyor 3 stories (facts read on the challenge pages, scenes, games, English text, draft Sinhala and Tamil text, voices) and the mixed sound design (rocket, rotor, ignition, wind and world ambience) | Sources linked in the app; a person must re-read them. **Sinhala and Tamil need speaker review** |
 | 15 Nov 2026 | Vidura | Claude Code (Anthropic) | UX pass over every screen on desktop and phone: language and sound controls everywhere, layout and touch fixes | Screens checked in a test browser; a person should try it on a real phone |
 | 15 Nov 2026 | Vidura | Claude Code (Anthropic) | Chat panel with memory and Gemini answers from the facts, interactive first screen (NASA star map, drag to look, our own synthesised theme music), Home navigation, child-friendly Sources page, layout sweep of every story | Checked in a test browser on desktop and phone sizes |
-| 15 Nov 2026 | Vidura | AI video generator (prompts by Claude Code) | The three opening-film clips on Home: the child waits by the rocket, boards it, and the rocket lifts off (`src/assets/video/home-*.mp4`). The generator drew a NASA patch on the suit; it is kept as generated, by Vidura's decision (15 Nov 2026). No on-screen AI label, by Vidura's decision; disclosed here | Watched frame by frame by Claude Code; Vidura chose the clips |
+| 15 Nov 2026 | Vidura | AI video generator (prompts by Claude Code) | The three opening-film clips on Home: the child waits by the rocket, boards it, and the rocket lifts off (`src/assets/video/home-*.mp4`). The waiting clip was regenerated on 15 Nov (evening) without the NASA patch the first version had. A small on-screen "AI-generated film" label shows while any clip plays. The boarding clip shows a plain round blue chest patch, with no text, for under a second | Watched frame by frame by Claude Code; Vidura chose the clips |
+| 15 Nov 2026 | Vidura | Claude Code (Anthropic) | Submission graphics: the journey and architecture diagrams, the by-the-numbers, timeline, games, fact-engine and tech-stack panels (numbers counted from the repository), and app screenshots | Every number recounted from the code and data; Vidura reviewed the images |
 
 ## AI-generated content in the product
 
@@ -31,12 +32,13 @@ Space Apps requires teams to disclose how AI was used. Add a row for everything 
 
 ## What AI did not make
 
-- No AI-generated images or video are in the product (the voices above are the only AI-generated media). 3D models are NASA's own (3D Resources)
+- Apart from the opening film and the voices above, no AI-generated images or video are in the product. 3D models are NASA's own (3D Resources)
   or simple ones built in code; planet textures are NASA data; sounds are synthesised in the browser.
-- No NASA logos or insignia. Mission patches are our own design.
+- No NASA logos. Mission patches are our own design.
 
-## In the product (planned, phase 2)
+## AI in the product
 
-"Ask the machine" and "Postcard" will call a small Claude model through a serverless function,
-answering only from that episode's verified `facts.json`, with canned text as the offline fallback.
-Not built yet.
+"Talk to the machine" (built): our Cloud Run server (`server/ask`) asks Gemini 3.5 Flash-Lite to
+answer only from that story's verified `facts.json`; an answer with a number that is not in the
+facts is dropped. Offline, or when the server is slow, the app picks the best checked fact itself.
+"Postcard": not built.

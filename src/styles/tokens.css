@@ -26,6 +26,7 @@
   --font-ui: system-ui, -apple-system, 'Segoe UI', 'Noto Sans Sinhala', 'Noto Sans Tamil', sans-serif;
   --track-title: 0.08em;
 
+  --text-xs: 11px;
   --text-s: 14px;
   --text-m: clamp(16px, 1.9vw, 22px);
   --text-l: clamp(20px, 2.4vw, 28px);
