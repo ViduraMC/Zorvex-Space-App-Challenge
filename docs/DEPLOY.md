@@ -36,6 +36,7 @@ Manual fallback: `npm run build`, zip the contents of `dist/` (not the folder), 
    gcloud config set project zorvex-space-apps
    gcloud services enable run.googleapis.com cloudbuild.googleapis.com secretmanager.googleapis.com
    printf '%s' 'PASTE_THE_KEY' | gcloud secrets create gemini-key --data-file=-
+   gcloud secrets add-iam-policy-binding gemini-key --member=serviceAccount:PROJECT_NUMBER-compute@developer.gserviceaccount.com --role=roles/secretmanager.secretAccessor
    gcloud run deploy zorvex-ask --source server/ask --region asia-south1 --allow-unauthenticated \
      --set-secrets GEMINI_API_KEY=gemini-key:latest --max-instances 2 \
      --set-env-vars GEMINI_MODEL=gemini-3.5-flash-lite
