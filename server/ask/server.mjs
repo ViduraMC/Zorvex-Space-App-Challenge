@@ -12,7 +12,7 @@ import { numbersOk } from './verify.mjs';
 const ENV = {
   key: process.env.GEMINI_API_KEY ?? '',
   model: process.env.GEMINI_MODEL ?? 'gemini-3.5-flash-lite',
-  origins: (process.env.ALLOWED_ORIGINS ?? 'https://zorvex.earth,https://www.zorvex.earth,http://localhost:5173').split(','),
+  origins: (process.env.ALLOWED_ORIGINS ?? 'https://zorvex.earth,https://www.zorvex.earth,https://zorvex-space-apps.web.app,https://zorvex-space-apps.firebaseapp.com,http://localhost:5173').split(','),
   perIpPerHour: Number(process.env.MAX_PER_IP_PER_HOUR ?? 30),
   perDay: Number(process.env.MAX_PER_DAY ?? 3000),
   port: Number(process.env.PORT ?? 8080),
