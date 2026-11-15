@@ -23,7 +23,8 @@ Not a catalogue, not a quiz site. The child does what the real team did.
 
 - **Stack:** Vite + TypeScript + plain three.js. No React. The build guide's sample code is
   React; we follow its story, screens and state machine with our own engine instead.
-- **Title font:** the Didot look (as in the film Interstellar). It is one token, `--font-title`
+- **Title font:** Orbitron, a readable sci-fi face (Vidura, 15 Nov 2026; replaced the Didot look,
+  which read poorly). It is one token, `--font-title`
   in `src/styles/tokens.css`. Comic style is one story style of several (`style: 'comic' | 'cinematic'`).
 - **One canvas for the whole journey**; phases change only through `src/journey/store.ts`.
 - **An episode is data.** Teammates never edit `src/engine/`. Missing something? Open an issue for Vidura.

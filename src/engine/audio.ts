@@ -78,6 +78,15 @@ const AMBIENCE: Record<Ambience, { wind: number; cutoff: number; pad: number }> 
 };
 /** How far the background (wind, engines) dips while a voice line plays. */
 const DUCK = 0.45;
+/** The opening theme: bar length (s), loudness and its four chords (A minor, F, C, G; in Hz). */
+const MUSIC_BAR_S = 4.8;
+const MUSIC_VOLUME = 0.55;
+const MUSIC_CHORDS: number[][] = [
+  [110, 164.81, 220, 261.63, 329.63],
+  [87.31, 130.81, 220, 261.63, 349.23],
+  [130.81, 196, 261.63, 329.63, 392],
+  [98, 146.83, 246.94, 293.66, 392],
+];
 
 /** A looping layer whose loudness follows a 0..1 level (rocket roar, helicopter rotors, motor). */
 interface Loop {
@@ -100,6 +109,9 @@ class AudioEngine {
   #rotor: Loop | null = null;
   #riser: { osc: OscillatorNode; gain: GainNode } | null = null;
   #clip: HTMLAudioElement | null = null;
+  #music: { gain: GainNode; timer: number; step: number } | null = null;
+  /** The music level asked for before the first tap made audio possible. */
+  #musicWanted = 0;
 
   get soundOn(): boolean {
     return progress.get().sound;
@@ -134,6 +146,7 @@ class AudioEngine {
       this.#bed = bed;
       this.#noise = makeNoise(ctx);
       this.#startBed(ctx, bed);
+      if (this.#musicWanted > 0) this.music(this.#musicWanted);
     } catch {
       this.#ctx = null; // no audio device: the game stays fully playable in silence
     }
@@ -292,6 +305,85 @@ class AudioEngine {
     const ctx = this.#ctx;
     if (!ctx || !loop) return;
     loop.gain.gain.setTargetAtTime(Math.max(0, Math.min(1, level)) * loop.max, ctx.currentTime, smooth);
+  }
+
+  /**
+   * Our own slow theme for the opening screens (0 = off, 1 = full): a church-organ swell over four
+   * chords and a soft clock tick, in the spirit of big space films. Synthesised here, no recording.
+   */
+  music(level: number): void {
+    this.#musicWanted = level;
+    const ctx = this.#ctx;
+    if (!ctx || !this.#bed) return;
+    if (!this.#music) {
+      if (level <= 0) return;
+      const gain = ctx.createGain();
+      gain.gain.value = 0;
+      gain.connect(this.#bed);
+      const state = { gain, timer: 0, step: 0 };
+      const play = (): void => this.#musicBar(ctx, gain, state.step++);
+      play();
+      state.timer = window.setInterval(play, MUSIC_BAR_S * 1000);
+      this.#music = state;
+    }
+    const music = this.#music;
+    music.gain.gain.setTargetAtTime(level * MUSIC_VOLUME, ctx.currentTime, 1.2);
+    if (level <= 0) {
+      // let it fade, then stop scheduling bars
+      window.setTimeout(() => {
+        if (this.#musicWanted > 0 || this.#music !== music) return;
+        window.clearInterval(music.timer);
+        music.gain.disconnect();
+        this.#music = null;
+      }, 5000);
+    }
+  }
+
+  /** One bar of the theme: an organ chord that swells and fades, and four clock ticks. */
+  #musicBar(ctx: AudioContext, out: GainNode, step: number): void {
+    const t = ctx.currentTime + 0.05;
+    const chord = MUSIC_CHORDS[step % MUSIC_CHORDS.length];
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = 1500;
+    const env = ctx.createGain();
+    env.gain.setValueAtTime(0.0001, t);
+    env.gain.linearRampToValueAtTime(0.16, t + MUSIC_BAR_S * 0.35);
+    env.gain.setTargetAtTime(0.0001, t + MUSIC_BAR_S * 0.75, MUSIC_BAR_S * 0.25);
+    filter.connect(env);
+    env.connect(out);
+    // organ pipes: each note with its octave and a faint fifth above, for that cathedral sound
+    for (const f of chord) {
+      for (const [mult, vol, type] of [
+        [1, 0.5, 'sine'],
+        [2, 0.22, 'triangle'],
+        [3, 0.08, 'sine'],
+      ] as const) {
+        const osc = ctx.createOscillator();
+        osc.type = type;
+        osc.frequency.value = f * mult;
+        const g = ctx.createGain();
+        g.gain.value = vol / chord.length;
+        osc.connect(g);
+        g.connect(filter);
+        osc.start(t);
+        osc.stop(t + MUSIC_BAR_S * 1.6);
+      }
+    }
+    // the ticking clock: time passing
+    for (let k = 0; k < 4; k++) {
+      const at = t + (k * MUSIC_BAR_S) / 4;
+      const osc = ctx.createOscillator();
+      osc.frequency.value = k % 2 ? 1760 : 1320;
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0.0001, at);
+      g.gain.linearRampToValueAtTime(0.035, at + 0.004);
+      g.gain.exponentialRampToValueAtTime(0.0001, at + 0.06);
+      osc.connect(g);
+      g.connect(out);
+      osc.start(at);
+      osc.stop(at + 0.08);
+    }
   }
 
   /** Rocket engines, 0 (off) to 1 (full roar). It glides, so calling it every frame is fine. */

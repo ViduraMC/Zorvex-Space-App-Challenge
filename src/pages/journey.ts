@@ -5,7 +5,8 @@
  */
 import gsap from 'gsap';
 import type { Object3D } from 'three';
-import { DirectionalLight, Group, HemisphereLight, Mesh, PerspectiveCamera, Raycaster, Scene, Vector2, Vector3 } from 'three';
+import { AdditiveBlending, BackSide, DirectionalLight, Group, HemisphereLight, Mesh, MeshBasicMaterial, PerspectiveCamera, Raycaster, Scene, SphereGeometry, SRGBColorSpace, TextureLoader, Vector2, Vector3 } from 'three';
+import starMap from '../assets/sky/nasa-starmap-2020.jpg';
 import type { FogExp2, MeshStandardMaterial, ShaderMaterial } from 'three';
 import { button, el, link } from '../dom';
 import { audio } from '../engine/audio';
@@ -15,7 +16,7 @@ import { Renderer } from '../engine/renderer';
 import { go, type Page } from '../engine/router';
 import { Scope } from '../engine/scope';
 import { episodeFor } from '../episodes';
-import { openAsk } from '../features/ask';
+import { closeAsk, openAsk } from '../features/ask';
 import { summaryOf, type Explorer } from '../journey/explorers';
 import { NASA_MODELS, nasaModel, loadNasaModel } from '../journey/nasaModels';
 import { COLORS, createChild, createDesert, createNightSky, createPlanet, createRocket, createShootingStars, createStars } from '../journey/props';
@@ -43,6 +44,12 @@ const SPACE_CAM = { z: 28, fov: 19, halfHeight: 4.66 };
 /** Share of a wide screen that the hologram panel covers. */
 const PANEL_SHARE = 0.32;
 const ROCKET_X = 3.4;
+/** The Moon in the Home sky: where it hangs and how big it is (scene units). */
+/** The star-map dome: size, brightness, and the turn that lifts the Milky Way above the horizon. */
+const SKY_DOME = { radius: 850, opacity: 0.9, tilt: [0.9, 3.5, 0] as [number, number, number] };
+const SKY_MOON = { at: [-4, 30, -90] as [number, number, number], size: 5 };
+/** Drag to look around Home: how far the view may turn (radians). */
+const LOOK = { yaw: 1.2, pitchUp: 0.5, pitchDown: -0.15, perPixel: 0.004 };
 const ROCKET_HEIGHT = 6.4;
 const CHILD_HEIGHT = 1.05;
 const CHILD_START_X = -0.6;
@@ -92,7 +99,19 @@ export const journeyPage: Page = (root) => {
   // a soft front light so the rocket and the young explorer read clearly against the night
   const fill = new DirectionalLight(0xc8d4ff, 1.6);
   fill.position.set(2, 3, 10);
-  earth.add(createDesert(), rocket.group, child.group, shooting.group, new HemisphereLight(0x33406a, 0x120e0c, 2.4), moonlight, fill);
+  // the real night sky all around (NASA SVS Deep Star Maps 2020): drag to look and the Milky Way is there
+  const skyMap = new TextureLoader().load(starMap);
+  skyMap.colorSpace = SRGBColorSpace;
+  const skyDome = new Mesh(
+    new SphereGeometry(SKY_DOME.radius, 64, 32),
+    new MeshBasicMaterial({ map: skyMap, side: BackSide, transparent: true, opacity: SKY_DOME.opacity, blending: AdditiveBlending, depthWrite: false, fog: false }),
+  );
+  skyDome.rotation.set(...SKY_DOME.tilt);
+  // the real Moon (NASA LRO colour map) hangs in the night sky above the launch site
+  const skyMoon = createPlanet('moon', anisotropy);
+  skyMoon.group.position.set(...SKY_MOON.at);
+  skyMoon.group.scale.setScalar(SKY_MOON.size);
+  earth.add(skyDome, createDesert(), rocket.group, child.group, shooting.group, skyMoon.group, new HemisphereLight(0x33406a, 0x120e0c, 2.4), moonlight, fill);
   const space = new Group();
   const sun = new DirectionalLight(0xffffff, 3.2);
   sun.position.set(-6, 4, 8);
@@ -109,10 +128,12 @@ export const journeyPage: Page = (root) => {
   const title = el('header', 'j-title', undefined, shell);
   el('h1', '', t('ui.title'), title);
   el('p', '', t('ui.subtitle'), title);
+  el('p', 'j-hint', t(matchMedia('(pointer: coarse)').matches ? 'ui.home.hintTouch' : 'ui.home.hint'), title);
   const homeSources = link('j-sources', t('ui.home.sources'), '#about', shell);
   // language and sound on every screen that waits for the child (hidden during cutscenes)
   const top = el('nav', 'j-top', undefined, shell);
   top.setAttribute('aria-label', t('ui.menu'));
+  const homeBtn = button('chip', `⌂ ${t('ui.home')}`, () => journey.home(), top);
   const homeLinks = el('div', 'j-top-links', undefined, top);
   link('chip', t('ui.shelf'), '#shelf', homeLinks);
   link('chip', t('ui.about'), '#about', homeLinks);
@@ -145,6 +166,7 @@ export const journeyPage: Page = (root) => {
   const fieldTitle = el('h2', '', undefined, field);
   el('p', '', t(matchMedia('(pointer: coarse)').matches ? 'ui.journey.hintTouch' : 'ui.journey.hint'), field);
   const nav = el('nav', 'j-nav', undefined, field);
+  button('chip', `⌂ ${t('ui.home')}`, () => journey.home(), nav);
   button('chip', t('ui.journey.change'), () => journey.travel(), nav);
   link('chip', t('ui.shelf'), '#shelf', nav);
   link('chip', t('ui.about'), '#about', nav);
@@ -252,17 +274,16 @@ export const journeyPage: Page = (root) => {
     el('span', '', t(`ui.type.${e.type}`), meta);
     el('span', '', years(e), meta);
     el('p', '', summaryOf(e), holo);
-    // where it rests: a small globe of its world with the landing site marked
-    const route = el('div', 'holo-route', undefined, holo);
-    globe ??= new SiteGlobe();
-    route.appendChild(globe.canvas);
-    globe.show(e.destination, e.site ?? null);
-    const where = el('p', 'holo-site', undefined, route);
+    // where it rests: a small globe of its world with the landing site marked (only when we have
+    // a sourced site; no "coming soon" filler)
     if (e.site) {
+      const route = el('div', 'holo-route', undefined, holo);
+      globe ??= new SiteGlobe();
+      route.appendChild(globe.canvas);
+      globe.show(e.destination, e.site);
+      const where = el('p', 'holo-site', undefined, route);
       where.append(`${t('ui.holo.site')} ${formatSite(e.site.lat, e.site.lon)} · ${e.site.note} `);
       link('', t('ui.holo.siteSource'), e.site.source, where);
-    } else {
-      where.textContent = t('ui.holo.siteSoon');
     }
     // where every word on this panel comes from
     const sources = el('div', 'holo-sources', undefined, holo);
@@ -273,7 +294,7 @@ export const journeyPage: Page = (root) => {
     const parts = modelKeyOf(e.id);
     if (parts && hasAnatomy(parts)) link('holo-parts', t('ui.parts.open'), `#parts-${parts}`, holo);
     const story = episodeFor(e.id);
-    if (story) button('holo-parts', t('ui.ask.open', { name: e.name }), () => openAsk(shell, story.id, e.name), holo);
+    if (story) button('holo-talk', `💬 ${t('ui.ask.open', { name: e.name })}`, () => openAsk(shell, story.id, e.name), holo);
     holo.classList.remove('in');
     void holo.offsetWidth; // restart the appear animation
     holo.classList.add('in');
@@ -289,6 +310,7 @@ export const journeyPage: Page = (root) => {
   // ---------- the phases ----------
   const ENTER: Record<Phase, () => void> = {
     HOME() {
+      show(pick, false);
       audio.ambience('earth');
       useScene(scene);
       setFov(50);
@@ -314,6 +336,57 @@ export const journeyPage: Page = (root) => {
       show(startBtn, true);
       show(homeSources, true);
       startBtn.focus();
+      audio.music(1);
+      // drag to look around the night sky; tap the rocket to launch
+      const base = new Vector3().subVectors(cam.look, cam.pos);
+      const dist = base.length();
+      const baseYaw = Math.atan2(base.x, -base.z);
+      const basePitch = Math.asin(base.y / dist);
+      const view = { yaw: 0, pitch: 0 };
+      let drag: { x: number; y: number; moved: number } | null = null;
+      const aim = (): void => {
+        const yaw = baseYaw + view.yaw;
+        const pitch = basePitch + view.pitch;
+        cam.look.set(cam.pos.x + Math.sin(yaw) * Math.cos(pitch) * dist, cam.pos.y + Math.sin(pitch) * dist, cam.pos.z - Math.cos(yaw) * Math.cos(pitch) * dist);
+      };
+      const onRocket = (e: PointerEvent): boolean => {
+        pointer.set((e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
+        raycaster.setFromCamera(pointer, camera);
+        return raycaster.intersectObject(rocket.group, true).length > 0;
+      };
+      phaseScope.listen(window, 'pointerdown', () => audio.init());
+      phaseScope.listen(window, 'keydown', () => audio.init());
+      phaseScope.listen(canvas, 'pointerdown', (e: PointerEvent) => {
+        drag = { x: e.clientX, y: e.clientY, moved: 0 };
+        canvas.setPointerCapture(e.pointerId);
+      });
+      phaseScope.listen(canvas, 'pointermove', (e: PointerEvent) => {
+        if (!drag) {
+          const hot = onRocket(e);
+          canvas.style.cursor = hot ? 'pointer' : 'grab';
+          rocket.glow.intensity = hot ? 14 : 6;
+          return;
+        }
+        const dx = e.clientX - drag.x;
+        const dy = e.clientY - drag.y;
+        drag = { x: e.clientX, y: e.clientY, moved: drag.moved + Math.abs(dx) + Math.abs(dy) };
+        view.yaw = Math.max(-LOOK.yaw, Math.min(LOOK.yaw, view.yaw - dx * LOOK.perPixel));
+        view.pitch = Math.max(LOOK.pitchDown, Math.min(LOOK.pitchUp, view.pitch + dy * LOOK.perPixel));
+        canvas.style.cursor = 'grabbing';
+        aim();
+      });
+      phaseScope.listen(canvas, 'pointerup', (e: PointerEvent) => {
+        // a tap (not a drag) on the rocket launches, just like Start
+        if (drag && drag.moved < 8 && onRocket(e)) {
+          audio.init();
+          journey.start();
+        }
+        drag = null;
+      });
+      phaseScope.add(() => {
+        canvas.style.cursor = '';
+        rocket.glow.intensity = 6;
+      });
       // idle: the child breathes and looks up at the stars
       phaseScope.frame((_dt, time) => {
         child.group.scale.y = 1 + Math.sin(time * 1.6) * 0.012;
@@ -328,10 +401,13 @@ export const journeyPage: Page = (root) => {
         child.legs[0].rotation.x = swing;
         child.legs[1].rotation.x = -swing;
       });
+      const home = homeCam();
       timeline = gsap
         .timeline({ onComplete: () => journey.finish('HOME_WALK') })
-        .to([title, startBtn, homeSources], { opacity: 0, duration: 0.3 * D })
-        .to(child.group.rotation, { y: Math.PI / 2, duration: 0.5 * D })
+        .to(cam.look, { x: home.look[0], y: home.look[1], z: home.look[2], duration: 0.6 * D, ease: 'sine.inOut' }, 0)
+        .to([title, startBtn, homeSources], { opacity: 0, duration: 0.3 * D }, 0)
+        // the suit model faces -z, so a quarter turn the other way points it at the rocket (it walked backwards before)
+        .to(child.group.rotation, { y: -Math.PI / 2, duration: 0.5 * D })
         .call(() => void (walk.on = true))
         .to(child.group.position, { x: ROCKET_X - 0.85, z: 0, duration: 3 * D, ease: 'none' })
         .call(() => void (walk.on = false))
@@ -346,6 +422,7 @@ export const journeyPage: Page = (root) => {
       show(startBtn, false);
       show(homeSources, false);
       show(cockpit, true);
+      audio.music(0);
       flight.clouds.visible = true;
       rocket.group.visible = child.group.visible = false;
       cam.pos.set(ROCKET_X, 2.7, 0);
@@ -415,6 +492,7 @@ export const journeyPage: Page = (root) => {
     },
     DESTINATION() {
       audio.ambience('space');
+      audio.music(0.8);
       useScene(scene);
       layout();
       earth.visible = nightSky.mesh.visible = false;
@@ -469,6 +547,7 @@ export const journeyPage: Page = (root) => {
       const place = t(`ui.journey.${destination}`);
       show(pick, false);
       show(cockpit, true);
+      audio.music(0);
       say(t('ui.journey.landing', { place }));
       voice(`voice.landing.${destination}`);
       rush.set(0, 0, 1);
@@ -521,6 +600,7 @@ export const journeyPage: Page = (root) => {
     },
     EXPLORERS() {
       audio.ambience(journey.get().destination ?? 'mars');
+      audio.music(0.35);
       const s = ensureSurface(journey.get().destination!);
       useScene(s.scene);
       setFov(s.view.fov, PANEL_SHARE);
@@ -558,6 +638,7 @@ export const journeyPage: Page = (root) => {
     },
     HOLOGRAM_LAUNCH() {
       audio.play('whoosh');
+      audio.music(0);
       timeline = gsap.timeline({ onComplete: () => journey.finish('HOLOGRAM_LAUNCH') });
       if (!REDUCED) timeline.to(holo, { scale: 12, opacity: 0.9, filter: 'blur(6px) brightness(2)', duration: 0.7, ease: 'power3.in' });
       timeline
@@ -583,6 +664,9 @@ export const journeyPage: Page = (root) => {
     show(skip, CUTSCENES.includes(phase));
     show(top, phase === 'HOME' || phase === 'DESTINATION');
     show(homeLinks, phase === 'HOME');
+    show(homeBtn, phase === 'DESTINATION');
+    // the title screen's own parts only belong to Home (they stayed visible after a return from a story)
+    for (const node of [title, startBtn, homeSources]) show(node, phase === 'HOME' || phase === 'HOME_WALK');
     if (phase !== 'EXPLORERS' && phase !== 'HOLOGRAM_LAUNCH') show(field, false);
     ENTER[phase]();
   }
@@ -643,6 +727,7 @@ export const journeyPage: Page = (root) => {
     }
     camera.lookAt(cam.look);
     stars.points.position.copy(camera.position);
+    skyDome.position.copy(camera.position);
     nightSky.mesh.position.copy(camera.position);
     const onSurface = surface && (phase === 'EXPLORERS' || phase === 'HOLOGRAM_LAUNCH' || phase === 'LANDING');
     if (surface && onSurface) {
@@ -662,6 +747,7 @@ export const journeyPage: Page = (root) => {
   enter(journey.get().phase);
   raf = requestAnimationFrame(frame);
   session.add(() => {
+    closeAsk();
     globe?.dispose();
     cancelAnimationFrame(raf);
     timeline?.kill();

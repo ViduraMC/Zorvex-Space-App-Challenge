@@ -17,7 +17,7 @@ import { Timeline } from '../engine/timeline';
 import type { EpisodeContext, EpisodeDef, SceneHandles, Target } from '../engine/types';
 import { createWorld, type World, type WorldKind } from '../engine/worlds';
 import { factsOf, findEpisode } from '../episodes';
-import { openAsk } from '../features/ask';
+import { askLauncher, closeAsk, openAsk } from '../features/ask';
 import { patchNode } from '../features/patch';
 import { skyTonightCard } from '../features/sky-tonight';
 import { langSelect } from './chrome';
@@ -54,6 +54,7 @@ export const playerPage: Page = (root, id) => {
     return;
   }
   useEpisode(id);
+  audio.music(0); // the opening theme belongs to the journey; a story has its own sounds
   const shell = el('div', 'player', undefined, root);
   shell.dataset.style = episode.style ?? 'comic';
   const canvas = el('canvas', 'gl', undefined, shell);
@@ -70,6 +71,7 @@ export const playerPage: Page = (root, id) => {
 
   const session = new Scope();
   session.add(() => {
+    closeAsk();
     renderer.dispose();
     audio.hush();
     audio.drive(0);
@@ -247,6 +249,7 @@ async function play(
       go(location.hash);
     }, hud);
     q.title = t('ui.quality.hint');
+    q.classList.add('quality');
     // before the story starts the whole screen reopens; once it runs, the next lines switch language
     langSelect(hud, 'mini lang', () => {
       if (!started) return go(location.hash);
@@ -260,8 +263,16 @@ async function play(
     });
     skip = button('mini skip', t('ui.skip'), () => timeline.skip(), hud);
     skip.hidden = skipHidden;
+    measureHud();
+  };
+  /** Captions, game goals and bubbles start below the controls, which wrap onto two rows on phones. */
+  const measureHud = (): void => {
+    const bottom = Math.round(hud.getBoundingClientRect().bottom);
+    shell.style.setProperty('--hud-bottom', `${bottom}px`);
+    comic.topInset = bottom + 10;
   };
   drawHud();
+  session.listen(window, 'resize', measureHud);
 
   session.listen(window, 'keydown', (e: KeyboardEvent) => {
     const onButton = document.activeElement instanceof HTMLButtonElement;
@@ -294,7 +305,8 @@ async function play(
       if (top === current.scene) {
         const anchor = project(machine.bubblePoint(under));
         const below = project(under.set(machine.x, machine.root.position.y - 0.05, machine.z));
-        comic.placeBubble(anchor.x, anchor.y, below.y);
+        // behind the camera the projection is meaningless: let the bubble fall back to the screen middle
+        comic.placeBubble(anchor.visible ? anchor.x : NaN, anchor.y, below.y);
       } else {
         // the machine is not on this stage: speak from the lower middle of the screen
         comic.placeBubble(window.innerWidth * 0.4, window.innerHeight * 0.72, window.innerHeight);
@@ -323,7 +335,10 @@ async function play(
       audio.play('radio');
       cover.remove();
       started = true;
+      // the machine can be asked anything at any moment of its story
+      askLauncher(shell, episode.id);
       skip.hidden = false;
+      measureHud(); // Skip can wrap the controls onto a second row
       await session.wait(timeline.run(session));
       skip.hidden = true;
       showEnd(episode, shell);

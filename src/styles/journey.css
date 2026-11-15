@@ -38,9 +38,10 @@
   pointer-events: none;
 }
 .j-title h1 {
-  font-size: clamp(30px, 5.6vw, 76px);
-  letter-spacing: 0.22em;
-  margin-right: -0.22em;
+  font-size: clamp(28px, 5vw, 68px);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  margin-right: -0.1em;
   line-height: 1.12;
   line-height: 1;
 }
@@ -78,7 +79,7 @@
   font-family: var(--font-title);
   font-weight: 700;
   font-size: var(--text-l);
-  letter-spacing: 0.3em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--space);
   background: var(--text);
@@ -212,7 +213,7 @@
   font-family: var(--font-title);
   font-weight: 700;
   font-size: var(--text-l);
-  letter-spacing: 0.3em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text);
   background: transparent;
@@ -420,7 +421,7 @@
   font-family: var(--font-title);
   font-weight: 700;
   font-size: var(--text-l);
-  letter-spacing: 0.3em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #04121a;
   background: var(--holo);
@@ -677,4 +678,18 @@ select.chip option {
     flex-basis: 100%;
     justify-content: flex-end;
   }
+}
+.holo-talk {
+  min-height: 46px;
+  border-radius: 999px;
+  border: 1px solid var(--holo);
+  background: rgba(79, 216, 255, 0.12);
+  color: #e9fbff;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: 0 0 14px rgba(79, 216, 255, 0.3);
+}
+.holo-talk:hover,
+.holo-talk:focus-visible {
+  background: rgba(79, 216, 255, 0.24);
 }

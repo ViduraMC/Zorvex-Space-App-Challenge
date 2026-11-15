@@ -30,59 +30,71 @@ function sourceList(parent: HTMLElement, sources: Source[]): void {
   }
 }
 
+/** A collapsible section: a whole list at a glance, opened only when someone wants the detail. */
+function section(parent: HTMLElement, title: string): HTMLElement {
+  const box = el('details', 'lib-section', undefined, parent);
+  el('summary', '', title, box);
+  return box;
+}
+
 export const aboutPage: Page = (root) => {
   const inner = pageShell(root, 'about');
   const about = el('div', 'about', undefined, inner);
   el('h1', 'title', t('ui.about'), about);
   el('p', 'lede', t('ui.about.what'), about);
 
-  el('h3', '', t('ui.about.challenge'), about);
-  const intro = el('p', '', `${t('ui.about.challengeNote')} `, about);
+  // 1. One card per machine: where its facts come from, and a way into its story
+  el('h2', 'lib-heading', t('ui.about.byMachine'), about);
+  el('p', 'lib-note', t('ui.about.byMachineNote'), about);
+  const grid = el('div', 'lib-grid', undefined, about);
+  for (const episode of episodes) {
+    const facts = factsOf(episode.id);
+    if (facts.length === 0) continue;
+    const card = el('details', 'lib-card', undefined, grid);
+    card.style.setProperty('--patch', episode.patch.color);
+    const head = el('summary', '', undefined, card);
+    el('span', 'lib-badge', episode.patch.glyph, head);
+    const name = el('span', 'lib-name', undefined, head);
+    el('b', '', tEp(episode.id, 'title'), name);
+    el('small', '', t('ui.about.factCount', { n: facts.length }), name);
+    const acts = el('div', 'lib-acts', undefined, card);
+    link('chip', `▶ ${t('ui.about.play')}`, `#ep-${episode.id}`, acts);
+    if (episode.anatomy) link('chip', t('ui.parts.open'), `#parts-${episode.anatomy}`, acts);
+    const pages = new Map(facts.filter((f) => /^https?:/.test(f.source)).map((f) => [f.source, f.sourceName]));
+    for (const [url, label] of pages) link('chip lib-src', `↗ ${label}`, url, acts);
+    const list = el('ol', 'lib-facts', undefined, card);
+    for (const fact of facts) el('li', '', fact.text, list);
+  }
+
+  // 2. Everything else, folded away until someone opens it
+  const challenge = section(about, t('ui.about.challenge'));
+  const intro = el('p', '', `${t('ui.about.challengeNote')} `, challenge);
   link('', t('ui.about.challengeLink'), CHALLENGE_PAGE, intro);
-  sourceList(about, CHALLENGE_RESOURCES);
+  sourceList(challenge, CHALLENGE_RESOURCES);
 
-  el('h3', '', t('ui.about.models'), about);
-  const models = el('p', '', `${t('ui.about.modelsNote')} `, about);
-  link('', 'science.nasa.gov/3d-resources', 'https://science.nasa.gov/3d-resources/', models);
-  sourceList(about, NASA_3D_RESOURCES);
+  const models = section(about, t('ui.about.models'));
+  const modelsNote = el('p', '', `${t('ui.about.modelsNote')} `, models);
+  link('', 'science.nasa.gov/3d-resources', 'https://science.nasa.gov/3d-resources/', modelsNote);
+  sourceList(models, NASA_3D_RESOURCES);
 
-  el('h3', '', t('ui.about.story'), about);
-  sourceList(about, STORY_SOURCES);
+  sourceList(section(about, t('ui.about.story')), STORY_SOURCES);
+  sourceList(section(about, t('ui.about.other')), OTHER_SOURCES);
 
-  el('h3', '', t('ui.about.other'), about);
-  sourceList(about, OTHER_SOURCES);
-
-  el('h3', '', t('ui.about.explorers'), about);
+  const dates = section(about, t('ui.about.explorers'));
   for (const destination of ['mars', 'moon'] as const) {
-    const list = el('ul', 'sources', undefined, about);
+    const list = el('ul', 'sources', undefined, dates);
     for (const e of explorersOf(destination)) {
       const item = el('li', '', `${e.name}: `, list);
-      e.sources.forEach((s, i) => {
+      e.sources.forEach((src, i) => {
         if (i > 0) item.append(', ');
-        link('', s.label, s.url, item);
+        link('', src.label, src.url, item);
       });
     }
   }
 
-  el('h3', '', t('ui.about.sources'), about);
-  el('p', '', t('ui.about.sourcesNote'), about);
-  for (const episode of episodes) {
-    const facts = factsOf(episode.id);
-    if (facts.length === 0) continue;
-    el('h2', 'section', tEp(episode.id, 'title'), about);
-    const list = el('ul', 'sources', undefined, about);
-    for (const fact of facts) {
-      const item = el('li', '', `${fact.text} `, list);
-      if (/^https?:/.test(fact.source)) link('', fact.sourceName, fact.source, item);
-      else item.append(fact.sourceName);
-    }
-  }
-
-  el('h3', '', t('ui.about.credits'), about);
-  const libs = el('ul', 'sources', undefined, about);
+  const libs = el('ul', 'sources', undefined, section(about, t('ui.about.credits')));
   for (const [name, url] of LIBRARIES) link('', name, url, el('li', '', undefined, libs));
 
-  el('h3', '', t('ui.about.ai'), about);
-  el('p', '', t('ui.about.aiNote'), about);
-  el('p', '', t('ui.about.disclaimer'), about);
+  el('p', '', t('ui.about.aiNote'), section(about, t('ui.about.ai')));
+  el('p', 'lib-note', t('ui.about.disclaimer'), about);
 };

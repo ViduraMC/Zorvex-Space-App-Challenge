@@ -10,6 +10,7 @@ Where each piece of data is used: `docs/RESOURCES.md`.
 | Saturn V, Advanced Crew Escape Suit, Mars Exploration Rover (Opportunity), Viking Lander, InSight, Ingenuity, Apollo Lunar Module, Pioneer 10, Mars 2020 Perseverance Rover | `src/assets/models/*.glb` | NASA 3D Resources, science.nasa.gov/3d-resources |
 | Mars image texture | `src/assets/planets/mars.jpg` | NASA 3D Resources |
 | Earth: Blue Marble | `src/assets/planets/earth.png` | NASA's Scientific Visualization Studio |
+| Night sky: Deep Star Maps 2020 (converted from the 4K EXR) | `src/assets/sky/nasa-starmap-2020.jpg` | NASA/Goddard Space Flight Center Scientific Visualization Studio; Gaia DR2: ESA/Gaia/DPAC |
 | First image from the surface of Mars (Viking 1, 20 July 1976) | `src/episodes/viking/assets/first-image.jpg` | NASA/JPL |
 | Viking 1 panorama of Chryse Planitia; Viking 2 colour view of Utopia Planitia | `src/episodes/viking/assets/` | NASA/JPL |
 | Voices | `src/episodes/*/voice/en/`, `src/journey/voice/en/` | AI-generated with Kokoro-82M (Apache-2.0) |
@@ -35,7 +36,7 @@ Versions and licences checked on npm on 14 Nov 2026.
 
 ## Fonts (Google Fonts, SIL Open Font Licence)
 
-Bodoni Moda (free stand-in for Didot; Apple devices use their built-in Didot), Bangers,
+Orbitron (titles), Bangers,
 Comic Neue, Noto Sans Sinhala, Noto Sans Tamil.
 
 ## Made by us

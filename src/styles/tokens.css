@@ -18,14 +18,13 @@
   --text: #f3efe6;
   --text-dim: #a49d8f;
 
-  /* type. Title face: the wide, high-contrast Didot look. "Didot" is Linotype's own cut, which
-     Apple devices already carry; everyone else gets Bodoni Moda (free, SIL OFL), the closest
-     free match. Swap in a licensed web font here and the whole product follows. */
-  --font-title: 'Didot', 'Linotype Didot', 'Bodoni Moda', 'GFS Didot', 'Noto Sans Sinhala', 'Noto Sans Tamil', serif;
+  /* type. Title face: Orbitron (free, SIL OFL), a clean, readable space-age face in the spirit of
+     sci-fi film titles; chosen by Vidura on 15 Nov 2026 over the Didot look, which read poorly. */
+  --font-title: 'Orbitron', 'Noto Sans Sinhala', 'Noto Sans Tamil', 'Segoe UI', sans-serif;
   --font-shout: 'Bangers', 'Noto Sans Sinhala', 'Noto Sans Tamil', Impact, 'Arial Black', sans-serif;
   --font-letter: 'Comic Neue', 'Noto Sans Sinhala', 'Noto Sans Tamil', 'Comic Sans MS', sans-serif;
   --font-ui: system-ui, -apple-system, 'Segoe UI', 'Noto Sans Sinhala', 'Noto Sans Tamil', sans-serif;
-  --track-title: 0.14em;
+  --track-title: 0.08em;
 
   --text-s: 14px;
   --text-m: clamp(16px, 1.9vw, 22px);

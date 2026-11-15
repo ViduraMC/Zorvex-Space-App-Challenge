@@ -5,7 +5,7 @@ Updated: Sunday 15 Nov 2026, morning (Asia/Colombo).
 ## Now
 
 - Live: https://zorvex-space-apps.web.app (Firebase Hosting, free, deployed by every push to main).
-  zorvex.earth waits for two DNS records at Porkbun (see docs/DEPLOY.md).
+  zorvex.earth: DNS done; Firebase confirmed the domain, the certificate was propagating at 12:00.
 - AI chat live on Cloud Run (zorvex-ask, asia-south1, Gemini 3.5 Flash-Lite); answers in English,
   Sinhala and Tamil from the facts only; an answer with an invented number is dropped.
 - Code is on GitHub (private): https://github.com/ViduraMC/Zorvex-Space-App-Challenge.
@@ -21,6 +21,12 @@ Updated: Sunday 15 Nov 2026, morning (Asia/Colombo).
 - Eleven playable stories: Sojourner, Viking, InSight, ALSEP, Apollo 11 EASEP, Pioneer, and new
   Spirit and Opportunity, Phoenix, Ingenuity, Apollo 15 LRV and Surveyor 3 (all three languages,
   English voices, every fact from the challenge pages; branch feature/remaining-stories).
+- Round 2 (15 Nov, midday): chat is a side panel with memory (last 6 turns), a floating
+  "Talk to …" button in every story, Gemini answers in the machine's voice from the facts only;
+  first screen has the real NASA star map all around (drag to look), the Moon, a tappable rocket and
+  our own synthesised theme; Home button on the destination and explorers screens; title font
+  Orbitron; Sources page is a card per machine; captions, bubbles and goals stay on screen and
+  below the controls (automated sweep of every story, desktop and phone).
 - UX pass over every screen (desktop and phone, English, Sinhala, Tamil): a language picker and a
   sound switch on Home, the destination choice, the explorers, the story player and Anatomy (a
   language change inside a story keeps the child's place); hologram panel no longer overlaps

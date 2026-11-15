@@ -73,6 +73,12 @@ export function createJourney() {
       // a language change reopens the screen: stay on the destination choice
       else if (state.phase !== 'DESTINATION') set({ phase: 'HOME' });
     },
+    /** Back to Home from the destination choice or the explorers (never during a cutscene). */
+    home(): void {
+      if (state.phase === 'DESTINATION' || state.phase === 'EXPLORERS') {
+        set({ phase: 'HOME', destination: null, hoveredId: null, selectedId: null });
+      }
+    },
     /** "Change destination" on the explorers screen. */
     travel(): void {
       if (state.phase === 'EXPLORERS') set({ phase: 'DESTINATION', hoveredId: null });
