@@ -34,7 +34,7 @@ jobs:
         env:
           VITE_ASK_URL: ${{ vars.ASK_URL }}
       - name: Publish to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
+        uses: FirebaseExtended/action-hosting-deploy@500ac625ca2dd40cbd15f7659af953801858032a # v0.11.0 (pinned: it receives the deploy key)
         with:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           projectId: zorvex-space-apps
